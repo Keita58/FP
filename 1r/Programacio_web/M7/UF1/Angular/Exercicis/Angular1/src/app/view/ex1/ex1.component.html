@@ -1,0 +1,20 @@
+<div class="container">
+  <div>
+    <label for="data">
+      Dada:
+    </label>
+    <input id="data" type="text" [formControl]=data>
+    <!-- Exemple if a l'HTML. Nou a la versió 17 -->
+    @if(data.errors?.['min']){
+      <p class="text-danger">El número mínim és el 1.</p>
+    }
+    @else if(data.errors?.['max']) {
+      <p class="text-danger">El número màxim és el 6.</p>
+    }
+    @else if(data.errors?.['required']){
+      <p class="text-danger">És necessari informar el camp.</p>
+    }
+  </div>
+  <button class="button" (click)="Calcular()">Calcular</button>
+  <p [class.encertar]="found" [class.noencertar]="!found">{{dada}}</p>
+</div>

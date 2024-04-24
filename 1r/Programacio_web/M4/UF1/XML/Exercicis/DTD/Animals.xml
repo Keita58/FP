@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE animal [
+  <!ELEMENT animal (especie*)>
+  <!ELEMENT especie (peix|mamifer|au|amfibi)>
+  <!ELEMENT peix (#PCDATA)>
+  <!ELEMENT mamifer (#PCDATA)>
+  <!ELEMENT au (#PCDATA)>
+  <!ELEMENT amfibi (#PCDATA)>
+]>
+
+
+<animal>
+  <especie>
+    <au>Voltor</au>
+  </especie>
+  <especie>
+    <amfibi>Granota</amfibi>
+  </especie>
+  <especie>
+    <mamifer>Hipopotam</mamifer>
+  </especie>
+  <especie>
+    <peix>Peix Lleó</peix>
+  </especie>
+</animal>

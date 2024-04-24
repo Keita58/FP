@@ -1,0 +1,61 @@
+body {
+    text-align: center;
+    border: 1px darkgrey solid;
+    width: 400px;
+    height: 550px;
+    margin: 10px auto 0;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    height: 22px;
+    width: 200px;
+    align-self: center;
+}
+
+#correu {
+    display: flex;
+    flex-direction: row;
+}
+
+#contrasenya {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+#contrasenya input {
+    height: 22px;
+    width: 164.45px;
+    align-self: center;
+}
+
+p {
+    margin-right: 10px;
+}
+
+#boto {
+    width: 50px;
+    height: 22px;
+}
+
+@media (max-width: 600px) {
+    body {
+        width: auto;
+        height: auto;
+    }
+    #boto {
+        margin-bottom: 15px;
+    }
+}

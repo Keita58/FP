@@ -1,0 +1,17 @@
+table, th, td {
+    border: 5px solid orchid;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: left;
+}
+
+th {
+    padding: 10px;
+    background-color: mediumvioletred;
+}
+
+table {
+    width: 100%;
+}

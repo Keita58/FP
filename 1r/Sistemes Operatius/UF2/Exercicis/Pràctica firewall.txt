@@ -1,0 +1,109 @@
+Marc Sánchez López - 22/04/2024
+
+1.
+root@vps-63c288f3:~# ufw version
+ufw 0.36.2
+Copyright 2008-2023 Canonical Ltd.
+
+2.
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu
+-> Al no tenir el firewall encès no podem veure les regles actuals, però segons aquesta pàgina web
+el firewall bloqueja totes les connexions entrants i permet totes les connexions sortints.
+Extret de la pàgina: "By default, UFW is set to deny all incoming connections and allow all outgoing connections."
+
+3.
+https://www.cyberciti.biz/faq/howto-limiting-ssh-connections-with-ufw-on-ubuntu-debian/
+root@vps-63c288f3:~# ufw limit 22
+Rules updated
+Rules updated (v6)
+
+4.
+root@vps-63c288f3:~# ufw allow 80
+Rules updated
+Rules updated (v6)
+root@vps-63c288f3:~# ufw allow 443
+Rules updated
+Rules updated (v6)
+
+5.
+https://askubuntu.com/a/793123
+root@vps-63c288f3:~# ufw deny out 22
+Rules updated
+Rules updated (v6)
+
+6.
+root@vps-63c288f3:~# ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+root@vps-63c288f3:~# ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22                         LIMIT IN    Anywhere
+80                         ALLOW IN    Anywhere
+443                        ALLOW IN    Anywhere
+22 (v6)                    LIMIT IN    Anywhere (v6)
+80 (v6)                    ALLOW IN    Anywhere (v6)
+443 (v6)                   ALLOW IN    Anywhere (v6)
+
+22                         DENY OUT    Anywhere
+22 (v6)                    DENY OUT    Anywhere (v6)
+
+7.
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-22 15:55 Hora de verano romance
+Nmap scan report for vps-63c288f3.vps.ovh.net (151.80.148.103)
+Host is up (0.037s latency).
+Not shown: 996 filtered tcp ports (no-response)
+PORT    STATE  SERVICE
+22/tcp  open   ssh
+80/tcp  open   http
+113/tcp closed ident
+443/tcp open   https
+
+Nmap done: 1 IP address (1 host up) scanned in 17.56 seconds
+
+8.
+root@vps-63c288f3:~# ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22                         LIMIT IN    Anywhere
+80                         ALLOW IN    Anywhere
+443                        ALLOW IN    Anywhere
+22 (v6)                    LIMIT IN    Anywhere (v6)
+80 (v6)                    ALLOW IN    Anywhere (v6)
+443 (v6)                   ALLOW IN    Anywhere (v6)
+
+22                         DENY OUT    Anywhere
+22 (v6)                    DENY OUT    Anywhere (v6)
+
+9.
+https://serverfault.com/a/786115
+root@vps-63c288f3:~# ufw insert 1 deny from 8.8.8.8
+Rule inserted
+root@vps-63c288f3:~# ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+Anywhere                   DENY IN     8.8.8.8
+22                         LIMIT IN    Anywhere
+80                         ALLOW IN    Anywhere
+443                        ALLOW IN    Anywhere
+22 (v6)                    LIMIT IN    Anywhere (v6)
+80 (v6)                    ALLOW IN    Anywhere (v6)
+443 (v6)                   ALLOW IN    Anywhere (v6)
+
+22                         DENY OUT    Anywhere
+22 (v6)                    DENY OUT    Anywhere (v6)

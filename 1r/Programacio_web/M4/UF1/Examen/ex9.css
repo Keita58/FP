@@ -1,0 +1,5 @@
+table, th, td {
+    border: 3px palegreen solid;
+    border-collapse: collapse;
+    background-color: plum;
+}

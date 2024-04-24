@@ -1,0 +1,27 @@
+.animacio {
+    width: 100px;
+    height: 100px;
+    background-color: chartreuse;
+}
+
+.desplaçament {
+    background-color: chartreuse;
+}
+
+div {
+    width: 100px;
+    height: 100px;
+    animation-name: a;
+    animation-duration: 5s;
+    animation-delay: 5s;
+    background-color: chartreuse;
+}
+
+@keyframes a {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    100% {
+        transform: translateY(100px) translateX(100px);
+    }
+}

@@ -1,0 +1,94 @@
+1. Accedeix al directori de treball.
+
+marc@MarcPC:~$ cd /home/marc/treball/so
+marc@MarcPC:~/treball/so$
+
+2. Crea els directoris ejercicios/carpeta1.
+
+marc@MarcPC:~/treball/so$ mkdir exercicis
+marc@MarcPC:~/treball/so$ mkdir exercicis/carpeta1
+marc@MarcPC:~/treball/so$ cd exercicis/carpeta1
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ 
+
+3. Crea un fitxer denominat link.txt que contingui el text Prova d’enllaç.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ echo "Prova d'enllaç" > link.txt
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ls
+link.txt
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ cat link.txt 
+Prova d'enllaç
+
+4. Comprova el vincle (inode) al qual pertany.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ls -li
+total 4
+131391 -rw-r--r-- 1 marc marc 16 17 de gen.  20:06 link.txt
+
+5. Crea un vincle de tipus dur (hard) que s’anomeni hardlink.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ln link.txt hardlink
+
+6. Comprova que tenen el mateix número de vincle.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ls -li
+total 8
+131391 -rw-r--r-- 2 marc marc 16 17 de gen.  20:06 hardlink
+131391 -rw-r--r-- 2 marc marc 16 17 de gen.  20:06 link.txt
+
+7. Comprova que té el mateix contingut.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ cat link.txt 
+Prova d'enllaç
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ cat hardlink 
+Prova d'enllaç
+
+8. Afegeix algun contingut al segon fitxer i comprova que el fitxer també visualitza el mateix.
+
+(Hem afegit la línia "Prova 2 d'enllaç" al fitxer hardlink)
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ gedit hardlink 
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ cat link.txt 
+Prova d'enllaç
+Prova 2 d'enllaç
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ cat hardlink 
+Prova d'enllaç
+Prova 2 d'enllaç
+
+9. Esborra el primer fitxer i comprova que el segon continua funcionant sense problemes.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ rm link.txt 
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ cat hardlink 
+Prova d'enllaç
+Prova 2 d'enllaç
+
+10. Ara crea un nou fitxer denominat link2.txt que tingui el text Enllaç simbòlic.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ echo "Enllaç simbòlic" > link2.txt
+
+11. Crea sobre el mateix un enllaç simbòlic denominat link2_sim. Comprova que es crea,
+que està etiquetat com a “l” i a més a més apunta a link2.txt.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ln -s link2.txt link2_sim
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ls -li
+total 8
+131391 -rw-r--r-- 1 marc marc 34 17 de gen.  20:14 hardlink
+131402 lrwxrwxrwx 1 marc marc  9 17 de gen.  20:17 link2_sim -> link2.txt
+131396 -rw-r--r-- 1 marc marc 18 17 de gen.  20:16 link2.txt
+
+12. Comprova que no té el mateix número d’inode.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ls -li link2_sim 
+131402 lrwxrwxrwx 1 marc marc 9 17 de gen.  20:17 link2_sim -> link2.txt
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ls -li link2.txt 
+131396 -rw-r--r-- 1 marc marc 18 17 de gen.  20:16 link2.txt
+
+13. Esborra el fitxer link2.txt i comprova que el seu enllaç simbòlic queda en un estat invàlid.
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ rm link2.txt 
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ ls -l
+total 4
+-rw-r--r-- 1 marc marc 34 17 de gen.  20:14 hardlink
+lrwxrwxrwx 1 marc marc  9 17 de gen.  20:17 link2_sim -> link2.txt
+(El link amb link2.txt està en vermell al ja no existir l'arxiu.)
+
+marc@MarcPC:~/treball/so/exercicis/carpeta1$ cat link2_sim 
+cat: link2_sim: El fitxer o directori no existeix

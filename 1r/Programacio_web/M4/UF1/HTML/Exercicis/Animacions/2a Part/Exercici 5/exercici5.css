@@ -1,0 +1,31 @@
+.quadre {
+    color: white;
+    /*float: left;*/
+    margin-right: 2%;
+    font-size: 20px
+}
+
+body {
+    background-color: #CC3333;
+}
+.moviment {
+    background-color: #FFCC99;
+    background-image:         linear-gradient(to right, rgba( 0,0,0,0.9 ) 25%, rgba( 0,0,0,0.1 ) 50%, rgba( 0,0,0,0.9 ) 75%);
+    color: white;
+    height: 40px;
+    width: 20%;
+    animation: move-eye 4s linear alternate infinite;
+
+}
+
+@keyframes move-eye {
+    0% {
+        margin-top: 0;
+    }
+    50% {
+        margin-top: 44%;
+    }
+    100% {
+        margin-top: 0;
+    }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulari secret</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+    <script src="login.js" defer></script>
+    <script defer src="hora.js"></script>
+</head>
+<body class="container bg-black text-white">
+<div class="row align-items-center justify-content-center">
+    <img src="./1917571.jpg" class="d-block m-2" alt="Titol">
+    <nav class="navbar pb-4 text-center">
+        <a href="paginaPrincipal.html" class="text-decoration-none text-white col-sm-1 col-12">Inici</a>
+        <a href="resum.html" class="text-decoration-none text-white col-sm-1 col-12">Resum</a>
+        <a href="OST.html" class="text-decoration-none text-white col-sm-1 col-12">OST</a>
+        <a href="inspiracions.html" class="text-decoration-none text-white col-sm-1 col-12">Inspiracions</a>
+        <a href="seqüela.html" class="text-decoration-none text-white col-sm-1 col-12">Seqüela</a>
+        <a href="login.html" class="text-decoration-none text-white col-sm-1 col-12">Login</a>
+        <a href="cançons.html" class="text-decoration-none text-white col-sm-1 col-12">Cançons</a>
+        <a href="afegir.html" class="text-decoration-none text-white col-sm-1 col-12">Afegir cançons</a>
+    </nav>
+</div>
+<div class="d-flex justify-content-center">
+    <img id="foto" src="https://pngimg.com/d/hedgehog_PNG18.png">
+</div>
+<div class="d-flex justify-content-center">
+    <h3>Login</h3>
+</div>
+<div id="formulariLogin">
+    <form>
+        <div class="mb-3">
+            <label for="mail" class="form-label">Correu</label>
+            <input type="email" class="form-control" placeholder="example@example.com" id="mail" autocomplete="off"/><br>
+        </div>
+        <div class="">
+            <label class="form-label" for="contrasenya">Contrasenya</label>
+            <input class="form-control" type="password" id="contrasenya" autocomplete="off"/><br>
+        </div>
+        <button class="btn mb-3 border-white text-white" id="boto1">Envia</button>
+        <button class="btn mb-3 border-white text-white" id="boto2">Cancel·la</button>
+        <button class="btn mb-3 border-white text-white" id="boto3">LogOut</button>
+    </form>
+    <div>
+        <a href="register.html" class="text-decoration-none text-white"><p>No estàs registrat? Clica aquí</p></a>
+    </div>
+</div>
+<div class="row">
+    <div class="d-flex justify-content-center mt-3">
+        <p>IES Sabadell - Marc Sánchez</p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p id="hora"></p>
+    </div>
+</div>
+</body>
+</html>

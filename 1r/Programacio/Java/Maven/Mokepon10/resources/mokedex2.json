@@ -1,0 +1,52 @@
+{
+  "entrades": [
+    {
+      "id": 1,
+      "nom": "Mulmasaur",
+      "pes": 15.2,
+      "evolucions": {},
+      "localitzacions": [
+        "Ruta 1",
+        "Ruta 6",
+        "Ruta 12",
+        "Bosc dels Mulmasaurs"
+      ]
+    },
+    {
+      "id": 2,
+      "nom": "Zekrom",
+      "tipus": "Elèctric/Drac",
+      "pes": 345.0,
+      "evolucions": {},
+      "localitzacions": [
+        "Cueva Incierta"
+      ]
+    },
+    {
+      "id": 3,
+      "nom": "Magmortar",
+      "tipus": "Foc",
+      "pes": 680.0,
+      "evolucions": {
+        "pre": "Magmar",
+        "post": "-"
+      },
+      "localitzacions": [
+        "Ladera Corona"
+      ]
+    },
+    {
+      "id": 4,
+      "nom": "Magmar",
+      "tipus": "Foc",
+      "pes": 44.5,
+      "evolucions": {
+        "pre": "Magby",
+        "post": "Magmortar"
+      },
+      "localitzacions": [
+        "Monte Ascuas"
+      ]
+    }
+  ]
+}

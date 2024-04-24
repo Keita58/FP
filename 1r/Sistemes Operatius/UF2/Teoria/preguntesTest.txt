@@ -1,0 +1,10 @@
+Tens la teva pàgina web en l'arxiu pagina.html, i vols que l'Apache2 l'obri automàticament, quin seguit de comandes has d'escriure
+per a que es pugui obrir?
+
+cd /etc/apache2
+nano mods-avaliable/dir.conf -> Afegim la direcció pagina.html
+systemctl restart apache2
+
+Vés a la carpeta on estan localitzades les comandes d'administrador
+
+cd /usr/sbin/

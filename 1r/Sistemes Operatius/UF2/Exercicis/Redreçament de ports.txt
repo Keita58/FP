@@ -1,0 +1,36 @@
+Exercici 1 - Provar el tunneling SSH utilitzant el nostre VPS per accedir a pàgines inaccessibles des de l'institut com per exemple steam.
+
+Per poder-se connectar a store.steampowered.com primer hem d'utilitzar la comanda <<ssh -D 9090 -N -f keita58@keita58.damvib.cat>> per a poder-se
+connectar al servidor amb l'usuari keita58 (el del meu servidor en aquest cas). 
+Una vegada el túnel de tipus SOCKS s'ha obert, hem d'obrir un navegador qualsevol (en el meu cas el Firefox) i anem a les preferències.
+Una vegada hi som anem als paràmetres de connexió, escollim la opció de configuració manual, en la opció de "Ordinador central SOCKS" escrivim localhost, posem el port de la comanda anterior
+(en aquest cas hem posat el port 9090) i activem la casella "Servidor intermediari DNS en utilitzar SOCKS v5". 
+Si hem seguit tots els passos anteriors podem ja accedir a la pàgina web principal d'Steam sense cap tipus de problema.
+
+
+Exercici 2 - Provar el redreçament de ports locals (-L) del ssh per poder accedir al servidor de mariadb del servidor des del DBeaver local.
+
+ssh -L 3336:127.0.0.1:3306 keita58@151.80.148.103
+
+MariaDB -> hotel super3
+
+Per a connectar-se al DBeaver he hagut de posar l'usuari i contrasenya anteriors posant com a port el primer número de la comanda, 3336
+i de server host localhost.
+
+Exercici 4 - Utilitza nmap per veure quins ports tenen oberts tots els ordinadors de la teva subxarxa (10.1.84.0/24 o 192.168.16.0/22). Pista: mira el manual per veure com indicar-li al nmap un rang d'adreces IP.
+
+He hagut d'instal·lar l'eina <<nmap>> amb <<apt-get install nmap>> a la línia de comandes del servidor. Una vegada instal·lada he escrit <<nmap localhost>> per poder
+veure quins ports hi havia connectats i m'han sortit 3 diferents.
+
+root@vps-63c288f3:~# nmap localhost
+Starting Nmap 7.93 ( https://nmap.org ) at 2024-02-27 22:46 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000050s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 997 closed tcp ports (reset)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+3306/tcp open  mysql
+
+Nmap done: 1 IP address (1 host up) scanned in 0.08 seconds

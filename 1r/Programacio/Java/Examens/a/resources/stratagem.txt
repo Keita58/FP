@@ -1,0 +1,6 @@
+Eagle Strike;2000;true
+Quasar Cannon;7000;false
+500 KT Bomb;6000;true
+Orbital Strike;6000;false
+Mine Field;3000;true
+Gatling Gun;4000;true

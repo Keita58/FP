@@ -1,0 +1,83 @@
+Per connectar-me a la base de dades -> 
+    - vagrant ssh
+    - sudo su - postgres
+    - psql
+    - \c pagila
+
+1. Per veure els esquemes hem d'escriure \dn
+
+pagila=# \dn
+      List of schemas
+  Name  |       Owner
+--------+-------------------
+ public | pg_database_owner
+(1 row)
+
+2. Per veure les vistes hem d'escriure \dv
+
+pagila=# \dv
+                 List of relations
+ Schema |            Name            | Type | Owner
+--------+----------------------------+------+-------
+ public | actor_info                 | view | admin
+ public | customer_list              | view | admin
+ public | film_list                  | view | admin
+ public | nicer_but_slower_film_list | view | admin
+ public | sales_by_film_category     | view | admin
+ public | sales_by_store             | view | admin
+ public | staff_list                 | view | admin
+(7 rows)
+
+3. Per veure la creació de les vistes hem d'escriure "\sv+ actor_info"
+
+pagila-# \sv+ actor_info
+1       CREATE OR REPLACE VIEW public.actor_info AS
+2        SELECT a.actor_id,
+3           a.first_name,
+4           a.last_name,
+5           group_concat(DISTINCT (c.name::text || ': '::text) || (( SELECT group_concat(f.title::text) AS group_concat
+6                  FROM film f
+7                    JOIN film_category fc_1 ON f.film_id = fc_1.film_id
+8                    JOIN film_actor fa_1 ON f.film_id = fa_1.film_id
+9                 WHERE fc_1.category_id = c.category_id AND fa_1.actor_id = a.actor_id
+10                GROUP BY fa_1.actor_id))) AS film_info
+11         FROM actor a
+12           LEFT JOIN film_actor fa ON a.actor_id = fa.actor_id
+13           LEFT JOIN film_category fc ON fa.film_id = fc.film_id
+14           LEFT JOIN category c ON fc.category_id = c.category_id
+15        GROUP BY a.actor_id, a.first_name, a.last_name
+
+4. Per veure les funcions d'usuari hem d'escriure "\df"
+
+                                                          List of functions
+ Schema |            Name            | Result data type |                         Argument data types                         | Type
+--------+----------------------------+------------------+---------------------------------------------------------------------+------
+ public | _group_concat              | text             | text, text                                                          | func
+ public | film_in_stock              | SETOF integer    | p_film_id integer, p_store_id integer, OUT p_film_count integer     | func
+ public | film_not_in_stock          | SETOF integer    | p_film_id integer, p_store_id integer, OUT p_film_count integer     | func
+ public | get_customer_balance       | numeric          | p_customer_id integer, p_effective_date timestamp without time zone | func
+ public | group_concat               | text             | text                                                                | agg
+ public | inventory_held_by_customer | integer          | p_inventory_id integer                                              | func
+ public | inventory_in_stock         | boolean          | p_inventory_id integer                                              | func
+ public | last_day                   | date             | timestamp without time zone                                         | func
+ public | last_updated               | trigger          |                                                                     | func
+ public | rewards_report             | SETOF customer   | min_monthly_purchases integer, min_dollar_amount_purchased numeric  | func
+
+5. Per veure el codi font de les funcions hem d'escriure '\df+'
+
+                                                          List of functions
+ Schema |            Name            | Result data type |                         Argument data types                         | Type | Volatility | Parallel | Owner | Security | Access privileges | Language |                                                                                   Source code                                                                                   | Description
+--------+----------------------------+------------------+---------------------------------------------------------------------+------+------------+----------+-------+----------+-------------------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------
+ public | _group_concat              | text             | text, text                                                          | func | immutable  | unsafe   | admin | invoker  |                   | sql      | \r                                                                                                                                                                             +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          | SELECT CASE\r                                                                                                                                                                  +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |   WHEN $2 IS NULL THEN $1\r                                                                                                                                                    +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |   WHEN $1 IS NULL THEN $2\r                                                                                                                                                    +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |   ELSE $1 || ', ' || $2\r                                                                                                                                                      +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          | END\r                                                                                                                                                                          +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |                                                                                                                                                                                 |
+ public | film_in_stock              | SETOF integer    | p_film_id integer, p_store_id integer, OUT p_film_count integer     | func | volatile   | unsafe   | admin | invoker  |                   | sql      | \r                                                                                                                                                                             +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |      SELECT inventory_id\r                                                                                                                                                     +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |      FROM inventory\r                                                                                                                                                          +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |      WHERE film_id = $1\r                                                                                                                                                      +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |      AND store_id = $2\r                                                                                                                                                       +|
+        |                            |                  |                                                                     |      |            |          |       |          |                   |          |      AND inventory_in_stock(inventory_id);\r                                                                                                                                   +|

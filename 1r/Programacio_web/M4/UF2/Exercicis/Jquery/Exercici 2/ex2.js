@@ -1,0 +1,1 @@
+$("<div><h2>M’encanta el Discord en blanc</h2></div>").appendTo("body");

@@ -1,0 +1,72 @@
+{
+    "personatges": {
+       "personatge" : {
+            "informació biogràfica": {
+                "nom": "Sansa",
+                "cognom": "Stark",
+                "edat": 20,
+                "lloc naixement": "Winterfell, the North",
+                "any naixement": "285 AC",
+                "lloc defunció": null,
+                "any defunció": null
+            },
+            "informació política": {
+                "cases": [
+                    "Stark",
+                    "Lannister",
+                    "Bolton"
+                ],
+                "afiliacions": [
+                    "House Targaryen"
+                ],
+                "títols": [
+                    "Lady of Winterfell",
+                    "Wardeness of the North",
+                    "Quenn of the North"
+                ],
+                "antecessors": null,
+                "successors": null,
+                "militancia": null
+            },
+            "informació personal": {
+                "alies": [
+                    "Little dove",
+                    "Little bird",
+                    "Sansa Lannister",
+                    "Alayne"
+                ],
+                "cultura": "Northern",
+                "religió": "Faith of the Seven",
+                "pares": {
+                    "pare": "Eddard Stark",
+                    "mare": "Catelyn Tully"
+                },
+                "germans": null,
+                "fills/filles": null,
+                "cònjugue": [
+                    "Tyrion Lannister",
+                    "Ramsay Bolton"
+                ],
+                "consorts": null
+            },
+            "dades rellevants": {
+                "series": "Game of Thrones",
+                "temporades": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8
+                ],
+                "aparegut en": 59,
+                "primer vist en": "Winter is Coming",
+                "darrer vist en": "The Iron Throne",
+                "mort a ": null,
+                "retratat/da per": "Sophie Turner"
+            }
+        }   
+    }
+}

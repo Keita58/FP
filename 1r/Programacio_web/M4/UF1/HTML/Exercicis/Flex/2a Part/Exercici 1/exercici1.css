@@ -1,0 +1,69 @@
+body {
+    width: 60em;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row;
+}
+
+section {
+    padding: 2em;
+    margin: 1em;
+}
+
+#green {
+    background-color: #baffc9;
+    order: 2;
+}
+
+#green ul {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#orange {
+    background-color: #ffdfba;
+    order: 4;
+}
+
+#orange div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#orange li {
+    width: 100%;
+    height: 100%;
+}
+
+#yellow {
+    background-color:   #ffffba;
+    order: 5;
+}
+
+#red {
+    background-color:   #ffb3ba;
+    order: 3;
+}
+
+#blue {
+    background-color:   #bae1ff;
+    order: 1;
+}
+
+#blue ul {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    background-color: white;
+    padding: 1em;
+    display: block;
+    margin: 1em;
+}
+

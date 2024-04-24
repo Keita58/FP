@@ -1,0 +1,9 @@
+div {
+    height: 150px;
+    background-color: lime;
+    opacity: 0.5;
+    padding: 25px;
+    border: 50px solid olive;
+    border-radius: 10px;
+    margin: 35px;
+}

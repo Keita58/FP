@@ -1,0 +1,6 @@
+- Codificació en binari: binari, octal, hexadecimal, conversions. Operacions, comptar en binari. Codificació de caràcters (ASCII, ISO, UNICODE). Portes lògiques. Formats d'imatge i d'àudio. Múltiples del bit/byte.
+- Hardware: CPU, memòria principal, busos, USB, memòria cau, BIOS/CMOS, discs.
+- Arquitectura, funcions. Tipus de sistemes operatius. Gestors arrencada.
+- Llicències: propietàries (OEM, individual, per volum), lliures (definició, copyleft), creative commons, domini públic.
+- Xarxa: adreces MAC, adreces IP (classes, màscares de xarxa, IP reservades, comptar combinacions). ipconfig / ip a, ping.
+- Pràctiques: Aida, bios, virtualbox+windows.

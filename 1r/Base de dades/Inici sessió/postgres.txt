@@ -1,0 +1,8 @@
+vagrant ssh
+sudo su - postgres -> Així evitem posar la contrasenya (que no existeix)
+psql
+-----
+Entrar al Dbeaver (vagrant up a postgressql)
+Afegir connexió
+admin/super3 i entrar a la pestanya de postgresql i posar mostrar totes les bases de dades
+Canviar port afegint un 0 al final

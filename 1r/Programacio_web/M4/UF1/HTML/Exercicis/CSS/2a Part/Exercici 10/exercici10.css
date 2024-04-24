@@ -1,0 +1,22 @@
+p {
+    color: springgreen;
+    font-variant: initial;
+    font-family: Arial, serif;
+    font-size: 18px;
+    text-transform: capitalize;
+
+}
+p#\#primer {
+    text-indent: 50px;
+}
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+}
+
+h1 {
+    color: teal;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 36px;
+}

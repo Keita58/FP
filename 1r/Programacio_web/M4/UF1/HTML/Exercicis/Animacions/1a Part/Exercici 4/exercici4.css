@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 200px;
+    height: 150px;
+    transition-duration: 5s;
+}
+
+img:hover {
+    background-color: gold;
+    border-radius: 5em;
+    transform: rotate(1080deg) scale(4, 4);
+    transition-timing-function: ease-in-out;
+}

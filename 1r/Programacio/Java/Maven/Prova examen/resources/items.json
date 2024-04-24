@@ -1,0 +1,60 @@
+{
+	"ModName": "Core",
+	"Defs": [{
+			"ParentName": "MedicineBase",
+			"defName": "Neutroamine",
+			"description": "A synthetic precursor chemical. While it is useless on its own, many drugs require neutroamine as an ingredient.",
+			"stackLimit": 150,
+			"statBases": {
+				"MaxHitPoints": 50,
+				"MarketValue": 6,
+				"Mass": 0.02,
+				"Flammability": 0.7,
+				"DeteriorationRate": 1
+			},
+			"thingCategories": [
+				"Manufactured",
+				"Industrial",
+				"Medicine"
+			]
+
+		},
+		{
+			"ParentName": "ResourceBase",
+			"defName": "ComponentIndustrial",
+			"description": "Miscellaneous gears, capacitors, circuit boards, tubes, wheels, sensors, wires, chips, processors, and other electronic and industrial parts. Necessary for assembling complex machines or electronics.",
+			"stackLimit": 50,
+			"healthAffectsPrice": false,
+			"statBases": {
+				"MaxHitPoints": 70,
+				"MarketValue": 32,
+				"Mass": 0.6,
+				"Flammability": 0.6,
+				"DeteriorationRate": 2
+			},
+			"intricate": true,
+			"thingCategories": [
+				"Manufactured",
+				"Industrial"
+			]
+		},
+		{
+			"ParentName": "ResourceBase",
+			"defName": "Chemfuel",
+			"label": "chemfuel",
+			"description": "A volatile liquid chemical. Used to fuel engines and rockets, or to transmute into propellant for projectiles, or as an incendiary weapon.",
+			"stackLimit": 150,
+			"intricate": true,
+			"statBases": {
+				"MaxHitPoints": 50,
+				"MarketValue": 2.3,
+				"Mass": 0.05,
+				"Flammability": 2,
+				"DeteriorationRate": 1
+			},
+			"thingCategories": [
+				"Manufactured"
+			]
+		}
+	]
+}

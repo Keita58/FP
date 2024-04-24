@@ -1,0 +1,44 @@
+body {
+    text-align: center;
+    background-color: lightgoldenrodyellow;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+img {
+    margin: 10px;
+    max-width: 300px;
+    transition: all 0.5s ease;
+}
+
+#imatge1 {
+    filter: sepia(80);
+}
+
+#imatge2 {
+    filter: blur(5px);
+}
+
+#imatge3 {
+    filter: grayscale(80);
+}
+
+#imatge4 {
+    filter: invert(70);
+}
+
+#imatge5 {
+    filter: hue-rotate(90deg);
+}
+
+#imatge6 {
+    filter: saturate(500);
+}
+
+#imatge7 {
+    filter: contrast(250) brightness(300);
+}

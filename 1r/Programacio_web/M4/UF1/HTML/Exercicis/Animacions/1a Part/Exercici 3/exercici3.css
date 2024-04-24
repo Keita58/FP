@@ -1,0 +1,38 @@
+h1 {
+    background-color: deeppink;
+    color: black;
+    transform: translate(1100px) rotate(270deg);
+    width: 10em;
+}
+
+h4 {
+    text-align: center;
+    transform: translateX(100%) translateY(25em);
+    background-color: dodgerblue;
+    color: white;
+    margin: 10% 20%;
+    border: 10em;
+}
+
+h2 {
+    background-color: palegreen;
+    text-align: center;
+    margin: 10% 20%;
+    border: 3em;
+    transform: translateY(-100px);
+
+}
+
+em {
+    color: navy;
+}
+
+h3 {
+    background-color: firebrick;
+    opacity: 50%;
+    transform: matrix(1.414, 1.414, -1.414, 1.414, 0, 0);
+}
+
+p {
+    text-align: center;
+}

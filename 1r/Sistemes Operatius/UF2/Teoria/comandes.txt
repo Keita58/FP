@@ -1,0 +1,121 @@
+grep -> Ens permet buscar el que posem a continuació en carpetes, arxius, etc. (grep debian /etc/passwd -> Ens mostra només l'usuari debian en la carpeta passwd)
+També el podem fer servir per a escriure per pantalla, i retorna el mateix text que contingui la paraula que li hem posat.
+
+debian:x:1000:1000:Debian:/home/debian:/bin/bash 
+Nom      Id usuari        Carpeta personal de l'usuari (directori)
+              Id grup                  Versió de la línia de comandes que s'està executant
+                   Dades personals
+
+pwd -> Ens diu el directori on estem actualment
+
+SHELL -> La línia de comandes que estem utilitzant (normalment es bash). És una variable, per tant per saber quina és haurem de fer echo $SHELL
+
+gcc -> Compilador de C
+
+chmod -> Modificació de permisos (mirar arxiu permisos)
+
+ln -> Creem un link entre dos arxius (mirar arxiu permisos)
+
+head -> Imprimeix les primeres 10 línies d'un fitxer.
+
+update-alternatives --list editor / sudo update-alternatives --set "adreça" -> Així podem mirar quins editors de codi tenim al nostre sistema i canviar-lo pel que preferim.
+
+cut -> Ens permet retallar el que s'imprimeix per pantalla amb diversos modificadors (-d -> Separador / -f -> Files o camps creades a partir del separador)
+    - cut -d: -f3-5 /etc/
+
+groups -> Et mostra de quins grups ets (l'usuari actual)
+
+id -> Et mostra l'usuari i en quin grups està un usuari en concret (o si no s'especifica per a l'usuari actual)
+
+man -> Manual
+
+less -> Ens permet obrir un arxiu en un format per passar línies poc a poc.
+
+adduser -> Crea un nou usuari en el ordinador. També es pot afegir un usuari a un grup (adduser keita58 root).
+
+su - -> Et canvia a l'usuari root des del teu usuari
+
+/usr/bin -> Carpeta on estan les comandes d'un usuari normal i corrent
+
+/usr/sbin -> Carpeta on estan les comandes d'un usuari administrador
+
+CTRL + D -> Eina per tancar programes, lectura de fitxers, etc. Es un escape en la línia de comandes.
+
+ssh_congif -> Configuració per la part client
+
+sshd_config -> Configuració per part del servidor (la d es de deamon, un servei)
+
+wget/curl -> Descarrega arxius d'internet a partir d'una adreça (Si es posa un -O podem indicar la ubicació d'on volem que es descarregui)
+
+tee -> Ens permet imprimir per pantalla i alhora guardar el mateix en un arxiu que vulguem nosaltres
+
+apt-cache search -> Ens permet buscar paquets del repositori Debian amb el nom que li posem a continuació
+    · Si posem --names-only només apareixeran aquells paquets que tinguin el nom o continguin el nom que posem
+
+apt-get install --reinstall -d -> Amb aquesta comanda estem dient que el paquet que volem instal·lar només el descarregui (-d)
+
+md5sum/sha256sum -> Hash codificat amb el que podem comprovar si la descàrrega ha estat correcte, ja que es comprova amb la que té el paquet en el repositori.
+
+apt-cache search --names-only apache | grep -v "^lib" | less -> Amb aquesta comanda estem buscant els paquets del repositori que tenen en el nom "apache",
+treiem els que comencen amb la paraula "lib-" i ens ho mostra amb la comanda less
+
+apt-get show -> Ens mostra la descripció i de més del paquet que escrivim
+
+uname -> Et diu el que estàs executant (sistema) (uname -a -> Et diu més coses, com la versió i tipus de sistema que estàs executant)
+
+sftp "nomusuari"@"ip" -> Per poder compartir arxius (es un ssh però per arxius, no comandes)
+    · També es pot utilitzar WinSCP (una aplicació per Windows)
+
+apt-get install libapache2-mod-php -> Per instal·lar el paquet de PHP
+
+apt-get install default-mysql-server -> Per instal·lar la base de dades MySQL (que també té MariaDB)
+
+apt-get install php-mysql -> Per a fer la connexió entre el PHP i el MariaDB
+
+systemctl restart apache2 -> Amb aquesta comanda reinicies el servidor apache2
+
+systemctl reload apache2 -> Restart de l'Apache2
+
+MariaDB ->
+    Per crear l'usuari que utilitzarem a la base de dades posarem: 
+        - create user 'usuari'@'localhost' identified by 'contrasenya';
+    I una vegada hem creat l'usuari li hem de donar els permisos per a poder utilitzar la base de dades:
+        - grant all privileges on albums.* to 'albums'@'localhost';
+    IMPORTANT!! -> Ens hem de fixar en les majúscules de les taules, sinó les busques no funcionen!
+    Per veure les taules d'una base de dades a MariaDB hem de posar "show tables" (i per canviar de base de dades hem d'utilitzar "\u <<nom>>").
+
+sed -> Editor de text sense interfície, es fa servir per quan es vol escriptar coses i posar text a arxius diferents
+    sed -i s/"DirectoryIndex"/"DirectoryIndex pagina.html"/ dir.config -> Amb aquesta comanda afegim el text "pagina.html" davant del text "DirectoryIndex"
+    Per evitar que no funcioni o peti al canviar el text, s'ha de posar la opció -i per posar "inline" i que el canvi el faci al mateix document
+    Si s'editen més d'un arxiu s'ha de posar una "g" al final de la comanda per especificar que es global per a tots els arxius.
+
+wc -> Per contar coses (es diu word count però es pot fer servir per contar línies, per exemple)
+
+file -> Comanda molt útil per saber que son els arxius i les seves descripcions
+
+Tab (amb text) -> T'apareixen les comandes que comencen amb la lletra que has escrit
+
+a2dissite -> D'Apache2, deshabilita la configuració que posis
+
+a2ensite -> D'Apache2, habilita la configuració que posis
+
+(Aquestes dues comandes van després de crear l'arxiu a /etc/apache2/sites-enabled)
+
+find -> Comanda per buscar arxius o carpetes específiques
+
+chown -> Permet canviar el propietari d'arxius i carpetes
+    - Si es posa x:x canvies el propietari i el grup al que pertany
+
+chgrp -> Permet canviar de grup arxius i carpetes
+
+ps -> Permet mirar els processos en execució
+
+groups -> Ens permet veure els grups d'un usuari en específic
+
+grep <<nom_grup>> /etc/group -> Ens permet veure els usuaris que pertanyen a un grup específic
+
+ip a -> Info detallada de les teves adreces ip
+
+dig -> S'utilitza per saber el DNS de diferents servidors web (dig <<pàgina web/ip>>)
+
+nmap -> S'utilitza per mostrar dades de xarxa de diferents pàgines web (nmap <<pàgina web>>)

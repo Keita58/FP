@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cantants [
+  <!ELEMENT cantants (cantant*)>
+  <!ELEMENT cantant (nom, album, canço)>
+  <!ELEMENT nom (#PCDATA)>
+  <!ELEMENT album (#PCDATA)>
+  <!ELEMENT canço (#PCDATA)>
+]>
+
+<cantants>
+  <cantant>
+    <nom> Eslabón Armado y Peso Pluma</nom>
+    <album>Desvelado</album>
+    <canço>Ella Baila Sola</canço>
+  </cantant>
+  <cantant>
+    <nom >Morgan Wallen</nom >
+    <album>One Thing at a Time</album>
+    <canço>Last Night</canço>
+  </cantant>
+</cantants>

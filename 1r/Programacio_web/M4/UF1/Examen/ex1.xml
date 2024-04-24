@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<missions>
+  <missio>
+    <nom_joc>Sword Art Online</nom_joc>
+    <titol>Primera missió</titol>
+    <descripcio>Mata a tots els monstres</descripcio>
+    <recompensa>
+      <tipus>Monedes</tipus>
+      <nom>Monedes del Regne</nom>
+      <ubicacio>Esplanada inicial</ubicacio>
+      <valor unitats="gold">5</valor>
+    </recompensa>
+    <objectius></objectius>
+    <requeriments>
+      <punts_minim unitats="points">0</punts_minim>
+      <nivell_necessari unitats="lvl">1</nivell_necessari>
+      <experiencia unitats="exp">0</experiencia>
+      <personatge>
+        <nom>Jojo</nom>
+        <relacio>Usuari</relacio>
+        <poders>Màgia</poders>
+      </personatge>
+    </requeriments>
+  </missio>
+</missions>

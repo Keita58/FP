@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mokedex>
+    <nom_entrenador>Marc</nom_entrenador>
+    <entrades>
+        <entrada id="1">
+            <nom>Mekrom</nom>
+            <tipus>Elèctric/Drac</tipus>
+            <pes>120.5</pes>
+            <evolucions>
+                <pre-evolucio>-</pre-evolucio>
+                <post-evolucio>-</post-evolucio>
+            </evolucions>
+            <localitzacions>
+                <localitzacio>Alto Mando</localitzacio>
+            </localitzacions>
+        </entrada>
+        <entrada id="2">
+            <nom>Magikarp</nom>
+            <tipus>Aigua</tipus>
+            <pes>15.0</pes>
+            <evolucions>
+                <pre-evolucio>-</pre-evolucio>
+                <post-evolucio>Gyarados</post-evolucio>
+            </evolucions>
+            <localitzacions>
+                <localitzacio>Ruta 12</localitzacio>
+                <localitzacio>Ruta 13</localitzacio>
+                <localitzacio>Ruta 17</localitzacio>
+                <localitzacio>Ruta 18</localitzacio>
+            </localitzacions>
+        </entrada>
+    </entrades>
+</mokedex>

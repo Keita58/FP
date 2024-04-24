@@ -1,0 +1,54 @@
+<!ELEMENT personatges (personatge+)>
+<!ELEMENT personatge (informacio_important, informacio_politica, dades_personals, dades_rellevants)>
+<!ELEMENT informacio_important (nom, edat*, lloc_naixement?, any_naixement*, any_defuncio?, lloc_defuncio?)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT edat (#PCDATA)>
+<!ATTLIST edat unitats CDATA #REQUIRED>
+<!ELEMENT lloc_naixement (#PCDATA)>
+<!ELEMENT any_naixement (#PCDATA)>
+<!ATTLIST any_naixement unitats CDATA #REQUIRED>
+<!ELEMENT any_defuncio (#PCDATA)>
+<!ATTLIST any_defuncio unitats CDATA #REQUIRED>
+<!ELEMENT lloc_defuncio (#PCDATA)>
+<!ELEMENT informacio_politica (cases?, titols?, antecessors?, successors?, (afiliacions?|militancies?))>
+<!ELEMENT cases (casa+)>  
+<!ELEMENT casa (#PCDATA)>
+<!ELEMENT titols (titol+)>
+<!ELEMENT titol (#PCDATA)>
+<!ELEMENT antecessors (antecessor+)>
+<!ELEMENT antecessor (#PCDATA)>
+<!ELEMENT successors (successor+)>
+<!ELEMENT successor (#PCDATA)>
+<!ELEMENT afiliacions (afiliacio+)>
+<!ELEMENT afiliacio (#PCDATA)>
+<!ELEMENT militancies (militancia+)>
+<!ELEMENT militancia (#PCDATA)>
+<!ELEMENT dades_personals (alies?, cultura?, religio?, pares?, germans?, fills?, cònjuges?, consorts?)>
+<!ELEMENT alies (alias+)>
+<!ELEMENT alias (#PCDATA)>
+<!ELEMENT cultura (#PCDATA)>
+<!ELEMENT religio (#PCDATA)>
+<!ELEMENT pares (pare?, mare?)>
+<!ELEMENT pare (#PCDATA)>
+<!ELEMENT mare (#PCDATA)>
+<!ELEMENT germans (germa*, germana*)>
+<!ELEMENT germa (#PCDATA)>
+<!ELEMENT germana (#PCDATA)>
+<!ELEMENT fills (fill*, filla*)>
+<!ELEMENT fill (#PCDATA)>
+<!ATTLIST fill numero CDATA #REQUIRED>
+<!ELEMENT filla (#PCDATA)>
+<!ATTLIST filla numero CDATA #REQUIRED>
+<!ELEMENT cònjuges (cònjuge*)>
+<!ELEMENT cònjuge (#PCDATA)>
+<!ELEMENT consorts (consort*)>
+<!ELEMENT consort (#PCDATA)>
+<!ELEMENT dades_rellevants (temporades?, aparegut_en?, primer_vist_en?, darrer_vist_en?, mort_a?, retratat-da_per?)>
+<!ELEMENT temporades (temporada+)>  
+<!ELEMENT temporada (#PCDATA)>
+<!ELEMENT aparegut_en (#PCDATA)>
+<!ATTLIST aparegut_en unitats CDATA #REQUIRED>
+<!ELEMENT primer_vist_en (#PCDATA)>
+<!ELEMENT darrer_vist_en (#PCDATA)>
+<!ELEMENT mort_a (#PCDATA)>
+<!ELEMENT retratat-da_per (#PCDATA)>

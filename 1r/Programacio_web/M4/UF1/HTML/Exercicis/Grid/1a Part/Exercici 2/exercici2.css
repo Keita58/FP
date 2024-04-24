@@ -1,0 +1,71 @@
+.grid-container {
+    display: grid;
+    /*grid gap, separacio INTERNA del grid, vertical horitzontal*/
+    grid-gap: 10px 10px;
+    /*color de la separacio*/
+    background-color: #2196F3;
+    /*padding, separacio EXTERNA del grid*/
+    padding: 10px;
+
+    /*grid-template-columns, especifiques el tamany de les n columnes que vols posar */
+    /*grid-template-columns: 20% 30% 30% 20%*/
+    /*pots fer servir fr , de fraccio, per a "repartir l'espai que queda"*/
+    grid-template-columns: 1fr 4fr 1fr 50px;
+    grid-template-rows: 250px 600px 250px 250px;
+}
+
+.grid-item {
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.item1 {
+    background-color: darkgreen;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.item2 {
+    background-color: red;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.item3 {
+    background-color: gold;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.item4 {
+    background-color: darkmagenta;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.item5 {
+    background-color: blue;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+
+.item6 {
+    background-color: hotpink;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.item7 {
+    background-color: white;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 4;
+    grid-column-end: 5;
+}

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE animes [
+  <!ELEMENT animes (anime*)>
+  <!ELEMENT anime (#PCDATA)>
+]>
+
+<animes>
+  <anime>Ghost in the shell</anime>
+  <anime>Mamoru Oshii</anime>
+</animes>

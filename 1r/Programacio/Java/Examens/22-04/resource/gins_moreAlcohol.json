@@ -1,0 +1,50 @@
+[
+  {
+    "nom": "Puerto de Indias",
+    "graduacio": 36,
+    "sabor": "maduixa",
+    "ingredients": [
+      {
+        "vol": 70.0,
+        "nom": "ginebra"
+      },
+      {
+        "vol": 5.3,
+        "nom": "maduixa"
+      }
+    ]
+  },
+  {
+    "nom": "Bombay Blue Saphire",
+    "graduacio": 39,
+    "ingredients": [
+      {
+        "vol": 75.0,
+        "nom": "ginebra"
+      },
+      {
+        "vol": 5.3,
+        "nom": "enhebro"
+      },
+      {
+        "vol": 2.2,
+        "nom": "juniper berries"
+      }
+    ]
+  },
+  {
+    "nom": "Hendrick\u0027s",
+    "graduacio": 36,
+    "sabor": "cogombre",
+    "ingredients": [
+      {
+        "vol": 80.0,
+        "nom": "ginebra"
+      },
+      {
+        "vol": 5.3,
+        "nom": "cogombre"
+      }
+    ]
+  }
+]

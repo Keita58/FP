@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE animal [
+  <!ELEMENT animal (grup*)>
+  <!ELEMENT grup (peix*, mamifer*, au*, amfibi*)>
+  <!ELEMENT peix (#PCDATA)>
+  <!ELEMENT mamifer (#PCDATA)>
+  <!ELEMENT au (#PCDATA)>
+  <!ELEMENT amfibi (#PCDATA)>
+]>
+<animal>
+  <grup>
+    <peix>Tauró</peix>
+    <peix>Rap</peix>
+  </grup>
+  <grup>
+    <mamifer>Girafa</mamifer>
+    <mamifer>Lemur</mamifer>
+  </grup>
+  <grup>
+    <au>Voltor</au>
+    <au>Corb</au>
+  </grup>
+  <grup>
+    <amfibi>Gripau</amfibi>
+    <amfibi>Granota</amfibi>
+  </grup>
+</animal>

@@ -1,0 +1,52 @@
+﻿<response>
+  <rows>
+    <row>
+      <codcentre>17008298</codcentre>
+      <nom>Escola 1</nom>
+      <grup_confin>2</grup_confin>
+      <alumn_confin>36</alumn_confin>
+      <docent_confin>10</docent_confin>
+      <altres_confin>0</altres_confin>
+    </row>
+    <row>
+      <codcentre>43002594</codcentre>
+      <nom>Escola 2</nom>
+      <grup_confin>7</grup_confin>
+      <alumn_confin>141</alumn_confin>
+      <docent_confin>1</docent_confin>
+      <altres_confin>0</altres_confin>
+    </row>
+    <row>
+      <codcentre>17006083</codcentre>
+      <nom>Escola 3</nom>
+      <grup_confin>8</grup_confin>
+      <alumn_confin>168</alumn_confin>
+      <docent_confin>8</docent_confin>
+      <altres_confin>1</altres_confin>
+    </row>
+    <row>
+      <codcentre>08054034</codcentre>
+      <nom>Escola 4</nom>
+      <grup_confin>0</grup_confin>
+      <alumn_confin>5</alumn_confin>
+      <docent_confin>0</docent_confin>
+      <altres_confin>0</altres_confin>
+    </row>
+    <row>
+      <codcentre>08040552</codcentre>
+      <nom>Escola 5</nom>
+      <grup_confin>7</grup_confin>
+      <alumn_confin>177</alumn_confin>
+      <docent_confin>2</docent_confin>
+      <altres_confin>1</altres_confin>
+    </row>
+    <row>
+      <codcentre>08021302</codcentre>
+      <nom>Escola 6</nom>
+      <grup_confin>2</grup_confin>
+      <alumn_confin>45</alumn_confin>
+      <docent_confin>0</docent_confin>
+      <altres_confin>0</altres_confin>
+    </row>
+  </rows>
+</response>

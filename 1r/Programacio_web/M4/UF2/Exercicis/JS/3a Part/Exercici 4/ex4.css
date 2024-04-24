@@ -1,0 +1,23 @@
+:root[data-theme="noterrorista"] {
+    --bg-color: #cfd8dc;
+    --text-color: #212121;
+    --font: "Arial";
+}
+
+:root[data-theme="terrorista"] {
+    --bg-color: #263238;
+    --text-color: #e0e0e0;
+    --font: "Times";
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-family: var(--font);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

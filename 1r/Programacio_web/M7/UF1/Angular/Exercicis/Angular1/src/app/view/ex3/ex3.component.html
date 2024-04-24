@@ -1,0 +1,10 @@
+<div class="container">
+  <div [formGroup]="formulari">
+    <label for="textarea">Text:</label>
+    <textarea id="textarea" formControlName="text" cols="40"></textarea>
+    @if(this.formulari.controls['text'].errors?.['required']){
+      <p class="text-danger">És necessari informar el camp.</p>
+    }
+  </div>
+  <app-ex3fill [formulari]="formulari.controls['text'].value"></app-ex3fill>
+</div>

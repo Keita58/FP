@@ -1,0 +1,8 @@
+.float_left {
+    margin-right: 20px;
+    float: left;
+}
+
+#imatge2 {
+    clear: left;
+}

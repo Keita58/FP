@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: lemonchiffon;
+    overflow: hidden;
+}
+
+.container {
+    width: 100px;
+    height: 100px;
+    background-color: darkolivegreen;
+    animation: animacio 4s 3 ease-out;
+}
+
+@keyframes animacio {
+    0% {
+        transform-origin: center;
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: rotateY(90deg) translateX(100px) scale(1.5, 1.5);
+        background-color: chartreuse;
+    }
+    100% {
+        transform: rotateZ(360deg) translateX(200px) scale(2, 2);
+        background-color: turquoise;
+    }
+}

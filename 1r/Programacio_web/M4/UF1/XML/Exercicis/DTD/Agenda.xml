@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE agenda [
+  <!ELEMENT agenda (contacte*)>
+  <!ELEMENT contacte (nom, telefon*, correu+)>
+  <!ELEMENT nom (#PCDATA)>
+  <!ELEMENT telefon (#PCDATA)>
+  <!ELEMENT correu (#PCDATA)>
+]>
+
+
+<agenda>
+  <contacte>
+    <nom>Juana Alvarez</nom>
+    <telefon>987654321</telefon>
+    <telefon>900000000</telefon>
+    <correu>ja@gmail.com</correu>
+  </contacte>
+  <contacte>
+    <nom>Juan Romero</nom>
+    <telefon>888111777</telefon>
+    <telefon>900000000</telefon>
+    <correu>jr@jaja.org</correu>
+  </contacte>
+</agenda>

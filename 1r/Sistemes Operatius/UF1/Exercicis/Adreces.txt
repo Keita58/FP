@@ -1,0 +1,17 @@
+142.252.243.70
+-Classe
+Classe B (10001110)
+
+-Màscara per defecte?
+La màscara per defecte és /16
+
+-/18
+	·Adreça xarxa
+	142.252.243.70 /18 ->
+	142.252.192.0
+
+	·Adreça broadcast
+	142.252.255.255
+
+	·Màscara en decimal
+	255.255.192.0

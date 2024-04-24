@@ -1,0 +1,105 @@
+body {
+    width: 60em;
+    margin: 0 auto;
+    display: grid;
+    grid-template: auto / auto;
+}
+
+section {
+    padding: 2em;
+    margin: 1em;
+}
+
+#green {
+    background-color: #baffc9;
+    grid-column: 1/3;
+    grid-row: 4/5;
+}
+
+#orange {
+    background-color: #ffdfba;
+    grid-column: 1/4;
+    grid-row: 1/2;
+}
+
+#yellow {
+    background-color:   #ffffba;
+    grid-column: 3/4;
+    grid-row: 2/5;
+}
+
+#red {
+    background-color:   #ffb3ba;
+    grid-column: 2/3;
+    grid-row: 2/4;
+}
+
+#red ul {
+    display: grid;
+    grid-template: auto / auto;
+    justify-content: space-evenly;
+}
+
+.item1 {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.item2 {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.item3 {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.item4 {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+#blue {
+    background-color:   #bae1ff;
+    grid-column: 1/2;
+    grid-row: 2/4;
+}
+
+#blue ul {
+    display: grid;
+    grid-template: auto / auto;
+    justify-content: space-evenly;
+}
+
+.itema {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.itemb {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.itemc {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.itemd {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    background-color: white;
+    padding: 1em;
+    display: block;
+    margin: 1em;
+    width: 50px;
+}

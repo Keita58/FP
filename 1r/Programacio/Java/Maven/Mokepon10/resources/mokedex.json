@@ -1,0 +1,33 @@
+{
+  "nomEntrenador": "Red",
+  "entrades": [
+    {
+      "id": 1,
+      "nom": "Mulmasaur",
+      "pes": 15.2,
+      "evolucions": {
+        "post-evolucio": "Menusaur"
+      },
+      "localitzacions": [
+        "Ruta 1",
+        "Ruta 6",
+        "Ruta 12",
+        "Bosc dels Mulmasaurs"
+      ]
+    },
+    {
+      "id": 2,
+      "nom": "Zekrom",
+      "tipus": "Elèctric/Drac",
+      "pes": 345.0,
+      "evolucions": {
+        "pre-evolucio": "-",
+        "post-evolucio": "-"
+      },
+      "localitzacions": [
+        "Cueva Incierta",
+        "Alto Mando"
+      ]
+    }
+  ]
+}

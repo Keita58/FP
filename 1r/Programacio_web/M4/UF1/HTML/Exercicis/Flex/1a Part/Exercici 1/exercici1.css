@@ -1,0 +1,27 @@
+.flex_container {
+    background-color: black;
+    color: white;
+    margin: 10px;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex div{
+    flex-grow: 1;
+}
+
+body {
+    font-family: Calibri;
+}
+
+main {
+    text-align: center;
+}
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+    color: white;
+}

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE personatges SYSTEM "file:/D:/Programacio_web/Projectes/XML/Projecte%20DTD.dtd">
+<personatges>
+  <personatge>
+    <informacio_important>
+      <nom>Harwin Strong</nom>
+      <edat unitats="any(s)">30</edat>
+      <any_defuncio unitats="AC">126</any_defuncio>
+      <lloc_defuncio>Harrenhal</lloc_defuncio>
+    </informacio_important>
+    <informacio_politica>
+      <cases>
+        <casa>Strong</casa>
+      </cases>
+      <titols>
+        <titol>Ser</titol>
+        <titol>Lord Commander of the City Watch</titol>
+      </titols>
+      <antecessors>
+        <antecessor>Daemon Targaryen</antecessor>
+      </antecessors>
+      <afiliacions>
+        <afiliacio>City Watch of King's Landing</afiliacio>
+        <afiliacio>Blacks</afiliacio>
+      </afiliacions>
+    </informacio_politica>
+    <dades_personals>
+      <alies>
+        <alias>Breakbones</alias>
+      </alies>
+      <cultura>Andal</cultura>
+      <pares>
+        <pare>Lyonel Strong</pare>
+      </pares>
+      <germans>
+        <germa>Larys Strong</germa>
+      </germans>
+      <fills>
+        <fill numero="1">Jacaerys Velaryon</fill>
+        <fill numero="2">Lucerys Velaryon</fill>
+        <fill numero="3">Joffrey Velaryon</fill>
+      </fills>
+      <consorts>
+        <consort>Rhaenyra Targaryen</consort>
+      </consorts>
+    </dades_personals>
+    <dades_rellevants>
+      <temporades>
+        <temporada>1</temporada>
+      </temporades>
+      <aparegut_en unitats="episodi(s)">4</aparegut_en>
+      <primer_vist_en>Second of His Name</primer_vist_en>
+      <darrer_vist_en>The Princess and the Queen</darrer_vist_en>
+      <mort_a>The Princess and the Queen</mort_a>
+      <retratat-da_per>Ryan Corr</retratat-da_per>
+    </dades_rellevants>
+  </personatge>
+</personatges>

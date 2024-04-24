@@ -1,0 +1,32 @@
+{
+    "canals": [
+        {
+            "nom": "Formula 1",
+            "categoria": "Esports de motor",
+            "usuaris": [
+                {
+                    "nom": [
+                        "michael",
+                        "toto",
+                        "mercedesamg"
+                    ],
+                    "avatar": "averagephoto.url",
+                    "estat": "moderador"
+                }
+            ]
+        },
+        {
+            "nom": "La cuina del poble",
+            "categoria": "cuina",
+            "usuaris": [
+                {
+                    "nom": [
+                        "angela"
+                    ],
+                    "avatar": "gorrocuina.url",
+                    "estat": "administrador"
+                }
+            ]
+        }
+    ]
+}

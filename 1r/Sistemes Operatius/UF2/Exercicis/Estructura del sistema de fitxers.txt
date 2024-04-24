@@ -1,0 +1,82 @@
+1. Exercicis
+
+1.1. Suposem que el directori de treball és programes. Dóna les rutes relatives
+i absolutes, en Windows i en Linux, per referir-se als següents fitxers:
+    - ex1.c -> 
+        Relativa: exercicis/ex1.c | exercicis\ex1.c
+        Absoluta: /home/ies/programes/exercicis/ex1.c | C:\Users\ies\programes\exercicis\ex1.c
+
+    - punters.odt -> 
+        Relativa: ../documents/programacio/punters/punters.odt | ..\documents\programacio\punters\punters.odt
+        Absoluta: /home/ies/documents/programacio/punters/punters.odt | C:\Users\ies\documents\programacio\punters\punters.odt
+
+1.2. Suposem que el directori de treball és tema1. Dóna les rutes relatives en
+qualsevol dels dos sistemes operatius per referir-se a:
+    - apunts1.odt ->
+        Relativa: ./apunts1.odt o apunts.odt
+
+    - apunts2.odt ->
+        Relativa: ../tema2/apunts2.odt
+
+    - funcions.odt ->
+        Relativa: ../../programacio/funcions/funcions.odt
+
+    - temari.odt ->
+        Relativa: ../../temari.odt
+
+Suposem que el directori actual de treball és so.
+
+1.3. Llista el contingut del directori actual.
+    Linux: ls 
+    Windows: dir
+
+1.4. Situa el fitxer apunts2.odt al directori documents i amb el nom 
+apunts_sistemes.odt.
+    Linux: mv tema2/apunts2.odt ../apunts_sistemes.odt
+    Windows: move tema2\apunts2.odt ..\apunts_sistemes.odt
+
+1.5. Copia el fitxer temari.odt al directori arrel amb el nom temari_so.odt.
+    Linux: cp ../temari.odt /home/ies/temari_so.odt
+    Windows: copy ..\temari.odt C:\Users\ies\temari_so.odt
+
+1.6. Llista el contingut del directori documents.
+    Linux: ls ../
+    Windows: dir ..\
+
+1.7. Situa’t al directori exercicis.
+    Linux: cd ../../programes/exercicis
+    Windows: cd ..\..\programes\exercicis
+
+Suposem ara que el directori actiu és exercicis.
+
+1.8. Mou el directori hola_mon sencer a dins del directori exercicis.
+    Linux: mv ../hola_mon .
+    Windows: move ..\hola_mon .
+
+1.9. Copia els fitxers ex1.c i ex1corregit.c al directori funcions.
+    Linux: cp ex1* ../../documents/programacio/funcions
+    Windows: copy ex1.c ex1corregit.c ..\..\documents\programacio\funcions
+
+1.10. Visualitza el fitxer hola_mon.c.
+    Linux: cat ../hola_mon/hola_mon.c
+    Windows: type ..\hola_mon\hola_mon.c
+
+1.11. Mou el fitxer temari.odt al directori actual.
+    Linux: mv /home/ies/documents/temari.odt .
+    Windows: C:\Users\ies\documents\temari.odt .
+
+1.12. Esborra el fitxer arrays.odt.
+    Linux: rm ../../documents/programacio/arrays/arrays.odt
+    Windows: del ..\..\documents\programacio\arrays\arrays.odt
+
+1.13. Esborra el directori so i tot el seu contingut.
+    Linux: rm -R /home/ies/documents/so
+    Windows: rd /s C:\Users\ies\documents\so
+
+1.14. Crea un directori anomenat solucions dins del directori programes.
+    Linux: mkdir ../solucions
+    Windows: mkdir ..\solucions
+
+1.15. Canvia al directori arrel.
+    Linux: cd /home/ies
+    Windows: cd C:\Users\ies

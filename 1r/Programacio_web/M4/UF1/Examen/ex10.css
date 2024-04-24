@@ -1,0 +1,20 @@
+div {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    animation-name: animacio;
+    animation-delay: 2s;
+    animation-duration: 3s;
+    color: orange;
+}
+
+@keyframes animacio {
+    0% {
+        transform: rotateZ(0);
+    }
+    100% {
+        background-color: orange;
+        color: green;
+        transform: rotateZ(720deg);
+    }
+}

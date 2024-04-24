@@ -1,0 +1,40 @@
+#anime-list {
+    display: flex;
+    flex-direction: row;
+    background-color: lightpink;
+}
+
+.anime-item {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 5px;
+    align-items: center;
+    border: 5px crimson dashed;
+    width: fit-content;
+}
+
+header {
+    text-align: center;
+}
+
+img {
+    width: 215px;
+    height: 318px;
+}
+
+p {
+    text-align: center;
+    color: darkviolet;
+    font-family: Helvetica;
+    font-size: 12px;
+}
+
+@media (max-width: 600px) {
+    #anime-list {
+        flex-wrap: wrap;
+    }
+    .anime-item {
+        flex-direction: row;
+    }
+}

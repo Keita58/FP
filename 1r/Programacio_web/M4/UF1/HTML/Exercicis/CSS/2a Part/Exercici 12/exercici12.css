@@ -1,0 +1,19 @@
+a:link {
+    color: hotpink;
+    background-color: mediumblue;
+}
+
+a:visited {
+    color: maroon;
+    background-color: mediumblue;
+}
+
+a:hover {
+    color: magenta;
+    background-color: salmon;
+}
+
+a:active {
+    color: cyan;
+    background-color: salmon;
+}

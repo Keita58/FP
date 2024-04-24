@@ -1,0 +1,22 @@
+.withFlex {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px black solid;
+}
+
+.withoutFlex {
+    display: flex;
+    flex-wrap: nowrap;
+    border: 2px black solid;
+}
+
+.resize {
+    height: auto;
+    width: auto;
+    max-width: 230px;
+    max-height: 230px;
+}
+
+div {
+    margin-bottom: 15px;
+}

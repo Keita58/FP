@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE persones [
+  <!ELEMENT persones (persona*)>
+  <!ELEMENT persona (nom, (telefon | correu), datanaixerment)>
+  <!ELEMENT nom (#PCDATA)>
+  <!ELEMENT telefon (#PCDATA)>
+  <!ELEMENT correu (#PCDATA)>
+  <!ELEMENT datanaixerment (#PCDATA)>
+]>
+
+
+<persones>
+  <persona>
+    <nom>Patricia Benitez</nom>
+    <correu>pbe@correu.cat</correu>
+    <datanaixerment>4 de març de 2008</datanaixerment>
+  </persona>
+  <persona>
+    <nom>Cecilia Lopez</nom>
+    <telefon>El cura pelirrojillo</telefon>
+    <datanaixerment>21 de maig de 1985</datanaixerment>
+  </persona>
+</persones>

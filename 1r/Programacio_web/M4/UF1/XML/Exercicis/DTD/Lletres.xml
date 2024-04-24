@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lletres [
+  <!ELEMENT lletres (paraula,numero)>
+  <!ELEMENT paraula (#PCDATA)>
+  <!ELEMENT numero (#PCDATA)>
+]>
+
+
+<lletres>
+  <paraula>m</paraula>
+  <numero>12</numero>
+</lletres>

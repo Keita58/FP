@@ -1,0 +1,302 @@
+1. Fes una comanda que passi tots els arxius `.txt` del teu directori actual al directori pare del teu directori pare actual.
+
+mv *.txt /..
+
+Correcció: mv *.txt ../.. (No es pot posar només la barra perquè es considera ruta absoluta i peta, si es vol posar la barra s'ha de posar un punt abans, ./)
+
+2. Fes una comanda que guardi el contingut de `document.txt` en l'arxiu `documentclonat.txt`.
+
+cat document.txt > documentclonat.txt
+
+Correcció: Correcte 
+
+3. Como Detienes el servicio de Apache?
+
+systemctl stop apache2
+
+Correcció: Correcte 
+
+4. Añade una base de Datos mediante el archivo sql `Buenasnoches.sql` el cual se encuentra en el directorio actual, a MariaDB (Una vez dentro de esta).
+
+mariadb < Buenasnoches.sql
+
+Correcció: source 'Buenasnoches.sql' -> Estem ja a dins de MariaDB, per tant no podem posar l'ordre si estiguéssim fora
+
+5. Posa la comanda per connectar remotament a la màquina amb IP 217.182.128.112 amb l'usuari `Noquestions`.
+
+ssh Noquestions@217.182.128.112
+
+Correcció: Correcte 
+
+6. Posa la comanda per veure nomès els noms de tots els usuaris que no són usuaris de sistema. **PISTA:** `X>=1000`.
+
+Correcció: grep '[1-9][0-9]\{3,\}' /etc/passwd | cut -f1 -d (!!!)
+
+7. Tens la teva pàgina web en l'arxiu `pagina.html` (en comptes d'`index.html`), i vols que l'Apache2 l'obri automàticament. Quin seguit de comandes has d'escriure per a què es pugui obrir?
+
+cd /etc/apache2
+cd nano mods-avaliable/dir.conf -> Afegim la direcció pagina.html
+systemctl restart apache2
+
+Correcció: Correcte
+
+8. Vés a la carpeta on estan localitzades les comandes d'administrador.
+
+cd /etc/sbin
+
+Correcció: cd /usr/sbin :( (usr perquè son les comandes d'usuari)
+
+9. Amb quina comanda pots veure quina versió del SO s'està executant?
+
+uname -r
+
+Corecció: Correcte (també es pot fer amb -a)
+
+10. Què fa la comanda dd?
+  a. Copiar un fitxer amb una quantitat de bytes especificats.
+  b. Copiar un fitxer directament a l'escriptori.
+  c. Esborrar un directori.
+  d. Esborrar tots els directoris dins d'una carpeta.
+
+a)
+
+Correcció: Correcte
+
+11. Com donaries permisos a un usuari a Linux perquè pugui connectar-se mitjançant una connexió des d'un altre ordinador.
+
+No cal donar cap tipus de privilegi, només has de saber la contrasenya i ip de l'altre ordinador per a poder-te connectar fent servir SSH.
+(ssh 'usuari'@'ip' i després posar la contrasenya que toca). 
+
+Correcció: Es pot modificar l'arxiu /etc/ssh/sshd_config, però està bé
+
+12. Com donaries tots els permisos sobre una carpeta i totes les seves subcarpetes?
+
+chmod -R 777 carpeta
+
+Correcció: Correcte
+
+13. Mou tots els fitxers del directori pare al directori de treball utilitzant rutes relatives.
+
+mv -a /* /treball
+
+Correcció: El directori de treball és el directori on estàs actualment, pel que la correció es -> mv ../* .
+
+14. Canvia la contrasenya de l'usuari `usuari`.
+
+passwd usuari
+
+Correcció: Correcte
+
+15. Volem moure tot el contingut de `/home/cosa` (però no la pròpia carpeta) a `/var/www/html`. Amb quina ordre ho fem?
+
+mv /home/cosa/* /var/www/html
+
+Correcció: Correcte
+
+16. Si treiem el permís de poder veure el contingut d'una carpeta però dins de la carpeta hi ha un fitxer sobre el qual tinc permís de lectura, podem veure aquell fitxer? Si es pot, com?
+
+No el podem veure, ja que l'arxiu està dins d'una carpeta a la que no podem accedir a dins, i per tant, encara que tinguem els permisos per veure l'arxiu que hi ha a l'interior no el podem veure.
+
+Correcció: Si sabem el nom de l'arxiu sí que el podem veure, ja que tenim permisos d'execució/entrada a la carpeta i per tant es pot accedir a l'arxiu.
+
+17. En MariaDB, como otorgas al usuario `maria`, que sólo puede conectar localmente, todos los permisos sobre la BD `hotel`?
+
+grant all privileges from hotel to maria;
+
+Correcció: grant all privileges on schema hotel.* to 'maria'@'localhost'
+
+18. Cómo le pones todos los permisos al dueño, sólo lectura al grupo, y sólo ejecucion a los otros usuarios a un archivo llamado `nose.txt`?
+
+chmod 741 nose.txt
+
+Correcció: Correcte
+
+19. Com podem instal·lar el servidor HTTP Apache al servidor?
+
+apt-get install apache2
+
+Correcció: Correcte
+
+20. Com mostrem una llista de tots els paquets instal·lats?
+
+apt list --installed
+
+Correcció: Correcte
+
+21. Quina comanda permet buscar els paquets d'apache a l'índex de paquets locals?
+
+apt list --installed | grep apache
+
+Correcció: apt-cache search installed
+
+22. Quina comanda permet veure quin paquet ha instal·lat X fitxer?
+
+dpkg -L <<paquet>>
+
+Correcció: dpkg -S <<nom fitxer>> (El -L es per als paquets, la pregunta era per als arxius :( )
+
+23. Com comprovo si el fitxer `/vmlinuz` és un enllaç simbòlic?
+
+Si al fer ls -l ens mostra que hi ha un enllaç a un altre arxiu amb 'vmlinuz -> xxxx'
+
+Correcció: Correcte (ls -l /vmlinux)
+
+24. Crea un enllaç simbòlic anomenat `link` que apunti al fitxer `fitxer.txt`.
+
+ln link fitxer.txt
+
+Correcció: Falta l'opció -s (ln -s fitxer.txt link)
+
+25. Com trobo la ruta del fitxer que s'executarà quan escrigui `nano`?
+
+which nano
+
+Correcció: Correcte
+
+26. Ordre per saber amb quin usuari estic connectat.
+
+whoami
+
+Correcció: Correcte
+
+27. Ordre per saber què són tots els fitxers del directori de treball.
+
+ls -l 
+
+Correcció: file * 
+
+-------------------------------------------------------------------------------------------------------------------
+
+28. Canviar el propietari i el grup d’un fitxer
+
+chown "usuari":"grup" fitxer.txt
+
+29. Canviar els permisos d’un fitxer perquè sigui llegible, editable i executable pel propietari
+
+chmod u=rwx fitxer.txt
+
+30. Utilitza una comanda per poder editar un arxiu en una ubicació específica.
+
+nano "ubicació/arxiu"
+
+31. Com pots comprovar si el servei de mariadb funciona correctament?
+
+systemctl status mariadb
+
+32. Com pots donar permisos de lectura, escriptura i execució sol al propietari d'un arxiu anomenat "document.txt" utilitzant el comando chmod en Linux?
+
+chmod u=rwx document.txt
+
+33. El comando en Linux per a llistar tots els processos en execució juntament amb els seus detalls, inclosos l'ANEU del procés, l'usuari i l'ús de recursos, és?
+
+ps aux
+
+34. Quina és la comanda per detenir el servei de MySQL?
+
+systemctl stop mysql
+
+35. Com puc afegir un usuari nou a un grup existent a Linux?
+
+adduser <<usuari grup>>
+
+36. Quin és el propòsit principal de l'ordre grep a Linux i quin seria un exemple del seu ús pràctic a la línia d'ordres?
+
+El grep analitza el que se li passa pel pipe (si està seguit d'una altra comanda) o de l'arxiu que se li passa per paràmetre i retorna aquelles paraules que concorden amb el que s'especifica
+  - cat grep.txt | grep "awk"
+  - grep "awk" grep.txt
+
+37. Quina funció fa l'ordre chmod en un sistema Linux i com s'utilitza per canviar els permisos d'un fitxer?
+
+La funció chmod canvia els permisos d'arxius i carpetes per a l'usuari que l'ha creat, el grup al que pertany el mateix i per a la resta d'usuaris i grups, cadascun amb els seus permisos
+
+38. crea un nou directori.
+
+mkdir <<nom del directori>>
+
+39. Elimina un directori.
+
+rmdir <<nom del directori>>
+
+40. Utilizando el comando ls, muestra la lista de archivos en el directorio actual, pero solo aquellos cuyos nombres comienzan con la letra "a".
+
+ls a*
+
+41. Utilizando el comando grep, busca todas las líneas en un archivo llamado "texto.txt" que contengan la palabra "Linux". Muestra solo las líneas que coinciden con la búsqueda.
+
+grep "Linux" texto.txt
+
+42. ¿Qué comando usarías para listar los archivos en el directorio ‘directorioEjemplo’ que se ubica en un directorio directamente superior y sus subdirectorios?
+
+ls -R ..
+
+43. ¿Cómo cambiarías el nombre del archivo "archivo.txt" a "nuevo_archivo.txt"?
+
+mv archivo.txt nuevo_archivo.txt
+
+44. ¿Cual es la comanda para restaurar una base de datos desde este archivo backup.sql, teniendo en cuenta que la base ya está creada y solo quieres sobreescribirla?
+
+mariadb < backup.sql
+
+45. Usando la comanda mysqldump, crea un archivo de backup.sql de la base de datos albums en el directorio de tu usuario
+
+mysqldump albums > /home/<<usuari>>/backup.sql
+
+46. Com afegir el contingut del fitxer file1.txt al final del fitxer file2.txt a Linux?
+
+cat file1.txt >> file2.txt
+
+47. file1 i file2 estan dins del mateix directori pare, i el directori actual és file1. Com puc copiar file2, incloent-hi els subdirectoris i el seu contingut, a file1?
+
+cp -R ../file2 file1
+
+48. Com pots eliminar tots els fitxers amb extensió ".tmp" al teu directori actual de manera segura?
+
+rm *.tmp
+
+49. Quina seria la manera de canviar el nom del fitxer "arxiu_antic.txt" "arxiu_nou.txt" utilitzant l'ordre "mv"?
+
+mv arxiu_antic.txt arxiu_nou.txt
+
+50. ¿Qué comando usarías para mostrar las primeras 10 líneas de un archivo llamado "archivo.txt"?
+
+head archivo.txt
+
+51. ¿Cómo puedes comprimir un directorio llamado "mi_directorio" en un archivo zip llamado "mi_directorio.zip"?
+
+zip mi_directorio.zip mi_directorio (desp´res d'haver instal·lat el paquet de zip)
+
+52. Como puedes saber el estado del servicio de php 8.2?
+
+php -i
+
+53. home ----------------- 1 -------- 1 \n | | \n | |--------- 2 \n | | \n | |------ 3 ----- 33.txt \n | | | | | |---------------- 2 -------- 1 | |--------- 2
+
+??????
+
+54. Com posaries els noms dels arxius relacionats amb imatges, és a dir fitxers .jpg i .png, de tots els directoris dins d'un document de text anomenat noms_imgs.txt al directori pare?
+
+wtf
+
+55. Com comptaries la quantitat total d'imatges (arxius .jpg i .png) a tots els subdirectoris dins del directori /var
+
+find /var -type f \( -iname \*.jpg -o -iname \*.png \) | wc -l
+
+56. Llista totes les comandes relacionades amb el sistema.
+
+ls /usr/bin/ | grep "system*"
+
+57. Llista totes les comandes relacionades amb la carpeta bin.
+
+ls /usr/bin
+
+58. Desde el usuari danivillao crea una carpeta anomenada Royalty i afegeix en la carpeta Royalty els següents arxius txt FitRoyalty, RoyalDev,RoyalGames.
+
+mkdir Royalty
+touch Royalty/FitRoyalty.txt
+touch Royalty/RoyalDev.txt
+touch Royalty/RoyalGames.txt
+
+59. Crear 2 usuaris anomenat dani i ruben que tindren de contrasenya ‘royaltythebest
+
+create user 'dani'@'localhost' identified by 'royaltythebest'
+create user 'ruben'@'localhost' identified by 'royaltythebest'

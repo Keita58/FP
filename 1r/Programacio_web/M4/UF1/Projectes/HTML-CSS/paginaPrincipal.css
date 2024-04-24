@@ -1,0 +1,320 @@
+body {
+    background-color: black;
+    font-family: "DejaVu Sans";
+    overflow-x: hidden;
+}
+/*Des d'aquí comença la part compartida per totes les pàgines*/
+.no_moure {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template: auto / auto;
+}
+
+header {
+    grid-column: 1/4;
+}
+
+header img {
+    width: 1000px;
+    height: 150px;
+    object-fit: cover;
+    object-position: 100%;
+}
+
+nav {
+    grid-row: 2/3;
+    grid-column: 1/4;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template: auto / auto;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    grid-row: 4;
+    grid-column: 1/4;
+    margin-top: 10%;
+}
+/*Fins aquí totes les pàgines comparteixen característiques (menú de navegació i títol)*/
+#video iframe {
+    width: 500px;
+    height: 500px;
+}
+
+p {
+    color: white;
+}
+
+table {
+    color: white;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+#album {
+    display: grid;
+    justify-content: center;
+    align-self: center;
+}
+
+#album img:hover {
+    transition: 0.5s ease-in-out;
+    transform: scale(1.15);
+    border: 2px darkorange dashed;
+}
+
+.resum {
+    justify-items: center;
+}
+
+.resum p {
+    text-align: center;
+    width: 800px;
+}
+
+.resum img {
+    margin-top: 5%;
+}
+
+.inspiracio {
+    justify-content: space-evenly;
+}
+
+#evangelion {
+    grid-column: 1;
+}
+
+#evangelion:hover {
+    transform: scale(1.15, 1.15);
+    transition: .5s ease;
+}
+
+#evangelion img {
+    width: 333px;
+    height: 500px;
+}
+
+#godzilla {
+    grid-column: 2;
+}
+
+#godzilla:hover{
+    transform: scale(1.15, 1.15);
+    transition: .5s ease;
+}
+
+#godzilla img {
+    width: 333px;
+    height: 500px;
+    transition: .5s;
+}
+
+/*Animació foto seqüela peli*/
+#animacio {
+    animation: animacio 10s alternate infinite ease-in-out;
+    border: 2px solid;
+    margin-top: 2%;
+}
+
+#animacio img {
+    width: 333px;
+    height: 500px;
+    object-fit: cover;
+    object-position: 100%;
+}
+
+@keyframes animacio {
+    0% {
+        transform: rotate(0deg);
+        border-color: orange;
+    }
+    25% {
+        transform: rotate(90deg);
+        border-color: brown;
+    }
+    50% {
+        transform: rotate(180deg);
+        border-color: darkolivegreen;
+    }
+    75% {
+        transform: rotate(270deg);
+        border-color: magenta;
+    }
+    100% {
+        transform: rotate(360deg);
+        border-color: blue;
+    }
+}
+/*Fins aquí animació*/
+
+/*Animació bonus que es mourà per tota la pantalla*/
+.princ img {
+    width: 30px;
+    height: 30px;
+    animation: eriço 60s infinite linear;
+    overflow: hidden;
+}
+
+.res img {
+    width: 30px;
+    height: 30px;
+    animation: eriço 60s infinite linear;
+    overflow: hidden;
+}
+
+.ost img {
+    width: 30px;
+    height: 30px;
+    animation: eriço 60s infinite linear;
+    overflow: hidden;
+}
+
+.ins img {
+    width: 30px;
+    height: 30px;
+    animation: eriço 60s infinite linear;
+    overflow: hidden;
+}
+
+.seq img {
+    width: 30px;
+    height: 30px;
+    animation: eriço 60s infinite linear;
+    overflow: hidden;
+}
+
+@keyframes eriço {
+    0% {
+        transform: translate(0, 0);
+    }
+    15% {
+        transform: translate(-700px, -600px) rotate(90deg);
+    }
+    30% {
+        transform: translate(-100px, -1000px) rotate(180deg);
+    }
+    45% {
+        transform: translate(-5px, -50px) rotate(270deg);
+    }
+    60% {
+        transform: translate(300px, 0px) rotate(360deg);
+    }
+    75% {
+        transform: translate(1000px, -200px) rotate(0deg);
+    }
+    100% {
+        transform: translate(0) rotate(360deg);
+    }
+}
+/* Fi animació bonus*/
+
+/*Formulari ultra secret*/
+.formulari {
+    text-align: center;
+    width: 400px;
+    height: 550px;
+    margin: 10px auto 0;
+}
+
+.formulari #foto {
+    width: 200px;
+    height: 200px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    height: 22px;
+    width: 200px;
+    align-self: center;
+}
+
+#correu {
+    display: flex;
+    flex-direction: row;
+}
+
+#contrasenya {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+#contrasenya input {
+    height: 22px;
+    width: 164.45px;
+    align-self: center;
+}
+
+.formulari p {
+    margin-right: 10px;
+}
+
+#boto {
+    width: 50px;
+    height: 22px;
+}
+/*Fi formulari ultra secret*/
+
+@media (max-width: 800px) {
+    header img {
+        width: 450px;
+    }
+    #video iframe {
+        width: 300px;
+        height: 300px;
+    }
+    .resum p {
+        width: 400px;
+    }
+    .resum img {
+        transform: scale(0.8);
+    }
+    #album {
+        display: grid;
+        grid-row: 3;
+        grid-column: 1;
+        justify-content: center;
+        align-self: center;
+        transform: scale(0.6);
+    }
+    #album:hover {
+        transition: 0.5s ease-in-out;
+        transform: scale(0.7);
+        border: 2px darkorange dashed;
+    }
+    ol {
+        grid-column: 1;
+        grid-row: 1/2;
+        justify-self: center;
+    }
+    #godzilla {
+        grid-column: 1;
+        grid-row: 2;
+    }
+}

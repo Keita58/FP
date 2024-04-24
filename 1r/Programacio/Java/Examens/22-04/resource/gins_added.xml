@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<celler>
+    <nom>Casa Chen</nom>
+    <gins>
+        <gin>
+            <nom>Puerto de Indias</nom>
+            <graduacio>35</graduacio>
+            <sabor>maduixa</sabor>
+            <ingredients>
+                <ingredient vol="70.0">
+                    <nom>ginebra</nom>
+                </ingredient>
+                <ingredient vol="5.3">
+                    <nom>maduixa</nom>
+                </ingredient>
+            </ingredients>
+        </gin>
+        <gin>
+            <nom>Bombay Blue Saphire</nom>
+            <graduacio>38</graduacio>
+            <ingredients>
+                <ingredient vol="75.0">
+                    <nom>ginebra</nom>
+                </ingredient>
+                <ingredient vol="5.3">
+                    <nom>enhebro</nom>
+                </ingredient>
+                <ingredient vol="2.2">
+                    <nom>juniper berries</nom>
+                </ingredient>
+                <ingredient vol="0.0">
+                    <nom>aigua</nom>
+                </ingredient>
+            </ingredients>
+        </gin>
+        <gin>
+            <nom>Hendrick's</nom>
+            <graduacio>35</graduacio>
+            <sabor>cogombre</sabor>
+            <ingredients>
+                <ingredient vol="80.0">
+                    <nom>ginebra</nom>
+                </ingredient>
+                <ingredient vol="5.3">
+                    <nom>cogombre</nom>
+                </ingredient>
+            </ingredients>
+        </gin>
+    </gins>
+</celler>

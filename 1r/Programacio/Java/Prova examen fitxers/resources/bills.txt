@@ -1,0 +1,4 @@
+HumanLeather;Hat;40
+Steel;Component;16
+Wood;Table;40
+Steel;Chair;25

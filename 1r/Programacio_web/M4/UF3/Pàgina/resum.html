@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resum</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-utilities.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script defer src="/js/bootstrap.js"></script>
+    <script defer src="resum.js"></script>
+    <script defer src="hora.js"></script>
+</head>
+<body class="container bg-black text-white">
+<div class="row align-items-center justify-content-center">
+    <img src="./1917571.jpg" class="d-block m-2" alt="Titol">
+    <nav class="navbar pb-4 text-center">
+        <a href="paginaPrincipal.html" class="text-decoration-none text-white col-sm-1 col-12">Inici</a>
+        <a href="resum.html" class="text-decoration-none text-white col-sm-1 col-12">Resum</a>
+        <a href="OST.html" class="text-decoration-none text-white col-sm-1 col-12">OST</a>
+        <a href="inspiracions.html" class="text-decoration-none text-white col-sm-1 col-12">Inspiracions</a>
+        <a href="seqüela.html" class="text-decoration-none text-white col-sm-1 col-12">Seqüela</a>
+        <a href="login.html" class="text-decoration-none text-white col-sm-1 col-12">Login</a>
+        <a href="cançons.html" class="text-decoration-none text-white col-sm-1 col-12">Cançons</a>
+        <a href="afegir.html" class="text-decoration-none text-white col-sm-1 col-12">Afegir cançons</a>
+    </nav>
+</div>
+<div class="row text-center">
+    <p>
+        Quan legions de monstruoses criatures anomenades Kaiju surten de les profunditat del mar, s'inicia una guerra que matarà milions de persones i esgotarà els recursos de la humanitat durant anys. Per poder combatre els gegants Kaiju, els humans construeixen uns robots enormes anomenats Jaegers, que són pilotats per 2 humans simultàniament mitjançant un enllaç neuronal. Tot i això, els Jaegers són poc eficients contra els Kaiju. Quan la humanitat està a punt de perdre la batalla definitivament, recorren a dos herois insòlits: un ex-pilot i una aprenent que encara no domina els Jaegers. Els dos personatges s'uneixen per pilotar un Jaeger antiquat i obsolet per guanyar la batalla.
+    </p>
+    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img id="gif" src="5917962796376527072.webp" title="Per veure el tràiler de la pel·lícula, clica aquí!"></a>
+    <p class="mt-2">Clica sobre el gif per anar al tràiler de la pel·lícula!</p>
+</div>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-black" id="staticBackdropLabel">Tràiler</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <a href="https://www.youtube.com/watch?v=4NCG8bp4BI0" target=”_blank”><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Clica aquí!</button></a>
+                <p class="text-black mb-2">No se si t'hi has adonat, però el gif al que acabes de fer click es de la segona pel·lícula! <br> Si vols veure el tràiler de la segona pel·lícula, fes clic en el segon botó!</p>
+                <a href="https://www.youtube.com/watch?v=CMEyH7Ka5B0" target=”_blank”><button type="button" class="btn btn-warning" data-bs-dismiss="modal">Clica aquí! 2</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="d-flex justify-content-center mt-3">
+        <p>IES Sabadell - Marc Sánchez</p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p id="hora"></p>
+    </div>
+</div>
+</body>
+</html>

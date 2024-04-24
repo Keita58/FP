@@ -1,0 +1,18 @@
+#imatge1 {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+#imatge2 {
+    position: absolute;
+    background-position: center;
+    top: 150px;
+}
+
+#imatge3 {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+}

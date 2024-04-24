@@ -1,0 +1,21 @@
+Tots els paquets de linux van firmats pels seus creadors, i amb la clau pública que venen el sistema operatiu
+pot comprovar si el paques es fiable i no ha estat modificat per un tercer.
+
+En aquests paquets no es poden canviar la firma pública perquè es necessita la clau privada per a modificar les dades.
+
+bin -> Aquí estan totes les comandes que poden utilitzar tots els usuaris, mentre que el super usuari té un directori propi de comandes que es diu sbin
+
+var/log/ -> Directori on s'emmagatzemen els registres de les aplicacions, tant si hi ha hagut errors com no, es guarden totes les dades
+    · syslog -> Es el registre del sistema dins de la carpeta log
+
+var/www/ -> Aquí es on es guarden tots els arxius relacionats amb pàgines web (i és el que utilitzarem per poder veure pàgines web amb les nostres dades).
+De normal només hi ha un index.html ja que l'Apache (l'aplicació que utilitzem per poder mostrar pàgines web amb el servidor) utilitza aquest .html com a pàgina principal
+
+Per poder afegir o canviar la pàgina principal que obre l'Apache2, hem de situar-nos a etc/apache2 (aquesta carpeta es on estan totes les dades de l'apache2)
+i obrir l'arxiu dir.config de la direcció mods-avaliable (bàsicament fem nano mods-avaliable/dir.conf). Una vegada l'hem obert podem canviar les adreces que hi ha per les que volguem,
+o només afegir el nostre .html que utilitzem. Una vegada l'hem afegit hem de reiniciar l'apache amb un systemctl restart apache2 i automàticament ens agafarà la pàgina que haurem posat com a principal.
+
+Per a tenir permisos de certificat digital a la nostra pàgina web es pot utilitzar certbot.eff.org (instal·la un programa al servidor). 
+El certificat digital es fa amb el servei "Let's Encrypt" que es una empresa sense ànim de lucre que permet certificar pàgines web de manera gratuita.
+
+snap -> Configurador de paquets igual que apt.

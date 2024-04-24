@@ -1,0 +1,69 @@
+Per mirar els permisos d'una carpeta -> ls -ld . (Per a que sigui del directori haurem de posar la "d" sempre)
+El significat dels permisos d'una carpeta (rwx):
+    - r: Es pot veure el contingut de la carpeta
+    - x: Per acceditr a dins de la carpeta (cd). Si no existeix no es pot accedir a dins ni a cap arxiu 
+    - w: Es pot escriure a dins de la carpeta
+
+gcc -> gcc -o hola hola.c (Posem abans l'o per nombrar l'arxiu resultant de compilar hola.c).
+
+d--- --- --- -> Propietari / Grup / Altres (Per saber quins permissos té cadascú)
+    - El grup fa referència al grup al que està el propietari (normalment administrador).
+
+chmod -> Per distingir entre les tres opcions, pots posar u (usuari), g (grup), o (altres) i 
+si no es posa res es per a tots els grups (o es pot posar una a en comptes de posar ugo). ***********
+
+(Si no posem res al posar els permisos escrits podem tenir "problemes",  ja que el sistema pot entendre que al donar permisos d'execució es vol per a tothom però els d'escriptura per exemple només ens els dona a nosaltres. Si volem que doni els mateixos permisos per a tots els usuaris haurem de posar la a al davant.)
+
+    - chmod +r dir -> Ens estem donant permisos de lectura de la direcció dir del sistema
+    - Per posar permisos a diferents opcions alhora es poden posar a la vegada (chmod ug+r dir)
+    - Si es volen posar només uns permisos en específic s'ha de posar el = en comptes del + o del - (chmod u=rwx dir)
+
+Si en comptes de posar r w x volem posar en números, hem de pensar que cada permís es un bit, on cada grup té un grup
+de 3 bits (--- --- ---). Es una manera més ràpida que haver de posar a quin grup li estàs posant. A més amb els números
+sobreescrius els permisos existents al que li estàs donant els mateixos.
+    - Si volem donar tots els permisos al usuari i a la resta només lectura i permís d'accés haurem de posar chmod 755 dir
+    perquè estarem posant (rwx -> 7 / r-x -> 5 / r-x -> 5)
+    - --- --- --- | -wx r-x ---
+      000 000 000 | 011 101 000 -> 3 5 0
+
+Si posem -R al davant del chmod estarem dient que li estem donant els mateixos permisos tant al directori com als arxius i directoris interns (chmod -R 755 dir/). Si només volem donar els permisos als arxius i carpetes haurem de posar un asterisc al davant del directori, tal que així (chmod -R 755 dir/*).
+
+Si volem posar només les carpetes com "executables" (que s'hi pugui accedir a dins d'elles) podem posar una "X" majúscula en comptes de una minúscula (chmod +wX dir/ -> Així donarem accés només a les carpetes i escriptura a tots els arxius i carpetes, però només per a nosaltres).
+
+Per veure l'inode dels arxius i carpetes (com l'identificador dins l'ordinador) posarem una "i" al costat del ls (i si es vol veure tot el contingut de la carpeta a més posarem la -l).
+
+El número que apareix després dels permisos son les vegades que "s'anomena" un directori o qualsevol arxiu.
+
+ln -> Link per crear un link entre arxius (el que farem amb aquesta comanda es que els transformarem en el mateix, que li estarem donant el mateix número de inode i incrementar en 1 les vegades qeu s'anomena ja que existeixen dos arxius diferents que realment son el mateix al haver fet el link entre ells).
+    - ln hola2.txt hola.txt -> ls -li ens donarà el mateix inode per als dos arxius diferents
+    - Si eliminem un dels dos arxius no li passa res a l'altre, ja que realment son direccions a la mateixa posició de memòria i per tant només estem eliminant una referència a memòria.
+    - -s es per a fer un link simbòlic (també es pot fer amb carpetes). Amb aquesta opció no canviem l'inode, i el seu tipus es un l de link. Després de posar aquesta opció es pot veure l'arxiu linkejat. Cada vegada que executem l'arxiu linkejat estem executant l'arxiu al que apunta.
+    - Els links son molt útils a linux, per exemple al cridar a la comanda editor ens obre l'editor de codi que tenim posar preferit, però aquesta comanda està linkada a la direcció on tenim el nostre editor de codi. Ens serveixen per cridar amb comandes a altres tipus de comandes que aquestes estan fent referència.
+
+umask -> Permisos que no volem que els arxius i directoris en tinguin, els resta del número de permisos bàsics. (IMPORTANT!!! -> Els arxius comencen sense el permís d'execució, així que la resta del umask es fa des de el 666, no el 77 com els directoris.)
+
+Permisos especials (aquests apareixen a sobre de la posició de la "x"):
+
+            setuid          setgid      sticky bit
+
+aplicat a   fitxer          directori   directori
+
+notació     s - S (4)       s - S (2)   t - T (1)   ->  La minúscula es quan existeixen aquest permís i el d'execució/accés i la majúscula es quan només existeix aquest permís 
+assignació  u+s             g+s         +t
+
+exemple     /usr/bin/sudo               /tmp
+            /usr/bin/passwd 
+
+setuid
+El fitxer s’executa amb els permisos del propietari del fitxer enlloc dels permisos de qui ha llançat l’executable.
+
+setgid
+Tots els fitxers que es troben dintre d’un directori pertanyen al grup propietari del directori.
+
+sticky bit
+Elements del directori només poden ser renomenats o eliminats pel propietari de l’element, el propietari del directori o l’usuari root
+
+chown -> Permet canviar el propietari d'arxius i carpetes
+    - Si es posa x:x canvies el propietari i el grup al que pertany
+
+chgrp -> Permet canviar de grup arxius i carpetes

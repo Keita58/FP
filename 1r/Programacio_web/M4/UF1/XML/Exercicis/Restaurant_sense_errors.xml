@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<families>
+  <familia>
+    <reserva>1</reserva>
+    <assistents>
+      <assistent>Izan</assistent>
+      <assistent>Esther</assistent>
+    </assistents>
+    <tel_contacte>555255755</tel_contacte>
+    <dia_apat>29-10-2020</dia_apat>
+    <inici_apat>14</inici_apat>
+  </familia>
+  <familia>
+    <reserva>2</reserva>
+    <assistents>
+      <assistent>Joan</assistent>
+      <assistent>Cristina</assistent>
+      <assistent>Joan Junior</assistent>
+      <assistent>Cristina Junior</assistent>
+    </assistents>
+    <tel_contacte>931324490</tel_contacte>
+    <dia_apat>31-10-2020</dia_apat>
+    <inici_apat>20</inici_apat>
+  </familia>
+  <familia>
+    <reserva>3</reserva>
+    <assistents>
+      <assistent>Manolo</assistent>
+      <assistent>Paquita</assistent>
+      <assistent>Penelope</assistent>
+      <assistent>Carlos</assistent>
+      <assistent>Jonathan</assistent>
+    </assistents>
+    <tel_contacte>976111000</tel_contacte>
+    <dia_apat>25-10-2020</dia_apat>
+    <inici_apat>22</inici_apat>
+  </familia>
+</families>

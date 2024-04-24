@@ -1,0 +1,8 @@
+ El volumen de la unidad C es Windows
+ El n£mero de serie del volumen es: 5C6C-38E5
+
+ Directorio de C:\Users\marc-\Desktop\Treballs\FP\1r\Sistemes Operatius\UF1\Examen\Pr…ctic
+
+13/12/2023  19:21                 0 fitxer.txt
+               1 archivos              0 bytes
+               0 dirs  289.370.189.824 bytes libres

@@ -1,0 +1,224 @@
+1. Crea el directori permisos. La resta de fitxers i directoris dels exercicis
+els farem dins d’aquest directori.
+
+marc@MarcPC:~$ mkdir permisos
+marc@MarcPC:~$ cd permisos/
+marc@MarcPC:~/permisos$ 
+
+2. Crea un fitxer amb touch de nom exemple i comprova els permisos amb què
+s’ha creat per defecte.
+
+marc@MarcPC:~/permisos$ touch exemple
+marc@MarcPC:~/permisos$ ls -l
+total 0
+-rw-r--r-- 1 marc marc 0 21 de gen.  13:47 exemple
+
+
+3. Crea el directori dir1 i fes el mateix per veure les diferències. Pots veure que apareix
+una “x” per indicar el possible accés al directori.
+
+marc@MarcPC:~/permisos$ mkdir dir1
+marc@MarcPC:~/permisos$ ls -l
+total 4
+drwxr-xr-x 2 marc marc 4096 21 de gen.  13:50 dir1
+-rw-r--r-- 1 marc marc    0 21 de gen.  13:47 exemple
+
+4. Comprova els permisos del fitxer /etc/shadow.
+
+marc@MarcPC:~/permisos$ ls -l /etc/shadow
+-rw-r----- 1 root shadow 1021  7 de des.  13:10 /etc/shadow
+
+5. Intenta veure el seu contingut. Hauria de donar un error de permisos, l’usuari
+root o el grup shadow són els únics que poden fer-ho.
+
+marc@MarcPC:~/permisos$ cat /etc/shadow
+cat: /etc/shadow: S’ha denegat el permís
+
+6. Accedeix al directori dir1. Hauries de poder accedir-hi sense problemes.
+
+marc@MarcPC:~/permisos$ cd dir1/
+marc@MarcPC:~/permisos/dir1$ 
+
+7. Ara treu els permisos d’accés, intenta tornar-hi a accedir. Hauria de generar un error.
+
+marc@MarcPC:~/permisos$ chmod -x dir1
+marc@MarcPC:~/permisos$ ls -l
+total 4
+drw-r--r-- 2 marc marc 4096 21 de gen.  13:50 dir1
+-rw-r--r-- 1 marc marc    0 21 de gen.  13:47 exemple
+marc@MarcPC:~/permisos$ cd dir1/
+bash: cd: dir1/: S’ha denegat el permís
+
+8. Torna a posar els permisos (amb forma simbòlica, no octal), però solament per l’usuari,
+i intenta accedir-hi. Hauries de poder accedir-hi sense problemes.
+
+marc@MarcPC:~/permisos$ chmod u+x dir1
+marc@MarcPC:~/permisos$ ls -l
+total 4
+drwxr--r-- 2 marc marc 4096 21 de gen.  13:50 dir1
+-rw-r--r-- 1 marc marc    0 21 de gen.  13:47 exemple
+marc@MarcPC:~/permisos$ cd dir1/
+marc@MarcPC:~/permisos/dir1$ 
+
+9. Torna al directori permisos.
+
+marc@MarcPC:~/permisos/dir1$ cd ..
+marc@MarcPC:~/permisos$ 
+
+10. Canvia els permisos del fitxer exemple per tal que solament pugui accedir-hi el
+propietari.
+
+marc@MarcPC:~/permisos$ chmod go-r exemple 
+marc@MarcPC:~/permisos$ ls -l
+total 4
+drwxr--r-- 2 marc marc 4096 21 de gen.  13:50 dir1
+-rw------- 1 marc marc    0 21 de gen.  13:47 exemple
+
+11. Posa els següents permisos al fitxer exemple, però utilitzant la forma octal: rw-rw-rw
+
+marc@MarcPC:~/permisos$ chmod 666 exemple 
+marc@MarcPC:~/permisos$ ls -l
+total 4
+drwxr--r-- 2 marc marc 4096 21 de gen.  13:50 dir1
+-rw-rw-rw- 1 marc marc    0 21 de gen.  13:47 exemple
+
+12. Canvia els permisos per tal que quedin de la següent forma: rwxr-xr--, (dona els
+permisos en forma octal).
+
+marc@MarcPC:~/permisos$ chmod 754 exemple 
+marc@MarcPC:~/permisos$ ls -l
+total 4
+drwxr--r-- 2 marc marc 4096 21 de gen.  13:50 dir1
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+
+13. Comprova que el valor de umask és 0022.
+
+marc@MarcPC:~/permisos$ umask
+0022
+
+14. Canvia els permisos per defecte per tal que els nous fitxers es creïn amb els següents permisos: r--​r-----
+
+marc@MarcPC:~/permisos$ umask 226
+marc@MarcPC:~/permisos$ umask
+0226
+
+15. Comprova que s’ha canviat el valor de umask.
+
+marc@MarcPC:~/permisos$ touch a
+marc@MarcPC:~/permisos$ ls -l
+total 4
+-r--r----- 1 marc marc    0 21 de gen.  19:20 a
+drwxr--r-- 2 marc marc 4096 21 de gen.  13:50 dir1
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+
+16. Torna a posar umask amb el valor inicial.
+
+marc@MarcPC:~/permisos$ umask 022
+marc@MarcPC:~/permisos$ umask
+0022
+
+17. Crea tres directoris anomenats dir1, dir2 i dir3. Fixa els permisos
+d’accés del directori dir1 de manera que el propietari tingui els tres privilegis,
+els usuaris del seu grup tinguin només accés de lectura i els demés usuaris del sistema
+no tinguin permisos d’accés.
+
+marc@MarcPC:~/permisos$ chmod o-r dir1
+marc@MarcPC:~/permisos$ ls -l
+total 4
+drwxr----- 2 marc marc 4096 21 de gen.  13:50 dir1
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+marc@MarcPC:~/permisos$ chmod o+wx dir1
+marc@MarcPC:~/permisos$ ls -l
+total 4
+drwxr---wx 2 marc marc 4096 21 de gen.  13:50 dir1
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+
+18. Fixa els permisos de dir2 per tal que el propietari tingui els tres privilegis,
+els del grup tinguin permís d’execució i lectura i els demés tinguin permís d’execució.
+
+marc@MarcPC:~/permisos$ mkdir dir2
+marc@MarcPC:~/permisos$ ls -l
+total 8
+drwxr---wx 2 marc marc 4096 21 de gen.  13:50 dir1
+drwxr-xr-x 2 marc marc 4096 21 de gen.  19:26 dir2
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+marc@MarcPC:~/permisos$ chmod o-r dir2
+marc@MarcPC:~/permisos$ ls -l
+total 8
+drwxr---wx 2 marc marc 4096 21 de gen.  13:50 dir1
+drwxr-x--x 2 marc marc 4096 21 de gen.  19:26 dir2
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+
+19. Fixa els permisos de dir3 per tal que l’usuari i el grup tinguin permís d’execució
+i lectura i els demés tinguin permís de lectura.
+
+marc@MarcPC:~/permisos$ mkdir dir3
+marc@MarcPC:~/permisos$ chmod 554 dir3
+marc@MarcPC:~/permisos$ ls -l
+total 12
+drwxr---wx 2 marc marc 4096 21 de gen.  13:50 dir1
+drwxr-x--x 2 marc marc 4096 21 de gen.  19:26 dir2
+dr-xr-xr-- 2 marc marc 4096 21 de gen.  19:29 dir3
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+
+20. Utilitza l’ordre chmod en forma simbòlica per aconseguir que els altres
+usuaris tinguin accés de lectura al directori dir2. Confirmar l’assignació dels permisos.
+
+marc@MarcPC:~/permisos$ chmod o+r dir2
+marc@MarcPC:~/permisos$ ls -l
+total 12
+drwxr---wx 2 marc marc 4096 21 de gen.  13:50 dir1
+drwxr-xr-x 2 marc marc 4096 21 de gen.  19:26 dir2
+dr-xr-xr-- 2 marc marc 4096 21 de gen.  19:29 dir3
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+
+21. Utilitza l’ordre chmod en forma octal per aconseguir que el propietari tingui
+permís d’execució i de lectura, el grup tingui permís de lectura i escriptura i
+els altres usuaris tinguin permís d’escriptura i execució sobre el directori dir1.
+
+marc@MarcPC:~/permisos$ chmod 563 dir1
+marc@MarcPC:~/permisos$ ls -l
+total 12
+dr-xrw--wx 2 marc marc 4096 21 de gen.  13:50 dir1
+drwxr-xr-x 2 marc marc 4096 21 de gen.  19:26 dir2
+dr-xr-xr-- 2 marc marc 4096 21 de gen.  19:29 dir3
+-rwxr-xr-- 1 marc marc    0 21 de gen.  13:47 exemple
+
+22. L’usuari ies fixa els permisos d’accés al seu directori inicial utilitzant
+l’ordre chmod 700 $HOME. Si l’arxiu text del seu directori inicial té fixats
+els permisos 777, podrà llegir algú aquest arxiu? Per què?
+
+Sí, només el podrà llegir l'usuari ies ja que és l'únic que té permisos per entrar dins del directori.
+
+23. Quin efecte produeixen les ordres següents? Explica la resposta.
+    - chmod 776 ~/docs
+
+    Posa els permisos de lectura, escriptura i execució tant per l'usuari com per al seu grup i de lectura i 
+    escriptura per a la resta del document docs.
+
+    - chmod 751 ~/lab?
+
+    Posa els permisos de lectura, escriptura i execució per a l'usuari, els permisos de lectura i execució per al 
+    grup i a la resta els d'execució dels documents que tinguin com a nom la o lab.
+
+    - chmod 511 *.c
+
+    Posa els permisos de lectura i execució per a l'usuari i els d'execució per al grup i els altres de tots els documents
+    amb l'extensió .c.
+
+    - chmod 711 ~/*
+
+    Posa els permisos de lectura, escriptura i execució per a l'usuari i el d'execució per al grup i els altres per a tots
+    els documents i carpetes.
+
+    - chmod u+w,g=o t[0-9][a-z]*
+
+    Afegeix el permís d'escriptura a l'usuari i posa els permisos del grup iguals que els que té en aquell moment els
+    dels altres per a tots els documents que comencin amb una t, tinguin un número del 0 al 9 només una vegada i 
+    qualsevol número de lletres minúscules entre la a i la z.
+
+    - chmod og=rwx,u-x doc??.odt
+
+    Afegeix els permisos de lectura, escriptura i execució per al grup i altres i treu el permís d'execució per a l'usuari
+    dels documents que tinguin com a nom do.odt o doc.odt.
+    

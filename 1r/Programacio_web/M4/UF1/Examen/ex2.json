@@ -1,0 +1,26 @@
+{
+   "missions": [
+        {
+            "nom_joc": "SAO",
+            "titol": "Primera missió",
+            "descripcio": "Mata a tots els monstres",
+            "recompensa": {
+                "tipus": "Monedes",
+                "nom": "Monedes del Regne",
+                "ubicacio": "Esplanada inicial",
+                "valor": 5
+            },
+            "objectius": null,
+            "requeriments": {
+                "punts_minim": 0,
+                "nivell_necessari": 1,
+                "experiencia": 0,
+                "personatge": {
+                    "nom": "Jojo",
+                    "relacio": "Usuari",
+                    "poders": "Màgia"
+                }
+            }
+        }
+   ] 
+}

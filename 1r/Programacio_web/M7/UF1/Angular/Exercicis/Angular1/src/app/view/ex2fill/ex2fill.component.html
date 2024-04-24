@@ -1,0 +1,41 @@
+<div class="container">
+  <div [formGroup]="formulari">
+    <label for="radi"> Radi: </label>
+    <input id="radi" type="text" formControlName="radi" required>
+    @if(this.formulari.controls['radi'].errors?.['min']){
+      <p class="text-danger">El número mínim és el 1.</p>
+    }
+    @else if(this.formulari.controls['radi'].errors?.['max']) {
+      <p class="text-danger">El número màxim és el 1000.</p>
+    }
+    @else if(this.formulari.controls['radi'].errors?.['required']){
+      <p class="text-danger">És necessari informar el camp.</p>
+    }
+    <br>
+
+    <label for="alcada"> Alçada: </label>
+    <input id="alcada" type="text" formControlName="altura" required>
+    @if(this.formulari.controls['altura'].errors?.['min']){
+      <p class="text-danger">El número mínim és el 1.</p>
+    }
+    @else if(this.formulari.controls['altura'].errors?.['max']) {
+      <p class="text-danger">El número màxim és el 1000.</p>
+    }
+    @else if(this.formulari.controls['altura'].errors?.['required']){
+      <p class="text-danger">És necessari informar el camp.</p>
+    }
+    <br>
+
+    <label for="unitats"> Unitats: </label>
+    <select id="unitats" formControlName="unitats" required>
+      <option hidden disabled selected value> Escull una opció </option>
+      <option value="quilòmetres">Quilòmetres</option>
+      <option value="metres">Metres</option>
+      <option value="decímetres">Decimetres</option>
+      <option value="centímetres">Centímetres</option>
+      <option value="mil·limetres">Mil·límetres</option>
+    </select>
+  </div>
+  <button class="button" (click)="Calcular()" [disabled]="!formulari.valid" >Calcular</button>
+  <p [class.gran]="color" [class.petit]="!color">{{ resposta }}</p>
+</div>

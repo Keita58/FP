@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<receptes>
+    <recepta>
+    <nom>Besuc al forn</nom>
+    <informacio_general>
+      <foto>http://www.dominio.com/fotos/besugo-al-horno.jpg</foto>
+      <comensals>4</comensals>
+      <temps unitats="m">45</temps>
+      <dificultat>Molt fàcil</dificultat>
+    </informacio_general>
+    <ingredients>
+      <ingredient quantitat="1">Besuc</ingredient>
+      <ingredient quantitat="1">Llimona</ingredient>
+      <ingredient quantitat="1" unitats="cullera sopera">Pa ratllat</ingredient>
+      <ingredient quantitat="2" unitats="dents">All</ingredient>
+      <ingredient quantitat="1/2" unitats="dl">Vi blanc</ingredient>
+      <ingredient>Oli</ingredient>
+      <ingredient>Julivert</ingredient>
+      <ingredient>Sal</ingredient>
+    </ingredients>
+    <preparacio>
+      <pas numero="1">Netejar el besuc...</pas>
+      <pas numero="2">Posar-lo al foc...</pas>
+      <pas numero="3">Pelar i picar els...</pas>
+      <pas numero="4">Cobrir el peix...</pas>
+      <pas numero="5">Posar al forn i ...</pas>
+    </preparacio>
+    </recepta>
+</receptes>
