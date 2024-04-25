@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-ex3',
@@ -11,6 +11,6 @@ export class Ex3Component {
   constructor(private form : FormBuilder) {}
 
   formulari : FormGroup = this.form.group ({
-    text : [""]
+    text : new FormControl('', [Validators.required])
   })
 }

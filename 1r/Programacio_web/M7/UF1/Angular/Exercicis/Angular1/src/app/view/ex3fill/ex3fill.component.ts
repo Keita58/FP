@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CalcularVocals} from "../../shared/classes/calcular-vocals";
 import {Ex3Service} from "../../shared/services/ex3.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-ex3fill',
@@ -18,6 +19,7 @@ export class Ex3fillComponent {
   constructor(private calcular:Ex3Service) {
   }
 
+  @Input() infoBoto : FormGroup | undefined;
   @Input() formulari : string = '';
 
   Contar() : void {
