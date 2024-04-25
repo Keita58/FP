@@ -15,6 +15,6 @@
       <p class="text-danger">És necessari informar el camp.</p>
     }
   </div>
-  <button class="button" (click)="Calcular()">Calcular</button>
+  <button class="button" (click)="Calcular()" [disabled]="!data.valid">Calcular</button>
   <p [class.encertar]="found" [class.noencertar]="!found">{{dada}}</p>
 </div>
