@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class tanc : MonoBehaviour
+public class Tanc : MonoBehaviour
 {
     public float speedMovement;
     public float speedBullets;
+    public float rotationSpeed;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -17,25 +18,32 @@ public class tanc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        movement();
+        
+    }
 
-        if (Input.GetKey(KeyCode.W))
-            rb.velocity = new Vector2(rb.velocity.x, speedMovement);
-        else if (Input.GetKey(KeyCode.S))
-            rb.velocity = new Vector2(rb.velocity.x, -speedMovement);
-        else 
-            rb.velocity = new Vector2(rb.velocity.x, 0);
+    private void movement()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.D))
-            rb.velocity = new Vector2(speedMovement, rb.velocity.y);
-        else if (Input.GetKey(KeyCode.A))
-            rb.velocity = new Vector2(-speedMovement, rb.velocity.y);
-        else
-            rb.velocity = new Vector2(0, rb.velocity.y);
+        Vector2 movement = new Vector2 (moveX, moveY);
+        movement.Normalize();
+
+        rb.velocity = movement * speedMovement;
+
+        if(movement != Vector2.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movement);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.tag == "Paret")
+        if (collision.transform.tag == "Paret")
+            rb.velocity = new Vector2(0, 0);
+        if (collision.transform.tag == "Obstacles")
             rb.velocity = new Vector2(0, 0);
     }
 }

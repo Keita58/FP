@@ -1,0 +1,2226 @@
+fileFormatVersion: 2
+guid: 76d2264e08d74e34fa6d45b9097a0f88
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sheet_tanks_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2cf84d16a4bca544b5b42d982aa55b4
+      internalID: -373263204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 448
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0969bed17b43e24192aadbbadfb8c3f
+      internalID: -1286724126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 415
+        width: 100
+        height: 97
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7202b9bd83357e4a969741aa0449381
+      internalID: -1315864870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_3
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 405
+        width: 97
+        height: 107
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 731b612d31ac4004695e883e63414038
+      internalID: 872662560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_5
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 423
+        width: 92
+        height: 89
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 687fc9442a0640d4686a1703c6ec2fe0
+      internalID: -928483106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_7
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 425
+        width: 87
+        height: 87
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5825fba609de38c45a13e2b8adcac873
+      internalID: 1600003458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_8
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 434
+        width: 83
+        height: 78
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8e846b927bfc4846a5f0dfeac14db9c
+      internalID: -1692215968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_9
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 442
+        width: 73
+        height: 70
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68a2dca2a087bb6489c947c11c5379ac
+      internalID: -1594733891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_10
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 402
+        width: 44
+        height: 62
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 548224e631cd2fe4cb774495ce71ac3c
+      internalID: 334851506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_11
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 478
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d3d913c3316ed94aa62e3565c38b815
+      internalID: 1109424193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_12
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 478
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9de3686fca69e4040998e8c5851290d0
+      internalID: -994507623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_13
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 454
+        width: 22
+        height: 58
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ea5256f1af278c448c3cef2ed8eb552
+      internalID: 1834392175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d801d82b973754d498991b98e59d3e53
+      internalID: -160877157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_15
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a147667084915744a95905fd9fe2940
+      internalID: 1725286185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_22
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 356
+        width: 82
+        height: 78
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 703eb8b1ae4ee324bb14846d2bb099fb
+      internalID: 457592380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_23
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 434
+        width: 82
+        height: 78
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a93e9bfd7ced1f641bd120bf89abf983
+      internalID: -1949933256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_24
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 372
+        width: 74
+        height: 70
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c9a629221253454c8716e72ef663e39
+      internalID: -412799627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_25
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 402
+        width: 44
+        height: 62
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09458c39a30073f49b5a59589817a860
+      internalID: -137414634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_26
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 464
+        width: 48
+        height: 48
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c61ecf46fe3af7347acf2cf634ac3260
+      internalID: 90696787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_27
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 404
+        width: 14
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9478bc3f23075ae47bf28071bd77e042
+      internalID: 303430567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab9043fdfb8f5664d819d10b2ddb508e
+      internalID: -1355072570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3027658dec0ff2748b231dfdc6b9d3b7
+      internalID: -804405147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_30
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 318
+        width: 100
+        height: 97
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b598e18f3e73444688d5dfe7da37bbc
+      internalID: -1831974149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_32
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 318
+        width: 87
+        height: 87
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0689e05869d37f4082b7ff622a568ce
+      internalID: 1841770678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_33
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 316
+        width: 92
+        height: 89
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff1708ea9ecf52c43aa2cdd154eb9e62
+      internalID: 665696632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_35
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 324
+        width: 90
+        height: 99
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7eb7ffa2e26b554b8512132e41a3eed
+      internalID: 1310840720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_37
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 338
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30bdde308937ce347bea25c95158b8c3
+      internalID: -294069215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_38
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 338
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75aa2297c0776de46ba0cf3b8f337ac9
+      internalID: -259177903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_39
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 260
+        width: 74
+        height: 70
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 700639356180ca54892111b6704c6066
+      internalID: 1707693114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_40
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 344
+        width: 22
+        height: 58
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 404933833adf4c94498a0cc6992fcfa6
+      internalID: -519564374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_41
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 354
+        width: 14
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e009bbe6c32c5c64e9ec18aa0594f623
+      internalID: 970411452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e3d10ac4f260cf49ac9219e8c5afc76
+      internalID: -1642188105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_43
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a99a312c644de614fbb81999414bb1a0
+      internalID: 118312555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_44
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 211
+        width: 97
+        height: 107
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 629e5d33ac8a76f41a1403fd98cb8b7c
+      internalID: 893530360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_47
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 227
+        width: 92
+        height: 89
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 208b4f263c0df09468aec3ad1e350cfa
+      internalID: -887331258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_49
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 237
+        width: 87
+        height: 87
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 343dee8cbfdc5db448dbd74ecb19a3d0
+      internalID: 673131380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_50
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 237
+        width: 87
+        height: 87
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 224d81d574a8cd045ad0f4a97d0bc0c2
+      internalID: -553817829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_51
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 338
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 163f627a11c0d844faae6139f733f9e9
+      internalID: -725104520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_52
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 251
+        width: 79
+        height: 79
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4366297292df234f8ab403782a25923
+      internalID: -1504912746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_53
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 212
+        width: 48
+        height: 48
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eaadf5961412a9498da6057554f9548
+      internalID: 1998957969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_54
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 286
+        width: 22
+        height: 58
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35304d09cf483f8419c753adad1418d6
+      internalID: -1358941540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_55
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 304
+        width: 14
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ae1a2cb983aba54b8aed2d809153d68
+      internalID: 1575394586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b43b9f5bf1bc04da0601372069392d
+      internalID: 1857073202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_57
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac7c340483087e849b7db0d559314c3a
+      internalID: -1077565926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_58
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 133
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2886ad32a9c45ed4195b3c5c5797bdd3
+      internalID: -248216152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_59
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 141
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b0bad18814b2e342998e8f6ee349deb
+      internalID: 1085919777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_60
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 211
+        width: 98
+        height: 107
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af921a5caeadb7d4b956f0511a489ed4
+      internalID: 2011217830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_65
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 159
+        width: 82
+        height: 78
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 590ba7c7ee8041c4192f8be1cf39a65b
+      internalID: 1201179014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_66
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 178
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a90475b50fc644543a3e3e05a109f8a3
+      internalID: -1412907041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_67
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 178
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16bd281c3c654c74aa2405c777d4914e
+      internalID: -598617285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_68
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 206
+        width: 44
+        height: 62
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a79513b272309248a3b1a48301a2707
+      internalID: 195302332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_69
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 228
+        width: 22
+        height: 58
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 964d15ecac81cde4e9c3b6d78b0fec45
+      internalID: -2105504751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b50bac9965f25a4fa2f3400ffc92926
+      internalID: -1641114008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_71
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 938dfd40cf72fa8469fe7e74186af270
+      internalID: -888941386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_72
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 133
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 167a1244a86af5f4e9bbc04800cec3e4
+      internalID: 1925017057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_73
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 133
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e595de93a9e1fa4cb752eb61b52315a
+      internalID: 893626580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_74
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 104
+        width: 97
+        height: 107
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf24ccb9c93b60b4897d5a808b9f2957
+      internalID: 869244752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_75
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 104
+        width: 98
+        height: 107
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42b691ee669a8984ab690dbd111fbd3a
+      internalID: 970796257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_77
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 128
+        width: 90
+        height: 99
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4be8d0a0c029c3e4f852c27aa076ee9a
+      internalID: 434049617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_78
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 150
+        width: 87
+        height: 87
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43739e36072da3942a0ebf6e32a0dcd0
+      internalID: 513023245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_80
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 172
+        width: 79
+        height: 79
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4678534a290b3514da6387d37cdd88bc
+      internalID: -973580992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_81
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 102
+        width: 74
+        height: 70
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d29652cfd8763e4f90949e65f17bddd
+      internalID: 927912885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_82
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 172
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 771906cbc6c6bba4cafb30eaab183f37
+      internalID: -1300492399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_83
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 144
+        width: 44
+        height: 62
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fa07c4c36648a145a1625390e42c45f
+      internalID: -572856944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_84
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 31
+        width: 100
+        height: 97
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 278dd9daf4ad7104fad7f16a6c3bb886
+      internalID: 1783112144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_85
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 31
+        width: 100
+        height: 97
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d96be878b57683449bc50385c5785947
+      internalID: 70581755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_86
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af2dbc1e0dd432a4aaee9eca14a3220d
+      internalID: 1794308945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_87
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76e5aaa8ba3d2794f8635e8fa5792926
+      internalID: 1366090761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_88
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 8
+        width: 96
+        height: 96
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf9d9897b049cdc44b82fd6548271dd9
+      internalID: 704842836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_89
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 15
+        width: 92
+        height: 89
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29ad7390f724ba645a2a76fde3422940
+      internalID: 1730689178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_90
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 5
+        width: 90
+        height: 99
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8376fde62eda444183a9317556758c2
+      internalID: -1010771185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_91
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75ad695f71950764088024ee6736f282
+      internalID: -2092599382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_92
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 29
+        width: 90
+        height: 99
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4dfc911c357dcc45a0ac00554b0a8e0
+      internalID: 159720574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_93
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 72
+        width: 82
+        height: 78
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e03544c7aaf21a4a98cab9fdb64e087
+      internalID: 1940874949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_94
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 80
+        width: 79
+        height: 79
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05a8d6a03098d9349a9d6284178a88dc
+      internalID: 174243127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_95
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 58
+        width: 64
+        height: 44
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eb4172e3059e7a43a6ee3617f976dd2
+      internalID: 1265039176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_96
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 40
+        width: 44
+        height: 62
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77c064eeb0e6b5244b54954c2233363b
+      internalID: -1237673338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_97
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 86
+        width: 22
+        height: 58
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec50fee24a7a4de40b6fbe1e05afbd77
+      internalID: -1073832958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_98
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0c381f544fd2864886c532905ba0505
+      internalID: -618791961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_99
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b659b09188e2d499d8734a4b1ecd4f
+      internalID: -2034584365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_100
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eea00ab691626345b096d58ac1902ce
+      internalID: -1714528855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_101
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d530ab82c514d449c04573a0a78ed7
+      internalID: -1574104276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_102
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fbb58e95b1131d4ea846deeb6de4a38
+      internalID: -1987724955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_103
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 799b4d05080fbf941a644298e2e5ef4a
+      internalID: -791359464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_104
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e871842e96cf6594aa749e306e0bde87
+      internalID: 785884099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_105
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 5
+        width: 12
+        height: 26
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2f117ec110c8fc47ba7a3e8bf8cab19
+      internalID: -520735673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_107
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 2
+        width: 74
+        height: 70
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e3c3440faf98e848a1d078c162a6064
+      internalID: 972454955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_108
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 1
+        width: 79
+        height: 79
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e429972c1402f714abf3bcc40e98260a
+      internalID: -1769113379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_109
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 10
+        width: 48
+        height: 48
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37be31daab4b0524b85e8ee2ad945325
+      internalID: 520482240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_110
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 6
+        width: 20
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab23a30b8f5cc7d4dbaa8a89f910a8ba
+      internalID: -1831084372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_111
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 36
+        width: 14
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34261d36ce713fb4f87ac1bc62cf9aa3
+      internalID: 1134801574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_4
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 167
+        width: 64
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 436e01d9cd2c02c45a99b7eb042c30cc
+      internalID: -924468647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_6
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 330
+        width: 83
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbd4e30b54b39a0449104737ea498af3
+      internalID: 1309426693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_tanks_16
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 268
+        width: 74
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 553e1cc47edf4fc4aa5f6f7527a0793f
+      internalID: -1949889464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      sheet_tanks_0: -373263204
+      sheet_tanks_1: -1286724126
+      sheet_tanks_10: 334851506
+      sheet_tanks_100: -1714528855
+      sheet_tanks_101: -1574104276
+      sheet_tanks_102: -1987724955
+      sheet_tanks_103: -791359464
+      sheet_tanks_104: 785884099
+      sheet_tanks_105: -520735673
+      sheet_tanks_106: -770882922
+      sheet_tanks_107: 972454955
+      sheet_tanks_108: -1769113379
+      sheet_tanks_109: 520482240
+      sheet_tanks_11: 1109424193
+      sheet_tanks_110: -1831084372
+      sheet_tanks_111: 1134801574
+      sheet_tanks_12: -994507623
+      sheet_tanks_13: 1834392175
+      sheet_tanks_14: -160877157
+      sheet_tanks_15: 1725286185
+      sheet_tanks_16: -1949889464
+      sheet_tanks_17: -99370978
+      sheet_tanks_18: -514998476
+      sheet_tanks_19: -1651950958
+      sheet_tanks_2: -1315864870
+      sheet_tanks_20: -302846677
+      sheet_tanks_21: -710702032
+      sheet_tanks_22: 457592380
+      sheet_tanks_23: -1949933256
+      sheet_tanks_24: -412799627
+      sheet_tanks_25: -137414634
+      sheet_tanks_26: 90696787
+      sheet_tanks_27: 303430567
+      sheet_tanks_28: -1355072570
+      sheet_tanks_29: -804405147
+      sheet_tanks_3: 872662560
+      sheet_tanks_30: -1831974149
+      sheet_tanks_31: -1861106560
+      sheet_tanks_32: 1841770678
+      sheet_tanks_33: 665696632
+      sheet_tanks_34: -1567601558
+      sheet_tanks_35: 1310840720
+      sheet_tanks_36: 1868480397
+      sheet_tanks_37: -294069215
+      sheet_tanks_38: -259177903
+      sheet_tanks_39: 1707693114
+      sheet_tanks_4: -924468647
+      sheet_tanks_40: -519564374
+      sheet_tanks_41: 970411452
+      sheet_tanks_42: -1642188105
+      sheet_tanks_43: 118312555
+      sheet_tanks_44: 893530360
+      sheet_tanks_45: 988752912
+      sheet_tanks_46: -1453070412
+      sheet_tanks_47: -887331258
+      sheet_tanks_48: 516647978
+      sheet_tanks_49: 673131380
+      sheet_tanks_5: -928483106
+      sheet_tanks_50: -553817829
+      sheet_tanks_51: -725104520
+      sheet_tanks_52: -1504912746
+      sheet_tanks_53: 1998957969
+      sheet_tanks_54: -1358941540
+      sheet_tanks_55: 1575394586
+      sheet_tanks_56: 1857073202
+      sheet_tanks_57: -1077565926
+      sheet_tanks_58: -248216152
+      sheet_tanks_59: 1085919777
+      sheet_tanks_6: 1309426693
+      sheet_tanks_60: 2011217830
+      sheet_tanks_61: -1645751235
+      sheet_tanks_62: 42713505
+      sheet_tanks_63: -47009786
+      sheet_tanks_64: 1652316603
+      sheet_tanks_65: 1201179014
+      sheet_tanks_66: -1412907041
+      sheet_tanks_67: -598617285
+      sheet_tanks_68: 195302332
+      sheet_tanks_69: -2105504751
+      sheet_tanks_7: 1600003458
+      sheet_tanks_70: -1641114008
+      sheet_tanks_71: -888941386
+      sheet_tanks_72: 1925017057
+      sheet_tanks_73: 893626580
+      sheet_tanks_74: 869244752
+      sheet_tanks_75: 970796257
+      sheet_tanks_76: 2016390450
+      sheet_tanks_77: 434049617
+      sheet_tanks_78: 513023245
+      sheet_tanks_79: -1494062450
+      sheet_tanks_8: -1692215968
+      sheet_tanks_80: -973580992
+      sheet_tanks_81: 927912885
+      sheet_tanks_82: -1300492399
+      sheet_tanks_83: -572856944
+      sheet_tanks_84: 1783112144
+      sheet_tanks_85: 70581755
+      sheet_tanks_86: 1794308945
+      sheet_tanks_87: 1366090761
+      sheet_tanks_88: 704842836
+      sheet_tanks_89: 1730689178
+      sheet_tanks_9: -1594733891
+      sheet_tanks_90: -1010771185
+      sheet_tanks_91: -2092599382
+      sheet_tanks_92: 159720574
+      sheet_tanks_93: 1940874949
+      sheet_tanks_94: 174243127
+      sheet_tanks_95: 1265039176
+      sheet_tanks_96: -1237673338
+      sheet_tanks_97: -1073832958
+      sheet_tanks_98: -618791961
+      sheet_tanks_99: -2034584365
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
