@@ -19,23 +19,29 @@ public class Tanc : MonoBehaviour
     void Update()
     {
         movement();
-        
     }
 
     private void movement()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-
-        Vector2 movement = new Vector2 (moveX, moveY);
-        movement.Normalize();
-
-        rb.velocity = movement * speedMovement;
-
-        if(movement != Vector2.zero)
+        if(Input.GetKey(KeyCode.A))
         {
-            Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movement);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
+            this.transform.Rotate(0, 0, (rotationSpeed/10));
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            this.transform.Rotate(0, 0, -(rotationSpeed/10));
+        }
+        if(Input.GetKey(KeyCode.W)) 
+        { 
+            rb.velocity = this.transform.up * speedMovement;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            rb.velocity = this.transform.up * -speedMovement;
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
         }
     }
 
