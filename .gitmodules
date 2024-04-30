@@ -1,3 +1,6 @@
 [submodule "1r/Sistemes Operatius/UF3/Hugo/Pagina/themes/ananke"]
 	path = 1r/Sistemes Operatius/UF3/Hugo/Pagina/themes/ananke
 	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "1r/Base de dades/Homestead"]
+	path = 1r/Base de dades/Homestead
+	url = https://github.com/laravel/homestead.git
