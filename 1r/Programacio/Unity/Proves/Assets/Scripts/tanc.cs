@@ -27,11 +27,17 @@ public class Tanc : MonoBehaviour
         {
             this.transform.Rotate(0, 0, (rotationSpeed/10));
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             this.transform.Rotate(0, 0, -(rotationSpeed/10));
         }
-        if(Input.GetKey(KeyCode.W)) 
+        else
+        {
+            this.transform.Rotate(0, 0, 0);
+            rb.angularVelocity = 0;
+        }
+
+        if (Input.GetKey(KeyCode.W)) 
         { 
             rb.velocity = this.transform.up * speedMovement;
         }
@@ -42,6 +48,7 @@ public class Tanc : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0, 0);
+            this.transform.Rotate(0, 0, 0);
         }
     }
 
