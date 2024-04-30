@@ -1,0 +1,2 @@
+composer create-project laravel/laravel code
+C:\Windows\System32\drivers\etc\hosts -> 192.168.56.56 homestead.test
