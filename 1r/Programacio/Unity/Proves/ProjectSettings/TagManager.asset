@@ -7,6 +7,7 @@ TagManager:
   - Paret
   - Obstacles
   - Bala
+  - BalaBona
   layers:
   - Default
   - TransparentFX

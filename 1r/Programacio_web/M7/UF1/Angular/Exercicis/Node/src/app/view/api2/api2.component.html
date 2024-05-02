@@ -1,0 +1,26 @@
+<div>
+    <form [formGroup]="songForm">
+        <label for="reproduccions">
+            Reproduccions:
+        </label>
+        <input id="reproduccions" type="number" formControlName="reproduccions">
+        <br>
+        <label for="recaptacio">
+            Recaptacio:
+        </label>
+        <input id="recaptacio" type="number" formControlName="recaptacio">
+        <br>
+        <button class="button" (click)="Recuperar()">Recuperar</button>
+    </form>
+    <div>
+        <ul>
+            @for (song of data; track song) {
+                <li>
+                    <div>
+                        <p>Nom {{ song['Nom'] }}</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

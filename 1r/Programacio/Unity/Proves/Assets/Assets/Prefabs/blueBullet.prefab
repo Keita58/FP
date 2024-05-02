@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1558144932379092361}
   - component: {fileID: -2097814260393114970}
   m_Layer: 0
-  m_Name: greenBullet
+  m_Name: blueBullet
   m_TagString: Bala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 92427e8b871dbaf4187b46a88b1a13f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 869f8fb816f30ea45a28085f11c5f327, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

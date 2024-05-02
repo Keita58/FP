@@ -1,0 +1,18 @@
+<div>
+    <form [formGroup]="songForm">
+        <div>
+            <label for="nom">Nom:</label>
+            <input id="nom" type="text" formControlName="nom">
+        </div>
+        <div>
+            <label for="reproduccions">Reproduccions:</label>
+            <input id="reproduccions" type="number" formControlName="reproduccions">
+        </div>
+        <div>
+            <label for="recaptacions">Recaptacions:</label>
+            <input id="recaptacions" type="number" formControlName="recaptacio">
+        </div>
+        <button type="button" (click)="Guardar()">Guardar</button>
+    </form>
+    <p>{{ resultat }}</p>
+</div>

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Tanc : MonoBehaviour
 {
     public float speedMovement;
     public float speedBullets;
     public float rotationSpeed;
+    public float lives;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -19,6 +21,11 @@ public class Tanc : MonoBehaviour
     void Update()
     {
         movement();
+        print(lives);
+        if(lives <= 0)
+        {
+            SceneManager.LoadScene("Mort");
+        }
     }
 
     private void movement()
@@ -58,5 +65,7 @@ public class Tanc : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
         if (collision.transform.tag == "Obstacles")
             rb.velocity = new Vector2(0, 0);
+        if (collision.transform.tag == "Bala")
+            this.lives--;
     }
 }

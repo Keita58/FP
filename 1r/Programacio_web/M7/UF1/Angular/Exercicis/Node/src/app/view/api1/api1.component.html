@@ -1,0 +1,13 @@
+<div>
+    <ul>
+        @for (song of data; track song) {
+            <li>
+                <div>
+                    <p>Nom {{ song['Nom'] }}</p>
+                </div>
+            </li>
+        }
+    </ul>
+    <button type="button" (click)="getSongs()">Songs!</button>
+    <br>
+</div>

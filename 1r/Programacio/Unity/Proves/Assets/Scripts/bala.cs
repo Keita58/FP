@@ -17,15 +17,27 @@ public class Bala : MonoBehaviour
     {
         
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.transform.tag == "Paret" || collision.transform.tag == "Obstacles") && cops > 0)
+        if ((collision.transform.tag == "Paret" || collision.transform.tag == "Obstacles"))
         {
-            cops--;
-            transform.position = Vector2.Reflect(rb.velocity, collision.GetContact(0).normal);
-
+            if(cops > 1)
+            {
+                cops--;
+                Vector2 vel = Vector2.Reflect(rb.velocity, collision.GetContact(0).normal);
+                rb.velocity = vel;
+            }
+            else
+                Destroy(this.gameObject);
         }
-        else if (cops == 1)
+        else if(collision.transform.tag == "Bala" || collision.transform.tag == "BalaBona")
+        {
             Destroy(this.gameObject);
+        }
+        else if(collision.transform.tag == "Player" && this.transform.tag != "BalaBona")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -40,10 +40,10 @@ app.get('/songs', async(req, res) => {
     }
 });
 
-app.get('/songs/:reproduccions/:recaptacio', async(req, res) => {
+app.get('/song', async(req, res) => {
     let client2;
-    let reproduccions = Number(req.params.reproduccions);
-    let recaptacio = Number(req.params.recaptacio);
+    let reproduccions = Number(req.query.reproduccions); //El nom en la busca ha d'estar EXACTAMENT igual a aquest, en aquest cas "reproduccions", tot en minúscula
+    let recaptacio = Number(req.query.recaptacio);
     try {
         client2 = await client.connect(url);
         const db = client2.db(dbName);
@@ -51,7 +51,7 @@ app.get('/songs/:reproduccions/:recaptacio', async(req, res) => {
         res.json(songs);
     }
     catch (err) {
-        console.log("Error amn l'operació CRUD de l'API", err);
+        console.log("Error amb l'operació CRUD de l'API", err);
     }
     finally {
         if(client2) {
@@ -62,9 +62,9 @@ app.get('/songs/:reproduccions/:recaptacio', async(req, res) => {
 
 app.get('/songs/insert', async(req, res) => {
     let client2;
-    let nom = req.body.nom;
-    let reproduccions = Number(req.body.reproduccions);
-    let recaptacio = Number(req.body.recaptacio);
+    let nom = req.query.nom;
+    let reproduccions = Number(req.query.reproduccions);
+    let recaptacio = Number(req.query.recaptacio);
     try {
         client2 = await client.connect(url);
         const db = client2.db(dbName);
@@ -102,10 +102,10 @@ app.get('/users', async(req, res) => {
    }
 });
 
-app.get('/users/:nom/:password', async(req, res) => {
+app.get('/user', async(req, res) => {
     let client2;
-    let nom = String(req.params.nom);
-    let password = String(req.params.password);
+    let nom = String(req.query.nom);
+    let password = String(req.query.password);
     try {
         client2 = await client.connect(url);
         const db = client2.db(dbName);
@@ -124,8 +124,8 @@ app.get('/users/:nom/:password', async(req, res) => {
 
 app.get('/users/insert', async(req, res) => {
     let client2;
-    let nom = req.body.nom;
-    let password = String(req.body.password);
+    let nom = req.query.nom;
+    let password = String(req.query.password);
     try {
         client2 = await client.connect(url);
         const db = client2.db(dbName);
@@ -145,9 +145,9 @@ app.get('/users/insert', async(req, res) => {
 
 app.get('/users/update', async(req, res) => {
     let client2;
-    let id = req.body.id;
-    let nom = req.body.nom;
-    let password = req.body.password;
+    let id = req.query.id;
+    let nom = req.query.nom;
+    let password = req.query.password;
     try {
         client2 = await client.connect(url);
         const db = client2.db(dbName);
