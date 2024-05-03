@@ -1,0 +1,143 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Activitat consultes d'arrays sobre `movies`
+
+Utilitzarem la col·lecció `movies` de la base de dades `sample_mflix`.
+
+Referències útils:
+
+- link:https://www.mongodb.com/docs/manual/tutorial/query-arrays/[Query an Array]
+- link:https://www.mongodb.com/docs/manual/reference/operator/query-array/[Array Query Operators]
+- link:https://www.mongodb.com/docs/manual/reference/operator/query/type/#document-type-available-types[$type]
+
+=== Exercicis
+
+[NOTE]
+====
+Per a cada exercici es vol:
+
+- La consulta demanada.
+- Els resultats obtinguts (o part dels resultats si en retorna molts).
+====
+
+1. Analitza l'esquema dels documents de la col·lecció `movies` fent servir l'opció `schema` del Compass. Observa el camp `cast`. És un array on es guarda el nom dels actors de cada pel·lícula. Observa també que hi ha una estadística de la longitud d'aquests arrays i una mostra dels seus valors.
+
+2. Mostra l'``_id``, `title`, any, directors i actors (`cast`) de les pel·lícules que tinguin exactament tres actors enregistrats al camp `cast`.
++
+[source,js]
+----
+db.movies.find(
+  {cast:{$size:3}},
+  {title:1, year:1, directors:1, cast:1}
+)
+----
+
+3. Mostra l'``id``, `title`, any, directors i actors de les pel·lícules que tinguin exactament 1 o 2 actors enregistrats al camp cast.
++
+[source,js]
+----
+db.movies.find(
+  {$or: [{cast:{$size:1}}, {cast:{$size:2}}]},
+  {title:1, year:1, directors:1, cast:1}
+)
+----
+
+4. Mostra l'``id``, `title`, any, directors i actors de les pel·lícules en què hagi actuat _"Billy Burke"_.
++
+[source,js]
+----
+db.movies.find(
+  {cast:"Billy Burke"},
+  {title:1, year:1, directors:1, cast:1}
+)
+----
+
+5. Mostra l'``id``, `title`, any, directors, idiomes i actors de les pel·lícules que estiguin només en espanyol en què hagi actuat la _Silvia Munt_ ordenades per l'any.
++
+[source,js]
+----
+db.movies.find({
+    languages:["Spanish"],
+    cast:"Silvia Munt"
+  },
+  {title:1, year:1, directors:1, languages:1, cast:1}
+).sort({year:1})
+----
+
+6. Mostra l'``id``, `title`, any, directors, idioma i actors de les pel·lícules que estiguin només en espanyol en què hagin actuat junts la _Silvia Munt_ i el _Javier Bardem_ ordenades per l'any.
++
+[source,js]
+----
+db.movies.find({
+    languages:["Spanish"],
+    $and: [
+      {cast:"Silvia Munt"},
+      {cast:"Javier Bardem"}
+    ]
+  },
+  {title:1, year:1, directors:1, languages:1, cast:1}
+).sort({year:1})
+----
+
+7. Selecciona totes les dades de les pel·lícules que estiguin només en espanyol i el camp `cast` tingui exactament dos elements.
++
+[source,js]
+----
+db.movies.find({
+    languages:["Spanish"],
+    cast: {$size:2}
+  }
+)
+----
+
+8. Observa el camp `year`. Adona't que no sempre és un nombre enter. Mostra totes les dades dels documents en què el tipus de dades del valor del camp `year` sigui `string`.
++
+[source,js]
+----
+db.movies.find({
+    year:{$type:"string"}
+  }
+)
+----
+
+9. Selecciona totes les dades de les pel·lícules que al camp `cast` figurin només _Aleksei Ananishnov_ i _Gudrun Geyer_ en aquest ordre.
++
+[source,js]
+----
+db.movies.find({
+    cast:["Aleksei Ananishnov", "Gudrun Geyer"]
+  }
+)
+----
+
+10. Mostra les dades de les pel·lícules fetes només en espanyol en què la intèrpret que apareix en tercer lloc al camp cast sigui la _Silvia Munt_, ordenades de més moderna a més antiga.
++
+[source,js]
+----
+db.movies.find({
+    languages:["Spanish"],
+    "cast.2":"Silvia Munt"
+  }
+).sort({year:-1});
+----
+
+11. Mostra les dades de les pel·lícules en què el camp `cast` tingui exactament 4 elements, l'intèrpret que apareix en primer lloc sigui el _Viggo Mortensen_ i el que apareix l'últim sigui _Sheila Moore_, ordenades de més moderna a més antiga.
++
+[source,js]
+----
+db.movies.find({
+    cast:{$size:4},
+    "cast.0":"Viggo Mortensen",
+    "cast.3":"Sheila Moore"
+  }
+).sort({year:-1});
+----

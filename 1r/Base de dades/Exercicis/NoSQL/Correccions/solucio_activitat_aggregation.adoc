@@ -1,0 +1,610 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Activitat aggregation framework
+
+Utilitzarem la col·lecció link:db/mongodb/books.json[books].
+
+Per importar la base de dades segueix els passos següents:
+
+1. Descarrega el fitxer. Importa'l amb:
++
+----
+$ mongoimport -d test -c books <ruta al fitxer books.json>
+----
+
+2. El sistema t'ha d'informar que s'han importat 500 documents.
+
+=== Exercicis
+
+[NOTE]
+====
+Per a cada exercici es vol:
+
+- La consulta demanada.
+- Els resultats obtinguts (o part dels resultats si en retorna molts).
+====
+
+1. Comprova que no hi ha títols repetits a la col·lecció: mostra els títols que
+apareixen més d'una vegada, i la quantitat de cops que apareixen.
++
+[source,js]
+----
+db.books.aggregate([
+  {$group:{
+    _id:"$title",
+    count:{$sum:1}
+  }},
+  {$match:{count:{$gt:1}}}
+])
+----
+
+2. Quin és el benefici total obtingut amb el llibre _ZOMBIES WITHOUT A LEADER_?
++
+[TIP]
+====
+Per accedir al preu de les ventes utilitza `"$sales.sale_price"`.
+====
++
+[source,js]
+----
+db.books.aggregate([
+  {$match:{title:"ZOMBIES WITHOUT A LEADER"}},
+  {$project:{total:{$sum:"$sales.sale_price"}}}
+])
+
+{ "_id" : "018769811-2", "total" : 107.88000000000001 }
+
+db.books.aggregate([
+  {$match:{title:"ZOMBIES WITHOUT A LEADER"}},
+  {$unwind:"$sales"},
+  {$group:{
+    _id:null,
+    total:{$sum:"$sales.sale_price"}
+  }},
+  {$project:{_id:0}}
+])
+
+{ "total" : 107.88000000000001 }
+----
+
+3. Cerca l'autor que ha escrit més llibres i quants llibres ha escrit. Si hi ha
+diversos autors que han escrit el mateix nombre de llibres, agafa el primer pel
+nom.
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$authors"},
+  {$group:{_id:"$authors", "nbooks":{$sum:1}}},
+  {$sort:{nbooks:-1, _id:1}},
+  {$limit:1}
+])
+
+{ "_id" : "Alissa Ranner", "nbooks" : 4 }
+----
+
+4. Cerca l'autor que ha escrit més llibres i quants llibres ha escrit. Si hi ha
+diversos autors que han escrit el mateix nombre de llibres, mostra'ls tots.
++
+[TIP]
+====
+Utilitza dues consultes.
+====
++
+[source,js]
+----
+maxbooks=db.books.aggregate([
+  {$unwind:"$authors"},
+  {$group:{_id:"$authors", "nbooks":{$sum:1}}},
+  {$sort:{nbooks:-1}},
+  {$limit:1}
+]).toArray()[0].nbooks
+
+db.books.aggregate([
+  {$unwind:"$authors"},
+  {$group:{_id:"$authors", "nbooks":{$sum:1}}},
+  {$match:{nbooks:maxbooks}}
+])
+
+{ "_id" : "Flossy Jacob", "nbooks" : 4 }
+{ "_id" : "Erny Lucey", "nbooks" : 4 }
+{ "_id" : "Salem Domney", "nbooks" : 4 }
+{ "_id" : "Valentijn Nabarro", "nbooks" : 4 }
+{ "_id" : "Jimmie Tomsett", "nbooks" : 4 }
+{ "_id" : "Alissa Ranner", "nbooks" : 4 }
+{ "_id" : "Laurianne Laundon", "nbooks" : 4 }
+----
+
+5. Cerca el llibre que té una puntuació mitjana més alta. Mostra l'ISBN del
+llibre, el títol, les seves puntuacions, i la mitjana de les seves puntuacions.
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$scores"},
+  {$group:{
+    _id:"$_id",
+    title:{$first:"$title"},
+    scores:{$push:"$scores"},
+    avgscore:{$avg:"$scores"}
+  }},
+  {$sort:{avgscore:-1}},
+  {$limit:1}
+])
+
+db.books.aggregate([
+  {$project: {
+    _id:1,
+    title:1,
+    scores:1,
+    avgscore:{$avg:"$scores"}
+  }},
+  {$sort:{avgscore:-1}},
+  {$limit:1}
+])
+
+{ "_id" : "720558475-2", "title" : "ARMIES OF A SHADOW", "scores" : [ 10 ], "avgscore" : 10 }
+----
+
+6. Cerca el llibre que té una puntuació mitjana més alta d'entre els que tenen
+almenys dues puntuacions. Mostra l'ISBN del llibre, el títol, les seves
+puntuacions, i la mitjana de les seves puntuacions.
++
+[source,js]
+----
+db.books.aggregate([
+  {$match:{"scores.1":{$exists:true}}},
+  {$unwind:"$scores"},
+  {$group:{
+    _id:"$_id",
+    title:{$first:"$title"},
+    scores:{$push:"$scores"},
+    avgscore:{$avg:"$scores"}
+  }},
+  {$sort:{avgscore:-1}},
+  {$limit:1}
+])
+
+db.books.aggregate([
+  {$match:{"scores.1":{$exists:true}}},
+  {$project: {
+    _id:1,
+    title:1,
+    scores:1,
+    avgscore:{$avg:"$scores"}
+  }},
+  {$sort:{avgscore:-1}},
+  {$limit:1}
+])
+
+{ "_id" : "650753755-1", "title" : "UNION WITHOUT FAITH", "scores" : [ 9.8, 9.3 ], "avgscore" : 9.55 }
+----
+
+7. Cerca el llibre de ciència ficció (_Science fiction_) que té una puntuació
+mitjana més alta. Mostra'n el títol, l'ISBN, i la seva puntuació mitjana.
++
+[source,js]
+----
+db.books.aggregate([
+  {$match:{genres:"Science fiction"}},
+  {$unwind:"$scores"},
+  {$group:{
+    _id:"$_id",
+    title:{$first:"$title"},
+    avgscore:{$avg:"$scores"}
+  }},
+  {$sort:{avgscore:-1}},
+  {$limit:1}
+])
+
+db.books.aggregate([
+  {$match:{genres:"Science fiction"}},
+  {$project: {
+    _id:1,
+    title:1,
+    scores:1,
+    avgscore:{$avg:"$scores"}
+  }},
+  {$sort:{avgscore:-1}},
+  {$limit:1}
+])
+
+{ "_id" : "115111113-9", "title" : "PIRATE OF THE UNDERGROUND", "avgscore" : 8 }
+----
+
+8. Per cada mes que apareix a la base de dades (des de maig de 2017 fins a maig
+de 2018), cerca quants llibres s'han venut.
++
+[TIP]
+====
+Utilitza les funcions `$month` i `$year`.
+====
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$sales"},
+  {$group:{
+    _id:{month:{$month:"$sales.sale_date"}, year:{$year:"$sales.sale_date"}},
+    nbooks:{$sum:1}
+  }},
+  {$sort:{"_id.year":1,"_id.month":1}}
+])
+
+{ "_id" : { "month" : 5, "year" : 2017 }, "nbooks" : 71 }
+{ "_id" : { "month" : 6, "year" : 2017 }, "nbooks" : 147 }
+{ "_id" : { "month" : 7, "year" : 2017 }, "nbooks" : 166 }
+{ "_id" : { "month" : 8, "year" : 2017 }, "nbooks" : 149 }
+{ "_id" : { "month" : 9, "year" : 2017 }, "nbooks" : 147 }
+{ "_id" : { "month" : 10, "year" : 2017 }, "nbooks" : 133 }
+{ "_id" : { "month" : 11, "year" : 2017 }, "nbooks" : 171 }
+{ "_id" : { "month" : 12, "year" : 2017 }, "nbooks" : 138 }
+{ "_id" : { "month" : 1, "year" : 2018 }, "nbooks" : 153 }
+{ "_id" : { "month" : 2, "year" : 2018 }, "nbooks" : 127 }
+{ "_id" : { "month" : 3, "year" : 2018 }, "nbooks" : 158 }
+{ "_id" : { "month" : 4, "year" : 2018 }, "nbooks" : 143 }
+{ "_id" : { "month" : 5, "year" : 2018 }, "nbooks" : 87 }
+----
+
+9. Per cada mes des de setembre de 2017 fins a febrer de 2018 (inclosos), cerca
+el benefici total que hem obtingut.
++
+[TIP]
+====
+Utilitza `new Date()` per crear una data.
+====
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$sales"},
+  {$match:{$and:[
+    {"sales.sale_date":{$gte:new Date("2017-09-01")}},
+    {"sales.sale_date":{$lt:new Date("2018-03-01")}}]}},
+  {$group:{
+    _id:{month:{$month:"$sales.sale_date"}, year:{$year:"$sales.sale_date"}},
+    total:{$sum:"$sales.sale_price"}
+  }},
+  {$sort:{"_id.year":1,"_id.month":1}}
+])
+
+{ "_id" : { "month" : 9, "year" : 2017 }, "total" : 3596.42 }
+{ "_id" : { "month" : 10, "year" : 2017 }, "total" : 3016.23 }
+{ "_id" : { "month" : 11, "year" : 2017 }, "total" : 4033.06 }
+{ "_id" : { "month" : 12, "year" : 2017 }, "total" : 3178.68 }
+{ "_id" : { "month" : 1, "year" : 2018 }, "total" : 3233 }
+{ "_id" : { "month" : 2, "year" : 2018 }, "total" : 2971.14 }
+----
+
+10. Cerca el nom dels tres gèneres dels quals s'han escrit més llibres.
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$genres"},
+  {$group:{
+    _id:"$genres",
+    nbooks:{$sum:1}
+  }},
+  {$sort:{nbooks:-1}},
+  {$limit:3},
+  {$project:{nbooks:0}}
+])
+
+{ "_id" : "Fantasy" }
+{ "_id" : "Satire" }
+{ "_id" : "Poetry" }
+----
+
+11. Cerca el nom dels gèneres dels quals s'han escrit més de 25 llibres.
+Ordena'ls alfabèticament.
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$genres"},
+  {$group:{
+    _id:"$genres",
+    nbooks:{$sum:1}
+  }},
+  {$match:{nbooks:{$gt:25}}},
+  {$project:{nbooks:0}},
+  {$sort:{_id:1}}
+])
+
+{ "_id" : "Adventure" }
+{ "_id" : "Anthology" }
+{ "_id" : "Art" }
+{ "_id" : "Children's" }
+{ "_id" : "Diaries and Journals" }
+{ "_id" : "Drama" }
+{ "_id" : "Encyclopedia" }
+{ "_id" : "Fantasy" }
+{ "_id" : "Health" }
+{ "_id" : "Historical Fiction" }
+{ "_id" : "Mystery" }
+{ "_id" : "Philosophy" }
+{ "_id" : "Poetry" }
+{ "_id" : "Religious" }
+{ "_id" : "Satire" }
+----
+
+12. Calcula quants diners hem deixat de guanyar degut als descomptes aplicats.
++
+[TIP]
+====
+Utilitza `$subtract`.
+====
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$sales"},
+  {$group:{
+    _id:null,
+    total:{$sum:{$subtract:["$price","$sales.sale_price"]}}
+  }},
+  {$project:{_id:0}}
+])
+
+{ "total" : 825.18 }
+----
+
+13. Cerca el títol del llibre que ens ha reportat més beneficis.
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$sales"},
+  {$group:{
+    _id:"$_id",
+    title:{$first:"$title"},
+    total:{$sum:"$sales.sale_price"}
+  }},
+  {$sort:{total:-1}},
+  {$limit:1},
+  {$project:{title:1,_id:0}}
+])
+
+db.books.aggregate([
+  {$project:{title:1, _id:0, total: {$sum:"$sales.sale_price"}}},
+  {$sort:{total:-1 }},
+  {$limit: 1},
+  {$project:{total:0}}
+])
+
+{ "title" : "DEAD IN THE HUNTER" }
+----
+
+14. Cerca l'ISBN i el títol dels llibres venuts entre abril i maig de 2018, i el
+benefici obtingut per cada títol en aquest període. Mostra només aquells pels
+quals hem obtingut un benefici superior a 50 euros i ordena'ls pel benefici
+obtingut.
++
+[TIP]
+====
+Utilitza `new Date()` per crear una data.
+====
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$sales"},
+  {$match:{$and:[
+    {"sales.sale_date":{$gte:new Date("2018-04-01")}},
+    {"sales.sale_date":{$lt:new Date("2018-06-01")}}
+  ]}},
+  {$group:{
+    _id:"$_id",
+    title:{$first:"$title"},
+    total:{$sum:"$sales.sale_price"}
+  }},
+  {$match:{total:{$gt:50}}},
+  {$sort:{total:-1}}
+])
+
+{ "_id" : "166481901-0", "title" : "BUFFOON HAS A SECRET LIFE", "total" : 100.44999999999999 }
+{ "_id" : "571295141-X", "title" : "WOLVES OF RAINBOWS", "total" : 95.82 }
+{ "_id" : "368329062-5", "title" : "PERFUME OF TOMORROW", "total" : 79.13 }
+{ "_id" : "202321278-2", "title" : "LOVES WITH BLUE EYES", "total" : 74.86 }
+{ "_id" : "209177119-8", "title" : "BANDITS AND FIGURES", "total" : 74.49 }
+{ "_id" : "146874449-6", "title" : "REBELS AND DECEIVERS", "total" : 71.8 }
+{ "_id" : "638857787-3", "title" : "VALENTINES AND BUTTERFLIES", "total" : 71.24 }
+{ "_id" : "545434097-9", "title" : "LORD OF GAGS", "total" : 70.48 }
+{ "_id" : "407821414-2", "title" : "HUMANS AND SERPENTS", "total" : 68.91 }
+{ "_id" : "810064158-7", "title" : "SPIDER WITHOUT FLAWS", "total" : 67.37 }
+{ "_id" : "250996297-3", "title" : "PESTS AND KINGS", "total" : 67.16 }
+{ "_id" : "186648061-8", "title" : "FROZEN BY MY VILLAGE", "total" : 66.79 }
+{ "_id" : "554876853-0", "title" : "FESTIVALS AROUND THE WORLD", "total" : 64.42 }
+{ "_id" : "941553134-7", "title" : "TEACHERS IN MY DREAMS", "total" : 63.92 }
+{ "_id" : "630098493-1", "title" : "EVIL IN THE FOREST", "total" : 63.92 }
+{ "_id" : "196438665-9", "title" : "AMUSED BY THE TEACHER", "total" : 63.72 }
+{ "_id" : "491778110-8", "title" : "CYBORGS AND LEADERS", "total" : 63.019999999999996 }
+{ "_id" : "916508049-1", "title" : "BANE OF SORROW", "total" : 63.019999999999996 }
+{ "_id" : "809241929-9", "title" : "PARODY IN THE MUSEUM", "total" : 61.64 }
+{ "_id" : "677924283-7", "title" : "VULTURES OF MY IMAGINATION", "total" : 59.870000000000005 }
+{ "_id" : "231857367-0", "title" : "PARROT OF DARKNESS", "total" : 59.379999999999995 }
+{ "_id" : "571726722-3", "title" : "TOWN OF THE OCEAN", "total" : 57.900000000000006 }
+{ "_id" : "028097068-4", "title" : "INVADERS AND BOYS", "total" : 55.83 }
+{ "_id" : "416708694-8", "title" : "FIGURES OF ANIMALS", "total" : 54.78 }
+{ "_id" : "861403484-9", "title" : "GIRLS AND FROGS", "total" : 53.06 }
+{ "_id" : "537630737-9", "title" : "PROPHETS OF THE FIELDS", "total" : 52.28 }
+{ "_id" : "330420607-8", "title" : "TRAITORS WITH SINS", "total" : 52.26 }
+{ "_id" : "090796981-X", "title" : "MEMORY OF FOND MEMORIES", "total" : 51.300000000000004 }
+{ "_id" : "559315313-2", "title" : "EXCELLENT ALIENS", "total" : 50.78 }
+{ "_id" : "866667329-X", "title" : "CHICKENS AND BEARS", "total" : 50.37 }
+----
+
+15. Cerca l'autor que ens ha reportat més beneficis, i quants beneficis ens ha
+reportat.
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$authors"},
+  {$unwind:"$sales"},
+  {$group:{
+    _id:"$authors",
+    total:{$sum:"$sales.sale_price"}
+  }},
+  {$sort:{total:-1}},
+  {$limit:1}
+])
+
+{ "_id" : "Malachi Pawden", "total" : 423.01 }
+----
+
+16. Cerca el número total de ventes que s'han fet de llibres que no tenen cap
+puntuació, i els beneficis totals que hi hem obtingut.
++
+[source,js]
+----
+db.books.aggregate([
+  {$match:{"scores.0":{$exists:false}}},
+  {$unwind:"$sales"},
+  {$group:{
+    _id:null,
+    nsales:{$sum:1},
+    total:{$sum:"$sales.sale_price"}
+  }},
+  {$project:{_id:0}}
+])
+
+{ "nsales" : 40, "total" : 838.68 }
+----
+
+17. Quins gèneres ha treballat la Miranda Belbin? Volem obtenir un array amb
+tots aquests els gèneres.
++
+[source,js]
+----
+db.books.aggregate([
+  {$match:{authors:"Miranda Belbin"}},
+  {$unwind:"$genres"},
+  {$group:{
+    _id:null,
+    genres:{$addToSet:"$genres"}
+  }},
+  {$project:{_id:0}}
+])
+
+{ "genres" : [ "Historical Fiction", "Drama", "Travel" ] }
+----
+
+18. Quins gèneres ha treballat l'autor del llibre amb ISBN 170494833-9?
++
+[TIP]
+====
+Es pot fer en dues consultes, o en una de sola si utilitzes l'estadi `$lookup`.
+====
++
+[source,js]
+----
+author=db.books.aggregate([
+  {$match:{_id:"170494833-9"}},
+  {$project:{authors:1,_id:0}}
+]).toArray()[0].authors[0]
+
+db.books.aggregate([
+  {$match:{authors:author}},
+  {$unwind:"$genres"},
+  {$group:{
+    _id:null,
+    genres:{$addToSet:"$genres"}
+  }},
+  {$project:{_id:0}}
+])
+
+db.books.aggregate([
+  {$match:{_id:"170494833-9"}},
+  {$lookup:{
+    from:"books",
+    localField:"authors",
+    foreignField:"authors",
+    as:"allbooks"
+  }},
+  {$unwind:"$allbooks"},
+  {$unwind:"$allbooks.genres"},
+  {$group:{
+    _id:null,
+    genres:{$addToSet:"$allbooks.genres"}
+  }},
+  {$project:{_id:0}}
+])
+
+{ "genres" : [ "Cookbook", "Historical Fiction" ] }
+----
+
+19. Volem obtenir una llista amb tots els autors ordenada alfabèticament i,
+per cada autor, l'ISBN dels llibres que ha escrit.
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$authors"},
+  {$group:{
+    _id:"$authors",
+    isbns:{$push:"$_id"}
+  }},
+  {$sort:{_id:1}}
+])
+
+{ "_id" : "Aaren Mougin", "isbns" : [ "893373418-X" ] }
+{ "_id" : "Abdul Limmer", "isbns" : [ "712651894-3" ] }
+{ "_id" : "Abelard Lorrimer", "isbns" : [ "515927208-9" ] }
+{ "_id" : "Addy Weightman", "isbns" : [ "074921729-4" ] }
+{ "_id" : "Agosto McPhelimy", "isbns" : [ "664159228-6", "629267690-0" ] }
+{ "_id" : "Aidan Walkingshaw", "isbns" : [ "824661603-X" ] }
+{ "_id" : "Aimee Gannon", "isbns" : [ "593505797-2" ] }
+{ "_id" : "Alana Adame", "isbns" : [ "628262675-7", "188068859-X" ] }
+{ "_id" : "Albertine Matteucci", "isbns" : [ "689396867-1" ] }
+{ "_id" : "Alden Cumine", "isbns" : [ "276426631-6" ] }
+{ "_id" : "Alejandra Havis", "isbns" : [ "635199592-2" ] }
+{ "_id" : "Alejandrina Greenly", "isbns" : [ "246404837-2" ] }
+{ "_id" : "Alfie Diplock", "isbns" : [ "437732911-1" ] }
+{ "_id" : "Alfred Rupp", "isbns" : [ "207123702-1", "782767291-4" ] }
+{ "_id" : "Alfredo Jarritt", "isbns" : [ "256566743-4" ] }
+{ "_id" : "Alice Cecchetelli", "isbns" : [ "509604889-6" ] }
+{ "_id" : "Alissa Ranner", "isbns" : [ "114315632-3", "083861627-5", "331948966-6", "648988787-8" ] }
+{ "_id" : "Alleen Blincowe", "isbns" : [ "268572576-8" ] }
+{ "_id" : "Alleyn Raymond", "isbns" : [ "974113023-6" ] }
+{ "_id" : "Alli Hartness", "isbns" : [ "934179625-3", "818622462-9" ] }
+...
+----
+
+20. Volem comprovar que els preus amb descompte estan ben calculats a la
+col·lecció. Fes una consulta que retorni els ISBN i les dades de les ventes que
+estan mal calculades (hauria de donar 0 resultats amb les dades originals).
++
+[TIP]
+====
+Per cada venta, calcula de nou el preu a partir del preu del llibre i del
+descompte aplicat. Després, comprova si la diferència entre el preu que has
+calculat i el preu de venta és superior a 0.01 (per evitar els efectes de
+l'arrodoniment a 2 decimals).
+====
++
+[source,js]
+----
+db.books.aggregate([
+  {$unwind:"$sales"},
+  {$project:{price:1,sales:1,
+    calculated_price:{$subtract:
+      ["$price",{$multiply:["$price","$sales.sale_discount",0.01]}]
+    }
+  }},
+  {$project:{price:1,sales:1,calculated_price:1,
+    difference:{$abs:{$subtract:["$sales.sale_price","$calculated_price"]}}
+  }},
+  {$match:{difference:{$gte:0.01}}}
+])
+----

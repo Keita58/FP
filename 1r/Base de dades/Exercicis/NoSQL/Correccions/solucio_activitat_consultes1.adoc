@@ -1,0 +1,122 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Solució activitat consultes 1
+
+Utilitzarem la col·lecció `zips` de la base de dades `sample_training`.
+
+=== Exercicis
+
+1. Troba les dades del codi postal 01222.
++
+[source,js]
+----
+db.zips.find({zip:"01222"})
+----
+
+2. Troba el document que s'ha inserit a la posició 2421.
++
+[source,js]
+----
+db.zips.find().skip(2420).limit(1)
+----
+
+3. Sabent que hem importat 29470 documents, mostra els 5 últims.
++
+[source,js]
+----
+db.zips.find().skip(29465)
+----
+
+4. Troba tots els codis postals de la ciutat de Nova York.
++
+[source,js]
+----
+db.zips.find({city:"NEW YORK"})
+----
+
+5. Troba tots els codis postals de la ciutat de Nova York que tenen més de
+50000 habitants.
++
+[source,js]
+----
+db.zips.find({city:"NEW YORK", pop:{$gt:50000}})
+----
+
+6. Troba tots els codis postals que pertanyen a la ciutat de Nova York o que
+tenen més de noranta mil habitants.
++
+[source,js]
+----
+db.zips.find({
+  $or:[
+    {city:"NEW YORK"},
+    {pop:{$gt:90000}}
+  ]
+})
+----
+
+7. Troba tots els documents que tenen un nom de població començat per 'Z'.
++
+[source,js]
+----
+db.zips.find({city:/^Z/})
+----
+
+8. Cerca tots els documents de l'estat d'Oregon (OR) i de l'estat de Nova York
+(NY). Utilitza `$in`.
++
+[source,js]
+----
+db.zips.find({state:{$in:["OR","NY"]}})
+----
+
+9. Sabent que el codi postal més gran de la col·lecció és el 99950, afegeix un
+nou document amb la mateixa estructura dels documents existents.
++
+[source,js]
+----
+db.zips.insertOne({
+	"zip" : "99951",
+	"city" : "CIUTAT1",
+	"loc" : [
+		-72.26423,
+		42.12065
+	],
+	"pop" : 45000,
+	"state" : "MA"
+});
+----
+
+10. Afegeix ara dos documents més, utilitzant una única sentència.
++
+[source,js]
+----
+db.zips.insertMany([{
+	"zip" : "99952",
+	"city" : "CIUTAT2",
+	"loc" : [
+		-72.26423,
+		42.12065
+	],
+	"pop" : 45000,
+	"state" : "MA"
+},{
+  "zip" : "99953",
+  "city" : "CIUTAT3",
+  "loc" : [
+    -72.26423,
+    42.12065
+  ],
+  "pop" : 45000,
+  "state" : "MA"
+}]);
+----

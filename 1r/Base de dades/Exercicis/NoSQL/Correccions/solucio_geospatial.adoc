@@ -1,0 +1,148 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Activitat GeoSpatial
+
+Utilitzarem les col·leccions `restaurants` i `neighborhoods` que trobaràs al directori `db/mongodb`. S'han d'importar a l'Atlas, en una base de dades de nom `geo`.
+
+Referències:
+
+- link:https://www.aristasur.com/contenido/sistema-de-coordenadas-geograficas-longitud-y-latitud[Sistema de coordenadas terrestres: longitud y latitud]
+- link:https://www.mongodb.com/docs/manual/reference/geojson/[MongoDB: GeoJSON Objects]
+- link:https://www.mongodb.com/docs/manual/geospatial-queries/[MongoDB: GeoSpatial Queries]
+- link:https://www.mongodb.com/docs/manual/reference/operator/query-geospatial/[MongoDB: Geospatial Query Operators]
+- link:https://www.mongodb.com/docs/manual/tutorial/geospatial-tutorial/[Exemples]
+
+=== Exercicis
+
+Vés a la BD `geo` i crea un índex a cada col·lecció (permet que les comandes de cerca siguin més ràpides, algunes no es poden fer si no estan creats aquests índexs):
+
+[source,js]
+----
+db.restaurants.createIndex({ location: "2dsphere" });
+db.neighborhoods.createIndex({ geometry: "2dsphere" });
+----
+
+1. Agafa el primer document de `restaurants` i de `neighborhoods`. Analitza les seves coordenades. Fes servir Google Maps per verificar les coordenades de posicionament d'alguns dels restaurants (són dades reals). Què observes? Per què?
++
+Les coordenades del maps són: (latitud, longitud) i el Mongo les fa servir en ordre invers (longitud, latitud).
+
+2. Troba el restaurant més proper a les coordenades -73.96 , 40.78.
++
+[source,js]
+----
+db.restaurants.findOne({
+  location:{$near:{
+    $geometry:{type:"Point",coordinates: [-73.96, 40.78]}
+  }}
+})
+
+db.restaurants.findOne({
+  location:{$nearSphere:{
+    $geometry:{type:"Point",coordinates: [-73.96, 40.78]}
+  }}
+})
+----
++
+Els operadors `$near` i `$nearSphere` tornen els documents ordenats de més proper a més llunyà, amb `findOne` troba el més proper.
+
+3. Troba tots els restaurants que es trobin dins d'un cercle de 500m de radi centrat en les coordenades -74, 40.7 (el que es coneix popularment com 500m a la rodona).
++
+[source,js]
+----
+db.restaurants.find({
+  location:{$nearSphere:{
+    $geometry:{type:"Point",coordinates: [-74, 40.7]},$maxDistance:500
+  }}
+})
+----
++
+O bé:
++
+[source,js]
+----
+db.restaurants.find({
+  location:{$geoWithin:{
+    $centerSphere:[[-74, 40.7],(0.5/6378.1)]
+  }}
+})
+----
++
+En aquest últim cas, la distància s'ha de donar en radians. Per passar de metres a radians cal dividir els metres pel radi de la terra en metres (aproximadament 6378100 metres), o alternativament, passar els metres a quilòmetres i després dividir pel radi de la terra en quilòmetres (6378,1 Km).
+
+4. Troba el restaurant que està a 194 metres i alguns centímetres de les coordenades -73.88, 40.7.
++
+[source,js]
+----
+db.restaurants.find({
+  location:{$nearSphere:{
+    $geometry:{
+      type:"Point",coordinates: [-73.88, 40.7]
+    },$maxDistance:195,$minDistance:194
+  }}
+})
+----
+
+5. Troba el nom del barri en què et trobes si ets a les coordenades -74, 40.6.
++
+[source,js]
+----
+db.neighborhoods.find({
+  geometry: {$geoIntersects: {
+    $geometry: { type: "Point", coordinates: [ -74, 40.6 ] }
+  }}
+},{name:1, _id:0})
+----
+
+6. Troba el nom del primer restaurant que està dins del barri d'Erasmus, ordenat alfabèticament de Z a A.
++
+_Pista_: Pots fer servir variables per guardar resultats intermedis de la següent manera: `var barrierasmus = db.neighborhoods.findOne({name:"Erasmus"})`.
+Llavors `barrierasmus` és el nom del document seleccionat. Podràs fer referència als seus camps fent servir la notació amb punt, per exemple,
+`barrierasmus.geometry`.
++
+[source,js]
+----
+var barrierasmus = db.neighborhoods.findOne({name:"Erasmus"})
+
+db.restaurants.find({
+  location: { $geoWithin: { $geometry: barrierasmus.geometry } }
+}).sort({name:-1}).limit(1)
+----
+
+7. Compta quants restaurants tens en el teu barri si vius en les coordenades -73.93, 40.82.
++
+[source,js]
+----
+var onsoc = db.neighborhoods.findOne({
+  geometry: { $geoIntersects: {
+    $geometry: { type: "Point", coordinates: [ -73.93, 40.82 ] }
+  }}
+})
+db.restaurants.find({
+  location: { $geoWithin: { $geometry: onsoc.geometry } }
+}).count()
+----
+
+8. Conclusions: Quina és la diferència entre `$near` i `$nearSphere`?
++
+--
+`$nearSphere` sempre calcula les distàncies en geometria esfèrica, mentre que `$near` ho fa en geometria esfèrica si l'índex utilitzat és de tipus `2dsphere` i en geometria cartesiana (plana) si l'índex és de tipus `2d`.
+
+Com que l'índex `2dsphere` s'utilitza sempre per dades GeoJSON, l'única diferència entre els dos es dóna quan utilitzem coordenades _legacy_.
+--
+
+9. Conclusions: En què es diferencien `$geoWithin` i `$geoIntersect`?
++
+--
+`$geoWithin`: s'especifica la superfície que fa de contenidor i troba el que hi ha a dins (troba el contingut sabent el contenidor).
+
+`$geoIntersects`: s'especifica un objecte i es mira a dins de quin altre es troba (troba el contenidor a partir del contingut).
+--

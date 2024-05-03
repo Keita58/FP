@@ -1,0 +1,122 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Activitat primeres consultes sobre `movies`
+
+Utilitzarem la col·lecció `movies` de la base de dades `sample_mflix`.
+
+Abans de començar observa l'estructura dels documents que es mostren, especialment els camps que no contenen valors simples. Compara l'estructura d'alguns dels primers documents i observa que no tenen exactament els mateixos camps.
+
+Referències útils:
+
+- link:https://www.mongodb.com/docs/manual/reference/operator/query/[Query and Projection Operators]
+- link:https://www.mongodb.com/docs/manual/tutorial/query-for-null-fields/[Query for Null or Missing Fields]
+
+=== Exercicis
+
+[NOTE]
+====
+Per a cada exercici es vol:
+
+- La consulta demanada.
+- Els resultats obtinguts (o part dels resultats si en retorna molts).
+====
+
+1. Mostra l'``_id``, `title`, `year` i `genres` de totes les pel·lícules ordenades per `year`.
++
+[source,js]
+----
+db.movies.find({},{title:1,year:1,genres:1}).sort({year:1})
+----
+
+2. Cerca l'``id``, `title`, `year` i `genres` de totes les pel·lícules dels anys vuitanta ordenades per `year` i dins del mateix any per `title`.
++
+[source,js]
+----
+db.movies.find({year:{$gte:1980, $lt:1990}},
+  {title:1,year:1,genres:1}).sort({year:1, title:1})
+----
+
+3. Mostra l'``id``, `title`, `year` i `genres` de totes les pel·lícules que tenen algun valor al camp `genres`, ordenades descendentment per `year`.
++
+[source,js]
+----
+db.movies.find({genres:{$exists:true}},
+  {title:1,year:1,genres:1}).sort({year:-1})
+----
+
+4. Mostra totes les dades dels curts ("Short") que s'hagin fet l'any 2000 ordenats ascendentment per la durada (`runtime`).
++
+[source,js]
+----
+db.movies.find({genres:"Short", year:2000}).sort({runtime:1})
+----
+
+5. Cerca totes les dades dels curts que s'hagin fet entre els anys 2000 i 2010 (inclosos).
++
+[source,js]
+----
+db.movies.find({genres:"Short", year:{$gte:2000,$lte:2010}})
+----
+
+6. Mostra totes les dades de les pel·lícules que s'hagin fet exclusivament els anys 2000 i 2010.
++
+[source,js]
+----
+db.movies.find({year:{$in:[2000,2010]}})
+----
+
+7. Mostra totes les dades dels curts que s'hagin fet exclusivament els anys 2000 i 2010.
++
+[source,js]
+----
+db.movies.find({genres:"Short", year:{$in:[2000,2010]}})
+----
+
+8. Mostra el títol, any i director de tots els drames, pel·lícules de terror i musicals (`genres` conté "Drama", "Horror" o "Music") que tinguin una durada superior a 2 hores i estiguin només en francès, ordenades de més nova a més antiga. No volem mostrar l'`id`.
++
+[source,js]
+----
+db.movies.find({
+  genres:{$in:["Drama","Horror","Music"]},
+  runtime:{$gt:120},
+  languages:["French"]
+  },
+  {title:1,year:1,directors:1}
+)
+----
+
+9. Mostra totes les dades de les pel·lícules fetes abans de l'any 1930.
++
+[source,js]
+----
+db.movies.find({year:{$lt:1930}})
+----
+
+10. Cerca l'``id``, títol, any i idioma de totes les pel·lícules fetes només en anglès abans de l'any 1930.
++
+[source,js]
+----
+db.movies.find({year:{$lt:1930}, languages:["English"]},
+  {title:1, year:1, languages:1})
+----
+
+11. Mostra l'``id``, títol, any i idioma de totes les pel·lícules fetes en idiomes diferents a l'anglès abans de l'any 1930. Observa els resultats i compara'ls amb els de les dues consultes anteriors. Segur que aquestes pel·lícules estan fetes en idiomes diferents a l'anglès?
++
+[source,js]
+----
+db.movies.find({
+    year:{$lt:1930},
+    languages:{$exists:true, $nin:["English"]}
+  },
+  {title:1, year:1, languages:1}
+)
+----

@@ -1,0 +1,168 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Activitat consultes sobre documents niuats i arrays de documents
+
+Referències útils:
+
+- link:https://www.mongodb.com/docs/manual/tutorial/query-documents/[Manual/Tutorial: Query documents]
+- link:https://www.mongodb.com/docs/manual/reference/operator/query-array/[Manual/Reference: Array query operators]
+- link:https://www.mongodb.com/docs/manual/tutorial/query-embedded-documents/[Query on embedded / nested documents]
+- link:https://www.mongodb.com/docs/manual/tutorial/query-array-of-documents/[Query an array of embedded documents]
+
+=== Exercicis
+
+[NOTE]
+====
+Per a cada exercici es vol:
+
+- La consulta demanada.
+- Els resultats obtinguts (o part dels resultats si en retorna molts).
+====
+
+Per a les pròximes consultes has de fer servir la col·lecció `results` que trobaràs al fitxer `results.json` que trobaràs a la carpeta `db/mongodb`. Cal importar aquesta col·lecció a l'Atlas.
+
+Per importar la col·lecció:
+
+- Des del Compass, crea una base de dades de nom `results`, amb una col·lecció de nom `results`.
+- Selecciona la col·lecció que acabes de crear a l'arbre de l'esquerra i prem "Import data".
+- Al diàleg (pot ser que surti en segon pla), selecciona el fitxer `results.json`.
+
+1. Mostra els documents en què alguna de les puntuacions superi el valor 90.
++
+[source,js]
+----
+db.results.find({
+    results:{$gt:90}
+  }
+);
+----
+
+2. Mostrar els documents en què algunes de les puntuacions sigui exactament 77 o exactament 80.
++
+[source,js]
+----
+db.results.find({
+    $or:[
+      {results:77},
+      {results:80}
+    ]
+  }
+);
+----
+
+3. Mostrar els documents en què algunes de les puntuacions sigui exactament 77 , una altra del mateix array sigui exactament 80 i una altra sigui exactament 72 (no importa l'ordre en què apareguin).
++
+[source,js]
+----
+db.results.find({
+    $and:[
+      {results:77},
+      {results:80},
+      {results:72}
+    ]
+  }
+);
+----
+
+4. Mostrar els documents en què algunes de les puntuacions estigui entre 77 i  80 (sense els extrems).
++
+[source,js]
+----
+db.results.find({
+    results:{$elemMatch:{
+      $gt:77,
+      $lt:80
+    }}
+  }
+);
+----
+
+5. Mostra els documents que només tinguin dues puntuacions.
++
+[source,js]
+----
+db.results.find({
+    results:{$size:2}
+  }
+);
+----
+
+6. Mostra els documents que tinguin només les puntuacions 18, 86 i 14 exactament en aquest ordre.
++
+[source,js]
+----
+db.results.find({
+    results:[18,86,14]
+  }
+);
+----
+
+Per a les pròximes consultes has de fer servir la base de dades `sample_weatherdata` i la col·lecció `data`. Dedica una bona estona abans a analitzar l'esquema dels documents d'aquesta col·lecció i a llegir les pàgines del tutorial sobre _queries on nested documents_ i _queries on arrays of documents_.
+
+[start=7]
+7. Mostra exclusivament l'id, qualitat de la temperatura de l'aire i la qualitat de la quantitat mesurada durant 24 hores dels canvis en la pressió atmosfèrica.
++
+[source,js]
+----
+db.data.find({},
+  {
+    "airTemperature.quality":1,
+    "atmosphericPressureChange.quantity24Hours.quality":1
+  }
+);
+----
+
+8. Mostra les mateixes dades que l'exercici anterior però només dels documents que tinguin tots dos camps: la temperatura de l'aire i el canvi de la pressió atmosfèrica.
++
+[source,js]
+----
+db.data.find({
+    "airTemperature":{$exists:true},
+    "atmosphericPressureChange":{$exists:true}
+  },
+  {
+    "airTemperature.quality":1,
+    "atmosphericPressureChange.quantity24Hours.quality":1
+  }
+);
+----
+
+9. Mostra els camps temperatura de l'aire i canvi de la pressió atmosfèrica de tots els documents que tinguin el valor de la temperatura de l'aire superior a 35 i inferior a 40.
++
+[source,js]
+----
+db.data.find({
+    "airTemperature.value":{
+      $gt:35, $lt:40
+    },
+    "atmosphericPressureChange":{$exists:true}
+  },
+  {
+    "airTemperature":1,
+    "atmosphericPressureChange":1
+  }
+);
+----
+
+10. Mostra els camps temperatura de l'aire i canvi de la pressió atmosfèrica de tots els documents en què la qualitat de la quantitat mesurada en 24 hores del canvi de la pressió atmosfèrica sigui 9.
++
+[source,js]
+----
+db.data.find({
+    "atmosphericPressureChange.quantity24Hours.quality":"9"
+  },
+  {
+    "airTemperature":1,
+    "atmosphericPressureChange":1
+  }
+);
+----

@@ -1,0 +1,114 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Activitat més consultes simples sobre `movies`
+
+Utilitzarem la col·lecció `movies` de la base de dades `sample_mflix`.
+
+Referències útils:
+
+- link:https://docs.mongodb.com/manual/reference/operator/query/[Query and Projection Operators]
+- link:https://www.mongodb.com/docs/manual/tutorial/query-for-null-fields/[Query for Null or Missing Fields]
+- link:https://www.mongodb.com/docs/manual/reference/operator/query/ne/#op._S_ne[$ne]
+- link:https://www.mongodb.com/docs/manual/reference/operator/query-element/[Element Query Operators]
+- link:https://www.mongodb.com/docs/manual/reference/operator/query/and/#op._S_and[$and]
+
+=== Exercicis
+
+[NOTE]
+====
+Per a cada exercici es vol:
+
+- La consulta demanada.
+- Els resultats obtinguts (o part dels resultats si en retorna molts).
+====
+
+1. Consulta que mostri l'id, títol i any de totes les pel·lícules que no tinguin el camp idioma.
++
+[source,js]
+----
+db.movies.find({languages:{$exists:false}},{title:1, year:1})
+----
+
+2. Consulta que mostri l'id, títol, any i idioma de les pel·lícules que estiguin en idiomes que no siguin només francès ni només anglès, ordenades pel títol.
++
+[source,js]
+----
+db.movies.find(
+  {$and: [
+    {languages:{$exists:true}},
+    {languages:{$ne:["English"]}},
+    {languages:{$ne:["French"]}}
+  ]},
+  {title:1, year:1, languages:1}
+).sort({title:1})
+----
+
+3. Consulta que mostri l'id, títol, any i idioma de les pel·lícules que no estiguin en cap d'aquests idiomes: francès, anglès, alemany i espanyol. Ordena-les pel títol.
++
+[source,js]
+----
+db.movies.find(
+  {languages:{$nin:["English", "French", "German", "Spanish"]}},
+  {title:1, year:1, languages:1}
+).sort({title:1})
+----
+
+4. Mostra totes les dades de les pel·lícules en francès, que tinguin gènere que no sigui ni curt ni drama i que, a més, tinguin una durada entre una hora i mitja i dues hores (incloses).
++
+[source,js]
+----
+db.movies.find({
+  languages:{$ne:"French"},
+  genres:{$nin:["Short","Drama"]},
+  runtime:{$gte:90,$lte:120}
+})
+----
+
+5. Mostra totes les dades de les pel·lícules que no tenen el camp director.
++
+[source,js]
+----
+db.movies.find({directors:{$exists:false}})
+----
+
+6. Mostra només el títol, any i director de les pel·lícules fetes en els anys setanta i noranta, ordenades en ordre descendent per l'any.
++
+[source,js]
+----
+db.movies.find({
+  $or: [
+    {year:{$gte:1970,$lt:1980}},
+    {year:{$gte:1990,$lt:2000}}
+  ]
+}, {_id:0, title:1, year:1, directors:1})
+.sort({year:-1})
+----
+
+7. Mostra només el títol, any, director i durada de les pel·lícules que duren exactament una hora i mitja.
++
+[source,js]
+----
+db.movies.find(
+  {runtime:90},
+  {_id:0, title:1, year:1, directors:1, runtime:1}
+)
+----
+
+8. Mostra només el títol, any, director i durada de les pel·lícules que no duren exactament hora i mitja, ordenades per la durada en ordre ascendent. Pensa primer quantes n'haurien de sortir.
++
+[source,js]
+----
+db.movies.find(
+  {runtime:{$ne:90, $exists:true}},
+  {_id:0, title:1, year:1, directors:1, runtime:1}
+).sort({runtime:1})
+----

@@ -1,0 +1,136 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Introducció a l'Aggregation Framework
+
+Utilitzarem la col·lecció `zips` de la base de dades `sample_training`.
+
+Referències:
+
+- link:https://www.mongodb.com/docs/manual/aggregation/[Aggregation Operations]
+- link:https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/[MongoDB: aggregation $match]
+- link:https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/#pipe._S_group[MondoDB: aggregation $group]
+- link:https://www.mongodb.com/docs/manual/tutorial/aggregation-zip-code-data-set/[MongoDB: Aggregation examples over "zipcodes" collection]
+- link:https://www.mongodb.com/docs/manual/tutorial/aggregation-with-user-preference-data/[MongoDB: Aggregation examples over "users" collection]
+
+=== Exercicis
+
+[NOTE]
+====
+Per a cada exercici es vol:
+
+- La consulta demanada.
+- Els resultats obtinguts (o part dels resultats si en retorna molts).
+====
+
+Encara que algunes de les activitats es podrien resoldre sense fer servir l'aggregation framework l'objectiu d'aquesta pràctica és que el facis servir per a totes les consultes.
+
+1. Fes una consulta que mostri la població total de cada estat ordenades alfabèticament per les sigles de l'estat.
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:"$state", sumpob:{$sum:"$pop"}}},
+  {$sort: {_id:1}}
+])
+----
+
+2. Llista els estats amb una població superior a 2.000.000, ordenats de major a menor nombre d'habitants.
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:"$state", sumpob:{$sum:"$pop"}}},
+  {$match: {sumpob:{$gt:2000000}}},
+  {$sort: {sumpob:-1}}
+])
+----
+
+3. Com es comportaria `$sum` si alguns documents tinguessin valors no numèrics en el camp del nombre d'habitants?
++
+[source,js]
+----
+Aquests camps s''ignorarien en el moment de fer la suma.
+----
+
+4. Quants estats hi ha amb una població superior a 2.000.000?
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:"$state", sumpob:{$sum:"$pop"}}},
+  {$match: {sumpob:{$gt:2000000}}},
+  {$group: {_id:null, n_states:{$sum:1}}},
+  {$project: {_id:0}}
+])
+----
+
+5. Mostra la població total de cada ciutat. Poden haver-hi ciutats diferents amb el mateix nom en estats diferents llavors cal identificar-les amb l'estat i el nom de la ciutat. També pot haver-hi més d'un zipcode dins de cada ciutat. Cal ordenar les ciutats per ordre alfabètic.
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:{city:"$city", state:"$state"}, totalpop:{$sum:"$pop"}}},
+  {$sort: {"_id.city":1, "_id.state":1}}
+])
+----
+
+6. Quantes ciutats diferents hi ha en aquesta base de dades?
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:{city:"$city", state:"$state"}}},
+  {$group: {_id:null, n_cities:{$sum:1}}},
+  {$project: {_id:0}}
+])
+----
+
+7. Quants codis zip hi ha en cada ciutat? Mostra els resultats ordenats de major a menor nombre de codis.
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:{city:"$city", state:"$state"}, n_zips:{$sum:1}}},
+  {$sort: {n_zips:-1}}
+])
+----
+
+8. Mostra les ciutats en què hi hagi més de 50 codis zip amb la quantitat de codis que tenen.
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:{city:"$city", state:"$state"}, n_zips:{$sum:1}}},
+  {$match: {n_zips:{$gt:50}}}
+])
+----
+
+9. Mostra el nombre de codis diferents que hi ha en cada estat, ordenats alfabèticament per l'estat.
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:"$state", n_zips:{$sum:1}}},
+  {$sort:{_id:1}}
+])
+----
+
+10. Mostrar el nombre de ciutats que hi ha en cada estat, ordenats per les sigles de l'estat.
++
+[source,js]
+----
+db.zips.aggregate([
+  {$group: {_id:{city:"$city", state:"$state"}}},
+  {$group: {_id:"$_id.state", n_cities:{$sum:1}}},
+  {$sort: {"_id":1}}
+])
+----

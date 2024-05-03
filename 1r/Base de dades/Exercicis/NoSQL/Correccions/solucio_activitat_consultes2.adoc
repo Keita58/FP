@@ -1,0 +1,145 @@
+= MongoDB
+:doctype: article
+:encoding: utf-8
+:lang: ca
+:toc: left
+:toclevels: 3
+:numbered:
+:ascii-ids:
+
+<<<
+
+== Activitat consultes 2
+
+Utilitzarem la col·lecció `zips` de la base de dades `sample_training`.
+
+=== Exercicis
+
+[NOTE]
+====
+Per a cada exercici es vol:
+
+- La consulta demanada.
+- Els resultats obtinguts (o part dels resultats si en retorna molts).
+====
+
+1. Troba quants codis postals tenen més de 60000 habitants.
++
+[source,js]
+----
+db.zips.find({pop:{$gt:60000}}).count()
+----
+
+2. Troba el codi postal, el nom de la població i la quantitat d'habitants dels
+10 codis postals més poblats d'Ohio (OH).
++
+[source,js]
+----
+db.zips.find({state:"OH"}, {city:1,pop:1}).sort({pop:-1}).limit(10)
+----
+
+3. Augmenta en 1000 la població del codi postal que vas afegir a l'activitat
+anterior.
++
+[source,js]
+----
+db.zips.updateOne({zip:"99951"}, {$inc:{pop:1000}})
+----
+
+4. Esborra el document que vas inserir a l'activitat anterior.
++
+[source,js]
+----
+db.zips.deleteOne({zip:"99951"})
+----
+
+5. Augmenta un 4% la població de tots els codis postals de l'estat de Texas
+(TX).
++
+[source,js]
+----
+db.zips.updateMany({state:"TX"}, {$mul:{pop:1.04}})
+----
+
+6. Mostra una llista amb tots els estats d'Estats Units, ordenada
+alfabèticament.
++
+[TIP]
+====
+Utilitza
+link:https://docs.mongodb.com/manual/reference/method/db.collection.distinct/[distinct].
+====
++
+[source,js]
+----
+db.zips.distinct("state").sort()
+----
+
+7. Troba quantes poblacions diferents hi ha a l'estat de Nova York.
++
+[TIP]
+====
+Recorda que pots utilitzar qualsevol propietat de JavaScript.
+====
++
+[source,js]
+----
+db.zips.distinct("city", {state:"NY"}).length
+----
+
+8. Troba els codis postals i poblacions que estan més a l'est del meridià -74.
++
+[TIP]
+====
+El meridià és la coordenada horitzontal de `loc`. Com més a l'oest més gran és el meridià.
+====
++
+[source,js]
+----
+db.zips.find({"loc.x":{$gt:74}}, {city:1,loc:1})
+----
+
+9. Troba els tres codis postals i les poblacions corresponents que més aprop
+estan del paral·lel 42.
++
+[TIP]
+====
+El paral·lel és la coordenada vertical de `loc`.
+
+Utilitza `toArray()` per passar un cursor de MongoDB a un array de JavaScript.
+
+Utilitza el `sort()` de JavaScript per realitzar una ordenació complexa.
+====
++
+[source,js]
+----
+db.zips.find(
+  {},
+  {city:1,loc:1}
+).toArray().sort(function(doc1,doc2) {
+  return Math.abs(doc1.loc.y-42)-Math.abs(doc2.loc.y-42);
+}).slice(0,3);
+----
+
+10. Mostra els codis postals de l'estat de California (CA), ordenats d'oest a
+est.
++
+[source,js]
+----
+db.zips.find({state:"CA"}, {loc:1}).sort({"loc.x":-1})
+----
+
+11. Dobla la població dels 8 codis postals més poblats de California (CA).
++
+[TIP]
+====
+Utilitza Javascript per recórrer els documents que retorni la cerca.
+====
++
+[source,js]
+----
+var resultats = db.zips.find({state:"CA"}).sort({pop:-1}).limit(8);
+resultats.forEach(function (element) {
+    db.zips.updateOne({zip:element.zip}, {$mul:{pop:2}})
+});
+----
