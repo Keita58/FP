@@ -1,0 +1,26 @@
+<div>
+  <form [formGroup]="userForm">
+    <label for="nom">
+      Nom:
+    </label>
+    <input id="nom" type="text" formControlName="nom">
+    <br>
+    <label for="password">
+      Password:
+    </label>
+    <input id="password" type="text" formControlName="password">
+    <br>
+    <button class="button" (click)="Recuperar()">Recuperar</button>
+  </form>
+  <div>
+    <ul>
+      @if (data) {
+        <p>Login completat!</p>
+      }
+      @else if (click) {
+        <p>Error en el login, revisa les credencials.</p>
+      }
+    </ul>
+  </div>
+</div>
+

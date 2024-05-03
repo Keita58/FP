@@ -60,11 +60,11 @@ app.get('/song', async(req, res) => {
     }
 });
 
-app.get('/songs/insert', async(req, res) => {
+app.post('/songs/insert', async(req, res) => {
     let client2;
-    let nom = req.query.nom;
-    let reproduccions = Number(req.query.reproduccions);
-    let recaptacio = Number(req.query.recaptacio);
+    let nom = req.body.nom;
+    let reproduccions = Number(req.body.reproduccions);
+    let recaptacio = Number(req.body.recaptacio);
     try {
         client2 = await client.connect(url);
         const db = client2.db(dbName);
@@ -122,10 +122,10 @@ app.get('/user', async(req, res) => {
     }
 });
 
-app.get('/users/insert', async(req, res) => {
+app.post('/users/insert', async(req, res) => {
     let client2;
-    let nom = req.query.nom;
-    let password = String(req.query.password);
+    let nom = req.body.nom;
+    let password = String(req.body.password);
     try {
         client2 = await client.connect(url);
         const db = client2.db(dbName);

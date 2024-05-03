@@ -1,0 +1,13 @@
+<div>
+  <ul>
+    @for (user of data; track user) {
+      <li>
+        <div>
+          <p>Correu {{ user['nom'] }}</p>
+        </div>
+      </li>
+    }
+  </ul>
+  <button type="button" (click)="getUsers()">Users!</button>
+  <br>
+</div>

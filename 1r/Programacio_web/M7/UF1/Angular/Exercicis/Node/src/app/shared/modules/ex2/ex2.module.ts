@@ -9,20 +9,20 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
-    declarations: [
+  declarations: [
     Api1Component,
     Api2Component,
     Api3Component
-    ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule
-    ],
-    exports: [
-      Api1Component,
-      Api2Component,
-      Api3Component
-    ],
-    providers: [ConnectDBService],
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    Api1Component,
+    Api2Component,
+    Api3Component
+  ],
+  providers: [ConnectDBService],
 })
 export class Ex2Module { }

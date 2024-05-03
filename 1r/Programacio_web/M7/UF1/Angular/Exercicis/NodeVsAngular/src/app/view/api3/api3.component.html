@@ -1,0 +1,14 @@
+<div>
+  <form [formGroup]="userForm">
+    <div>
+      <label for="nom">Nom:</label>
+      <input id="nom" type="text" formControlName="nom">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" type="text" formControlName="password">
+    </div>
+    <button type="button" (click)="Guardar()">Guardar</button>
+  </form>
+  <p>{{ resultat }}</p>
+</div>
