@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
-  rotation: 5
+  rotation: 30
 --- !u!61 &9132695738917303049
 BoxCollider2D:
   m_ObjectHideFlags: 0

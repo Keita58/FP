@@ -555,4 +555,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 2
-  rotation: 5
+  rotation: 35

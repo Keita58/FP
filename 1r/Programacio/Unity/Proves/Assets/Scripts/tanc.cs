@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,13 +10,14 @@ public class Tanc : MonoBehaviour
 {
     public float speedMovement;
     public float rotationSpeed;
-    public float lives;
+    public int lives;
     private Rigidbody2D rb;
     private GameObject tocat;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.lives = 3;
         tocat = GameObject.Find("Tocat");
         rb = GetComponent<Rigidbody2D>();
     }
@@ -22,7 +26,7 @@ public class Tanc : MonoBehaviour
     void Update()
     {
         movement();
-        if(lives <= 0)
+        if(lives < 1)
         {
             SceneManager.LoadScene("Mort");
         }
@@ -40,7 +44,6 @@ public class Tanc : MonoBehaviour
         }
         else
         {
-            GetComponent<AudioSource>().Stop();
             this.transform.Rotate(0, 0, 0);
             rb.angularVelocity = 0;
         }
@@ -68,8 +71,14 @@ public class Tanc : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
         if (collision.transform.tag == "Bala")
         {
-            this.lives--;
+            lives--;
+            print("aaa");
             tocat.GetComponent<AudioSource>().Play();
         }
+    }
+
+    internal int getVides()
+    {
+        return lives;
     }
 }

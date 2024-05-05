@@ -28,16 +28,19 @@ public class Enemics : MonoBehaviour
 
             if (num == 1)
             {
-                this.transform.Rotate(0, 0, (rotation / 10));
+                for (float i = 0; i < rotation; i += (float)0.2)
+                    rb.rotation = i;
             }
             else if (num == 2)
             {
-                this.transform.Rotate(0, 0, -(rotation / 10));
+                for (float i = 0; i > -rotation; i -= (float)0.2)
+                    rb.rotation = i;
             }
             else
             {
-                this.transform.Rotate(0, 0, 0);
                 rb.angularVelocity = 0;
+                rb.velocity = new Vector2(0, 0);
+                this.transform.Rotate(0, 0, 0);
             }
 
             if (num == 3)
@@ -66,19 +69,13 @@ public class Enemics : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
         if (collision.transform.tag == "BalaBona")
         {
-            if (this.gameObject.name == "EnemicVermell")
-            {
-                ui.GetComponent<UImanager>().SumarPunts();
-                ui.GetComponent<UImanager>().SumarPunts();
-                ui.GetComponent<UImanager>().SumarPunts();
-            }
-            else if(this.gameObject.name == "EnemicNegre")
-            {
-                ui.GetComponent<UImanager>().SumarPunts();
-                ui.GetComponent<UImanager>().SumarPunts();
-            }
+            if (this.gameObject.name == "EnemicVermell(Clone)")
+                ui.GetComponent<UImanager>().SumarPunts(15);
+            else if(this.gameObject.name == "EnemicNegre(Clone)")
+                ui.GetComponent<UImanager>().SumarPunts(10);
             else
-                ui.GetComponent<UImanager>().SumarPunts();
+                ui.GetComponent<UImanager>().SumarPunts(5);
+
             death.GetComponent<AudioSource>().Play();
             Destroy(this.gameObject);
         }

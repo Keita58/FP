@@ -13,27 +13,32 @@ public class UImanager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tempsText;
     [SerializeField] private TextMeshProUGUI puntuacioFinal;
     [SerializeField] private TextMeshProUGUI tempsFinal;
+    [SerializeField] private TextMeshProUGUI vides;
+    [SerializeField] private TextMeshProUGUI bales;
+    public GameObject player;
+    private GameObject playerBarrel;
     private int puntuacio;
     private int temps;
-    private int puntuaciofinal;
-    private int tempsfinal;
     // Start is called before the first frame update
     void Start()
     {
         puntuacio = 0;
         temps = -1;
-        puntuacioText.text = "Puntuació: " + puntuacio.ToString();
+        puntuacioText.text = "Puntuacio: " + puntuacio.ToString();
         tempsText.text = "Temps: " + temps.ToString() + "s";
         StartCoroutine(time());
+        playerBarrel = GameObject.Find("/Personatge/Cano");
     }
 
     void Update()
     {
         if (SceneManager.GetActiveScene().name == "Mort")
         {
-            tempsFinal.text = "Temps final: " + tempsfinal.ToString() + "s";
-            puntuacioFinal.text = "Puntuació final: " + puntuaciofinal.ToString();
+            tempsFinal.text = "Temps final: " + InfoCompartida.tempsFinal.ToString() + "s";
+            puntuacioFinal.text = "Puntuacio final: " + InfoCompartida.puntsFinal.ToString();
         }
+        vides.text = "Vides: " + player.GetComponent<Tanc>().getVides();
+        bales.text = "Bales: " + playerBarrel.GetComponent<Cano>().getBales();
     }
 
     private IEnumerator time()
@@ -41,16 +46,16 @@ public class UImanager : MonoBehaviour
         while (true)
         {
             temps++;
-            tempsfinal++;
+            InfoCompartida.tempsFinal++;
             tempsText.text = "Temps: " + temps.ToString() + "s";
             yield return new WaitForSeconds(1f);
         }
     }
 
-    public void SumarPunts()
+    public void SumarPunts(int punts)
     {
-        puntuacio += 5;
-        puntuaciofinal += 5;
-        puntuacioText.text = "Puntuació: " + puntuacio.ToString();
+        puntuacio += punts;
+        InfoCompartida.puntsFinal += punts;
+        puntuacioText.text = "Puntuacio: " + puntuacio.ToString();
     }
 }
