@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638496275948974606
-    m_Hash: 997274642
+      ticks: 638495656973918462
+    m_Hash: 4193190562
   m_LockFileStatus:
     m_FilePath: C:/Users/marc-/Desktop/Treballs/FP/1r/Programacio/Unity/Proves/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638496275948984712
-    m_Hash: 1927071672
+      ticks: 638495656974017836
+    m_Hash: 1472989481
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -4404,6 +4404,7 @@ m_ResolvedPackages:
     - 2.4.0-pre.2
     - 2.4.0-pre.5
     - 2.4.0
+    - 2.4.1
     compatible:
     - 1.2.4
     - 1.3.1
@@ -4424,6 +4425,7 @@ m_ResolvedPackages:
     - 2.4.0-pre.2
     - 2.4.0-pre.5
     - 2.4.0
+    - 2.4.1
     recommended: 1.2.4
     deprecated: []
   dependencies:
