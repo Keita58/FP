@@ -9,10 +9,12 @@ public class Tanc : MonoBehaviour
     public float rotationSpeed;
     public float lives;
     private Rigidbody2D rb;
+    private GameObject tocat;
 
     // Start is called before the first frame update
     void Start()
     {
+        tocat = GameObject.Find("Tocat");
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -38,12 +40,13 @@ public class Tanc : MonoBehaviour
         }
         else
         {
+            GetComponent<AudioSource>().Stop();
             this.transform.Rotate(0, 0, 0);
             rb.angularVelocity = 0;
         }
 
         if (Input.GetKey(KeyCode.W)) 
-        { 
+        {
             rb.velocity = this.transform.up * speedMovement;
         }
         else if (Input.GetKey(KeyCode.S))
@@ -64,6 +67,9 @@ public class Tanc : MonoBehaviour
         if (collision.transform.tag == "Obstacles")
             rb.velocity = new Vector2(0, 0);
         if (collision.transform.tag == "Bala")
+        {
             this.lives--;
+            tocat.GetComponent<AudioSource>().Play();
+        }
     }
 }

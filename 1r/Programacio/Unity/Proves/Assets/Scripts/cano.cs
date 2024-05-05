@@ -28,6 +28,7 @@ public class Cano : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0)) 
         {
+            GetComponent<AudioSource>().Play();
             // Per a evitar que les bales apareguin dins del tanc podem sumar el seu punt d'aparició per la direcció calculada
             // anteriorment, el que ens dóna un radi pel que les bales dispararan
             // Però aquesta direcció no està normalitzada i les bales surten del mapa, pel que necessitem normalitzar-la abans

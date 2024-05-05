@@ -6,10 +6,13 @@ public class Bala : MonoBehaviour
 {
     private int cops = 2;
     private Rigidbody2D rb;
+    private GameObject paret;
     // Start is called before the first frame update
     void Start()
     {
+        paret = GameObject.Find("Paret");
         rb = GetComponent<Rigidbody2D>();
+        Destroy(this.gameObject, 7f);
     }
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class Bala : MonoBehaviour
             if(cops > 1)
             {
                 cops--;
+                paret.GetComponent<AudioSource>().Play();
                 Vector2 vel = Vector2.Reflect(rb.velocity, collision.GetContact(0).normal);
                 rb.velocity = vel;
             }

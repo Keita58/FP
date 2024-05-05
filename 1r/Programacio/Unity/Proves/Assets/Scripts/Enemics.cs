@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemics : MonoBehaviour
 {
     private Rigidbody2D rb;
     private GameObject ui;
+    private GameObject death;
     public int velocity;
     public int rotation;
     // Start is called before the first frame update
     void Start()
     {
+        death = GameObject.Find("Mort");
         ui = GameObject.Find("Canvas");
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(movement());
@@ -51,7 +54,7 @@ public class Enemics : MonoBehaviour
                 this.transform.Rotate(0, 0, 0);
             }
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -63,7 +66,6 @@ public class Enemics : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
         if (collision.transform.tag == "BalaBona")
         {
-            Destroy(this.gameObject);
             if (this.gameObject.name == "EnemicVermell")
             {
                 ui.GetComponent<UImanager>().SumarPunts();
@@ -77,7 +79,8 @@ public class Enemics : MonoBehaviour
             }
             else
                 ui.GetComponent<UImanager>().SumarPunts();
-            
+            death.GetComponent<AudioSource>().Play();
+            Destroy(this.gameObject);
         }
     }
 }

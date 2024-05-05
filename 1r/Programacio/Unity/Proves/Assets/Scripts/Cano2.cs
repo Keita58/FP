@@ -22,11 +22,14 @@ public class Cano2 : MonoBehaviour
 
     private IEnumerator disparar()
     {
-        distancia.Normalize();
-        GameObject bulletNew = Instantiate(bullet, new Vector2(tank.transform.position.x + (distancia.x / 1.38f), tank.transform.position.y + (distancia.y / 1.38f)), transform.rotation);
-        bulletNew.GetComponent<Rigidbody2D>().velocity = transform.up * speedBullet;
-        
-        yield return new WaitForSeconds(secondsToShoot);
+        while (true)
+        {
+            yield return new WaitForSeconds(secondsToShoot);
+            distancia.Normalize();
+            GameObject bulletNew = Instantiate(bullet, new Vector2(tank.transform.position.x + (distancia.x / 1.38f), tank.transform.position.y + (distancia.y / 1.38f)), transform.rotation);
+            bulletNew.GetComponent<Rigidbody2D>().velocity = transform.up * speedBullet;
+            GetComponent<AudioSource>().Play();
+        }
     }
 
     // Update is called once per frame
