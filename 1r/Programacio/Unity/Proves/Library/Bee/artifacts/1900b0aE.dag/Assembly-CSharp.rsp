@@ -375,9 +375,12 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.15f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/bala.cs"
 "Assets/Scripts/cano.cs"
+"Assets/Scripts/Cano2.cs"
+"Assets/Scripts/Enemics.cs"
 "Assets/Scripts/Spawner.cs"
 "Assets/Scripts/tanc.cs"
 "Assets/Scripts/tancEnemics.cs"
+"Assets/Scripts/UImanager.cs"
 -langversion:9.0
 
 /deterministic

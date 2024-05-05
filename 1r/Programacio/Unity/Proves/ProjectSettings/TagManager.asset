@@ -8,6 +8,7 @@ TagManager:
   - Obstacles
   - Bala
   - BalaBona
+  - Enemic
   layers:
   - Default
   - TransparentFX

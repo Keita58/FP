@@ -39,5 +39,9 @@ public class Bala : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        else if(collision.transform.tag == "Enemic" && this.transform.tag != "Bala")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

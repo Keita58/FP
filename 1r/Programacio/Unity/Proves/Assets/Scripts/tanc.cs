@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class Tanc : MonoBehaviour
 {
     public float speedMovement;
-    public float speedBullets;
     public float rotationSpeed;
     public float lives;
     private Rigidbody2D rb;
@@ -21,7 +20,6 @@ public class Tanc : MonoBehaviour
     void Update()
     {
         movement();
-        print(lives);
         if(lives <= 0)
         {
             SceneManager.LoadScene("Mort");
