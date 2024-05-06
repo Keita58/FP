@@ -1,0 +1,2 @@
+php artisan -> Es poden veure les comandes per al projecte 
+	- (això a dins del ssh de la màquina virtual del Laravel!!!)
