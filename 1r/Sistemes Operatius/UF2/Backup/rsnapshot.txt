@@ -1,0 +1,59 @@
+Configuració del SSH
+
+Al nostre ordinador:
+
+    Com a root, crear clau criptogràfica:
+        ssh-keygen
+        No posar-li contrasenya!
+        Assegurar que /root/.ssh/id_rsa té els permisos adequats: chmod 600 id_rsa i chown root:root id_rsa.
+
+Al servidor:
+
+    Fitxer /etc/ssh/sshd_config:
+        PermitRootLogin prohibit-password
+        PasswordAuthentication yes
+
+    Passar la clau pública de l'usuari al servidor:
+        Afegir el contingut del fitxer /root/ssh/id_rsa.pub de l'ordinador local al fitxer /root/.ssh/authorized_keys del servidor.
+        Assegurar que té els permisos adequats: chmod 600 authorized_keys i chown root:root authorized_keys
+
+    Reiniciar el servei ssh:
+        systemctl restart sshd
+
+Al nostre ordinador:
+
+    Comprovació:
+
+Com a root:
+
+cd
+ssh -i .ssh/id_rsa elvostredomini.damvib.cat
+
+Ha d'entrar directament sense demanar contrasenya.
+Diagnosticar errors
+
+    Al client: dir-li al ssh que ens escrigui el que està fent: ssh -vi .ssh/id_rsa elteudomini@damvib.cat.
+    Al servidor: mirar el registre d'errors en el moment en què ens intentem connectar: journalctl -xef i des del client intentar la connexió.
+
+Configuració del rsnapshot
+
+Al client: apt update, apt install rsnapshot.
+
+A /etc/rsnapshot:
+
+    Descomentar: cmd_ssh /usr/bin/ssh
+    verbose 4 per tenir més info mentre provem, després ho podem deixar a 2.
+    Descomentar: logfile /var/log/rsnapshot.log per tenir els registres a aquest fitxer.
+    A partir de l'exemple example.com, crear les nostres regles:
+
+backup_exec     /bin/date "+ backup of elteudomini started at %c"
+backup  root@elteudomini.damvib.cat:/home/       elteudomini.damvib.cat/  +rsync_long_args=--bwlimit=16,exclude=core
+backup_exec     /bin/date "+ backup of elteudomini ended at %c"
+
+    Comprovar: rsnapshot alpha. La còpia ha d'aparèixer a /var/cache/rsnapshot.
+
+Completar la configuració del rsnapshot
+
+    Afegir backup de les bases de dades: backup_exec ssh root@elteudomini.damvib.cat "mysqldump nom_del_bd > ruta_al_backup.sql ". Assegura't que el fitxer es guarda a un dels directoris que després es copia!
+    Afegir backups de tots els directoris que volem guardar.
+
