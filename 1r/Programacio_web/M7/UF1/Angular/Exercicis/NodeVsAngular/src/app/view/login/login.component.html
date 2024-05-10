@@ -2,35 +2,35 @@
   <h1>Login Form:</h1>
   <form [formGroup]="loginForm">
     <input type="email" id="nom" name="nom" placeholder="Nom" formControlName="nom" required>
-    @if (loginForm.controls['nom']?.invalid && (loginForm.controls['nom']?.dirty || loginForm.controls['nom']?.touched)) {
+    @if (loginForm.controls['nom'].invalid && (loginForm.controls['nom'].dirty || loginForm.controls['nom'].touched)) {
       <div class="alert alert-danger">
-        @if(loginForm.controls['nom']?.errors?.['required']) {
+        @if(loginForm.controls['nom'].errors?.['required']) {
           <div>
             El nom és obligatori.
           </div>
         }
-        @if(loginForm.controls['nom']?.errors?.['minlength']) {
+        @else if(loginForm.controls['nom'].errors?.['minlength']) {
           <div>
             El nom ha de tenir, com a mínim, 3 caràcters.
           </div>
         }
       </div>
     }
+    <br>
     <input type="password" placeholder="Password" formControlName="password" required>
-    <br/>
-    @if (loginForm.controls['password']?.invalid && (loginForm.controls['password']?.dirty || loginForm.controls['password']?.touched)) {
+    @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)) {
       <div class="alert alert-danger">
-        @if(loginForm.controls['password']?.errors?.['required']) {
+        @if(loginForm.controls['password'].errors?.['required']) {
           <div>
             La contrasenya és necessària.
           </div>
         }
-        @if(loginForm.controls['password']?.errors?.['minlength']) {
+        @else if(loginForm.controls['password'].errors?.['minlength']) {
           <div>
             La contrasenya ha de tenir, com a mínim, 5 caràcters.
           </div>
         }
-        @if(loginForm.controls['password']?.errors?.['passwordValid']) {
+        @else if(loginForm.controls['password'].errors?.['passwordStrength']) {
           <div>
             Hi ha d'haver números, lletres, minúscules i lletres majúscules.
           </div>
@@ -38,4 +38,6 @@
       </div>
     }
   </form>
+  <button (click)="login()" [disabled]="!loginForm.valid">Login</button>
+  <p>{{ message }}</p>
 </div>

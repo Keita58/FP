@@ -16,6 +16,7 @@ export class ConnectDBService {
   }
 
   public getUser(form : FormGroup) : Observable<any> {
+    console.log(form);
     return this.httpclient.get(`${this.REST_API}/user`, {
       params: {
         nom : form.controls['nom'].value,

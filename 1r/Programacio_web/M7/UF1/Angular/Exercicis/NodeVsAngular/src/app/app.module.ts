@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {UsersModule} from "./shared/modules/users/users.module";
 import {HttpClientModule} from "@angular/common/http";
+import {Ex2Module} from "./shared/modules/ex2/ex2.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     UsersModule,
-    HttpClientModule
+    HttpClientModule,
+    Ex2Module
   ],
   providers: [],
   bootstrap: [AppComponent]

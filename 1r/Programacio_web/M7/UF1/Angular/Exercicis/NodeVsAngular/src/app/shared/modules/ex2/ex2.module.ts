@@ -3,21 +3,24 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../../../view/login/login.component';
 import { ValidacioDirective } from '../../../view/login/validacio.directive';
 import {ReactiveFormsModule} from "@angular/forms";
+import { RegisterComponent } from '../../../view/register/register.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    ValidacioDirective
+    ValidacioDirective,
+    RegisterComponent
   ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
   exports: [
     LoginComponent,
-    ValidacioDirective
+    ValidacioDirective,
+    RegisterComponent
   ]
 })
 export class Ex2Module { }
