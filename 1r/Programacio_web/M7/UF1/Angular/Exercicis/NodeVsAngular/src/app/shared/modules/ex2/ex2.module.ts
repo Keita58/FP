@@ -4,6 +4,7 @@ import { LoginComponent } from '../../../view/login/login.component';
 import { ValidacioDirective } from '../../../view/login/validacio.directive';
 import {ReactiveFormsModule} from "@angular/forms";
 import { RegisterComponent } from '../../../view/register/register.component';
+import { InformeComponent } from '../../../view/informe/informe.component';
 
 
 
@@ -11,7 +12,8 @@ import { RegisterComponent } from '../../../view/register/register.component';
   declarations: [
     LoginComponent,
     ValidacioDirective,
-    RegisterComponent
+    RegisterComponent,
+    InformeComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { RegisterComponent } from '../../../view/register/register.component';
   exports: [
     LoginComponent,
     ValidacioDirective,
-    RegisterComponent
+    RegisterComponent,
+    InformeComponent
   ]
 })
 export class Ex2Module { }

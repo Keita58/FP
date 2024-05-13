@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Informe de songs:</h1>
+  <form [formGroup]="songForm">
+    <input type="text" placeholder="Nom de la cançó" formControlName="canco" required>
+  </form>
+  <button (click)="getSongs()">Get Songs</button>
+  <button (click)="filtre()" [disabled]="!songForm.valid">Filtrar</button>
+  <button (click)="getPDF()">PDF</button>
+  <div id="pdfTable" #pdfTable>
+    @if(songs) {
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Reproduccions</th>
+            <th>Recaptació</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (song of songs; track song) {
+            <tr>
+              <td>
+                {{ song.Nom }}
+              </td>
+              <td>
+                {{ song.Reproduccions }}
+              </td>
+              <td>
+                {{ song.Recaptacio }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>

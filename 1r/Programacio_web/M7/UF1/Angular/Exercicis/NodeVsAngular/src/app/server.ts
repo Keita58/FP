@@ -86,3 +86,65 @@ app.post('/users/insert', async(req, res) => {
     }
   }
 });
+
+//----------------------------------- Songs
+
+app.get('/songs', async(req, res) => {
+  let client2;
+  try {
+    client2 = await client.connect(url);
+    const db = client2.db(dbName);
+    const songs = await db.collection("songs").find().toArray();
+    res.json(songs);
+  }
+  catch (err) {
+    console.log("Error amn l'operació CRUD de l'API", err);
+  }
+  finally {
+    if(client2) {
+      client2.close();
+    }
+  }
+});
+
+app.get('/song', async(req, res) => {
+  let client2;
+  let reproduccions = Number(req.query.reproduccions); //El nom en la busca ha d'estar EXACTAMENT igual a aquest, en aquest cas "reproduccions", tot en minúscula
+  let recaptacio = Number(req.query.recaptacio);
+  try {
+    client2 = await client.connect(url);
+    const db = client2.db(dbName);
+    const songs = await db.collection("songs").find({'Reproduccions': {$gte: reproduccions}, 'Recaptacio': {$gte: recaptacio}}).toArray();
+    res.json(songs);
+  }
+  catch (err) {
+    console.log("Error amb l'operació CRUD de l'API", err);
+  }
+  finally {
+    if(client2) {
+      client2.close();
+    }
+  }
+});
+
+app.post('/songs/insert', async(req, res) => {
+  let client2;
+  let nom = req.body.nom;
+  let reproduccions = Number(req.body.reproduccions);
+  let recaptacio = Number(req.body.recaptacio);
+  try {
+    client2 = await client.connect(url);
+    const db = client2.db(dbName);
+    let id = (await db.collection('songs').find().toArray()).length + 1;
+    const song = await db.collection('songs').insertOne({'id': id, 'Nom': nom, 'Reproduccions': reproduccions, 'Recaptacio': recaptacio});
+    res.json("Afegida!");
+  }
+  catch (err) {
+    console.log("Error amn l'operació CRUD de l'API", err);
+  }
+  finally {
+    if(client2) {
+      client2.close();
+    }
+  }
+});

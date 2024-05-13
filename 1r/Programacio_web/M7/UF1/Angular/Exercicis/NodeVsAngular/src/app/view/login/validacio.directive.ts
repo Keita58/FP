@@ -26,7 +26,7 @@ export function passwordValidator() : ValidatorFn {
       return null;
     const hasUppperCase : boolean = /[A-Z]+/.test(value); //Comprova si les lletres del text hi ha majúscules
     const hasLowerCase : boolean = /[a-z]+/.test(value); //Comprova si les lletres del text hi ha minúscules
-    const hasNumeric : boolean = /[0-9]+/.test(value); //Comprova si dis del text hi ha números
+    const hasNumeric : boolean = /[0-9]+/.test(value); //Comprova si dins del text hi ha números
     const specialCharacters : boolean = /[#@]/.test(value); //Comprova que no tingui ni # ni @
     const passwordValid : boolean = hasNumeric && hasLowerCase && hasUppperCase && !specialCharacters; //Si totes les comprovacions anteriors han donat true és true, sinó false
     return !passwordValid ? {passwordStrength : true} : null;

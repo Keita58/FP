@@ -28,4 +28,25 @@ export class ConnectDBService {
   public registerUser(form : FormGroup) : Observable<any> {
     return this.httpclient.post(`${this.REST_API}/users/insert`, form.value);
   }
+
+  public getAllSongs() : Observable<any> {
+    return this.httpclient.get(`${this.REST_API}/songs`);
+  }
+
+  public getSongsRecRep(form : FormGroup) : Observable<any> {
+    return this.httpclient.get(`${this.REST_API}/song`, {
+      params: {
+        reproduccions: form.controls['reproduccions'].value,
+        recaptacio: form.controls['recaptacio'].value
+      }
+    });
+  }
+
+  public setSong(form : FormGroup) : Observable<any>{
+    return this.httpclient.post(`${this.REST_API}/songs/insert`, form.value);
+  }
+
+  public connectarBD() : Observable<any> {
+    return this.httpclient.get(`${this.REST_API}/test`)
+  }
 }
