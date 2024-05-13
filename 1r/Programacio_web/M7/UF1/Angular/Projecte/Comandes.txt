@@ -1,0 +1,17 @@
+Al fer el servei de la base de dades i utilitzi el HttpClient -> Posar el HttpClientModule al app.module!!!!
+Creació de coses:
+- ng g c --export true -m (component)
+- ng g cl (classe)
+- ng g s (servei)
+- ng g m (mòdul)
+- ng g d (directriu)
+
+Posar el mòdul creat al app.module!!!!!
+npm install bootstrap
+ng add @ng-bootstrap/ng-bootstrap
+I afegir al style.css -> @import 'bootstrap/dist/css/bootstrap.css';
+
+Per utilitzar el server.ts ->
+npm install express --save
+npm install mongodb
+npm install body-parser --save

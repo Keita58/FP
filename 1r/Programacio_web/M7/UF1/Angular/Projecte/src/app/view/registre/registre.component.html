@@ -1,0 +1,49 @@
+<div class="container">
+  <h1>Register Form:</h1>
+  <form [formGroup]="registerForm">
+    <input type="email" id="nom" name="nom" placeholder="Nom" formControlName="nom" required>
+    @if (registerForm.controls['nom'].invalid && (registerForm.controls['nom'].dirty || registerForm.controls['nom'].touched)) {
+      <div class="alert alert-danger">
+        @if(registerForm.controls['nom'].errors?.['required']) {
+          <div>
+            El nom és obligatori.
+          </div>
+        }
+        @else if(registerForm.controls['nom'].errors?.['minlength']) {
+          <div>
+            El nom ha de tenir, com a mínim, 7 caràcters.
+          </div>
+        }
+        @else if(registerForm.controls['nom'].errors?.['emailStrength']) {
+          <div>
+            No és un correu de l'institut Sabadell.
+          </div>
+        }
+      </div>
+    }
+    <br>
+    <input type="password" placeholder="Password" formControlName="password" required>
+    @if (registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)) {
+      <div class="alert alert-danger">
+        @if(registerForm.controls['password'].errors?.['required']) {
+          <div>
+            La contrasenya és necessària.
+          </div>
+        }
+        @else if(registerForm.controls['password'].errors?.['minlength']) {
+          <div>
+            La contrasenya ha de tenir, com a mínim, 8 caràcters.
+          </div>
+        }
+        @else if(registerForm.controls['password'].errors?.['passwordStrength']) {
+          <div>
+            Hi ha d'haver números, lletres minúscules i lletres majúscules. (No hi poden estar els síbols # ni "&#64;")
+          </div>
+        }
+      </div>
+    }
+  </form>
+  <button (click)="register()" [disabled]="!registerForm.valid">Register</button>
+  <p>{{ message }}</p>
+</div>
+
