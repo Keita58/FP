@@ -4,10 +4,6 @@
 [submodule "1r/Base de dades/Homestead"]
 	path = 1r/Base de dades/Homestead
 	url = https://github.com/laravel/homestead.git
-[submodule "1r/Programacio/Unity/Joc"]
-	path = 1r/Programacio/Unity/Joc
-	url = https://github.com/Keita58/wee-tanks
-
 [submodule "1r/Programacio/Unity/joc-final-curs-fp"]
 	path = 1r/Programacio/Unity/joc-final-curs-fp
 	url = https://github.com/Keita58/joc-final-curs-fp
