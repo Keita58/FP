@@ -1,0 +1,30 @@
+.wall {
+  background: hotpink;
+  border: solid 8px black;
+  width: 0px;
+  height: 40px;
+}
+
+.eloi {
+  background: gold;
+  width: 40px;
+  height: 40px;
+}
+
+.dot-unhit {
+  background: black;
+  width: 40px;
+  height: 40px;
+}
+
+.work {
+  background: orangered;
+  width: 40px;
+  height: 40px;
+}
+
+.button {
+  border-radius: 6px;
+  background-color: #198754;
+  color: white;
+}

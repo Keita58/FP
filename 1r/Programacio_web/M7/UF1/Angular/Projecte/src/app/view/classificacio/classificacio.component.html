@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Classificació:</h1>
+  <button (click)="getUsers()">Recarrega</button>
+  <button (click)="getPDF()">PDF</button>
+  <div id="pdfTable" #pdfTable>
+    <br>
+    @if(users) {
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Punts</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users; track user) {
+            <tr>
+              <td>
+                {{ user.nom }}
+              </td>
+              <td>
+                {{ user.punts }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>

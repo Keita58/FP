@@ -4,6 +4,8 @@ import { PaginaPrincipalComponent } from '../../../view/pagina-principal/pagina-
 import { LoginComponent } from '../../../view/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { RegistreComponent } from '../../../view/registre/registre.component';
+import { ClassificacioComponent } from '../../../view/classificacio/classificacio.component';
+import { JocComponent } from '../../../view/joc/joc.component';
 
 
 
@@ -11,7 +13,9 @@ import { RegistreComponent } from '../../../view/registre/registre.component';
   declarations: [
     PaginaPrincipalComponent,
     LoginComponent,
-    RegistreComponent
+    RegistreComponent,
+    ClassificacioComponent,
+    JocComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,9 @@ import { RegistreComponent } from '../../../view/registre/registre.component';
   exports: [
     PaginaPrincipalComponent,
     LoginComponent,
-    RegistreComponent
+    RegistreComponent,
+    ClassificacioComponent,
+    JocComponent
   ]
 })
 export class ProjecteModule { }

@@ -1,0 +1,22 @@
+<div class="d-grid m-4 justify-content-center align-content-center">
+  @for (item of grid; track item) {
+    <div class="row">
+      @for (item2 of item; track item2) {
+        @if (item2 == "wall") {
+          <div class="wall"></div>
+        }
+        @else if (item2 == "eloi") {
+          <div class="eloi"></div>
+        }
+        @else if (item2 == "work") {
+          <div class="work"></div>
+        }
+        @else {
+          <div class="dot-unhit"></div>
+        }
+      }
+    </div>
+  }
+  <br>
+  <button class="button" (click)="comencar()">Començar!</button>
+</div>
