@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://marcs.damvib.cat/</loc>
+    <lastmod>2024-05-15T18:46:35+02:00</lastmod>
+  </url><url>
+    <loc>https://marcs.damvib.cat/posts/</loc>
+    <lastmod>2024-05-15T18:46:35+02:00</lastmod>
+  </url><url>
+    <loc>https://marcs.damvib.cat/posts/primer-post/</loc>
     <lastmod>2024-04-24T19:47:36+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-04-24T19:47:36+02:00</lastmod>
+    <loc>https://marcs.damvib.cat/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/primer-post/</loc>
-    <lastmod>2024-04-24T19:47:36+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://marcs.damvib.cat/tags/</loc>
   </url>
 </urlset>

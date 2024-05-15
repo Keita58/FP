@@ -1,3 +1,12 @@
 [submodule "themes/ananke"]
 	path = themes/ananke
 	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "themes/Font-Awesome"]
+	path = themes/Font-Awesome
+	url = https://github.com/FortAwesome/Font-Awesome
+[submodule "themes/bootstrap"]
+	path = themes/bootstrap
+	url = https://github.com/twbs/bootstrap
+[submodule "themes/docsy"]
+	path = themes/docsy
+	url = https://github.com/google/docsy
