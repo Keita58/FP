@@ -12,7 +12,9 @@ He instal·lat npm install -D autoprefixer, npm install -D postcss-cli i npm ins
 
 #Inici
 
-Abans d'instal·lar res, en el hugo.toml he posat uns [[module.import]] amb els mòduls que he instal·lat, en aquest cas github.com/google/docsy.
+Una vegada instal·lat l'anterior (i havent instal·lat [go] [https://go.dev/doc/install]) he executat hugo mod init gitlab.com/Keita58/pagina-hugo-docsy i hugo mod get github.com/google/docsy@v0.10.0.
+
+Per acabar, en el hugo.toml he posat uns [[module.import]] amb els mòduls que he instal·lat, en aquest cas github.com/google/docsy.
 Per posar això ho he posat de la següent manera:
 ...
 [module]
@@ -22,8 +24,6 @@ Per posar això ho he posat de la següent manera:
   [[module.imports]]
     path = "github.com/google/docsy"
     disable = false
-
-Una vegada instal·lat l'anterior (i havent instal·lat [go] [https://go.dev/doc/install]) he executat hugo mod init gitlab.com/Keita58/pagina-hugo i hugo mod get github.com/google/docsy.
 
 Enllaços:
   - https://www.docsy.dev/docs/get-started/docsy-as-module/

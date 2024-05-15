@@ -7,3 +7,6 @@
 [submodule "1r/Programacio/Unity/joc-final-curs-fp"]
 	path = 1r/Programacio/Unity/joc-final-curs-fp
 	url = https://github.com/Keita58/joc-final-curs-fp
+[submodule "1r/Sistemes Operatius/UF3/Hugo/Docsy"]
+	path = 1r/Sistemes Operatius/UF3/Hugo/Docsy
+	url = https://gitlab.com/Keita58/pagina-hugo-docsy
