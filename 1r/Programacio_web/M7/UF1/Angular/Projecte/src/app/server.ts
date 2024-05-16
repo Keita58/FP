@@ -67,14 +67,14 @@ app.post('/users/insert', async(req, res) => {
   try {
     client2 = await client.connect(url);
     const db = client2.db(dbName);
-    console.log(await db.collection('usuaris_app').find({'nom': nom}));
-    if(await db.collection('usuaris_app').find({'nom': nom})) {
-      res.json("Correu existent en la BD");
-    }
-    else {
+    console.log(await db.collection('usuaris_app').find({'nom': nom}).toArray())
+    if(await db.collection('usuaris_app').find({'nom': nom}).toArray()) {
       let id = (await db.collection('usuaris_app').find().toArray()).length + 1;
       const user = await db.collection('usuaris_app').insertOne({'id': id, 'nom': nom, 'password': password});
       res.json("Afegida!");
+    }
+    else {
+      res.json("Correu existent en la BD");
     }
   }
   catch (err) {

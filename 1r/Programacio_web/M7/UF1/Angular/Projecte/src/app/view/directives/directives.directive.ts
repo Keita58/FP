@@ -37,7 +37,7 @@ export function emailValidator() : ValidatorFn {
       return null;
     const hasUppperCase : boolean = /[A-Z]+/.test(value); //Comprova si les lletres del text hi ha majúscules
     const hasLowerCase : boolean = /[a-z]+/.test(value); //Comprova si les lletres del text hi ha minúscules
-    const isEmailSab : boolean = /[a-zA-Z]+@ies-sabadell.cat$/.test(value); //Comprova que acaba amb el correu de l'institut
+    const isEmailSab : boolean = /@ies-sabadell.cat$/.test(value); //Comprova que acaba amb el correu de l'institut
     const emailValid : boolean = isEmailSab && hasLowerCase && hasUppperCase; //Si totes les comprovacions anteriors han donat true és true, sinó false
     return !emailValid ? {emailStrength : true} : null;
   }

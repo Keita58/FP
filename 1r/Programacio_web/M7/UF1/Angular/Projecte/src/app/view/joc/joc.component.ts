@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import {Users} from "../../shared/classes/users";
 
 @Component({
@@ -9,8 +8,7 @@ import {Users} from "../../shared/classes/users";
 })
 export class JocComponent {
 
-  constructor(public usuari : Users) {
-  }
+  //usuari : Users;
 
   grid : string[][] = [
     ['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
@@ -91,8 +89,8 @@ export class JocComponent {
     }
     if(this.perduts == 10) {
       clearInterval(this.movimentid);
-      if(this.usuari.punts <= this.punts)
-        this.usuari.punts = this.punts;
+      /*if(this.usuari.punts <= this.punts)
+        this.usuari.punts = this.punts;*/
     }
     else {
       for(let j : number = 9; j > 0; j--) {
@@ -121,6 +119,7 @@ export class JocComponent {
   spawner(reinici : boolean) : void {
     this.punts = 0;
     this.perduts = 0;
+    this.spawnEnemics = 1000;
     this.movimentid = setInterval((): void => {
       this.inici()
     }, 1000);

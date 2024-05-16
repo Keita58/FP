@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { RegistreComponent } from '../../../view/registre/registre.component';
 import { ClassificacioComponent } from '../../../view/classificacio/classificacio.component';
 import { JocComponent } from '../../../view/joc/joc.component';
+import {ConnectDBService} from "../../services/connect-db.service";
 
 
 
@@ -27,6 +28,7 @@ import { JocComponent } from '../../../view/joc/joc.component';
     RegistreComponent,
     ClassificacioComponent,
     JocComponent
-  ]
+  ],
+  providers: []
 })
 export class ProjecteModule { }
