@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class JocComponent {
 
-  grid:string[][] = [
+  grid : string[][] = [
     ['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
     ['wall', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'wall'],
     ['wall', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'dot-unhit', 'wall'],
@@ -22,17 +22,16 @@ export class JocComponent {
     ['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall']
   ];
 
-  i : number = 1; //* Aquesta i és la posició en les y de l'Eloi 
+  i : number = 1; //* Aquesta i és la posició en les y de l'Eloi
   punts : number = 0; //* Puntuació del jugador
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
     switch (event.code) {
       case 'ArrowLeft':
-        console.log("Esquerra");
         if(this.i > 1 && this.grid[9][this.i-1] == "dot-unhit") {
 
-          //*Amb això el que fem és moure la posició a la que anirà l'Eloi per la que existeix, que en aquest cas és un dot-unhit
+          //* Amb això el que fem és moure la posició a la que anirà l'Eloi per la que existeix, que en aquest cas és un dot-unhit
           [this.grid[9][this.i], this.grid[9][this.i-1]] = [this.grid[9][this.i-1], this.grid[9][this.i]];
           this.i--;
         }
@@ -40,7 +39,7 @@ export class JocComponent {
           //TODO Afegir puntuació al jugador, aquí agafa un treball
           this.punts++;
 
-          //*Aquí fem el mateix que en l'anterior if però eliminant el work i transformant-lo en un dot-unhit
+          //* Aquí fem el mateix que en l'anterior if però eliminant el work i transformant-lo en un dot-unhit
           this.grid[9][this.i-1] = "dot-unhit";
           [this.grid[9][this.i], this.grid[9][this.i-1]] = [this.grid[9][this.i-1], this.grid[9][this.i]];
           this.i--;
@@ -48,10 +47,9 @@ export class JocComponent {
         break;
 
       case 'ArrowRight':
-        console.log("Dreta");
         if(this.i < 8 && this.grid[9][this.i+1] == "dot-unhit") {
 
-          //*Amb això el que fem és moure la posició a la que anirà l'Eloi per la que existeix, que en aquest cas és un dot-unhit
+          //* Amb això el que fem és moure la posició a la que anirà l'Eloi per la que existeix, que en aquest cas és un dot-unhit
           [this.grid[9][this.i], this.grid[9][this.i+1]] = [this.grid[9][this.i+1], this.grid[9][this.i]];
           this.i++;
         }
@@ -59,7 +57,7 @@ export class JocComponent {
           //TODO Afegir puntuació al jugador, aquí agafa un treball
           this.punts++;
 
-          //*Aquí fem el mateix que en l'anterior if però eliminant el work i transformant-lo en un dot-unhit
+          //* Aquí fem el mateix que en l'anterior if però eliminant el work i transformant-lo en un dot-unhit
           this.grid[9][this.i+1] = "dot-unhit";
           [this.grid[9][this.i], this.grid[9][this.i+1]] = [this.grid[9][this.i+1], this.grid[9][this.i]];
           this.i++;
@@ -68,16 +66,27 @@ export class JocComponent {
       default:
         break;
     }
-    
-    console.log(this.grid[9]);
-    console.log(this.i);
   }
+
+  sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   comencar() : void {
-    let interval = setInterval(this.treballs, 3000);
+    setInterval(this.inici, 3000, this.grid);
   }
 
-  treballs(): void {
-    throw new Error('Function not implemented.');
+  moviment(i : number, pos : number, grid : string[][]) : void {
+    while(true) {
+      [grid[i][pos], grid[i+1][pos]] = [grid[i+1][pos], grid[i][pos]];
+      i++;
+      this.sleep(3000);
+    }
+  }
+
+  inici(grid : string[][]) : void {
+    let r = Math.floor(Math.random() * (9 - 1) + 1);
+    console.log(grid);
+    grid[1][r] = "work";
+    let i : number = 2;
+    this.moviment(i, r, grid);
   }
 }
