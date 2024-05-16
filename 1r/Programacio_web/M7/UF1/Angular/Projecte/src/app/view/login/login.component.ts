@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Users} from "../../shared/classes/users";
 import {ConnectDBService} from "../../shared/services/connect-db.service";
@@ -10,6 +10,8 @@ import {ConnectDBService} from "../../shared/services/connect-db.service";
 })
 export class LoginComponent {
 
+  @Input() jugadorPuntuacioNova : Users | undefined;
+  @Output() envia : EventEmitter<Users> = new EventEmitter<Users>();
   constructor(private connectdb : ConnectDBService) {}
 
   loginForm! : FormGroup;
@@ -31,8 +33,9 @@ export class LoginComponent {
       }
       else {
         this.users = res;
-        console.log(this.loginForm.controls['nom'].value);
+        console.log(this.users);
         this.message = "L'usuari " + this.loginForm.controls['nom'].value + " s'ha logejat correctament.";
+        this.envia.emit(new Users(this.users[0].nom, this.users[0].password, this.users[0].punts));
       }
     })
   }

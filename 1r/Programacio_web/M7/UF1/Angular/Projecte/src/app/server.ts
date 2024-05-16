@@ -48,7 +48,7 @@ app.get('/user', async(req, res) => {
     client2 = await client.connect(url);
     const db = client2.db(dbName);
     const users = await db.collection("usuaris_app").find({'nom': nom, 'password': password}).toArray();
-    res.json(users.length);
+    res.json(users);
   }
   catch (err) {
     console.log("Error amn l'operació CRUD de l'API", err);

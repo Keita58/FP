@@ -1,12 +1,28 @@
 export class Users {
   idUser! : Number;
-  nom! : string;
-  password! : string;
-  punts! : number;
+  private _nom! : string;
+  private _password! : string;
+  private _punts! : number;
 
-  constructor(Nom: string, Password: string) {
-    this.nom = Nom;
-    this.password = Password;
-    this.punts = 0;
+  get nom(): string {
+    return this._nom;
+  }
+
+  get password(): string {
+    return this._password;
+  }
+
+  get punts(): number {
+    return this._punts;
+  }
+
+  set punts(value: number) {
+    this._punts = value;
+  }
+
+  constructor(Nom: string, Password: string, Punts: number) {
+    this._nom = Nom;
+    this._password = Password;
+    this._punts = Punts;
   }
 }
