@@ -14,9 +14,9 @@ class ProductSeed extends Seeder
     public function run(): void
     {
         DB::table('products')->insert([
-            'name' => 'HP potion',
-            'value' => '5.5',
-            'description' => 'Cures some life'
+            ['name'=>'Potion', 'price'=>40, 'description'=>'Cures some life'],
+            ['name'=>'Small potion', 'price'=>15, 'description'=>'Cures little life'],
+            ['name'=>'Mana', 'price'=>60, 'description'=>'Replenish some mana']
         ]);
     }
 }
