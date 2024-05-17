@@ -1,0 +1,7 @@
+app/Http/Controllers -> Aquí estan els controladors quan els creem
+
+database/migrations -> Aquí estan les migracions
+
+resources/views -> Aquí estan les vistes
+
+routes -> Aquí està el web.php (el que farem servir per posar les noves rutes de la pàgina)

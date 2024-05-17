@@ -1,2 +1,19 @@
 php artisan -> Es poden veure les comandes per al projecte 
 	- (això a dins del ssh de la màquina virtual del Laravel!!!)
+
+php artisan make:migration -> Creem la migració per a crear una nova taula
+	- (Si és una taula, posem create_..._table per a que es facin els imports que toquen)
+
+php artisan migrate -> Creem la taula a la nostra base de dades
+
+php artisan make:seed -> Creem la llavor amb les dades que inserirem a la base de dades
+
+php artisan db:seed <nom_del_seeder> -> Inserim les dades
+
+php artisan make:model ->  Creem el model de la taula
+
+php artisan make:controller -> Creem el controlador que ens "controla" el que veurem per pantalla
+
+web.php -> Afegim una ruta al controlador que acabem de crear
+
+php artisan make:view -> Creem la vista on posarem tot el que volem que es vegi.

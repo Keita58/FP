@@ -18,6 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+
+Route::get('/product/{product}/delete', [ProductController::class, 'delete'])->name('product.delete');
+// * El nom que posem entre els {} és el nom del model!!!
 
 require __DIR__.'/auth.php';
