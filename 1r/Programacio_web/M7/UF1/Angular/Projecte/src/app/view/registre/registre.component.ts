@@ -3,6 +3,7 @@ import {ConnectDBService} from "../../shared/services/connect-db.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Users} from "../../shared/classes/users";
 import {emailValidator, passwordValidator} from "../directives/directives.directive";
+import { LoginServiceService } from '../../shared/services/login-service.service';
 
 @Component({
   selector: 'app-registre',
@@ -10,7 +11,7 @@ import {emailValidator, passwordValidator} from "../directives/directives.direct
   styleUrl: './registre.component.css'
 })
 export class RegistreComponent {
-  constructor(private connectdb : ConnectDBService) {}
+  constructor(private connectdb : ConnectDBService, private loginService : LoginServiceService) {}
 
   registerForm! : FormGroup;
   users : Users[] = [];
@@ -25,7 +26,7 @@ export class RegistreComponent {
 
   register() : void {
     this.connectdb.registerUser(this.registerForm).subscribe(res => {
-      console.log(res);
+      //console.log(res);
       if(res == "Correu existent en la BD") {
         this.users = [];
         this.message = "Correu existent en la BD.";
@@ -33,7 +34,8 @@ export class RegistreComponent {
       else {
         this.users = res;
         console.log(this.registerForm.controls['nom'].value);
-        this.message = "L'usuari " + this.registerForm.controls['nom'].value + " s'ha registrat correctament.";
+        this.message = "L'usuari " + this.registerForm.controls['nom'].value + " s'ha registrat correctament. \n Ara fes un login amb les mateixes credencials per poder començar a jugar!";
+        //this.loginService.updateLoginData(res); //! Això hauria de funcionar però no ho fa. La sessió es manté però no es mostra en el menú.
       }
     })
   }

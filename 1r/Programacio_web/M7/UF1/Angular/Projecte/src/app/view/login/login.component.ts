@@ -36,7 +36,7 @@ export class LoginComponent {
         this.users = res;
         console.log(this.users);
         this.message = "L'usuari " + this.loginForm.controls['nom'].value + " s'ha logejat correctament.";
-        //this.envia.emit(new Users(this.users[0].nom, this.users[0].password, this.users[0].punts));
+        ////this.envia.emit(new Users(this.users[0].nom, this.users[0].password, this.users[0].punts));
         this.loginService.updateLoginData(res); //* Passem la info al loginService per a que tingui l'usuari tota l'estona
       }
     })

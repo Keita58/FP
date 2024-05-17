@@ -9,11 +9,6 @@
             El nom és obligatori.
           </div>
         }
-        @else if(loginForm.controls['nom'].errors?.['minlength']) {
-          <div>
-            El nom ha de tenir, com a mínim, 3 caràcters.
-          </div>
-        }
       </div>
     }
     <br>
@@ -23,16 +18,6 @@
         @if(loginForm.controls['password'].errors?.['required']) {
           <div>
             La contrasenya és necessària.
-          </div>
-        }
-        @else if(loginForm.controls['password'].errors?.['minlength']) {
-          <div>
-            La contrasenya ha de tenir, com a mínim, 5 caràcters.
-          </div>
-        }
-        @else if(loginForm.controls['password'].errors?.['passwordStrength']) {
-          <div>
-            Hi ha d'haver números, lletres, minúscules i lletres majúscules.
           </div>
         }
       </div>

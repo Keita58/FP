@@ -16,7 +16,7 @@
         }
         @else if(registerForm.controls['nom'].errors?.['emailStrength']) {
           <div>
-            No és un correu de l'institut Sabadell.
+            No té com a mínim una majúscula, una majúscula i no és un correu de l'institut Sabadell.
           </div>
         }
       </div>
@@ -37,7 +37,7 @@
         }
         @else if(registerForm.controls['password'].errors?.['passwordStrength']) {
           <div>
-            Hi ha d'haver números, lletres minúscules i lletres majúscules. (No hi poden estar els síbols # ni "&#64;")
+            Hi ha d'haver números, lletres minúscules i lletres majúscules. (No hi poden estar els símbols # ni "&#64;")
           </div>
         }
       </div>

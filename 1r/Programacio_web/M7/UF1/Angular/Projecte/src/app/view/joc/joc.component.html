@@ -36,9 +36,11 @@
     </div>
   }
   <br>
-  @if(perduts < 10) {
+  @if(segons == 0) {
     <button class="button" (click)="spawner(false)">Començar!</button>
   }
-  <button class="button" (click)="spawner(true)">Reinici</button>
+  @else {
+    <button class="button" (click)="spawner(true)">Reinici</button>
+  }
 </div>
 <!--<app-login (envia)="usuari" [jugadorPuntuacioNova]="usuari"></app-login>-->

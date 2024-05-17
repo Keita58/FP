@@ -157,6 +157,7 @@ export class JocComponent {
         }, 1000);
       }
       else {
+        this.segons = 1;
         this.base = JSON.parse(JSON.stringify(this.grid)); //* Tornem a clonar la matriu per a reiniciar el tauler
         clearInterval(this.movimentid);
         clearInterval(this.comptar);
