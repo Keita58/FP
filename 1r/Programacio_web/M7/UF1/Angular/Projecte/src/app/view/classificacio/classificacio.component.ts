@@ -13,6 +13,7 @@ import { ConnectDBService } from '../../shared/services/connect-db.service';
   styleUrl: './classificacio.component.css'
 })
 export class ClassificacioComponent {
+  sortedArray: any;
 
   constructor(private connectdb : ConnectDBService) {}
   users : Users[] = [];
@@ -24,6 +25,8 @@ export class ClassificacioComponent {
       }
       else {
         this.users = res;
+        this.users = this.users.sort((a, b) => b.punts - a.punts); //* Ordenem els jugadors per les seves puntuacions
+        console.log(this.users);
       }
     })
   }

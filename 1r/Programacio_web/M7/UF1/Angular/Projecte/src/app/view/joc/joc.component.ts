@@ -82,6 +82,7 @@ export class JocComponent {
   temps : number = 1; //* Per calcular el temps que passa abans no augmentar la velocitat dels treballs
   spawnEnemics : number = 1000; //* La velocitat a la que cauen els treballs
   loguejat : string = '';
+  segons : number = 0;
 
   ngOnInit() {
     if(this.usuari == 'logout')
@@ -100,7 +101,9 @@ export class JocComponent {
     }
     if(this.perduts == 10) {
       clearInterval(this.movimentid);
+      clearInterval(this.comptar);
       console.log(this.usuari);
+
       if(this.usuari[0].punts <= this.punts) {
         this.usuari[0].punts = this.punts;
         console.log("Punts: " + this.usuari[0].punts);
@@ -150,6 +153,7 @@ export class JocComponent {
         }, 1000);
         this.comptar = setInterval((): void => {
           this.temps++;
+          this.segons++;
         }, 1000);
       }
       else {
@@ -161,6 +165,7 @@ export class JocComponent {
         }, 1000);
         this.comptar = setInterval((): void => {
           this.temps++;
+          this.segons++;
         }, 1000);
         [this.base[9][this.i], this.base[9][1]] = [this.base[9][1], this.base[9][this.i]]; //* Canviem la posició actual de l'Eloi per la posició en la que està originalment per a que es pugui moure quan reiniciem
       }

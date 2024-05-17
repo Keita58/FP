@@ -7,6 +7,7 @@ import { RegistreComponent } from '../../../view/registre/registre.component';
 import { ClassificacioComponent } from '../../../view/classificacio/classificacio.component';
 import { JocComponent } from '../../../view/joc/joc.component';
 import {ConnectDBService} from "../../services/connect-db.service";
+import { AjudaComponent } from '../../../view/ajuda/ajuda.component';
 
 
 
@@ -16,7 +17,8 @@ import {ConnectDBService} from "../../services/connect-db.service";
     LoginComponent,
     RegistreComponent,
     ClassificacioComponent,
-    JocComponent
+    JocComponent,
+    AjudaComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import {ConnectDBService} from "../../services/connect-db.service";
     LoginComponent,
     RegistreComponent,
     ClassificacioComponent,
-    JocComponent
+    JocComponent,
+    AjudaComponent
   ],
   providers: []
 })
