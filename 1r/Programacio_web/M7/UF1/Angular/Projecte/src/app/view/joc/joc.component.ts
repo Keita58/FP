@@ -1,5 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import {Users} from "../../shared/classes/users";
+import { LoginServiceService } from '../../shared/services/login-service.service';
+import { ConnectDBService } from '../../shared/services/connect-db.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-joc',
@@ -8,7 +11,9 @@ import {Users} from "../../shared/classes/users";
 })
 export class JocComponent {
 
-  //usuari : Users;
+  constructor(private login : LoginServiceService, private connectdb : ConnectDBService) {}
+  usuari = this.login.userLogin.getValue();
+  loginForm! : FormGroup;
 
   grid : string[][] = [
     ['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
@@ -74,12 +79,18 @@ export class JocComponent {
   }
   movimentid : any;
   comptar : any;
-  temps : number = 0;
-  spawnEnemics : number = 1000;
+  temps : number = 1; //* Per calcular el temps que passa abans no augmentar la velocitat dels treballs
+  spawnEnemics : number = 1000; //* La velocitat a la que cauen els treballs
+  loguejat : string = '';
+
+  ngOnInit() {
+    if(this.usuari == 'logout')
+      this.loguejat = "T'has de loguejar/registrar abans de jugar!";
+  }
 
   inici() : void {
     console.log(this.spawnEnemics);
-    if(this.temps == 20){
+    if(this.temps == 20 && this.spawnEnemics > 250){
       this.spawnEnemics -= 125;
       this.temps = 0;
       clearInterval(this.movimentid);
@@ -89,8 +100,19 @@ export class JocComponent {
     }
     if(this.perduts == 10) {
       clearInterval(this.movimentid);
-      /*if(this.usuari.punts <= this.punts)
-        this.usuari.punts = this.punts;*/
+      console.log(this.usuari);
+      if(this.usuari[0].punts <= this.punts) {
+        this.usuari[0].punts = this.punts;
+        console.log("Punts: " + this.usuari[0].punts);
+        this.loginForm = new FormGroup({
+          nom : new FormControl(this.usuari[0].nom),
+          punts : new FormControl(this.usuari[0].punts)
+        });
+
+        this.connectdb.updateUser(this.loginForm).subscribe(res => {
+          console.log("Update fet");
+        });
+      }
     }
     else {
       for(let j : number = 9; j > 0; j--) {
@@ -117,18 +139,31 @@ export class JocComponent {
   }
 
   spawner(reinici : boolean) : void {
-    this.punts = 0;
-    this.perduts = 0;
-    this.spawnEnemics = 1000;
-    this.movimentid = setInterval((): void => {
-      this.inici()
-    }, 1000);
-    this.comptar = setInterval((): void => {
-      this.temps++;
-    }, 1000);
-    if(reinici) {
-      this.base = JSON.parse(JSON.stringify(this.grid)); //* Tornem a clonar la matriu per a reiniciar el tauler
-      clearInterval(this.movimentid);
+    if(this.usuari != 'logout') {
+      this.loguejat = '';
+      this.punts = 0;
+      this.perduts = 0;
+      this.spawnEnemics = 1000;
+      if(!reinici) {
+        this.movimentid = setInterval((): void => {
+          this.inici()
+        }, 1000);
+        this.comptar = setInterval((): void => {
+          this.temps++;
+        }, 1000);
+      }
+      else {
+        this.base = JSON.parse(JSON.stringify(this.grid)); //* Tornem a clonar la matriu per a reiniciar el tauler
+        clearInterval(this.movimentid);
+        clearInterval(this.comptar);
+        this.movimentid = setInterval((): void => {
+          this.inici()
+        }, 1000);
+        this.comptar = setInterval((): void => {
+          this.temps++;
+        }, 1000);
+        [this.base[9][this.i], this.base[9][1]] = [this.base[9][1], this.base[9][this.i]]; //* Canviem la posició actual de l'Eloi per la posició en la que està originalment per a que es pugui moure quan reiniciem
+      }
     }
   }
 }

@@ -67,15 +67,39 @@ app.post('/users/insert', async(req, res) => {
   try {
     client2 = await client.connect(url);
     const db = client2.db(dbName);
-    console.log(await db.collection('usuaris_app').find({'nom': nom}).toArray())
-    if(await db.collection('usuaris_app').find({'nom': nom}).toArray()) {
+    console.log(nom);
+    console.log(password);
+    const usuaris = await db.collection('usuaris_app').find({'nom': nom}).toArray();
+    console.log(usuaris.length)
+    if(usuaris.length == 0) {
       let id = (await db.collection('usuaris_app').find().toArray()).length + 1;
-      const user = await db.collection('usuaris_app').insertOne({'id': id, 'nom': nom, 'password': password});
+      const user = await db.collection('usuaris_app').insertOne({'id': id, 'nom': nom, 'password': password, 'punts': 0});
       res.json("Afegida!");
     }
     else {
       res.json("Correu existent en la BD");
     }
+  }
+  catch (err) {
+    console.log("Error amn l'operació CRUD de l'API", err);
+  }
+  finally {
+    if(client2) {
+      client2.close();
+    }
+  }
+});
+
+app.post('/users/update', async(req, res) => {
+  let client2;
+  let nom = req.body.nom;
+  let punts = Number(req.body.punts);
+  console.log(req.body);
+  try {
+    client2 = await client.connect(url);
+    const db = client2.db(dbName);
+    let user = await db.collection('usuaris_app').updateOne({'nom': nom}, {$set: {'punts': punts}});
+    res.json("Actualitzada!");
   }
   catch (err) {
     console.log("Error amn l'operació CRUD de l'API", err);

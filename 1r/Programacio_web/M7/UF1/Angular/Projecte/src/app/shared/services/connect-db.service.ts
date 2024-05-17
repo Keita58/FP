@@ -28,4 +28,8 @@ export class ConnectDBService {
   public registerUser(form : FormGroup) : Observable<any> {
     return this.httpclient.post(`${this.REST_API}/users/insert`, form.value);
   }
+
+  public updateUser(form : FormGroup) : Observable<any> {
+    return this.httpclient.post(`${this.REST_API}/users/update`, form.value);
+  }
 }
