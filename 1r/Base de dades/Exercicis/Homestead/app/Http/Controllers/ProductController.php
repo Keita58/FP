@@ -9,13 +9,39 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index() {
+    // * Llista de tots els productes de la base de dades
+    public function list() {
         $products = Product::all();
         return view('products-list')->with('products', $products); // El mateix -> return view('products', ['products', $products]);
     }
 
+    public function warn(Request $request, Product $product) {
+        return view('product-warn')->with('product', $product);
+    }
+
     public function delete(Request $request, Product $product) {
         $product->delete();
-        return view('product-delete')->with('product', $product)->redirect()->back();;
+        return redirect('products');
+    }
+
+    public function insert(Request $request) {
+        return view('product-insert');
+    }
+
+    public function create(Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'price' => 'required|integer|max:99999',
+            'quantity' => 'required|integer|max:255'
+        ]);
+        $products = new Product();
+        $products->name = $request->input('name');
+        $products->description = $request->input('description');
+        $products->price = $request->input('price');
+        $products->quantity = $request->input('quantity');
+        //$products->display_order = $products->id;
+        $products->save();
+        return redirect('products');
     }
 }
