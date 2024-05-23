@@ -15,3 +15,9 @@ Per utilitzar el server.ts ->
 npm install express --save
 npm install mongodb
 npm install body-parser --save
+
+npm install --save pdfmake
+npm install html-to-pdfmake
+npm install jspdf --save
+npm i --save-dev @types/html-to-pdfmake
+npm i --save-dev @types/pdfmake
