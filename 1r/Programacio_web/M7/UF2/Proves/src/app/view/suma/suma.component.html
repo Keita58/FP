@@ -1,0 +1,20 @@
+<div class="container">
+  <form [formGroup]="formulari">
+    <div>
+      <label for="num1">
+        Número 1:
+      </label>
+      <input id="num1" type="number" formControlName="num1">
+    </div>
+    <div>
+      <label for="num2">
+        Número 2:
+      </label>
+      <input id="num2" type="number" formControlName="num2">
+    </div>
+    <button class="button" (click)="Calcular()" [disabled]="!formulari.valid">Calcular</button>
+  </form>
+  @if (resultat !== undefined) {
+    <span>{{ resultat }}</span>
+  }
+</div>

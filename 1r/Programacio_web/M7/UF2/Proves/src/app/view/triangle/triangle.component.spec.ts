@@ -30,16 +30,16 @@ describe('TriangleComponent', () => {
   });
 
   it('Prova Comprova funció - Triangle', () => {
-    component.formulari.controls['num1'].setValue(35);
-    component.formulari.controls['num2'].setValue(22);
+    component.formulari.controls['base'].setValue(35);
+    component.formulari.controls['alcada'].setValue(22);
     component.Calcular();
     fixture.detectChanges();
     expect(component.resultat).toBe(385);
   });
 
   it('Prova Element del Dom - Triangle', () => {
-    component.formulari.controls['num1'].setValue(35);
-    component.formulari.controls['num2'].setValue(22);
+    component.formulari.controls['base'].setValue(35);
+    component.formulari.controls['alcada'].setValue(22);
     component.Calcular();
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;

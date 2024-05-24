@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { Exercici1Component } from '../../../view/exercici1/exercici1.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { TriangleComponent } from '../../../view/triangle/triangle.component';
+import { ComptarComponent } from '../../../view/comptar/comptar.component';
+import { SumaComponent } from '../../../view/suma/suma.component';
 
 
 
 @NgModule({
   declarations: [
     Exercici1Component,
-    TriangleComponent
+    TriangleComponent,
+    ComptarComponent,
+    SumaComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +21,9 @@ import { TriangleComponent } from '../../../view/triangle/triangle.component';
   ],
   exports: [
     Exercici1Component,
-    TriangleComponent
+    TriangleComponent,
+    ComptarComponent,
+    SumaComponent
   ]
 })
 export class ProvesModule { }
