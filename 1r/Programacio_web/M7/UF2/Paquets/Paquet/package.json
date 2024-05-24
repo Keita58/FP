@@ -1,0 +1,15 @@
+{
+  "name": "suma-proves",
+  "version": "1.0.0",
+  "description": "Suma bàsica per provar la creació de paquets a npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Tutorial",
+    "NPM"
+  ],
+  "author": "Keita58",
+  "license": "ISC"
+}
