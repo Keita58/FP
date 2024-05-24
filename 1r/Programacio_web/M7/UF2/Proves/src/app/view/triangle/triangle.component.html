@@ -1,0 +1,20 @@
+<div class="container">
+  <form [formGroup]="formulari">
+    <div>
+      <label for="num1">
+        Base:
+      </label>
+      <input id="num1" type="number" formControlName="base">
+    </div>
+    <div>
+      <label for="num2">
+        Alçada:
+      </label>
+      <input id="num2" type="number" formControlName="alcada">
+    </div>
+    <button class="button" (click)="Calcular()" [disabled]="!formulari.valid">Calcular àrea</button>
+  </form>
+  @if (resultat !== undefined) {
+    <span>El resultat és: {{ resultat }}</span>
+  }
+</div>

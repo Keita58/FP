@@ -1,0 +1,14 @@
+<div class="container">
+  <form [formGroup]="formulari">
+    <div>
+      <label for="num1">
+        Escriu:
+      </label>
+      <textarea id="num1" type="number" formControlName="frase"></textarea>
+    </div>
+    <button class="button" (click)="Calcular()" [disabled]="!formulari.valid">Vocals</button>
+  </form>
+  @if (res !== undefined) {
+    <span>{{ res }}</span>
+  }
+</div>
