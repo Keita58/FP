@@ -7,17 +7,38 @@ import htmlToPdfmake from "html-to-pdfmake";
 import { Users } from '../../shared/classes/users';
 import { ConnectDBService } from '../../shared/services/connect-db.service';
 
+/**
+ * Component de la classificació dels jugadors
+ */
 @Component({
   selector: 'app-classificacio',
   templateUrl: './classificacio.component.html',
   styleUrl: './classificacio.component.css'
 })
+
+
 export class ClassificacioComponent {
+  /**
+   * @ignore
+   */
   sortedArray: any;
 
+  /**
+   * @ignore
+   */
   constructor(private connectdb : ConnectDBService) {}
+
+  /**
+   * @ignore
+   */
   users : Users[] = [];
 
+  /**
+   * Rep tots els usuaris de la base de dades a partir de la funció del servei {@link ConnectDBService}
+   * i els ordena de major puntuació a menor.
+   * Si la base de dades no té usuaris passa a la variable users un array buit.
+   * @returns void
+   */
   getUsers() : void {
     this.connectdb.getAllUsers().subscribe(res => {
       if(res.length == 0) {
@@ -31,6 +52,12 @@ export class ClassificacioComponent {
     })
   }
 
+  /**
+   * Passem tota la informació que hi ha a la taula de classificació a un pdf que se'ns descarregarà automàticament. 
+   * Primer reconeix les dades que hi ha la taula amb el pdfTable, després passem tota aquesta a la variable html, que d'aquesta
+   * ho passem a documentDefinition només amb la informació i d'aquesta creem el pdf amb la funció pròpia de {@link pdfMake} createPdf.
+   * @return void
+   */
   @ViewChild('pdfTable') pdfTable !: ElementRef;
   getPDF() {
     const doc = new jsPDF();

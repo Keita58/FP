@@ -12,7 +12,7 @@ import { LoginServiceService } from '../../shared/services/login-service.service
 export class LoginComponent {
 
   @Input() jugadorPuntuacioNova : Users | undefined;
-  //@Output() envia : EventEmitter<Users> = new EventEmitter<Users>();
+  ////@Output() envia : EventEmitter<Users> = new EventEmitter<Users>();
   constructor(private connectdb : ConnectDBService, private loginService : LoginServiceService) {}
 
   loginForm! : FormGroup;
