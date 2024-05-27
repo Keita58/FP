@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -32,5 +33,7 @@ Route::get('/product/insert', [ProductController::class, 'insert'])->name('produ
 
 Route::post('/product/create', [ProductController::class, 'create'])->name('product.create');
 // * Inserim el producte creat abans
+
+Route::get('/clients', [ClientController::class, 'list'])->name('clients.list');
 
 require __DIR__.'/auth.php';

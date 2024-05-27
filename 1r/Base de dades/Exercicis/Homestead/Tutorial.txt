@@ -1,3 +1,16 @@
 Primer creem la taula per a la base de dades amb "php artisan make:migration"
 i en el nom hem de posar "create_<<nom>>_table".
 Després hem de modificar aquesta per afegir les columnes que vulguem a la taula (afegir sempre $table->timestamps(); i $table->id(); !!!)
+
+Quan ho hem modificat hem d'afegir la taula a la base de dades amb un "php artisan migrate"
+
+Per afegir info a la taula creada hem de crear una seed amb "php artisan make:seed" i posar el nom de la taula + seed, com "ProductSeed"
+Després, per a afegir les dades a l'arxiu hem d'utilitzar la funció ja creada amb un "DB::table("<<nom_taula>>")->insert([ [<<aquí he de posar la info de cada columna com ('name' => 'Marc')] ]);
+
+Una vegada tinguem informació per a inserir a la taula, hem d'escriure "php artisan db:seed <<nom de l'arxiu seed anterior>>"
+
+Ara hem de crear el model per a poder passar la informació de la taula a codi. Ho podem crear amb la comanda "php artisan make:model" i després escrivint el nom (HA DE SER EN SINGULAR!!!!)
+
+Toca ara crear el controlador de la taula, on tindrem totes les funcions d'aquesta. Per a crear-lo podem utilitzar la comanda "php artisan make:controller", posar el nom de la taula en singular i crear-lo buit.
+Ara a dins del controlador haurem d'escriure totes les funcions d'aquesta taula, com mostrar la informació, crear-ne de nova, eliminar-ne, etc.
+Per a que les funcions del controlador funcionin hem de posar les rutes a l'arxiu web.php.
