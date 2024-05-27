@@ -1,0 +1,3 @@
+Primer creem la taula per a la base de dades amb "php artisan make:migration"
+i en el nom hem de posar "create_<<nom>>_table".
+Després hem de modificar aquesta per afegir les columnes que vulguem a la taula (afegir sempre $table->timestamps(); i $table->id(); !!!)

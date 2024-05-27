@@ -11,4 +11,9 @@
         <input type="number" id="quantity" name="quantity"><br>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
+    <div>
+        <label>Go back</label>
+        <br>
+        <button onclick="location.href='{{ url('/products') }}'">Back</button>
+    </div>
 </div>
