@@ -4,6 +4,9 @@ import { LoginServiceService } from '../../shared/services/login-service.service
 import { ConnectDBService } from '../../shared/services/connect-db.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
+/**
+ * Component del joc
+ */
 @Component({
   selector: 'app-joc',
   templateUrl: './joc.component.html',

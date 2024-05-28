@@ -5,18 +5,38 @@ import {Users} from "../../shared/classes/users";
 import {emailValidator, passwordValidator} from "../directives/directives.directive";
 import { LoginServiceService } from '../../shared/services/login-service.service';
 
+/**
+ * Component del registre dels jugadors
+ */
 @Component({
   selector: 'app-registre',
   templateUrl: './registre.component.html',
   styleUrl: './registre.component.css'
 })
 export class RegistreComponent {
+  /**
+   * @ignore
+   */
   constructor(private connectdb : ConnectDBService, private loginService : LoginServiceService) {}
 
+  /**
+   * @ignore
+   */
   registerForm! : FormGroup;
+
+  /**
+   * @ignore
+   */
   users : Users[] = [];
+
+  /**
+   * @ignore
+   */
   message! : string;
 
+  /**
+   * @ignore
+   */
   ngOnInit() : void {
     this.registerForm = new FormGroup({
       nom : new FormControl('', [Validators.required, Validators.minLength(7), emailValidator()]),
@@ -24,6 +44,14 @@ export class RegistreComponent {
     })
   }
 
+  /**
+   * Amb aquesta funció el que fem és enviar les dades del formulari que el jugador omple a la funció registerUser de {@link ConnectDBService} que ens retorna si 
+   * les dades introduïdes existeixen. Si la funció ens retorna un missatge de que la informació del formulari ja existeix retornem el mateix a l'usuari
+   * i no deixem que es registri. En canvi, si retorna la informació del formulari vol dir que el registre és correcte i ho notifiquem a l'usuari per pantalla
+   * (a part d'avisar-lo que s'ha de loguejar per poder jugar).
+   * 
+   * @returns void
+   */
   register() : void {
     this.connectdb.registerUser(this.registerForm).subscribe(res => {
       //console.log(res);

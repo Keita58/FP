@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { JocComponent } from './joc.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('JocComponent', () => {
   let component: JocComponent;
@@ -8,7 +10,8 @@ describe('JocComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [JocComponent]
+      declarations: [JocComponent],
+      imports: [ReactiveFormsModule, HttpClientModule]
     })
     .compileComponents();
     

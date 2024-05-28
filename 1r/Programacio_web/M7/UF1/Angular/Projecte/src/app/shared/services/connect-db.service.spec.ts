@@ -1,12 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ConnectDBService } from './connect-db.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ConnectDBService', () => {
   let service: ConnectDBService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule]
+    });
     service = TestBed.inject(ConnectDBService);
   });
 

@@ -1,0 +1,1413 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projecte documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">projecte documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  JocComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/view/joc/joc.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component del joc</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-joc</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./joc.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./joc.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#base" >base</a>
+                            </li>
+                            <li>
+                                <a href="#grid" >grid</a>
+                            </li>
+                            <li>
+                                <a href="#i" >i</a>
+                            </li>
+                            <li>
+                                <a href="#perduts" >perduts</a>
+                            </li>
+                            <li>
+                                <a href="#punts" >punts</a>
+                            </li>
+                            <li>
+                                <a href="#segons" >segons</a>
+                            </li>
+                            <li>
+                                <a href="#spawnEnemics" >spawnEnemics</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#handleKeyDown" >handleKeyDown</a>
+                            </li>
+                            <li>
+                                <a href="#inici" >inici</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#spawner" >spawner</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#window:keydown" >window:keydown</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(login: <a href="../injectables/LoginServiceService.html" target="_self">LoginServiceService</a>, connectdb: <a href="../injectables/ConnectDBService.html" target="_self">ConnectDBService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/view/joc/joc.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor base de la classe JocComponent, on inicialitzem dues variables, una per a la connexió amb el servidor i l&#39;altre per a
+poder actualitzar la puntuació del jugador si supera el seu rècord.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>login</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoginServiceService.html" target="_self" >LoginServiceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>connectdb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConnectDBService.html" target="_self" >ConnectDBService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="window:keydown"></a>
+                    <span class="name">
+                        <span ><b>window:keydown</b></span>
+                        <a href="#window:keydown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>window:keydown(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/view/joc/joc.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Aquesta funció sencera és la que s&#39;encarrega del moviment del jugador en el joc.
+El que realitza és analitzar quina tecla s&#39;està utilitzant cada vegada i si és qualsevol de les dues fletxes (dreta o esquerra) realitza el moviment.</p>
+<p>Els moviments tant per la dreta com per a l&#39;esquerra són extremadament similars; tenim primer un switch case on es comprova si el jugador es vol moure
+cap a la dreta o cap a la l&#39;esquerra. Si es vol moure cap a l&#39;esquerra (per exemple) després comprovem amb un if else què hi té al costat, si una casella
+buida (amb el nom de &#39;dot-unhit&#39;) o un treball (amb el nom de &#39;work&#39;).
+Si té una casella buida el que fa és canviar les posicions amb la casella buida i modifica la variable &#39;i&#39;, que és la posició en les y del jugador.
+Si té un treball fa una cosa semblant a l&#39;anterior però modificant la casella de &#39;work&#39; per una de &#39;dot-unhit&#39; abans de canviar les posicions i suma
+un punt al marcador.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Variable que ens retorna quina tecla del teclat estem polsant</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleKeyDown"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>handleKeyDown</b></span>
+                        <a href="#handleKeyDown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleKeyDown(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;window:keydown&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/view/joc/joc.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Aquesta funció sencera és la que s&#39;encarrega del moviment del jugador en el joc.
+El que realitza és analitzar quina tecla s&#39;està utilitzant cada vegada i si és qualsevol de les dues fletxes (dreta o esquerra) realitza el moviment.</p>
+<p>Els moviments tant per la dreta com per a l&#39;esquerra són extremadament similars; tenim primer un switch case on es comprova si el jugador es vol moure
+cap a la dreta o cap a la l&#39;esquerra. Si es vol moure cap a l&#39;esquerra (per exemple) després comprovem amb un if else què hi té al costat, si una casella
+buida (amb el nom de &#39;dot-unhit&#39;) o un treball (amb el nom de &#39;work&#39;).
+Si té una casella buida el que fa és canviar les posicions amb la casella buida i modifica la variable &#39;i&#39;, que és la posició en les y del jugador.
+Si té un treball fa una cosa semblant a l&#39;anterior però modificant la casella de &#39;work&#39; per una de &#39;dot-unhit&#39; abans de canviar les posicions i suma
+un punt al marcador.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Variable que ens retorna quina tecla del teclat estem polsant</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="inici"></a>
+                    <span class="name">
+                        <span ><b>inici</b></span>
+                        <a href="#inici"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>inici()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/app/view/joc/joc.component.ts:188</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Funció del moviment i spawn dels treballs.</p>
+<p>Primer es comprova si han passat 20s per a reduir el temps d&#39;spawn dels enemics i si aquest temps d&#39;spawn no és menor a 250ms.
+Si han passat els 20s i el temps d&#39;spawn és major a 250ms aquest es redueix en 125ms, es reinicialitza el temporitzador a 0, s&#39;esborra l&#39;interval existent de l&#39;spawn dels enemics
+i es crea un de nou amb l&#39;interval reduit.</p>
+<p>Després comprova si ja s&#39;han perdut 10 treballs. Si és el cas, esborra tots els intervals existents i si la puntuació aconseguida és major a la que
+té el jugador actualment envia aquesta puntuació a la funció updateUser de <a href="../injectables/ConnectDBService.html">ConnectDBService</a> que l&#39;actualitzarà a la base de dades.
+Si no és el cas i encara no ha perdut els 10 treballs, els mou tots una casella avall en un bucle for començant des de la part de baix de la matriu
+i després en crea un a la part de dalt del tauler amb una probabilitat del 50% en una posició aleatòria (entre al columna 1 i la 8).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/view/joc/joc.component.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>S&#39;inicialitza al principi de tot d&#39;inicialitzar el projecte.
+Comprova que la variable usuari tingui informació (que l&#39;usuari estigui loguejat a la pàgina).
+Si no té informació vol dir que no s&#39;ha loguejat i modifica el text d&#39;avís per notificar l&#39;usuari que per jugar s&#39;ha de loguejar.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="spawner"></a>
+                    <span class="name">
+                        <span ><b>spawner</b></span>
+                        <a href="#spawner"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>spawner(reinici: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="252"
+                                    class="link-to-prism">src/app/view/joc/joc.component.ts:252</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>S&#39;inicialitza quan el jugador clica a començar en l&#39;html o a reiniciar.
+Si aquest no té sessió no fa res. Si en té inicia totes les variables als seus estats inicials; la puntuació a 0, els treballs a 0 i l&#39;spawn de
+treballs a 1000ms.
+Si ha fet click a &#39;Començar!&#39; (és a dir, no ha jugat encara) es creen dos intervals; el primer per a l&#39;spawn i creació dels treballs i el segon per a
+comptar els segons que passen, tant per al temporitzador que es mostra com per al de reduir el temps entre spawns dels treballs.
+Si ha fet click a &#39;Reinici&#39; reiniciem el tauler (la variable base d&#39;aquest component), esborrem i tornem a crear els intervals anteriors i canviem
+la posició del jugador actual per la que està en la matriu original per a que no hi hagi problemes amb el moviment.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>reinici</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Si el jugador fa click a jugar rep un false, si fa click a reinici rep un true</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="base"></a>
+                    <span class="name">
+                        <span ><b>base</b></span>
+                        <a href="#base"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[][]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>JSON.parse(JSON.stringify(this.grid))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/view/joc/joc.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>La matriu del joc (modificable).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="grid"></a>
+                    <span class="name">
+                        <span ><b>grid</b></span>
+                        <a href="#grid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[][]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    [&#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;eloi&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;]
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/view/joc/joc.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estat inicial del grid del joc. És una matriu 10x11 on totes les caselles exteriors són les parets, la casella [1][9] és on comença el jugador i la resta
+són caselles &quot;buides&quot; (segueixen existint però conten com a buides per al joc).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="i"></a>
+                    <span class="name">
+                        <span ><b>i</b></span>
+                        <a href="#i"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/view/joc/joc.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Posició en les y del jugador.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="perduts"></a>
+                    <span class="name">
+                        <span ><b>perduts</b></span>
+                        <a href="#perduts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/view/joc/joc.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Treballs perduts (que han tocat el terra) pel jugador.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="punts"></a>
+                    <span class="name">
+                        <span ><b>punts</b></span>
+                        <a href="#punts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/view/joc/joc.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Variable de la puntuació del jugador.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="segons"></a>
+                    <span class="name">
+                        <span ><b>segons</b></span>
+                        <a href="#segons"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/view/joc/joc.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Temps total del joc actual.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="spawnEnemics"></a>
+                    <span class="name">
+                        <span ><b>spawnEnemics</b></span>
+                        <a href="#spawnEnemics"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1000</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/view/joc/joc.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Variable de la velocitat a la que cauen els treballs (en ms).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, HostListener } from &#x27;@angular/core&#x27;;
+import {Users} from &quot;../../shared/classes/users&quot;;
+import { LoginServiceService } from &#x27;../../shared/services/login-service.service&#x27;;
+import { ConnectDBService } from &#x27;../../shared/services/connect-db.service&#x27;;
+import { FormControl, FormGroup } from &#x27;@angular/forms&#x27;;
+
+/**
+ * Component del joc
+ */
+@Component({
+  selector: &#x27;app-joc&#x27;,
+  templateUrl: &#x27;./joc.component.html&#x27;,
+  styleUrl: &#x27;./joc.component.css&#x27;
+})
+export class JocComponent {
+  /**
+   * Constructor base de la classe JocComponent, on inicialitzem dues variables, una per a la connexió amb el servidor i l&#x27;altre per a 
+   * poder actualitzar la puntuació del jugador si supera el seu rècord.
+   */
+  constructor(private login : LoginServiceService, private connectdb : ConnectDBService) {}
+
+  /**
+   * @ignore
+   */
+  usuari &#x3D; this.login.userLogin.getValue();
+
+  /**
+   * @ignore
+   */
+  loginForm! : FormGroup;
+
+  /**
+   * Estat inicial del grid del joc. És una matriu 10x11 on totes les caselles exteriors són les parets, la casella [1][9] és on comença el jugador i la resta
+   * són caselles &quot;buides&quot; (segueixen existint però conten com a buides per al joc).
+   * @type {string}
+   */
+  grid : string[][] &#x3D; [
+    [&#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;eloi&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;dot-unhit&#x27;, &#x27;wall&#x27;],
+    [&#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;, &#x27;wall&#x27;]
+  ];
+
+  /**
+   * La matriu del joc (modificable).
+   * @type {string}
+   */
+  base : string[][] &#x3D; JSON.parse(JSON.stringify(this.grid)); 
+  //* El que estem fet aquí es fer una còpia exacte de la variable grid, que conté l&#x27;estat inicial del joc. I això ho fem per a quan haguem de reiniciar el
+  //* tauler tenir una variable sense modificar i que puguem copiar sense problemes (la variable grid que no utilitzarem per a cap cosa que no sigui per a
+  //* copiar-la a la variable base).
+
+  /**
+   * Posició en les y del jugador.
+   * @type {number}
+   */
+  i : number &#x3D; 1;
+
+  /**
+   * Variable de la puntuació del jugador.
+   * @type {number}
+   */
+  punts : number &#x3D; 0;
+
+  /**
+   * Treballs perduts (que han tocat el terra) pel jugador.
+   * @type {number}
+   */
+  perduts : number &#x3D; 0;
+
+  /**
+   * Aquesta funció sencera és la que s&#x27;encarrega del moviment del jugador en el joc.
+   * El que realitza és analitzar quina tecla s&#x27;està utilitzant cada vegada i si és qualsevol de les dues fletxes (dreta o esquerra) realitza el moviment.
+   * 
+   * Els moviments tant per la dreta com per a l&#x27;esquerra són extremadament similars; tenim primer un switch case on es comprova si el jugador es vol moure 
+   * cap a la dreta o cap a la l&#x27;esquerra. Si es vol moure cap a l&#x27;esquerra (per exemple) després comprovem amb un if else què hi té al costat, si una casella 
+   * buida (amb el nom de &#x27;dot-unhit&#x27;) o un treball (amb el nom de &#x27;work&#x27;).
+   * Si té una casella buida el que fa és canviar les posicions amb la casella buida i modifica la variable &#x27;i&#x27;, que és la posició en les y del jugador.
+   * Si té un treball fa una cosa semblant a l&#x27;anterior però modificant la casella de &#x27;work&#x27; per una de &#x27;dot-unhit&#x27; abans de canviar les posicions i suma 
+   * un punt al marcador. 
+   *  
+   * @param {KeyboardEvent} event  Variable que ens retorna quina tecla del teclat estem polsant
+   */
+  @HostListener(&#x27;window:keydown&#x27;, [&#x27;$event&#x27;])
+  handleKeyDown(event: KeyboardEvent) {
+    switch (event.code) {
+      case &#x27;ArrowLeft&#x27;:
+        if(this.i &gt; 1 &amp;&amp; this.base[9][this.i-1] &#x3D;&#x3D; &quot;dot-unhit&quot;) {
+          //* Amb això el que fem és moure la posició a la que anirà l&#x27;Eloi per la que existeix, que en aquest cas és un dot-unhit
+          [this.base[9][this.i], this.base[9][this.i-1]] &#x3D; [this.base[9][this.i-1], this.base[9][this.i]];
+          this.i--;
+        }
+        else if(this.base[9][this.i-1] &#x3D;&#x3D; &quot;work&quot;) {
+          //* Afegim un punt al jugador si té el treball als seus costats i l&#x27;agafa
+          this.punts++;
+
+          //* Aquí fem el mateix que en l&#x27;anterior if però eliminant el work i transformant-lo en un dot-unhit
+          this.base[9][this.i-1] &#x3D; &quot;dot-unhit&quot;;
+          [this.base[9][this.i], this.base[9][this.i-1]] &#x3D; [this.base[9][this.i-1], this.base[9][this.i]];
+          this.i--;
+        }
+        break;
+
+      case &#x27;ArrowRight&#x27;:
+        if(this.i &lt; 8 &amp;&amp; this.base[9][this.i+1] &#x3D;&#x3D; &quot;dot-unhit&quot;) {
+          //* Amb això el que fem és moure la posició a la que anirà l&#x27;Eloi per la que existeix, que en aquest cas és un dot-unhit
+          [this.base[9][this.i], this.base[9][this.i+1]] &#x3D; [this.base[9][this.i+1], this.base[9][this.i]];
+          this.i++;
+        }
+        else if(this.base[9][this.i+1] &#x3D;&#x3D; &quot;work&quot;) {
+          //* Afegim un punt al jugador si té el treball als seus costats i l&#x27;agafa
+          this.punts++;
+
+          //* Aquí fem el mateix que en l&#x27;anterior if però eliminant el work i transformant-lo en un dot-unhit
+          this.base[9][this.i+1] &#x3D; &quot;dot-unhit&quot;;
+          [this.base[9][this.i], this.base[9][this.i+1]] &#x3D; [this.base[9][this.i+1], this.base[9][this.i]];
+          this.i++;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  movimentid : any;
+
+  /**
+   * @ignore
+   */
+  comptar : any;
+
+  /**
+   * @ignore
+   */
+  temps : number &#x3D; 1; //* Per calcular el temps que passa abans no augmentar la velocitat dels treballs
+
+  /**
+   * Variable de la velocitat a la que cauen els treballs (en ms).
+   * @type {number}
+   */
+  spawnEnemics : number &#x3D; 1000;
+
+  /**
+   * @ignore
+   */
+  loguejat : string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Temps total del joc actual.
+   * @type {number}
+   */
+  segons : number &#x3D; 0;
+
+  /**
+   * S&#x27;inicialitza al principi de tot d&#x27;inicialitzar el projecte.
+   * Comprova que la variable usuari tingui informació (que l&#x27;usuari estigui loguejat a la pàgina).
+   * Si no té informació vol dir que no s&#x27;ha loguejat i modifica el text d&#x27;avís per notificar l&#x27;usuari que per jugar s&#x27;ha de loguejar.
+   */
+  ngOnInit() {
+    if(this.usuari &#x3D;&#x3D; &#x27;logout&#x27;)
+      this.loguejat &#x3D; &quot;T&#x27;has de loguejar/registrar abans de jugar!&quot;;
+  }
+
+  /**
+   * Funció del moviment i spawn dels treballs.
+   * 
+   * Primer es comprova si han passat 20s per a reduir el temps d&#x27;spawn dels enemics i si aquest temps d&#x27;spawn no és menor a 250ms. 
+   * Si han passat els 20s i el temps d&#x27;spawn és major a 250ms aquest es redueix en 125ms, es reinicialitza el temporitzador a 0, s&#x27;esborra l&#x27;interval existent de l&#x27;spawn dels enemics
+   * i es crea un de nou amb l&#x27;interval reduit.
+   * 
+   * Després comprova si ja s&#x27;han perdut 10 treballs. Si és el cas, esborra tots els intervals existents i si la puntuació aconseguida és major a la que 
+   * té el jugador actualment envia aquesta puntuació a la funció updateUser de {@link ConnectDBService} que l&#x27;actualitzarà a la base de dades.
+   * Si no és el cas i encara no ha perdut els 10 treballs, els mou tots una casella avall en un bucle for començant des de la part de baix de la matriu
+   * i després en crea un a la part de dalt del tauler amb una probabilitat del 50% en una posició aleatòria (entre al columna 1 i la 8).
+   * 
+   * @returns void
+   */
+  inici() : void {
+    console.log(this.spawnEnemics);
+    if(this.temps &#x3D;&#x3D; 20 &amp;&amp; this.spawnEnemics &gt; 250){
+      this.spawnEnemics -&#x3D; 125;
+      this.temps &#x3D; 0;
+      clearInterval(this.movimentid);
+      this.movimentid &#x3D; setInterval((): void &#x3D;&gt; {
+        this.inici()
+      }, this.spawnEnemics);
+    }
+    if(this.perduts &#x3D;&#x3D; 10) {
+      clearInterval(this.movimentid);
+      clearInterval(this.comptar);
+      console.log(this.usuari);
+
+      if(this.usuari[0].punts &lt;&#x3D; this.punts) {
+        this.usuari[0].punts &#x3D; this.punts;
+        console.log(&quot;Punts: &quot; + this.usuari[0].punts);
+        this.loginForm &#x3D; new FormGroup({
+          nom : new FormControl(this.usuari[0].nom),
+          punts : new FormControl(this.usuari[0].punts)
+        });
+
+        this.connectdb.updateUser(this.loginForm).subscribe(res &#x3D;&gt; {
+          console.log(&quot;Update fet&quot;);
+        });
+      }
+    }
+    else {
+      for(let j : number &#x3D; 9; j &gt; 0; j--) {
+        for(let k : number &#x3D; 8; k &gt; 0; k--) {
+          if(this.base[j][k] &#x3D;&#x3D; &quot;work&quot; &amp;&amp; this.base[j+1][k] &#x3D;&#x3D; &quot;dot-unhit&quot;) {
+            [this.base[j][k], this.base[j+1][k]] &#x3D; [this.base[j+1][k], this.base[j][k]];
+          }
+          else if (this.base[j][k] &#x3D;&#x3D; &quot;work&quot; &amp;&amp; this.base[j+1][k] &#x3D;&#x3D; &quot;eloi&quot;) {
+            this.base[j][k] &#x3D; &quot;dot-unhit&quot;;
+            this.punts++;
+          }
+          else if (this.base[j][k] &#x3D;&#x3D; &quot;work&quot; &amp;&amp; this.base[j+1][k] &#x3D;&#x3D; &quot;wall&quot;) {
+            this.base[j][k] &#x3D; &quot;dot-unhit&quot;;
+            this.perduts++;
+          }
+        }
+      }
+      let surt : number &#x3D; Math.round(Math.random());
+      let r : number &#x3D; Math.floor(Math.random() * (9 - 1) + 1);
+      if (surt &#x3D;&#x3D; 1) {
+        this.base[1][r] &#x3D; &quot;work&quot;;
+      }
+    }
+  }
+
+  /**
+   * S&#x27;inicialitza quan el jugador clica a començar en l&#x27;html o a reiniciar.
+   * Si aquest no té sessió no fa res. Si en té inicia totes les variables als seus estats inicials; la puntuació a 0, els treballs a 0 i l&#x27;spawn de 
+   * treballs a 1000ms.
+   * Si ha fet click a &#x27;Començar!&#x27; (és a dir, no ha jugat encara) es creen dos intervals; el primer per a l&#x27;spawn i creació dels treballs i el segon per a 
+   * comptar els segons que passen, tant per al temporitzador que es mostra com per al de reduir el temps entre spawns dels treballs.
+   * Si ha fet click a &#x27;Reinici&#x27; reiniciem el tauler (la variable base d&#x27;aquest component), esborrem i tornem a crear els intervals anteriors i canviem 
+   * la posició del jugador actual per la que està en la matriu original per a que no hi hagi problemes amb el moviment.
+   * 
+   * @param reinici  Si el jugador fa click a jugar rep un false, si fa click a reinici rep un true
+   * @returns void
+   */
+  spawner(reinici : boolean) : void {
+    if(this.usuari !&#x3D; &#x27;logout&#x27;) {
+      this.loguejat &#x3D; &#x27;&#x27;;
+      this.punts &#x3D; 0;
+      this.perduts &#x3D; 0;
+      this.spawnEnemics &#x3D; 1000;
+      if(!reinici) {
+        this.movimentid &#x3D; setInterval((): void &#x3D;&gt; {
+          this.inici()
+        }, 1000);
+        this.comptar &#x3D; setInterval((): void &#x3D;&gt; {
+          this.temps++;
+          this.segons++;
+        }, 1000);
+      }
+      else {
+        this.segons &#x3D; 1;
+        this.base &#x3D; JSON.parse(JSON.stringify(this.grid)); //* Tornem a clonar la matriu per a reiniciar el tauler
+        clearInterval(this.movimentid);
+        clearInterval(this.comptar);
+        this.movimentid &#x3D; setInterval((): void &#x3D;&gt; {
+          this.inici()
+        }, 1000);
+        this.comptar &#x3D; setInterval((): void &#x3D;&gt; {
+          this.temps++;
+          this.segons++;
+        }, 1000);
+        [this.base[9][this.i], this.base[9][1]] &#x3D; [this.base[9][1], this.base[9][this.i]]; //* Canviem la posició actual de l&#x27;Eloi per la posició en la que està originalment per a que es pugui moure quan reiniciem
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;d-grid m-4 justify-content-center align-content-center&quot;&gt;
+  @if(loguejat &#x3D;&#x3D; &#x27;&#x27;) {
+    &lt;p&gt;Punts: {{ punts }}&lt;/p&gt;
+    &lt;br&gt;
+    &lt;p&gt;Treballs perduts: {{ perduts }}&lt;/p&gt;
+    &lt;br&gt;
+    &lt;p&gt;Temps: {{ segons }}&lt;/p&gt;
+    
+    @if (perduts &lt; 10) {
+      @for (item of base; track item) {
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          @for (item2 of item; track item2) {
+            @if (item2 &#x3D;&#x3D; &quot;wall&quot;) {
+              &lt;div class&#x3D;&quot;wall&quot;&gt;&lt;/div&gt;
+            }
+            @else if (item2 &#x3D;&#x3D; &quot;eloi&quot;) {
+              &lt;div class&#x3D;&quot;eloi&quot;&gt;&lt;/div&gt;
+            }
+            @else if (item2 &#x3D;&#x3D; &quot;work&quot;) {
+              &lt;div class&#x3D;&quot;work&quot;&gt;&lt;/div&gt;
+            }
+            @else {
+              &lt;div class&#x3D;&quot;dot-unhit&quot;&gt;&lt;/div&gt;
+            }
+          }
+        &lt;/div&gt;
+      }
+    }
+    @else {
+      &lt;h1 class&#x3D;&quot;bg-danger text-white&quot;&gt;Has perdut :(&lt;/h1&gt;
+    }
+  }
+  @else {
+    &lt;div&gt;
+      &lt;h1 class&#x3D;&quot;text-danger&quot;&gt;{{ loguejat }}&lt;/h1&gt;
+    &lt;/div&gt;
+  }
+  &lt;br&gt;
+  @if(segons &#x3D;&#x3D; 0) {
+    &lt;button class&#x3D;&quot;button&quot; (click)&#x3D;&quot;spawner(false)&quot;&gt;Començar!&lt;/button&gt;
+  }
+  @else {
+    &lt;button class&#x3D;&quot;button&quot; (click)&#x3D;&quot;spawner(true)&quot;&gt;Reinici&lt;/button&gt;
+  }
+&lt;/div&gt;
+&lt;!--&lt;app-login (envia)&#x3D;&quot;usuari&quot; [jugadorPuntuacioNova]&#x3D;&quot;usuari&quot;&gt;&lt;/app-login&gt;--&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="d-grid m-4 justify-content-center align-content-center">  @if(loguejat == \'\') {    <p>Punts: {{ punts }}</p>    <br>    <p>Treballs perduts: {{ perduts }}</p>    <br>    <p>Temps: {{ segons }}</p>        @if (perduts < 10) {      @for (item of base; track item) {        <div class="row">          @for (item2 of item; track item2) {            @if (item2 == "wall") {              <div class="wall"></div>            }            @else if (item2 == "eloi") {              <div class="eloi"></div>            }            @else if (item2 == "work") {              <div class="work"></div>            }            @else {              <div class="dot-unhit"></div>            }          }        </div>      }    }    @else {      <h1 class="bg-danger text-white">Has perdut :(</h1>    }  }  @else {    <div>      <h1 class="text-danger">{{ loguejat }}</h1>    </div>  }  <br>  @if(segons == 0) {    <button class="button" (click)="spawner(false)">Començar!</button>  }  @else {    <button class="button" (click)="spawner(true)">Reinici</button>  }</div><!--<app-login (envia)="usuari" [jugadorPuntuacioNova]="usuari"></app-login>--></div>'
+    var COMPONENTS = [{'name': 'AjudaComponent', 'selector': 'app-ajuda'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ClassificacioComponent', 'selector': 'app-classificacio'},{'name': 'JocComponent', 'selector': 'app-joc'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PaginaPrincipalComponent', 'selector': 'app-pagina-principal'},{'name': 'RegistreComponent', 'selector': 'app-registre'}];
+    var DIRECTIVES = [{'name': 'DirectivesDirective', 'selector': '[appDirectives]'}];
+    var ACTUAL_COMPONENT = {'name': 'JocComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'JocComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

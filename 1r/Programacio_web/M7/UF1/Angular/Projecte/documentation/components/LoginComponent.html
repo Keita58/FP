@@ -1,0 +1,564 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>projecte documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">projecte documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  LoginComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/view/login/login.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component del login dels jugadors</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-login</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./login.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./login.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#login" >login</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(connectdb: <a href="../injectables/ConnectDBService.html" target="_self">ConnectDBService</a>, loginService: <a href="../injectables/LoginServiceService.html" target="_self">LoginServiceService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/view/login/login.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor base que inicia les variables connectdb i loginService. La primera l&#39;utilitzarem per a la connexió amb la base de dades i poder verificar que
+les dades per al login son correctes i la segona per a mantenir la sessió durant tota l&#39;estona dins la pàgina (i poder mostrar tota l&#39;estona amb quin
+usuari està loguejat).</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>connectdb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConnectDBService.html" target="_self" >ConnectDBService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>loginService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoginServiceService.html" target="_self" >LoginServiceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="login"></a>
+                    <span class="name">
+                        <span ><b>login</b></span>
+                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>login()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/view/login/login.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Amb aquesta funció el que fem és enviar les dades del formulari que el jugador omple a la funció getUser de <a href="../injectables/ConnectDBService.html">ConnectDBService</a> que ens retorna si les
+dades introduïdes existeixen. Si la funció no ens retorna res vol dir que les dades són incorrectes i ho notifiquem a l&#39;usuari amb un missatge per pantalla.
+Si són correctes també ho notifiquem amb un missatge i afegim el correu de l&#39;usuari a la variable loginService esmenada anteriorment, que ens facilitarà poder
+mostrar mostrar quin usuari està loguejat en cada moment.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, EventEmitter, Input, Output} from &#x27;@angular/core&#x27;;
+import {FormControl, FormGroup, Validators} from &quot;@angular/forms&quot;;
+import {Users} from &quot;../../shared/classes/users&quot;;
+import {ConnectDBService} from &quot;../../shared/services/connect-db.service&quot;;
+import { LoginServiceService } from &#x27;../../shared/services/login-service.service&#x27;;
+
+/**
+ * Component del login dels jugadors
+ */
+@Component({
+  selector: &#x27;app-login&#x27;,
+  templateUrl: &#x27;./login.component.html&#x27;,
+  styleUrl: &#x27;./login.component.css&#x27;
+})
+export class LoginComponent {
+
+  ////@Input() jugadorPuntuacioNova : Users | undefined;
+  ////@Output() envia : EventEmitter&lt;Users&gt; &#x3D; new EventEmitter&lt;Users&gt;();
+  /**
+   * Constructor base que inicia les variables connectdb i loginService. La primera l&#x27;utilitzarem per a la connexió amb la base de dades i poder verificar que 
+   * les dades per al login son correctes i la segona per a mantenir la sessió durant tota l&#x27;estona dins la pàgina (i poder mostrar tota l&#x27;estona amb quin
+   * usuari està loguejat).
+   * @param connectdb 
+   * @param loginService 
+   */
+  constructor(private connectdb : ConnectDBService, private loginService : LoginServiceService) {}
+
+  /**
+   * @ignore
+   */
+  loginForm! : FormGroup;
+
+  /**
+   * @ignore
+   */
+  users : Users[] &#x3D; [];
+
+  /**
+   * @ignore
+   */
+  message! : string;
+
+  /**
+   * @ignore
+   */
+  ngOnInit() : void {
+    this.loginForm &#x3D; new FormGroup({
+      nom : new FormControl(&#x27;&#x27;, [Validators.required, Validators.minLength(7)]),
+      password : new FormControl(&#x27;&#x27;, [Validators.required, Validators.minLength(8)])
+    })
+  }
+
+  /**
+   * Amb aquesta funció el que fem és enviar les dades del formulari que el jugador omple a la funció getUser de {@link ConnectDBService} que ens retorna si les 
+   * dades introduïdes existeixen. Si la funció no ens retorna res vol dir que les dades són incorrectes i ho notifiquem a l&#x27;usuari amb un missatge per pantalla.
+   * Si són correctes també ho notifiquem amb un missatge i afegim el correu de l&#x27;usuari a la variable loginService esmenada anteriorment, que ens facilitarà poder 
+   * mostrar mostrar quin usuari està loguejat en cada moment.
+   * 
+   * @returns void
+   */
+  login() : void {
+    this.connectdb.getUser(this.loginForm).subscribe(res &#x3D;&gt; {
+      console.log(res);
+      if(res &#x3D;&#x3D; 0) {
+        this.users &#x3D; [];
+        this.message &#x3D; &quot;Login incorrecte&quot;;
+      }
+      else {
+        this.users &#x3D; res;
+        console.log(this.users);
+        this.message &#x3D; &quot;L&#x27;usuari &quot; + this.loginForm.controls[&#x27;nom&#x27;].value + &quot; s&#x27;ha logejat correctament.&quot;;
+        ////this.envia.emit(new Users(this.users[0].nom, this.users[0].password, this.users[0].punts));
+        this.loginService.updateLoginData(res); //* Passem la info al loginService per a que tingui l&#x27;usuari tota l&#x27;estona
+      }
+    })
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot;&gt;
+  &lt;h1&gt;Login Form:&lt;/h1&gt;
+  &lt;form [formGroup]&#x3D;&quot;loginForm&quot;&gt;
+    &lt;input type&#x3D;&quot;email&quot; id&#x3D;&quot;nom&quot; name&#x3D;&quot;nom&quot; placeholder&#x3D;&quot;Nom&quot; formControlName&#x3D;&quot;nom&quot; required&gt;
+    @if (loginForm.controls[&#x27;nom&#x27;].invalid &amp;&amp; (loginForm.controls[&#x27;nom&#x27;].dirty || loginForm.controls[&#x27;nom&#x27;].touched)) {
+      &lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;
+        @if(loginForm.controls[&#x27;nom&#x27;].errors?.[&#x27;required&#x27;]) {
+          &lt;div&gt;
+            El nom és obligatori.
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+    }
+    &lt;br&gt;
+    &lt;input type&#x3D;&quot;password&quot; placeholder&#x3D;&quot;Password&quot; formControlName&#x3D;&quot;password&quot; required&gt;
+    @if (loginForm.controls[&#x27;password&#x27;].invalid &amp;&amp; (loginForm.controls[&#x27;password&#x27;].dirty || loginForm.controls[&#x27;password&#x27;].touched)) {
+      &lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;
+        @if(loginForm.controls[&#x27;password&#x27;].errors?.[&#x27;required&#x27;]) {
+          &lt;div&gt;
+            La contrasenya és necessària.
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+    }
+  &lt;/form&gt;
+  &lt;button (click)&#x3D;&quot;login()&quot; [disabled]&#x3D;&quot;!loginForm.valid&quot;&gt;Login&lt;/button&gt;
+  &lt;p&gt;{{ message }}&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container">  <h1>Login Form:</h1>  <form [formGroup]="loginForm">    <input type="email" id="nom" name="nom" placeholder="Nom" formControlName="nom" required>    @if (loginForm.controls[\'nom\'].invalid && (loginForm.controls[\'nom\'].dirty || loginForm.controls[\'nom\'].touched)) {      <div class="alert alert-danger">        @if(loginForm.controls[\'nom\'].errors?.[\'required\']) {          <div>            El nom és obligatori.          </div>        }      </div>    }    <br>    <input type="password" placeholder="Password" formControlName="password" required>    @if (loginForm.controls[\'password\'].invalid && (loginForm.controls[\'password\'].dirty || loginForm.controls[\'password\'].touched)) {      <div class="alert alert-danger">        @if(loginForm.controls[\'password\'].errors?.[\'required\']) {          <div>            La contrasenya és necessària.          </div>        }      </div>    }  </form>  <button (click)="login()" [disabled]="!loginForm.valid">Login</button>  <p>{{ message }}</p></div></div>'
+    var COMPONENTS = [{'name': 'AjudaComponent', 'selector': 'app-ajuda'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ClassificacioComponent', 'selector': 'app-classificacio'},{'name': 'JocComponent', 'selector': 'app-joc'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PaginaPrincipalComponent', 'selector': 'app-pagina-principal'},{'name': 'RegistreComponent', 'selector': 'app-registre'}];
+    var DIRECTIVES = [{'name': 'DirectivesDirective', 'selector': '[appDirectives]'}];
+    var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoginComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

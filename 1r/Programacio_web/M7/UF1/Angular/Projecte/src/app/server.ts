@@ -28,6 +28,7 @@ app.get('/users', async(req, res) => {
     client2 = await client.connect(url);
     const db = client2.db(dbName);
     const users = await db.collection("usuaris_app").find().toArray();
+    console.log(users);
     res.json(users);
   }
   catch(err){
@@ -67,6 +68,7 @@ app.post('/users/insert', async(req, res) => {
   try {
     client2 = await client.connect(url);
     const db = client2.db(dbName);
+    console.log(req);
     console.log(nom);
     console.log(password);
     const usuaris = await db.collection('usuaris_app').find({'nom': nom}).toArray();
