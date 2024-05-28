@@ -1,3 +1,26 @@
+<style>
+    .background {
+        background: darkgreen;
+    }
+
+    .lletraMenu {
+        padding-right: 20px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .primer {
+        padding-left: 5px;
+    }
+</style>
+<nav class="flex flex-1 justify-begin mr-1 background">
+    <a href="{{ route('inici') }}" class="lletraMenu primer">
+        Home
+    </a>
+    <a href="{{ route('clients.list') }}" class="lletraMenu">
+        Clients
+    </a>
+</nav>
 <div>
     @foreach ($products as $product)
         <div>

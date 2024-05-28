@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('inici');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,6 +34,16 @@ Route::get('/product/insert', [ProductController::class, 'insert'])->name('produ
 Route::post('/product/create', [ProductController::class, 'create'])->name('product.create');
 // * Inserim el producte creat abans
 
+//----------------------------------------------------------------------------------------------------------------------
+
 Route::get('/clients', [ClientController::class, 'list'])->name('clients.list');
+
+Route::get('/client/{client}/delete', [ClientController::class, 'delete'])->name('client.delete');
+
+Route::get('/client/{client}/warn', [ClientController::class, 'warn'])->name('client.warn');
+
+Route::get('/client/insert', [ClientController::class, 'insert'])->name('client.insert');
+
+Route::post('/client/create', [ClientController::class, 'create'])->name('client.create');
 
 require __DIR__.'/auth.php';
