@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -8,9 +9,12 @@ public class Movement : MonoBehaviour
     [SerializeField] int velocity;
     Rigidbody2D rb;
     [SerializeField] GameObject bola;
+    int vides;
     void Start()
     {
+        vides = 3;
         rb = GetComponent<Rigidbody2D>();
+        bola.GetComponent<Bola>().perd += perdVida;
     }
 
     // Update is called once per frame
@@ -38,5 +42,18 @@ public class Movement : MonoBehaviour
             Destroy(collision.gameObject);
         }
             
+    }
+
+    void perdVida()
+    {
+        if(vides > 0)
+        {
+            vides--;
+            this.transform.position = new Vector2(0, -5);
+        }
+        else
+        {
+            SceneManager.LoadScene("Inici");
+        }
     }
 }

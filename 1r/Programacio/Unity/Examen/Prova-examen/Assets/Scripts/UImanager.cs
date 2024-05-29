@@ -7,10 +7,11 @@ public class UImanager : MonoBehaviour
 {
     [SerializeField] GameObject bola;
     [SerializeField] TextMeshProUGUI vides;
-    int videsNum = 3;
+    int videsNum;
     // Start is called before the first frame update
     void Start()
     {
+        videsNum = 3;
         vides.text = "Vides: " + videsNum;
         bola.GetComponent<Bola>().perd += perdVida;
     }
