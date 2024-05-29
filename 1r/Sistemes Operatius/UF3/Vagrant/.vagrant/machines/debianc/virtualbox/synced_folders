@@ -1,0 +1,1 @@
+{"virtualbox":{"/compartida":{"guestpath":"/compartida","hostpath":"C:/Users/marc-/Desktop/Treballs/FP/1r/Sistemes Operatius/UF3/Vagrant/src","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/marc-/Desktop/Treballs/FP/1r/Sistemes Operatius/UF3/Vagrant","disabled":false,"__vagrantfile":true}}}
