@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] GameObject bola;
     int vides;
+    bool canvi = false;
     void Start()
     {
         vides = 3;
@@ -39,6 +40,23 @@ public class Movement : MonoBehaviour
         if(collision.transform.tag == "Power")
         {
             print(collision.GetComponent<SpriteRenderer>().color);
+            if (collision.GetComponent<SpriteRenderer>().color == Color.blue)
+            {
+                int num = Random.Range(2, 6);
+                StartCoroutine(pausa(num));
+            }
+            else if(collision.GetComponent<SpriteRenderer>().color == Color.green)
+            {
+                bola.GetComponent<Bola>().canviVerd();
+            }
+            else if(collision.GetComponent<SpriteRenderer>().color == Color.yellow)
+            {
+                bola.GetComponent<Bola>().canviGroc();
+            }
+            else
+            {
+                bola.GetComponent<Bola>().creaBola();
+            }
             Destroy(collision.gameObject);
         }
             
@@ -54,6 +72,21 @@ public class Movement : MonoBehaviour
         else
         {
             SceneManager.LoadScene("Inici");
+        }
+    }
+
+    private IEnumerator pausa(int temps)
+    {
+        print("Entrat en pausa");
+        if (!canvi)
+        {
+            bola.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            yield return new WaitForSeconds(temps);
+            canvi = true;
+        }
+        else
+        {
+            yield return bola.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         }
     }
 }
