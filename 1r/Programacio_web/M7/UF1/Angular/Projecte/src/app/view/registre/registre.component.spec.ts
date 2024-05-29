@@ -63,11 +63,11 @@ describe('RegistreComponent', () => {
     });
     const req = httpTestingController.expectOne(service.REST_API + "/users/insert");
     expect(req.request.method).toEqual('POST');
-    expect(req.request.body).toEqual({ nom: 'MMarc@ies-sabadell.cat', password: 'Aaaaaaaaa1' })
+    expect(req.request.body).toEqual({ nom: 'MMarc@ies-sabadell.cat', password: 'Aaaaaaaaa1' });
   });
 
-  it('Comprova els paràmetres enviats - Registre', () => {
+  /* it('Comprova els paràmetres enviats - Registre', () => {
 
-  });
+  }); */
   
 });
