@@ -41,19 +41,20 @@ export class ClassificacioComponent {
    */
   getUsers() : void {
     this.connectdb.getAllUsers().subscribe(res => {
+      this.users = [];
       if(res.length == 0) {
         this.users = [];
       }
       else {
         this.users = res;
         this.users = this.users.sort((a, b) => b.punts - a.punts); //* Ordenem els jugadors per les seves puntuacions
-        console.log(this.users);
+        //console.log(this.users);
       }
     })
   }
 
   /**
-   * Passem tota la informació que hi ha a la taula de classificació a un pdf que se'ns descarregarà automàticament. 
+   * Passem tota la informació que hi ha a la taula de classificació a un pdf que se'ns descarregarà automàticament.
    * Primer reconeix les dades que hi ha la taula amb el pdfTable, després passem tota aquesta a la variable html, que d'aquesta
    * ho passem a documentDefinition només amb la informació i d'aquesta creem el pdf amb la funció pròpia de {@link pdfMake} createPdf.
    * @return void

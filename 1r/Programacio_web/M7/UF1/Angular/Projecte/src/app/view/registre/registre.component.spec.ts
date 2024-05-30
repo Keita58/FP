@@ -1,36 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistreComponent } from './registre.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ConnectDBService } from '../../shared/services/connect-db.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {of} from "rxjs";
 
 describe('RegistreComponent', () => {
   let component: RegistreComponent;
   let fixture: ComponentFixture<RegistreComponent>;
-  let service : ConnectDBService;
-  let httpClientSpy : jasmine.SpyObj<HttpClient>;
-  let httpClient : HttpClient;
-  let httpTestingController: HttpTestingController;
+  let connectdb : ConnectDBService;
 
   beforeEach(async () => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get','post']);
-    service = new ConnectDBService(httpClientSpy);
-
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [RegistreComponent],
       imports: [ReactiveFormsModule, HttpClientTestingModule],
       providers: [ConnectDBService]
     })
     .compileComponents();
-    
-    httpClient = TestBed.inject(HttpClient);
-    httpTestingController = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(ConnectDBService);
-
     fixture = TestBed.createComponent(RegistreComponent);
     component = fixture.componentInstance;
+    connectdb = TestBed.inject(ConnectDBService);
     fixture.detectChanges();
   });
 
@@ -38,36 +28,13 @@ describe('RegistreComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Comprova que la URL sigui correcte - Registre', () => {
-    let registerForm = new FormGroup({
-      nom : new FormControl('MMarc@ies-sabadell.cat'),
-      password : new FormControl('Aaaaaaaaa1')
-    });
-    service.registerUser(registerForm).subscribe({
-      next: Users => {},
-      error: fail
-    });
-    const req = httpTestingController.expectOne(service.REST_API + "/users/insert");
-    expect(req.request.url).toEqual('http://localhost:3000/users/insert');
-    //console.log(req);
+  it('Comprovar dades - Registre', () => {
+    const res = {data: [{nom: 'AAAAAAAAAAAa@ies-sabadell.cat', password: 'Tetris_123'}]};
+    spyOn(connectdb, 'registerUser').and.returnValue(of(res));
+    component.registerForm.patchValue({nom: 'AAAAAAAAAAAa@ies-sabadell.cat', password: 'Tetris_123'});
+    component.register();
+    fixture.detectChanges();
+    console.log(component.message);
+    expect(component.message).toEqual("L'usuari AAAAAAAAAAAa@ies-sabadell.cat s'ha registrat correctament. \n Ara fes un login amb les mateixes credencials per poder començar a jugar!");
   });
-
-  it('Comprova que el mètode sigui correcte - Registre', () => {
-    let registerForm = new FormGroup({
-      nom : new FormControl('MMarc@ies-sabadell.cat'),
-      password : new FormControl('Aaaaaaaaa1')
-    });
-    service.registerUser(registerForm).subscribe({
-      next: Users => {},
-      error: fail
-    });
-    const req = httpTestingController.expectOne(service.REST_API + "/users/insert");
-    expect(req.request.method).toEqual('POST');
-    expect(req.request.body).toEqual({ nom: 'MMarc@ies-sabadell.cat', password: 'Aaaaaaaaa1' });
-  });
-
-  /* it('Comprova els paràmetres enviats - Registre', () => {
-
-  }); */
-  
 });
