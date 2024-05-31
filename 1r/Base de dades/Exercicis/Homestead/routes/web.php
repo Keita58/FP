@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -45,5 +46,11 @@ Route::get('/client/{client}/warn', [ClientController::class, 'warn'])->name('cl
 Route::get('/client/insert', [ClientController::class, 'insert'])->name('client.insert');
 
 Route::post('/client/create', [ClientController::class, 'create'])->name('client.create');
+
+//----------------------------------------------------------------------------------------------------------------------
+
+Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
+
+Route::post('/invoice/create', [ClientController::class, 'create'])->name('invoice.create');
 
 require __DIR__.'/auth.php';

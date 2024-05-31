@@ -1,4 +1,5 @@
-<nav class="flex flex-1 justify-begin">
+<link rel="stylesheet" type="text/css" href="{{ url('/resources/css/menu.css') }}" />
+<nav class="flex flex-1 justify-begin background">
     <a href="{{ route('inici') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
         Home
     </a>

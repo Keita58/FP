@@ -1,18 +1,4 @@
-<style>
-    .background {
-        background: darkgreen;
-    }
-
-    .lletraMenu {
-        padding-right: 20px;
-        color: white;
-        text-decoration: none;
-    }
-
-    .primer {
-        padding-left: 5px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="{{ url('/resources/css/menu.css') }}" />
 <nav class="flex flex-1 justify-begin mr-1 background">
     <a href="{{ route('inici') }}" class="lletraMenu primer">
         Home

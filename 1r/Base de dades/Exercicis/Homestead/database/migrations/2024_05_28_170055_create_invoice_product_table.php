@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBiginteger('invoice_id');
             $table->unsignedBiginteger('product_id');
+            $table->string('product_name');
+            $table->integer('quantity_product');
+            $table->integer('price_product');
+            $table->timestamps();
 
 
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
