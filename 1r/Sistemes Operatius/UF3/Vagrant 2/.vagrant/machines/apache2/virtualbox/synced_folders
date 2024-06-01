@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/marc-/Desktop/Treballs/FP/1r/Sistemes Operatius/UF3/Vagrant 2","disabled":false,"__vagrantfile":true}}}
+{"rsync":{"/www/html":{"type":"rsync","guestpath":"/www/html","hostpath":"C:/Users/marc-/Desktop/Treballs/FP/1r/Sistemes Operatius/UF3/Vagrant 2/www/html","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}},"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/marc-/Desktop/Treballs/FP/1r/Sistemes Operatius/UF3/Vagrant 2","disabled":false,"__vagrantfile":true}}}
