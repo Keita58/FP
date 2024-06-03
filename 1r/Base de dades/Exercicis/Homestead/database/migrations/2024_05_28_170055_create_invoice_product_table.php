@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('product_name');
             $table->integer('quantity_product');
             $table->integer('price_product');
+            $table->integer('price_before_iva')->unsigned();
+            $table->integer('price_after_iva')->unsigned();
+            $table->integer('applicated_iva')->unsigned();
             $table->timestamps();
-
 
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

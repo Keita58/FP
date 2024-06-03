@@ -14,7 +14,7 @@ class ClientSeed extends Seeder
     public function run(): void
     {
         DB::table('clients')->insert([
-            ['name'=>'Marc', 'age'=>23, 'address'=>'c/Grugliasco, 61', 'city'=>'Barberà del Vallès', 'country'=>'Catalunya','created_at'=>now(), 'updated_at'=>now()]
+            ['name'=>'Marc', 'age'=>23, 'address'=>'c/Grugliasco, 61', 'city'=>'Barberà del Vallès', 'country'=>'Catalunya', 'money'=>10000, 'created_at'=>now(), 'updated_at'=>now()]
         ]);
     }
 }

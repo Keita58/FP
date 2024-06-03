@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('price');
             $table->string('description')->default('');
             $table->integer('quantity')->unsigned()->default(1);
+            $table->integer('iva');
             $table->timestamps();
         });
     }

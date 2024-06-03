@@ -40,7 +40,6 @@ class ProductController extends Controller
         $products->description = $request->input('description');
         $products->price = $request->input('price');
         $products->quantity = $request->input('quantity');
-        //$products->display_order = $products->id;
         $products->save();
         return redirect('products');
     }
