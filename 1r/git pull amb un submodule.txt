@@ -1,1 +1,1 @@
-Per afegir un repositori submodule s'ha de fer un 'git submodule init' i 'git submodule update'
+Per afegir un repositori submodule s'ha de fer un 'git submodule init' i 'git submodule update' 
