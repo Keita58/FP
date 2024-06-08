@@ -11,13 +11,27 @@
             <br>
             <label>Tria quins productes vols comprar:</label>
             <br>
-            @foreach($products as $product)
-                <label>{{$product->name}}, {{$product->price}}</label>
-                <input type="number" name="{{$product->id}}[quantity]" placeholder="Quantitat"/>
-                <br>
-            @endforeach
-            <button type="submit" class="btn btn-primary">Compra</button>
+            <table>
+                <tr>
+                    <th>Nom</th>
+                    <th>Monedes</th>
+                    <th>Quantitat</th>
+                    <th></th>
+                </tr>
+                @foreach($products as $product)
+                    <tr>
+                        <td>{{$product->name}}</td>
+                        <td>{{$product->price}}</td>
+                        <td>{{$product->quantity}}</td>
+                        <td><input type="number" name="{{$product->id}}[quantity]" placeholder="Quantitat"/></td>
+                    </tr>
+                @endforeach
+            </table>
+            <button type="submit" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold">Compra</button>
         </form>
+    </div>
+    <div style="margin-top: 10px">
+        <button onclick="location.href='{{ url('/invoice/list') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Descarta</button>
     </div>
 </x-app-layout>
 

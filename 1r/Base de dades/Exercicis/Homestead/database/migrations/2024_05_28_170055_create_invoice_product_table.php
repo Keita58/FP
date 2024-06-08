@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        /**
+         * La taula pivot té tota la informació de les comandes
+         */
         Schema::create('invoice_product', function (Blueprint $table) {
             $table->id();
             $table->unsignedBiginteger('invoice_id');

@@ -10,8 +10,8 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function products() : BelongsToMany
+    public function invoices() : BelongsToMany
     {
-        return $this->belongsToMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class)->withTimestamps()->withPivot('product_name', 'quantity_product', 'price_product', 'price_before_iva', 'price_after_iva', 'applicated_iva');
     }
 }

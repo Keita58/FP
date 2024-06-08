@@ -18,10 +18,8 @@ class InvoiceController extends Controller
     }
 
     public function create(Request $request) {
-        var_dump($request->all());
-
         $request->validate([
-            '*.quantity' => 'required|integer|max:255|min:1'
+            '*.quantity' => 'required|integer|max:255|min:0'
         ]);
 
         $client_id = $request->input('client_id');
@@ -39,8 +37,7 @@ class InvoiceController extends Controller
             ]);
             $product->save();
         }
-
-        return redirect()->route('invoices.list');
+        return redirect()->route('invoice.list');
     }
 
     public function list(Request $request) {
