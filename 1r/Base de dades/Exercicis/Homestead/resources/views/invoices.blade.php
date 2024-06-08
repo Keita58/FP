@@ -23,7 +23,10 @@
                         <td>{{$product->name}}</td>
                         <td>{{$product->price}}</td>
                         <td>{{$product->quantity}}</td>
-                        <td><input type="number" name="{{$product->id}}[quantity]" placeholder="Quantitat"/></td>
+                        <td><input type="number" name="quantity[{{$product->id}}][quantity]" placeholder="Quantitat" value="0"/></td>
+                        <input type="hidden" name="iva[{{$product->id}}]" value="{{$product->iva}}">
+                        <input type="hidden" name="price[{{$product->id}}]" value="{{$product->price}}">
+                        <input type="hidden" name="name[{{$product->id}}]" value="{{$product->name}}">
                     </tr>
                 @endforeach
             </table>

@@ -14,10 +14,10 @@
             <input type="text" id="country" name="country"><br>
             <label for="money">Monedes:</label><br>
             <input type="number" id="money" name="money"><br>
-            <button type="submit" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold; margin-top: 5px">Create</button>
+            <button type="submit" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold; margin-top: 5px">Crea</button>
         </form>
         <div style="margin-top: 10px">
-            <button onclick="location.href='{{ url('/clients') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Back</button>
+            <button onclick="location.href='{{ url('/clients') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Enrere</button>
         </div>
     </div>
 </x-app-layout>

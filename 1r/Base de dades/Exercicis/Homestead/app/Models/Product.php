@@ -12,6 +12,6 @@ class Product extends Model
 
     public function invoices() : BelongsToMany
     {
-        return $this->belongsToMany(Invoice::class)->withTimestamps()->withPivot('product_name', 'quantity_product', 'price_product', 'price_before_iva', 'price_after_iva', 'applicated_iva');
+        return $this->belongsToMany(Invoice::class)->withTimestamps()->withPivot('quantity_product', 'price_before_iva', 'price_after_iva', 'applicated_iva');
     }
 }

@@ -20,6 +20,6 @@ class Invoice extends Model
 
     public function products() : BelongsToMany
     {
-        return $this->belongsToMany(Product::class)->withTimestamps()->withPivot('product_name', 'quantity_product', 'price_product', 'price_before_iva', 'price_after_iva', 'applicated_iva');
+        return $this->belongsToMany(Product::class)->withTimestamps()->withPivot('quantity_product', 'price_before_iva', 'price_after_iva', 'applicated_iva');
     }
 }

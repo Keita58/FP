@@ -12,6 +12,6 @@ class Client extends Model
 
     public function commands(): HasMany
     {
-        return $this->hasMany(Invoice::class);
+        return $this->hasMany('App\Models\Invoices', 'client_id', 'id');
     }
 }

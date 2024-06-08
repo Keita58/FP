@@ -53,6 +53,6 @@ Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
 
 Route::get('/invoice/list', [InvoiceController::class, 'list'])->name('invoice.list');
 
-Route::post('/invoice/create', [ClientController::class, 'create'])->name('invoice.create');
+Route::post('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
 
 require __DIR__.'/auth.php';

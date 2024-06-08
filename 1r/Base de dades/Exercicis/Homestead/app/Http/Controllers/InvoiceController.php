@@ -18,26 +18,39 @@ class InvoiceController extends Controller
     }
 
     public function create(Request $request) {
-        $request->validate([
+        /*$request->validate([
             '*.quantity' => 'required|integer|max:255|min:0'
-        ]);
+        ]);*/
+        $client_id = $request->input('users');
+        $products = $request->input('quantity');
+        Log::info('Productes: ', $products);
+        $ivas = $request->input('iva');
+        Log::info('IVAS: ', $ivas);
+        $names = $request->input('name');
+        Log::info('Names: ', $names);
+        $prices = $request->input('price');
+        Log::info('Prices: ', $prices);
 
-        $client_id = $request->input('client_id');
-        $products = $request->input('products');
         $invoice = new Invoice();
         $invoice->client()->associate($client_id);
-        foreach ($products as $product) {
-            $iva_producte = $product->iva;
-            $invoice->products()->attach([
-                'quantity_product' => $request->input('quantity'),
-                'price_product' => $product->price,
-                'price_before_iva' => $product->price,
-                'price_after_iva' => ($product->price*$iva_producte)/100,
-                'applicated_iva' => $iva_producte,
-            ]);
-            $product->save();
+        $num = 0;
+        foreach ($products as $product => $quantity_product) {
+            $num++;
+            $product = Product::find($num);
+            Log::info('Quantitat: ', $quantity_product);
+            if($quantity_product > 0){
+                $iva_producte = $ivas[$num];
+                $invoice->products()->attach($num, [
+                    'quantity_product' => $quantity_product,
+                    'price_before_iva' => $prices[$num],
+                    'price_after_iva' => $prices[$num]+($prices[$num]*$iva_producte)/100,
+                    'applicated_iva' => $iva_producte,
+                ]);
+                $product->quantity -= $quantity_product;
+                $product->save();
+            }
         }
-        return redirect()->route('invoice.list');
+        return redirect()->back();
     }
 
     public function list(Request $request) {

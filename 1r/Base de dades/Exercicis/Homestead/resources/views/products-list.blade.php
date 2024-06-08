@@ -23,9 +23,9 @@
         </table>
     </div>
     <div style="margin-top: 10px">
-        <label>Click here to insert a new product</label>
+        <label>Clica aquí per crear un nou producte</label>
         <br>
-        <button onclick="location.href='{{ url('/product/insert') }}'" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold">Insert</button>
+        <button onclick="location.href='{{ url('/product/insert') }}'" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold">Crea</button>
     </div>
 </x-app-layout>
 

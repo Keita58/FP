@@ -18,9 +18,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBiginteger('invoice_id');
             $table->unsignedBiginteger('product_id');
-            $table->string('product_name');
             $table->integer('quantity_product');
-            $table->integer('price_product');
             $table->integer('price_before_iva')->unsigned();
             $table->integer('price_after_iva')->unsigned();
             $table->integer('applicated_iva')->unsigned();

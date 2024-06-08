@@ -9,13 +9,13 @@
                 <th>Preu abans IVA</th>
                 <th>Preu després IVA</th>
             </tr>
-            @foreach($invoices as $invoice)
+            @foreach($invoices->products as $product)
                 <td>{{$invoice->pivot->name}}</td>
-                <td>{{$invoice->pivot->product_name}}</td>
-                <td>{{$invoice->pivot->quantity_product}}</td>
-                <td>{{$invoice->pivot->iva}}</td>
-                <td>{{$invoice->pivot->price_product}}</td>
-                <td>{{$invoice->pivot->price_after_iva}}</td>
+                <td>{{$product->pivot->product_name}}</td>
+                <td>{{$product->pivot->quantity_product}}</td>
+                <td>{{$product->pivot->iva}}</td>
+                <td>{{$product->pivot->price_before_iva}}</td>
+                <td>{{$product->pivot->price_after_iva}}</td>
             @endforeach
         </table>
     </div>

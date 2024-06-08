@@ -20,9 +20,9 @@
         </table>
     </div>
     <div style="margin-top: 10px">
-        <label>Click here to insert a new client</label>
+        <label>Clica aquí per a crear un nou client</label>
         <br>
-        <button onclick="location.href='{{ url('/client/insert') }}'" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold">Insert</button>
+        <button onclick="location.href='{{ url('/client/insert') }}'" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold">Crea</button>
     </div>
 </x-app-layout>
 
