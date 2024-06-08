@@ -31,7 +31,8 @@ class ClientController extends Controller
             'address' => 'required|string|max:1000',
             'age' => 'required|integer|max:500',
             'city' => 'required|string|max:255',
-            'country' => 'required|string|max:255'
+            'country' => 'required|string|max:255',
+            'money' => 'required|integer|max:500',
         ]);
         $client = new Client();
         $client->name = $request->input('name');
@@ -39,6 +40,7 @@ class ClientController extends Controller
         $client->address = $request->input('address');
         $client->city = $request->input('city');
         $client->country = $request->input('country');
+        $client->money = $request->input('money');
         //$products->display_order = $products->id;
         $client->save();
         return redirect('clients');

@@ -1,33 +1,28 @@
-<link rel="stylesheet" type="text/css" href="{{ url('/resources/css/menu.css') }}"/>
-<nav class="flex flex-1 justify-begin background">
-    <a href="{{ route('inici') }}" class="lletraMenu primer">
-        Home
-    </a>
-    <a href="{{ route('products.list') }}" class="lletraMenu">
-        Products
-    </a>
-</nav>
-<div>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Delete</th>
-        </tr>
-        @foreach ($clients as $client)
-            <tr style="">
-                <td>{{ $client->name }}</td>
-                <td>{{ $client->age }}</td>
-                <td>{{ $client->address }}, {{ $client->city }}, {{ $client->country }}</td>
-                <td><button onclick="location.href='{{ url('/client/'.$client->id.'/warn') }}'">Delete</button></td>
-            </tr>
-        @endforeach
-    </table>
-    <br>
+<x-app-layout>
     <div>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Edat</th>
+                <th>Adreça</th>
+                <th>Monedes</th>
+                <th></th>
+            </tr>
+            @foreach ($clients as $client)
+                <tr style="">
+                    <td>{{ $client->name }}</td>
+                    <td>{{ $client->age }}</td>
+                    <td>{{ $client->address }}, {{ $client->city }}, {{ $client->country }}</td>
+                    <td>{{ $client->money }}</td>
+                    <td><button onclick="location.href='{{ url('/client/'.$client->id.'/warn') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Delete</button></td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+    <div style="margin-top: 10px">
         <label>Click here to insert a new client</label>
         <br>
-        <button onclick="location.href='{{ url('/client/insert') }}'">Insert</button>
+        <button onclick="location.href='{{ url('/client/insert') }}'" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold">Insert</button>
     </div>
-</div>
+</x-app-layout>
+

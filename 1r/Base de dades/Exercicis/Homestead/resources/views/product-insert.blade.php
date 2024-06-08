@@ -1,31 +1,22 @@
-<link rel="stylesheet" type="text/css" href="{{ url('/resources/css/menu.css') }}" />
-<nav class="flex flex-1 justify-begin background">
-    <a href="{{ route('inici') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-        Home
-    </a>
-    <a href="{{ route('products.list') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-        Products
-    </a>
-    <a href="{{ route('clients.list') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-        Clients
-    </a>
-</nav>
-<div>
-    <form class="form-horizontal" method="POST" action="{{ route('product.create') }}">
-        @csrf
-        <label for="name">Nom:</label><br>
-        <input type="text" id="name" name="name"><br>
-        <label for="description">Descripció:</label><br>
-        <input type="text" id="description" name="description"><br>
-        <label for="price">Preu:</label><br>
-        <input type="number" id="price" name="price"><br>
-        <label for="quantity">Quantitat:</label><br>
-        <input type="number" id="quantity" name="quantity"><br>
-        <button type="submit" class="btn btn-primary">Create</button>
-    </form>
+<x-app-layout>
     <div>
-        <label>Go back</label>
-        <br>
-        <button onclick="location.href='{{ url('/products') }}'">Back</button>
+        <form class="form-horizontal" method="POST" action="{{ route('product.create') }}">
+            @csrf
+            <label for="name">Nom:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="description">Descripció:</label><br>
+            <input type="text" id="description" name="description"><br>
+            <label for="price">Preu:</label><br>
+            <input type="number" id="price" name="price"><br>
+            <label for="quantity">Quantitat:</label><br>
+            <input type="number" id="quantity" name="quantity"><br>
+            <label for="iva">IVA del producte:</label><br>
+            <input type="number" id="iva" name="iva"><br>
+            <button type="submit" class="btn btn-primary" style="background-color: green; color: white; border-radius: 5px; border: 1px solid black; font-weight: bold; margin-top: 5px">Create</button>
+        </form>
+        <div style="margin-top: 10px">
+            <button onclick="location.href='{{ url('/products') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Back</button>
+        </div>
     </div>
-</div>
+</x-app-layout>
+

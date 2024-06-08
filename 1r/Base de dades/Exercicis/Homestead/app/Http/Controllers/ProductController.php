@@ -33,13 +33,15 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'price' => 'required|integer|max:99999',
-            'quantity' => 'required|integer|max:255'
+            'quantity' => 'required|integer|max:255',
+            'iva' => 'required|integer|max:100',
         ]);
         $products = new Product();
         $products->name = $request->input('name');
         $products->description = $request->input('description');
         $products->price = $request->input('price');
         $products->quantity = $request->input('quantity');
+        $products->iva = $request->input('iva');
         $products->save();
         return redirect('products');
     }

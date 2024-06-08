@@ -17,8 +17,6 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-
-
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
@@ -28,8 +26,23 @@
                 </header>
             @endif
 
+            <nav class="flex bg-green-900 text-white justify-around">
+                <a href="{{ route('inici') }}" class="lletraMenu primer">
+                    Home
+                </a>
+                <a href="{{ route('products.list') }}" class="lletraMenu">
+                    Productes
+                </a>
+                <a href="{{ route('clients.list') }}" class="lletraMenu">
+                    Clients
+                </a>
+                <a href="{{ route('invoice.list') }}" class="lletraMenu">
+                    Comandes
+                </a>
+            </nav>
+
             <!-- Page Content -->
-            <main>
+            <main style="display: flex; flex-direction: column; justify-content: center; align-content: center; margin: 10px;">
                 {{ $slot }}
             </main>
         </div>
