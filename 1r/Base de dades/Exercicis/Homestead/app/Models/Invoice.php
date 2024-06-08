@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 class Invoice extends Model
 {
     use HasFactory;
-
+    protected $fillable=['client_id'];
     public function client() : BelongsTo
     {
         return $this->belongsTo(Client::class);

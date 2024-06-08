@@ -21,6 +21,7 @@ class InvoiceController extends Controller
         /*$request->validate([
             '*.quantity' => 'required|integer|max:255|min:0'
         ]);*/
+        Log::info('Request data: ', $request->all());
         $client_id = $request->input('users');
         $products = $request->input('quantity');
         Log::info('Productes: ', $products);
@@ -31,7 +32,9 @@ class InvoiceController extends Controller
         $prices = $request->input('price');
         Log::info('Prices: ', $prices);
 
-        $invoice = new Invoice();
+        $invoice = Invoice::create([
+            'client_id' => $client_id
+        ]);
         $invoice->client()->associate($client_id);
         $num = 0;
         foreach ($products as $product => $quantity_product) {
@@ -47,9 +50,9 @@ class InvoiceController extends Controller
                     'applicated_iva' => $iva_producte,
                 ]);
                 $product->quantity -= $quantity_product;
-                $product->save();
             }
         }
+        $invoice->save();
         return redirect()->back();
     }
 
