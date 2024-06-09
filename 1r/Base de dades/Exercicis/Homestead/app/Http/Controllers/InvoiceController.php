@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
@@ -18,9 +19,9 @@ class InvoiceController extends Controller
     }
 
     public function create(Request $request) {
-        /*$request->validate([
-            '*.quantity' => 'required|integer|max:255|min:0'
-        ]);*/
+        $request->validate([
+            'quantity.*.quantity' => 'required|integer|max:255|min:0'
+        ]);
         Log::info('Request data: ', $request->all());
         $client_id = $request->input('users');
         $products = $request->input('quantity');
@@ -35,29 +36,31 @@ class InvoiceController extends Controller
         $invoice = Invoice::create([
             'client_id' => $client_id
         ]);
-        $invoice->client()->associate($client_id);
+        $invoice->save();
         $num = 0;
-        foreach ($products as $product => $quantity_product) {
+        foreach ($products as $product) {
             $num++;
-            $product = Product::find($num);
-            Log::info('Quantitat: ', $quantity_product);
-            if($quantity_product > 0){
+            $num_items = Product::find($num);
+            //Log::info('Descripcio item: ', $num_items);
+            Log::info(Arr::get($product, 'quantity'));
+            if(Arr::get($product, 'quantity') > 0){
                 $iva_producte = $ivas[$num];
                 $invoice->products()->attach($num, [
-                    'quantity_product' => $quantity_product,
+                    'quantity_product' => Arr::get($product, 'quantity'),
                     'price_before_iva' => $prices[$num],
                     'price_after_iva' => $prices[$num]+($prices[$num]*$iva_producte)/100,
                     'applicated_iva' => $iva_producte,
                 ]);
-                $product->quantity -= $quantity_product;
+                $num_items->quantity -= Arr::get($product, 'quantity');
             }
         }
-        $invoice->save();
-        return redirect()->back();
+        return redirect('invoice/list');
     }
 
     public function list(Request $request) {
-        $invoices = Invoice::with('products', 'clients')->get();
+        $invoices = Invoice::find(1)->products()->orderBy('name')->get();
+        print_r(Arr::get($invoices, 'id'));
+        Log::info('Invoices: ', (array)$invoices);
         return view('invoice-list')->with('invoices', $invoices);
     }
 }
