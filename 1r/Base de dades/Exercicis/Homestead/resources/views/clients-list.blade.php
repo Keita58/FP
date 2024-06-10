@@ -1,7 +1,7 @@
 <x-app-layout>
     <div>
-        <table>
-            <tr>
+        <table style="width: 75%">
+            <tr style="text-align: left">
                 <th>Nom</th>
                 <th>Edat</th>
                 <th>Adreça</th>
@@ -9,10 +9,10 @@
                 <th></th>
             </tr>
             @foreach ($clients as $client)
-                <tr style="">
+                <tr>
                     <td>{{ $client->name }}</td>
                     <td>{{ $client->age }}</td>
-                    <td>{{ $client->address }}, {{ $client->city }}, {{ $client->country }}</td>
+                    <td style="width: 45%">{{ $client->address }}, {{ $client->city }}, {{ $client->country }}</td>
                     <td>{{ $client->money }}</td>
                     <td><button onclick="location.href='{{ url('/client/'.$client->id.'/warn') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Delete</button></td>
                 </tr>

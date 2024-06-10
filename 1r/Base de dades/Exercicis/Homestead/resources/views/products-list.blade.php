@@ -1,7 +1,7 @@
 <x-app-layout>
     <div>
-        <table>
-            <tr>
+        <table style="width: 50%">
+            <tr style="text-align: left">
                 <th>Nom</th>
                 <th>Cost</th>
                 <th>Descripció</th>

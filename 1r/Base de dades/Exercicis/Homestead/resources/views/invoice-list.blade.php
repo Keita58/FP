@@ -1,7 +1,16 @@
 <x-app-layout>
     <div>
-        <table>
-            <tr>
+        <h1>Selecciona l'usuari de qui vols veure les comandes:</h1>
+        <select id="users" name="users">
+            <option value="none" disabled>Tots</option>
+            @foreach($clients as $client)
+                <option value={{$client->id}}>{{ $client->name }}</option>
+            @endforeach
+        </select>
+        <br>
+        <h1>Comandes:</h1>
+        <table style="width: 100%">
+            <tr style="text-align: left">
                 <th>Client</th>
                 <th>Producte</th>
                 <th>Quantitat</th>
@@ -9,13 +18,17 @@
                 <th>Preu abans IVA</th>
                 <th>Preu després IVA</th>
             </tr>
-            @foreach($invoices->products as $product)
-                <td>{{$invoice->pivot->name}}</td>
-                <td>{{$product->pivot->product_name}}</td>
-                <td>{{$product->pivot->quantity_product}}</td>
-                <td>{{$product->pivot->iva}}</td>
-                <td>{{$product->pivot->price_before_iva}}</td>
-                <td>{{$product->pivot->price_after_iva}}</td>
+            @foreach($invoices as $invoice)
+                @foreach($invoice->products as $product)
+                    <tr>
+                        <td>{{$invoice->client->name}}</td>
+                        <td>{{$product->name}}</td>
+                        <td>{{$product->pivot->quantity_product}}</td>
+                        <td>{{$product->iva}}</td>
+                        <td>{{$product->pivot->price_before_iva}}</td>
+                        <td>{{$product->pivot->price_after_iva}}</td>
+                    </tr>
+                @endforeach
             @endforeach
         </table>
     </div>

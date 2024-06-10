@@ -41,9 +41,9 @@ class InvoiceController extends Controller
         foreach ($products as $product) {
             $num++;
             $num_items = Product::find($num);
-            //Log::info('Descripcio item: ', $num_items);
+            // * Aquest Arr::get serveix per agafar la info de la quantitat de productes, ja que està en el format {quantity: 1}
             Log::info(Arr::get($product, 'quantity'));
-            if(Arr::get($product, 'quantity') > 0){
+            if(Arr::get($product, 'quantity') > 0 && $num_items->quantity > 0) {
                 $iva_producte = $ivas[$num];
                 $invoice->products()->attach($num, [
                     'quantity_product' => Arr::get($product, 'quantity'),
@@ -52,15 +52,19 @@ class InvoiceController extends Controller
                     'applicated_iva' => $iva_producte,
                 ]);
                 $num_items->quantity -= Arr::get($product, 'quantity');
+                $num_items->save();
+            }
+            else if ($num_items->quantity == 0 && Arr::get($product, 'quantity') > 0) {
+                return redirect('invoice')->with('fail', 'Estàs intentant comprar ítems quan no en queden');
             }
         }
         return redirect('invoice/list');
     }
 
     public function list(Request $request) {
-        $invoices = Invoice::find(1)->products()->orderBy('name')->get();
-        print_r(Arr::get($invoices, 'id'));
-        Log::info('Invoices: ', (array)$invoices);
-        return view('invoice-list')->with('invoices', $invoices);
+        // * El with està perquè així podem agafar les dues relacions que tenim en el model i poder agafar els noms dels clients i productes sense problemes
+        $invoices = Invoice::with('products', 'client')->get();
+        $clients = Client::all();
+        return view('invoice-list')->with('invoices', $invoices)->with('clients', $clients);
     }
 }
