@@ -29,10 +29,10 @@ class ClientController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:1000',
-            'age' => 'required|integer|max:500',
+            'age' => 'required|integer|max:500|min:1',
             'city' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            'money' => 'required|integer|max:500',
+            'money' => 'required|integer|max:999999999|min:0',
         ]);
         $client = new Client();
         $client->name = $request->input('name');
@@ -41,7 +41,6 @@ class ClientController extends Controller
         $client->city = $request->input('city');
         $client->country = $request->input('country');
         $client->money = $request->input('money');
-        //$products->display_order = $products->id;
         $client->save();
         return redirect('clients');
     }

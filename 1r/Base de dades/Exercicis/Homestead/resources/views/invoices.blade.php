@@ -5,7 +5,7 @@
             <label for="users">Tria el teu usuari:</label>
             <select id="users" name="users">
                 @foreach($clients as $client)
-                    <option value={{$client->id}}>{{ $client->name }}</option>
+                    <option value={{$client->id}}>{{ $client->name }}, Diners: {{$client->money}}</option>
                 @endforeach
             </select>
             <br>
@@ -21,8 +21,8 @@
                 @foreach($products as $product)
                     <tr>
                         <td>{{$product->name}}</td>
-                        <td>{{$product->price}}</td>
-                        <td>{{$product->quantity}}</td>
+                        <td style="text-align: center">{{$product->price}}</td>
+                        <td style="text-align: center">{{$product->quantity}}</td>
                         <td><input type="number" name="quantity[{{$product->id}}][quantity]" placeholder="Quantitat" value="0"/></td>
                         <input type="hidden" name="iva[{{$product->id}}]" value="{{$product->iva}}">
                         <input type="hidden" name="price[{{$product->id}}]" value="{{$product->price}}">
