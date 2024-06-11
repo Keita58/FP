@@ -11,7 +11,7 @@
             <br>
             <label>Tria quins productes vols comprar:</label>
             <br>
-            <table>
+            <table style="width: 75%">
                 <tr>
                     <th>Nom</th>
                     <th>Monedes</th>

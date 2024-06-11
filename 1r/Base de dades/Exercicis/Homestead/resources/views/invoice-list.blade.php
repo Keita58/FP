@@ -13,6 +13,7 @@
         <h1>Comandes:</h1>
         <table style="width: 100%">
             <tr style="text-align: left">
+                <th>Num</th>
                 <th>Client</th>
                 <th>Producte</th>
                 <th>Quantitat</th>
@@ -24,6 +25,7 @@
             @foreach($invoices as $invoice)
                 @foreach($invoice->products as $product)
                     <tr>
+                        <td>{{$invoice->id}}</td>
                         <td>{{$invoice->client->name}}</td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->pivot->quantity_product}}</td>
