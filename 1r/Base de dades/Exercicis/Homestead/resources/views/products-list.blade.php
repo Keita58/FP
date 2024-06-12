@@ -16,7 +16,7 @@
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->quantity }}</td>
                     <td>{{ $product->iva }}</td>
-                    <td><button onclick="location.href='{{ url('/product/'.$product->id.'/warn') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Delete</button></td>
+                    <td><button onclick="location.href='{{ url('/product/'.$product->id.'/warn') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Elimina</button></td>
                     <!-- Aquest botó ens porta directament al link d'eliminació del producte -->
                 </tr>
             @endforeach

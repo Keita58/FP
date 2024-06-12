@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Invoice;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +14,13 @@ class InvoiceProductSeed extends Seeder
      */
     public function run(): void
     {
+        /**
+         * D'aquesta manera estem agafant l'últim id creat a invoices per a poder crear una fila a la taula intermitja
+         * sense problemes de que o no aparegui o de duplicats.
+         */
+        $ultimId = Invoice::all()->last()->id;
         DB::table('invoice_product')->insert([
-            'invoice_id' => 1,
+            'invoice_id' => $ultimId,
             'product_id' => 1,
             'quantity_product' => 1,
             'price_before_iva' => 10,

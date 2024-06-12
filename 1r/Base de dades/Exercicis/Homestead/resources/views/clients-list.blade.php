@@ -14,7 +14,7 @@
                     <td>{{ $client->age }}</td>
                     <td style="width: 45%">{{ $client->address }}, {{ $client->city }}, {{ $client->country }}</td>
                     <td>{{ $client->money }}</td>
-                    <td><button onclick="location.href='{{ url('/client/'.$client->id.'/warn') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Delete</button></td>
+                    <td><button onclick="location.href='{{ url('/client/'.$client->id.'/warn') }}'" style="border: 1px solid black; border-radius: 5px; background-color: red; color: white; font-weight: bold">Elimina</button></td>
                 </tr>
             @endforeach
         </table>

@@ -12,7 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         /**
-         * La taula pivot té tota la informació de les comandes
+         * La taula pivot té:
+         * - Id de la comanda.
+         * - Id del producte que es compra.
+         * - La quantitat del producte que es compra.
+         * - El preu abans d'afegir l'IVA.
+         * - El preu després d'afegir l'IVA.
+         * - L'IVA afegit al producte.
+         * - El moment en el que es realitza la compra.
          */
         Schema::create('invoice_product', function (Blueprint $table) {
             $table->id();
