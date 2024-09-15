@@ -1,0 +1,7 @@
+Android studio - página web (Koala ver.)
+Nou projecte sense flutter -> Empty views activity (llenguatge: Java)
+Projectes creats individualment, cap projecte dins d'un altre
+Barra dreta -> Running devices
+Màquina virtual creada a la C (usuari -> .Android -> avd -> màquina)
+No apagar la máquina cada vegada que hem acabat de probar el codi, li donem a running devices i desapareix
+Cada view té una id pròpia

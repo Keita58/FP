@@ -1,0 +1,1 @@
+Espai a dalt -> paddingTop (al layout corresponent)
