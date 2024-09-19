@@ -19,7 +19,10 @@ public class Bala : MonoBehaviour
         if(collision.transform.tag == "Mort")
         {
             Destroy(this.gameObject);
-            print("mort aaaa");
+        }
+        if (collision.transform.tag == "BalaAmiga")
+        {
+            //Posar que no afecti
         }
     }
 }
