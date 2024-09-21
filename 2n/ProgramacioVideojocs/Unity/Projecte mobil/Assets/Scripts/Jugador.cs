@@ -39,7 +39,7 @@ namespace jugador
 
         private void moviment()
         {
-            _Rigidbody.velocity = _Moviment.ReadValue<Vector2>() * 1.5f;
+            _Rigidbody.velocity = _Moviment.ReadValue<Vector2>() * 2f;
         }
 
         private void dispara(InputAction.CallbackContext callbackContext)

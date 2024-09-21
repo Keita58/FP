@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6afb27cec5ffffa498e2c444c4c720dc, type: 3}
-  m_Name: Enemics
+  m_Name: Enemic2
   m_EditorClassIdentifier: 
-  vides: 0
-  velocitat: 0
-  sprite: {fileID: 0}
+  vides: 4
+  velocitat: 1
+  sprite: {fileID: -5239757195476112093, guid: 477e499a5a0a11a4f92737f0b2f8249d, type: 3}
+  mal: 2

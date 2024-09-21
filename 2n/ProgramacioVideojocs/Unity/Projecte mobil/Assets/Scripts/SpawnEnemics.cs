@@ -1,20 +1,21 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SpawnEnemics : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] ScriptableObject _Enemic;
-    [SerializeField] ScriptableObject _Meteorit;
-    [SerializeField] ScriptableObject _Boss;
-    [SerializeField] Sprite[] _ImatgesEnemics;
-    [SerializeField] Sprite[] _ImatgesMeteorits;
-    [SerializeField] Sprite[] _ImatgesBoses;
+    [SerializeField] EnemicsSO[] _Enemic;
+    [SerializeField] Meteorits[] _Meteorit;
+    [SerializeField] Boses[] _Boss;
+    [SerializeField] GameObject _EnemicGO;
+    // Enemics -> 5 - Meteorits -> 4 - Boses -> 3
 
     void Start()
     {
         StartCoroutine(crear());
+        //StartCoroutine(boss());
     }
 
     // Update is called once per frame
@@ -27,48 +28,25 @@ public class SpawnEnemics : MonoBehaviour
     {
         while (true)
         {
-            /*int num = Random.Range(1, 4);
+            int num = Random.Range(2, 4);
             yield return new WaitForSeconds(num);
-            int enemicNum = Random.Range(1, 4);
-            int tipusEnemic = Random.Range
+            int enemicNum = Random.Range(0, 5);
+            GameObject enemicNau = Instantiate(_EnemicGO);
 
-            int posX = Random.Range(-4, 4);
-            int toca = Random.Range(0, 4);
-            switch (toca)
-            {
-                case 0:
-                    nau.transform.position = new Vector2(-9.6f, posY);
-                    break;
-                case 1:
-                    nau.transform.position = new Vector2(9.6f, posY);
-                    break;
-                case 2:
-                    nau.transform.position = new Vector2(posX, -5.6f);
-                    break;
-                case 3:
-                    nau.transform.position = new Vector2(posX, 5.6f);
-                    break;
-            }
-            nau.transform.up = jugador.transform.position - nau.transform.position;
-            nau.transform.Rotate(0, 0, 180);
-            switch (enemicNum)
-            {
-                case 1:
-                    nau.GetComponent<SpriteRenderer>().color = e1.color;
-                    nau.GetComponent<Rigidbody2D>().velocity = nau.transform.up * -e1.velocitat;
-                    nau.GetComponent<Nau>().mal = e1.perdreVides;
-                    break;
-                case 2:
-                    nau.GetComponent<SpriteRenderer>().color = e2.color;
-                    nau.GetComponent<Rigidbody2D>().velocity = nau.transform.up * -e2.velocitat;
-                    nau.GetComponent<Nau>().mal = e2.perdreVides;
-                    break;
-                case 3:
-                    nau.GetComponent<SpriteRenderer>().color = e3.color;
-                    nau.GetComponent<Rigidbody2D>().velocity = nau.transform.up * -e3.velocitat;
-                    nau.GetComponent<Nau>().mal = e3.perdreVides;
-                    break;
-            }*/
+            float posX = Random.Range(-2.8f, 3.0f);
+            enemicNau.transform.position = new Vector2(posX, 5.6f);
+            enemicNau.transform.tag = "Enemic";
+            enemicNau.GetComponent<Rigidbody2D>().velocity = -_Enemic[enemicNum].velocitat * enemicNau.transform.up;
+            enemicNau.GetComponent<Enemic>().mal = _Enemic[enemicNum].mal;
+            enemicNau.GetComponent<Enemic>().vides = _Enemic[enemicNum].vides;
+            enemicNau.GetComponent<Enemic>().punts = _Enemic[enemicNum].punts;
+            enemicNau.GetComponent<SpriteRenderer>().sprite = _Enemic[enemicNum].sprite;
+            enemicNau.transform.Rotate(0, 0, 180);            
         }
+    }
+
+    IEnumerator boss()
+    {
+        yield return new WaitForSeconds(60);
     }
 }

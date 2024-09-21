@@ -7,6 +7,8 @@ TagManager:
   - Mort
   - BalaAmiga
   - MortEnemic
+  - Enemic
+  - Meteorit
   layers:
   - Default
   - TransparentFX

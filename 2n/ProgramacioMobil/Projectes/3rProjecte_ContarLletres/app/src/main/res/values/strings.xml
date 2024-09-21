@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Contar_lletres</string>
+    <string name="text_Boto">Clica´m!</string>
+    <string name="text_hint">Escriu un text...</string>
+    <string name="text_lblLletre">Número de lletres: </string>
+    <string name="title_activity_main">Comptar Lletres V 2.0: </string>
+</resources>
