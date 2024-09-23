@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Mort
   - BalaAmiga
-  - MortEnemic
   - Enemic
   - Meteorit
+  - EliminaBala
   layers:
   - Default
   - TransparentFX

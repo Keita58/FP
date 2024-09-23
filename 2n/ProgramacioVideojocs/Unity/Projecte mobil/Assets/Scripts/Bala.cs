@@ -16,10 +16,9 @@ public class Bala : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.tag == "Mort")
+        if(collision.transform.tag == "EliminaBala")
         {
             Destroy(this.gameObject); 
         }
-
     }
 }

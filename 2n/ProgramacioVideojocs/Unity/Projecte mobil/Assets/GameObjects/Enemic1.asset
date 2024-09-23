@@ -16,3 +16,4 @@ MonoBehaviour:
   velocitat: 0.5
   sprite: {fileID: 1392089294744885835, guid: aea25a838b178164e8d1870303ed95bf, type: 3}
   mal: 1
+  punts: 100

@@ -41,7 +41,7 @@ public class SpawnEnemics : MonoBehaviour
             enemicNau.GetComponent<Enemic>().vides = _Enemic[enemicNum].vides;
             enemicNau.GetComponent<Enemic>().punts = _Enemic[enemicNum].punts;
             enemicNau.GetComponent<SpriteRenderer>().sprite = _Enemic[enemicNum].sprite;
-            enemicNau.transform.Rotate(0, 0, 180);            
+            enemicNau.transform.Rotate(0, 0, 180);
         }
     }
 
