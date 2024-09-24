@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] TextMeshProUGUI _Puntuacio;
     [SerializeField] TextMeshProUGUI _Vida;
+    [SerializeField] PuntsSO _PuntuacioSO;
     int _Punts = 0;
     int _Vides = 5;
 
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
     {
         _Punts += laguarrada;
         _Puntuacio.text = "Punts: " + (_Punts).ToString();
+        _PuntuacioSO.puntuacio = _Punts;
     }
 
     public void RestaVida()

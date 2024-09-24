@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 897017007}
   m_Layer: 0
   m_Name: Sostre
-  m_TagString: Untagged
+  m_TagString: EliminaBala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1583,6 +1583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Puntuacio: {fileID: 1032053342}
   _Vida: {fileID: 239790081}
+  _PuntuacioSO: {fileID: 11400000, guid: 1d1f930da753bd44a857cefbc7648d51, type: 2}
 --- !u!1 &1415714340
 GameObject:
   m_ObjectHideFlags: 0
