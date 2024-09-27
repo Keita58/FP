@@ -14,6 +14,8 @@ public class ClassePare {
 			executor.execute(new ClasseFill(i));
 		}
 		
+		executor.shutdown(); //<- Necessari per tancar el codi quan tots els threads hagin acabat abans del try catch
+		
 		try {
 			Thread th = new Thread(new Temp(5)); //Això és necessari perquè no ho posem amb l'executor, ha d'anar a part.
 			th.start();

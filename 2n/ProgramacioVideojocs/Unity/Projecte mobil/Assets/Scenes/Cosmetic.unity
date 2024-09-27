@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 100095880}
   - component: {fileID: 100095882}
   - component: {fileID: 100095883}
-  - component: {fileID: 100095884}
   m_Layer: 0
   m_Name: ship_F_0
   m_TagString: Untagged
@@ -266,36 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: 7182269146571354817, guid: 2234e656bf6951948a754c3cf83982ce, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &100095884
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100095879}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &148240469
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +278,6 @@ GameObject:
   - component: {fileID: 148240470}
   - component: {fileID: 148240472}
   - component: {fileID: 148240473}
-  - component: {fileID: 148240474}
   m_Layer: 0
   m_Name: ship_J_0
   m_TagString: Untagged
@@ -444,36 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: -8462956930825886630, guid: fe40ee6791bc3fa4fb4c06f43e851bae, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &148240474
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148240469}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &583468250
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +426,6 @@ GameObject:
   - component: {fileID: 583468251}
   - component: {fileID: 583468253}
   - component: {fileID: 583468254}
-  - component: {fileID: 583468255}
   m_Layer: 0
   m_Name: ship_G_0
   m_TagString: Untagged
@@ -622,36 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: 1596889407484746599, guid: b7c80ae90bd69674fb30bb5157ffae07, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &583468255
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583468250}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &597451324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,11 +1034,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jugador
       objectReference: {fileID: 0}
+    - target: {fileID: 8896502094432879948, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _PlayerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+--- !u!114 &965506075 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8896502094432879948, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+  m_PrefabInstance: {fileID: 965506074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8312f7b264a0614889701fcb9714000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1090272158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,7 +1066,6 @@ GameObject:
   - component: {fileID: 1090272159}
   - component: {fileID: 1090272161}
   - component: {fileID: 1090272162}
-  - component: {fileID: 1090272163}
   m_Layer: 0
   m_Name: ship_A_0
   m_TagString: Untagged
@@ -1277,36 +1201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: 2714203012980837920, guid: 4e9dd718c9de5d9438c8d71d74a6e693, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &1090272163
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090272158}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &1137992694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1214,6 @@ GameObject:
   - component: {fileID: 1137992695}
   - component: {fileID: 1137992697}
   - component: {fileID: 1137992698}
-  - component: {fileID: 1137992699}
   m_Layer: 0
   m_Name: ship_I_0
   m_TagString: Untagged
@@ -1455,36 +1349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: -164728908249693182, guid: ba13899420e122f48b77e9cbc7f9320d, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &1137992699
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137992694}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &1154097716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,7 +1362,6 @@ GameObject:
   - component: {fileID: 1154097717}
   - component: {fileID: 1154097719}
   - component: {fileID: 1154097720}
-  - component: {fileID: 1154097721}
   m_Layer: 0
   m_Name: ship_L_0
   m_TagString: Untagged
@@ -1633,36 +1497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: -4433381054564536814, guid: efdae27252c527d4abbb4ee1333a5b2a, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &1154097721
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154097716}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &1197422806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1510,6 @@ GameObject:
   - component: {fileID: 1197422807}
   - component: {fileID: 1197422809}
   - component: {fileID: 1197422810}
-  - component: {fileID: 1197422811}
   m_Layer: 0
   m_Name: ship_B_0
   m_TagString: Untagged
@@ -1811,36 +1645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: 1380014096762435831, guid: 009bf2be1a13e524098c5a2dfb699b84, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &1197422811
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197422806}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &1204997665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,6 +1658,7 @@ GameObject:
   - component: {fileID: 1204997667}
   - component: {fileID: 1204997666}
   - component: {fileID: 1204997669}
+  - component: {fileID: 1204997670}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1978,6 +1784,22 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1204997670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204997665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1426339254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,7 +1812,6 @@ GameObject:
   - component: {fileID: 1426339255}
   - component: {fileID: 1426339257}
   - component: {fileID: 1426339258}
-  - component: {fileID: 1426339259}
   m_Layer: 0
   m_Name: ship_K_0
   m_TagString: Untagged
@@ -2126,36 +1947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: -3070075143007470126, guid: 2d033819c5e76b943b9a326df924f1fa, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &1426339259
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426339254}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &1452941882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,7 +1960,6 @@ GameObject:
   - component: {fileID: 1452941883}
   - component: {fileID: 1452941885}
   - component: {fileID: 1452941886}
-  - component: {fileID: 1452941887}
   m_Layer: 0
   m_Name: ship_H_0
   m_TagString: Untagged
@@ -2304,36 +2095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: 5891586112367536921, guid: 74f877193f7a278439af58c668eb1fc9, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &1452941887
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452941882}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &1562460689
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,7 +2186,6 @@ GameObject:
   - component: {fileID: 1649425024}
   - component: {fileID: 1649425026}
   - component: {fileID: 1649425027}
-  - component: {fileID: 1649425028}
   m_Layer: 0
   m_Name: ship_D_0
   m_TagString: Untagged
@@ -2560,36 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: 193971175507206871, guid: fffb260a22da5414a9207b2aecc5ee73, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &1649425028
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649425023}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &1700552476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2602,7 +2334,6 @@ GameObject:
   - component: {fileID: 1700552477}
   - component: {fileID: 1700552479}
   - component: {fileID: 1700552480}
-  - component: {fileID: 1700552481}
   m_Layer: 0
   m_Name: ship_E_0
   m_TagString: Untagged
@@ -2738,36 +2469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: 1041961173196304559, guid: af98ff7c2cabba44880e6c9103291672, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &1700552481
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700552476}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1 &1752306575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,7 +2585,6 @@ GameObject:
   - component: {fileID: 2016084796}
   - component: {fileID: 2016084798}
   - component: {fileID: 2016084799}
-  - component: {fileID: 2016084800}
   m_Layer: 0
   m_Name: ship_C_0
   m_TagString: Untagged
@@ -3019,36 +2720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  post: {fileID: 3735598107444979727, guid: c3b5cb012a6583d44af03f4ffd2e00f5, type: 3}
-  jugador: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!50 &2016084800
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016084795}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  _Jugador: {fileID: 965506075}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

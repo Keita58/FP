@@ -39,7 +39,7 @@ public class SpawnEnemics : MonoBehaviour
             int enemicNum = Random.Range(0, 5);
             GameObject enemicNau = Instantiate(_EnemicGO);
 
-            float posX = Random.Range(-2.8f, 3.0f);
+            float posX = Random.Range(-2.6f, 2.6f);
             enemicNau.transform.position = new Vector2(posX, 5.6f);
             enemicNau.transform.tag = "Enemic";
             enemicNau.GetComponent<Rigidbody2D>().velocity = -_Enemic[enemicNum].velocitat * enemicNau.transform.up;

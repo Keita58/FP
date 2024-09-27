@@ -1,16 +1,13 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CanviSkin : MonoBehaviour
+
+public class CanviSkin : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] JugadorSO pre;
-    [SerializeField] Sprite post;
-    [SerializeField] GameObject jugador;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        pre.sprite = post;
-        jugador.GetComponent<SpriteRenderer>().sprite = post;
-    }
+    [SerializeField] Jugador _Jugador;
 
-    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        _Jugador.SetSkin(GetComponent<SpriteRenderer>().sprite);
+    }
 }

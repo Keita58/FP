@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -9,18 +10,25 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _Puntuacio;
     [SerializeField] TextMeshProUGUI _Vida;
     [SerializeField] PuntsSO _PuntuacioSO;
-    int _Punts = 0;
-    int _Vides = 5;
+    int _Punts;
+    int _Vides;
+    int _Segons;
 
     void Start()
     {
-        
+        _Punts = 0;
+        _Vides = 5;
+        _Segons = 0;
+        StartCoroutine(temps());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator temps()
     {
-        
+        while (true)
+        {
+            _Segons++;
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public void IncrementarPuntuacio(int laguarrada)
@@ -32,12 +40,14 @@ public class UIManager : MonoBehaviour
 
     public void RestaVida()
     {
-        if (_Vides > 1) 
+        if (_Vides > 1)
         {
             _Vida.text = "Vida: " + (--_Vides).ToString();
         }
         else
+        {
+            _PuntuacioSO.temps = _Segons;
             SceneManager.LoadScene("Fi");
-        
+        }
     }
 }

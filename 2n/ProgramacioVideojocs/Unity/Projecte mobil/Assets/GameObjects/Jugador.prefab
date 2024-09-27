@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1200385172250791825}
   - component: {fileID: 8896502094432879948}
   - component: {fileID: 4518149195418135425}
-  - component: {fileID: 389915410127908539}
+  - component: {fileID: -6855785047376558362}
   m_Layer: 0
   m_Name: Jugador
   m_TagString: Player
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2714203012980837920, guid: 4e9dd718c9de5d9438c8d71d74a6e693, type: 3}
+  m_Sprite: {fileID: -8462956930825886630, guid: fe40ee6791bc3fa4fb4c06f43e851bae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Bala: {fileID: 6555481038177275033, guid: a58a8387f7f5fed45b787222b20c2fcb, type: 3}
   _Action: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _PlayerData: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
 --- !u!50 &4518149195418135425
 Rigidbody2D:
   serializedVersion: 4
@@ -131,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &389915410127908539
+--- !u!70 &-6855785047376558362
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,6 +166,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.005055502, y: 0.015166283}
-  m_Size: {x: 0.4276686, y: 0.93321943}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.66, y: 0.98}
   m_Direction: 0

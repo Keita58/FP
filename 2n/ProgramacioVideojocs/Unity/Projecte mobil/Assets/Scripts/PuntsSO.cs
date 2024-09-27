@@ -4,4 +4,5 @@ using UnityEngine;
 public class PuntsSO : ScriptableObject
 {
     public int puntuacio;
+    public int temps;
 }
