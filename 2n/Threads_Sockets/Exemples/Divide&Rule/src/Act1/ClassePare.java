@@ -8,14 +8,17 @@ import java.util.concurrent.Future;
 
 public class ClassePare {
 
+	static int N_VALORS = 100000;
+	static int NUMS = 2000000;
+
 	public static void main(String[] args) {
 		
 		ArrayList<Integer> llistaNum = new ArrayList<>();
 		Random r = new Random();
 		ExecutorService executor = Executors.newFixedThreadPool(1);
 
-		for(long i = 0; i < 2000000; i++) {
-			llistaNum.add(r.nextInt(2000000));
+		for(long i = 0; i < N_VALORS; i++) {
+			llistaNum.add(r.nextInt(NUMS));
 		}
 		long tempsInici = System.nanoTime();
 		Future<Integer[]> futur = executor.submit(new ClasseFill(llistaNum));

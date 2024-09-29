@@ -9,6 +9,9 @@ import java.util.concurrent.Future;
 
 public class ClassePare {
 
+	static int N_VALORS = 100000;
+	static int NUMS = 2000000;
+
 	public static void main(String[] args) {
 		
 		List<Integer> llistaNum = new ArrayList<>();
@@ -17,14 +20,14 @@ public class ClassePare {
 		Runtime runtime = Runtime.getRuntime();
 		System.out.println("Processadors disponibles: " + runtime.availableProcessors());
 
-		for(long i = 0; i < 2000000; i++) {
-			llistaNum.add(r.nextInt(2000000));
+		for(long i = 0; i < N_VALORS; i++) {
+			llistaNum.add(r.nextInt(NUMS));
 		}
 		int sub = runtime.availableProcessors(); // Per quant hem de subdividir la llista
 		List<List<Integer>> nombreLlistes = new ArrayList<>();
 
 		for(int i = 0; i < sub; i++) {
-			nombreLlistes.add(llistaNum.subList((i*2000000)/sub, ((i+1)*2000000)/sub));
+			nombreLlistes.add(llistaNum.subList((i*N_VALORS)/sub, ((i+1)*N_VALORS)/sub));
 		}
 		long tempsInici = System.nanoTime();
 		ArrayList<Future<Integer[]>> futurs = new ArrayList<>();

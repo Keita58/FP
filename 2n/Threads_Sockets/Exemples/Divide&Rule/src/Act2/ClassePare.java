@@ -9,17 +9,20 @@ import java.util.concurrent.Future;
 
 public class ClassePare {
 
+	static int N_VALORS = 100000;
+	static int NUMS = 2000000;
+
 	public static void main(String[] args) {
 		
 		List<Integer> llistaNum = new ArrayList<>();
 		Random r = new Random();
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 
-		for(long i = 0; i < 2000000; i++) {
-			llistaNum.add(r.nextInt(2000000));
+		for(long i = 0; i < N_VALORS; i++) {
+			llistaNum.add(r.nextInt(NUMS));
 		}
-		List<Integer> llista1 = llistaNum.subList(0, 1000000);
-		List<Integer> llista2 = llistaNum.subList(1000000, 2000000);
+		List<Integer> llista1 = llistaNum.subList(0, N_VALORS/2);
+		List<Integer> llista2 = llistaNum.subList(N_VALORS/2, N_VALORS);
 		long tempsInici = System.nanoTime();
 		ArrayList<Future<Integer[]>> futurs = new ArrayList<>();
 
