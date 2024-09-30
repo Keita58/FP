@@ -6,11 +6,13 @@ public class Enemic : MonoBehaviour
     public int mal;
     public int vides;
     public int punts;
+    public int videsMax;
     [SerializeField] private GameEvent _Event;
+    [SerializeField] HealthBar vidaPantalla;
 
     void Start()
     {
-        
+        videsMax = vides;
     }
 
     // Update is called once per frame
@@ -38,7 +40,10 @@ public class Enemic : MonoBehaviour
                 Destroy(this.gameObject);
             }
             else
+            {
                 vides--;
+                vidaPantalla.UpdateHealth();
+            }
             Destroy(collision.gameObject);
         }
     }
