@@ -59,6 +59,7 @@ public class Jugador : MonoBehaviour
     {
         if (callbackContext.phase.ToString() == "Started")
         {
+            GetComponent<AudioSource>().Play();
             GameObject BalaCopia = Instantiate(_Bala);
             BalaCopia.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 0.5f);
             BalaCopia.GetComponent<Rigidbody2D>().velocity = this.transform.up * 2;

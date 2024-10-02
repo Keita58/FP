@@ -7,12 +7,14 @@ public class Enemic : MonoBehaviour
     public int vides;
     public int punts;
     public int videsMax;
+    private GameObject soToc;
     [SerializeField] private GameEvent _Event;
     [SerializeField] HealthBar vidaPantalla;
 
     void Start()
     {
         videsMax = vides;
+        soToc = GameObject.Find("SoToc");
     }
 
     // Update is called once per frame
@@ -38,13 +40,13 @@ public class Enemic : MonoBehaviour
             {
                 _Event.Raise(punts);
                 Destroy(this.gameObject);
+                soToc.GetComponent<AudioSource>().Play();
             }
             else
             {
                 vides--;
                 vidaPantalla.UpdateHealth();
             }
-            Destroy(collision.gameObject);
         }
     }
 }

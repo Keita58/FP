@@ -9,5 +9,6 @@ public class CanviSkin : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         _Jugador.SetSkin(GetComponent<SpriteRenderer>().sprite);
+        GetComponent<AudioSource>().Play();
     }
 }

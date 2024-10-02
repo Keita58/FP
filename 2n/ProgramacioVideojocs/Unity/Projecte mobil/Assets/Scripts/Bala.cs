@@ -2,6 +2,7 @@
 
 public class Bala : MonoBehaviour
 {
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +20,11 @@ public class Bala : MonoBehaviour
         if(collision.transform.tag == "EliminaBala")
         {
             Destroy(this.gameObject); 
+        }
+        if(collision.transform.tag == "Enemic")
+        {
+            
+            Destroy(this.gameObject);
         }
     }
 }
