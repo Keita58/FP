@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         View.OnClickListener oclPetit = new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
                 txtPatata.setTextSize(TypedValue.COMPLEX_UNIT_PX,txtPatata.getTextSize() - 3f);
             }
         };
