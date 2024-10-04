@@ -24,8 +24,11 @@ public class MainActivity extends AppCompatActivity {
     String simbol = "";
     boolean negatiuNum = false;
     boolean divZero = false;
+    boolean calculat = false;
+    float numMemoria = 0;
+    boolean infoMemoria = false;
 
-    DecimalFormat df = new DecimalFormat("#.####");
+    DecimalFormat df = new DecimalFormat("#.#####");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView text = (TextView) findViewById(R.id.Text);
+        TextView calculMostra = (TextView) findViewById(R.id.CalculMostra);
 
         Button Num_0 = (Button) findViewById(R.id.Num_0);
         Button Num_1 = (Button) findViewById(R.id.Num_1);
@@ -63,64 +67,82 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(view.getId() == R.id.Num_0){
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"0");
                     else if(divZero)
                         text.setText("0");
                 }
                 else if(view.getId() == R.id.Num_1) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"1");
-                    else
+                    else {
                         text.setText("1");
+                        calculat = false;
+                    }
                 }
                 else if(view.getId() == R.id.Num_2) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"2");
-                    else
+                    else{
                         text.setText("2");
+                        calculat = false;
+                    }
                 }
                 else if(view.getId() == R.id.Num_3) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"3");
-                    else
+                    else{
                         text.setText("3");
+                        calculat = false;
+                    }
                 }
                 else if(view.getId() == R.id.Num_4) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"4");
-                    else
+                    else{
                         text.setText("4");
+                        calculat = false;
+                    }
                 }
                 else if(view.getId() == R.id.Num_5) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"5");
-                    else
+                    else{
                         text.setText("5");
+                        calculat = false;
+                    }
                 }
                 else if(view.getId() == R.id.Num_6) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"6");
-                    else
+                    else{
                         text.setText("6");
+                        calculat = false;
+                    }
                 }
                 else if(view.getId() == R.id.Num_7) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"7");
-                    else
+                    else{
                         text.setText("7");
+                        calculat = false;
+                    }
                 }
                 else if(view.getId() == R.id.Num_8) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"8");
-                    else
+                    else{
                         text.setText("8");
+                        calculat = false;
+                    }
                 }
                 else if(view.getId() == R.id.Num_9) {
-                    if(!text.getText().equals("0") && !divZero)
+                    if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"9");
-                    else
+                    else{
                         text.setText("9");
+                        calculat = false;
+                    }
                 }
                 if(divZero)
                     divZero = false;
@@ -148,16 +170,17 @@ public class MainActivity extends AppCompatActivity {
                     simbol = "";
                     num1Ocupat = false;
                     decimal = false;
+                    calculMostra.setText("");
                 }
                 if(!divZero) {
                     if(view.getId() == R.id.Calc_Decimal) {
-                        if(!decimal && text.getText() != "") {
+                        if(!decimal && !text.getText().equals("")) {
                             text.setText(text.getText()+".");
                             decimal = true;
                         }
                     }
                     else if(view.getId() == R.id.Calc_Igual) {
-                        if(text.getText() != "") {
+                        if(!text.getText().equals("")) {
                             switch (simbol) {
                                 case "+":
                                     float aux = Float.parseFloat(text.getText().toString());
@@ -189,9 +212,10 @@ public class MainActivity extends AppCompatActivity {
                         simbol = "";
                         num1Ocupat = false;
                         decimal = false;
+                        calculat = true;
                     }
                     else if(view.getId() == R.id.Calc_Div) {
-                        if(text.getText() != "") {
+                        if(!text.getText().equals("")) {
                             if(num1Ocupat)
                                 num1 /= Float.parseFloat(text.getText().toString());
                             else {
@@ -204,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     else if(view.getId() == R.id.Calc_Mult) {
-                        if(text.getText() != "") {
+                        if(!text.getText().equals("")) {
                             if(num1Ocupat)
                                 num1 *= Float.parseFloat(text.getText().toString());
                             else {
@@ -217,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     else if(view.getId() == R.id.Calc_Resta) {
-                        if(text.getText() != "") {
+                        if(!text.getText().equals("")) {
                             if(num1Ocupat)
                                 num1 -= Float.parseFloat(text.getText().toString());
                             else {
@@ -245,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     else if(view.getId() == R.id.Calc_Suma) {
-                        if(text.getText() != "") {
+                        if(!text.getText().equals("")) {
                             if(num1Ocupat)
                                 num1 += Float.parseFloat(text.getText().toString());
                             else {
@@ -256,6 +280,24 @@ public class MainActivity extends AppCompatActivity {
                             simbol = "+";
                             decimal = false;
                         }
+                    }
+                    else if(view.getId() == R.id.MemoryAdd) {
+                        infoMemoria = true;
+                        numMemoria += Float.parseFloat(text.getText().toString());
+                    }
+                    else if(view.getId() == R.id.MemorySub) {
+                        infoMemoria = true;
+                        numMemoria -= Float.parseFloat(text.getText().toString());
+                    }
+                    else if(view.getId() == R.id.MemoryResult) {
+                        if(infoMemoria) {
+                            text.setText(df.format(numMemoria));
+                            calculat = true;
+                        }
+                    }
+                    else if(view.getId() == R.id.MemoryClear) {
+                        infoMemoria = false;
+                        numMemoria = 0;
                     }
                 }
             }
@@ -269,5 +311,9 @@ public class MainActivity extends AppCompatActivity {
         Calc_Suma.setOnClickListener(oclSimbols);
         Calc_Igual.setOnClickListener(oclSimbols);
         Calc_Simbol.setOnClickListener(oclSimbols);
+        MemAdd.setOnClickListener(oclSimbols);
+        MemSub.setOnClickListener(oclSimbols);
+        MemResult.setOnClickListener(oclSimbols);
+        MemClear.setOnClickListener(oclSimbols);
     }
 }
