@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(calculat)
+                    calculMostra.setText("");
+
                 if(view.getId() == R.id.Num_0){
                     if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"0");
@@ -184,15 +187,18 @@ public class MainActivity extends AppCompatActivity {
                             switch (simbol) {
                                 case "+":
                                     float aux = Float.parseFloat(text.getText().toString());
+                                    calculMostra.setText(df.format(num1) + "+" + df.format(aux) + "=");
                                     text.setText(df.format(num1+aux));
                                     break;
                                 case "-":
                                     float aux3 = Float.parseFloat(text.getText().toString());
+                                    calculMostra.setText(df.format(num1) + "-" + df.format(aux3) + "=");
                                     text.setText(df.format(num1-aux3));
                                     break;
                                 case "/":
                                     if(Float.parseFloat(text.getText().toString()) != 0) {
                                         float aux5 = Float.parseFloat(text.getText().toString());
+                                        calculMostra.setText(df.format(num1) + "/" + df.format(aux5) + "=");
                                         float div = num1/aux5;
                                         text.setText(df.format(div));
                                     }
@@ -204,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                 case "X":
                                     float aux7 = Float.parseFloat(text.getText().toString());
+                                    calculMostra.setText(df.format(num1) + "*" + df.format(aux7) + "=");
                                     float mult = num1*aux7;
                                     text.setText(df.format(mult));
                                     break;
@@ -216,11 +223,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else if(view.getId() == R.id.Calc_Div) {
                         if(!text.getText().equals("")) {
-                            if(num1Ocupat)
-                                num1 /= Float.parseFloat(text.getText().toString());
+                            if(!simbol.equals("")) {
+                                calculConcatenat(simbol, text, calculMostra);
+                                calculMostra.setText(df.format(num1) + "/");
+                            }
                             else {
-                                num1 = Float.parseFloat(text.getText().toString());
-                                num1Ocupat = true;
+                                if(num1Ocupat)
+                                    num1 /= Float.parseFloat(text.getText().toString());
+                                else {
+                                    num1 = Float.parseFloat(text.getText().toString());
+                                    num1Ocupat = true;
+                                }
                             }
                             text.setText("");
                             simbol = "/";
@@ -229,11 +242,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else if(view.getId() == R.id.Calc_Mult) {
                         if(!text.getText().equals("")) {
-                            if(num1Ocupat)
-                                num1 *= Float.parseFloat(text.getText().toString());
+                            if(!simbol.equals("")) {
+                                calculConcatenat(simbol, text, calculMostra);
+                                calculMostra.setText(df.format(num1) + "*");
+                            }
                             else {
-                                num1 = Float.parseFloat(text.getText().toString());
-                                num1Ocupat = true;
+                                if(num1Ocupat)
+                                    num1 *= Float.parseFloat(text.getText().toString());
+                                else {
+                                    num1 = Float.parseFloat(text.getText().toString());
+                                    num1Ocupat = true;
+                                }
                             }
                             text.setText("");
                             simbol = "X";
@@ -242,11 +261,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else if(view.getId() == R.id.Calc_Resta) {
                         if(!text.getText().equals("")) {
-                            if(num1Ocupat)
-                                num1 -= Float.parseFloat(text.getText().toString());
+                            if(!simbol.equals("")) {
+                                calculConcatenat(simbol, text, calculMostra);
+                                calculMostra.setText(df.format(num1) + "-");
+                            }
                             else {
-                                num1 = Float.parseFloat(text.getText().toString());
-                                num1Ocupat = true;
+                                if(num1Ocupat)
+                                    num1 -= Float.parseFloat(text.getText().toString());
+                                else {
+                                    num1 = Float.parseFloat(text.getText().toString());
+                                    num1Ocupat = true;
+                                }
                             }
                             text.setText("");
                             simbol = "-";
@@ -266,15 +291,21 @@ public class MainActivity extends AppCompatActivity {
                                 decimal = false;
                             negatiuNum = false;
                         }
-
                     }
                     else if(view.getId() == R.id.Calc_Suma) {
                         if(!text.getText().equals("")) {
-                            if(num1Ocupat)
-                                num1 += Float.parseFloat(text.getText().toString());
+                            if(!simbol.equals("")) {
+                                calculConcatenat(simbol, text, calculMostra);
+                                calculMostra.setText(df.format(num1) + "+");
+                            }
                             else {
-                                num1 = Float.parseFloat(text.getText().toString());
-                                num1Ocupat = true;
+                                if(num1Ocupat){
+                                    num1 += Float.parseFloat(text.getText().toString());
+                                }
+                                else {
+                                    num1 = Float.parseFloat(text.getText().toString());
+                                    num1Ocupat = true;
+                                }
                             }
                             text.setText("");
                             simbol = "+";
@@ -315,5 +346,29 @@ public class MainActivity extends AppCompatActivity {
         MemSub.setOnClickListener(oclSimbols);
         MemResult.setOnClickListener(oclSimbols);
         MemClear.setOnClickListener(oclSimbols);
+    }
+
+    private void calculConcatenat(String simbol, TextView text, TextView calculMostra) {
+        switch (simbol) {
+            case "+":
+                num1 += Float.parseFloat(text.getText().toString());
+                break;
+            case "-":
+                num1 -= Float.parseFloat(text.getText().toString());
+                break;
+            case "/":
+                if(Float.parseFloat(text.getText().toString()) != 0) {
+                    num1 /= Float.parseFloat(text.getText().toString());
+                }
+                else {
+                    text.setText("No es pot dividir entre 0!");
+                    num1 = 0;
+                    divZero = true;
+                }
+                break;
+            case "X":
+                num1 *= Float.parseFloat(text.getText().toString());
+                break;
+        }
     }
 }
