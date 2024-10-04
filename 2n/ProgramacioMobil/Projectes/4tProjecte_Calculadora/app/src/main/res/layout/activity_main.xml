@@ -6,192 +6,249 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     android:textAlignment="textEnd"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/CalculMostra"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:textAlignment="textEnd"
+            android:textColor="#6B6B6B" />
 
-            <TextView
-                android:id="@+id/CalculMostra"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:textAlignment="textEnd"
-                android:textColor="#6B6B6B" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/Text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="10dp"
+            android:text="0"
+            android:textAlignment="viewEnd"
+            android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingBottom="10dp"
-                android:text="0"
-                android:textAlignment="viewEnd"
-                android:textSize="24sp" />
-        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/MemoryClear"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
                 android:width="70dp"
                 android:minWidth="70dp"
                 android:text="MC" />
 
             <Button
-                android:id="@+id/MemoryResult"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="MR" />
-
-            <Button
-                android:id="@+id/MemoryAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="M+" />
-
-            <Button
-                android:id="@+id/MemorySub"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="M-" />
-
-            <Button
-                android:id="@+id/Calc_C"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="C" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
                 android:id="@+id/Num_7"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
                 android:text="7" />
 
             <Button
-                android:id="@+id/Num_8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="8" />
-
-            <Button
-                android:id="@+id/Num_9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="9" />
-
-            <Button
-                android:id="@+id/Calc_Mult"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="X" />
-
-            <Button
-                android:id="@+id/Calc_Igual"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="=" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
                 android:id="@+id/Num_4"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
                 android:text="4" />
 
             <Button
-                android:id="@+id/Num_5"
+                android:id="@+id/Num_1"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
-                android:text="5" />
+                android:text="1" />
 
             <Button
-                android:id="@+id/Num_6"
+                android:id="@+id/Calc_Simbol"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:layout_weight="1"
                 android:minWidth="70dp"
-                android:text="6" />
+                android:text="+/-" />
 
-            <Button
-                android:id="@+id/Calc_Resta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="70dp"
-                android:text="-" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
-                android:id="@+id/Num_1"
+                android:id="@+id/MemoryResult"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
-                android:text="1" />
+                android:text="MR" />
+
+            <Button
+                android:id="@+id/Num_8"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/Num_5"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="5" />
 
             <Button
                 android:id="@+id/Num_2"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
                 android:text="2" />
 
             <Button
-                android:id="@+id/Num_3"
+                android:id="@+id/Num_0"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:text="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/MemoryAdd"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="M+" />
+
+            <Button
+                android:id="@+id/Num_9"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/Num_6"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/Num_3"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
                 android:text="3" />
 
             <Button
-                android:id="@+id/Calc_Suma"
+                android:id="@+id/Calc_Decimal"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:text="." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/MemorySub"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="M-" />
+
+            <Button
+                android:id="@+id/Calc_Div"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:text="/" />
+
+            <Button
+                android:id="@+id/Calc_Mult"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="X" />
+
+            <Button
+                android:id="@+id/Calc_Resta"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="-" />
+
+            <Button
+                android:id="@+id/Calc_Suma"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
                 android:text="+" />
 
@@ -200,39 +257,25 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
-                android:id="@+id/Calc_Simbol"
+                android:id="@+id/Calc_C"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
-                android:text="+/-" />
+                android:text="C" />
 
             <Button
-                android:id="@+id/Num_0"
+                android:id="@+id/Calc_Igual"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="197dp"
+                android:layout_margin="0.75dp"
                 android:minWidth="70dp"
-                android:text="0" />
-
-            <Button
-                android:id="@+id/Calc_Decimal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="70dp"
-                android:text="." />
-
-            <Button
-                android:id="@+id/Calc_Div"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="70dp"
-                android:text="/" />
+                android:text="=" />
 
         </LinearLayout>
 
