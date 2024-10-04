@@ -9,6 +9,7 @@ TagManager:
   - Enemic
   - Meteorit
   - EliminaBala
+  - Tope
   layers:
   - Default
   - TransparentFX

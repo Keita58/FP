@@ -24,12 +24,6 @@ public class SpawnEnemics : MonoBehaviour
         //StartCoroutine(boss());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator crear()
     {
         while (true)

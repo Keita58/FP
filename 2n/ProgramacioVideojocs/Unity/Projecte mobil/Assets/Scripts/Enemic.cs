@@ -17,12 +17,6 @@ public class Enemic : MonoBehaviour
         soToc = GameObject.Find("SoToc");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.tag == "Player")

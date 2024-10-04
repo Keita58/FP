@@ -8,6 +8,7 @@ public class Jugador : MonoBehaviour
     [SerializeField] GameObject _Bala;
     [SerializeField] InputActionAsset _Action;
     [SerializeField] JugadorSO _PlayerData;
+    [SerializeField] PoolBales _Pool;
     InputActionAsset _CopiaAction;
 
     private InputAction _Moviment;
@@ -60,10 +61,19 @@ public class Jugador : MonoBehaviour
         if (callbackContext.phase.ToString() == "Started")
         {
             GetComponent<AudioSource>().Play();
-            GameObject BalaCopia = Instantiate(_Bala);
+            GameObject BalaCopia = _Pool.GetBala();
+            BalaCopia.SetActive(true);
             BalaCopia.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 0.5f);
             BalaCopia.GetComponent<Rigidbody2D>().velocity = this.transform.up * 2;
+            BalaCopia.GetComponent<Bala>().OnDestroyed += ReturnBalaToPool;
         }
+    }
+
+    private void ReturnBalaToPool(GameObject bala)
+    {
+        bala.GetComponent<Bala>().OnDestroyed -= ReturnBalaToPool;
+        bala.SetActive(false);
+        _Pool.ReturnBala(bala);
     }
 
     private void OnDestroy()

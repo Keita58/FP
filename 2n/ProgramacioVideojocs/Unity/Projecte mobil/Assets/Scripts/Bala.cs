@@ -1,30 +1,14 @@
- using UnityEngine;
+using System;
+using UnityEngine;
 
 public class Bala : MonoBehaviour
 {
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public event Action<GameObject> OnDestroyed;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.tag == "EliminaBala")
+        if(collision.transform.tag == "EliminaBala" || collision.transform.tag == "Enemic")
         {
-            Destroy(this.gameObject); 
-        }
-        if(collision.transform.tag == "Enemic")
-        {
-            
-            Destroy(this.gameObject);
+            OnDestroyed?.Invoke(this.gameObject); 
         }
     }
 }
