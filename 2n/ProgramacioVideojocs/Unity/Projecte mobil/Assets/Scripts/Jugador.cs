@@ -61,19 +61,19 @@ public class Jugador : MonoBehaviour
         if (callbackContext.phase.ToString() == "Started")
         {
             GetComponent<AudioSource>().Play();
-            GameObject BalaCopia = _Pool.GetBala();
+            GameObject BalaCopia = _Pool.GetElement();
             BalaCopia.SetActive(true);
             BalaCopia.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 0.5f);
             BalaCopia.GetComponent<Rigidbody2D>().velocity = this.transform.up * 2;
-            BalaCopia.GetComponent<Bala>().OnDestroyed += ReturnBalaToPool;
+            BalaCopia.GetComponent<IPoolable>().OnDestroyed += ReturnBalaToPool;
         }
     }
 
     private void ReturnBalaToPool(GameObject bala)
     {
-        bala.GetComponent<Bala>().OnDestroyed -= ReturnBalaToPool;
+        bala.GetComponent<IPoolable>().OnDestroyed -= ReturnBalaToPool;
         bala.SetActive(false);
-        _Pool.ReturnBala(bala);
+        _Pool.ReturnElement(bala);
     }
 
     private void OnDestroy()

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PoolBales : MonoBehaviour
 {
-    [SerializeField] private GameObject _Bala;
-    [SerializeField] private int _NumBales;
+    [SerializeField] private GameObject _Element;
+    [SerializeField] private int _NumElements;
 
     private GameObject[] _Pool;
     private bool[] _Disponible;
@@ -11,12 +11,12 @@ public class PoolBales : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        _Pool = new GameObject[_NumBales];
-        _Disponible = new bool[_NumBales];
+        _Pool = new GameObject[_NumElements];
+        _Disponible = new bool[_NumElements];
 
-        for(int i = 0; i < _NumBales; i++)
+        for(int i = 0; i < _NumElements; i++)
         {
-            GameObject aux = Instantiate(_Bala, transform); // Posem transform perquè així creem les noves bales dins de l'objecte buit
+            GameObject aux = Instantiate(_Element, transform); // Posem transform perquè així creem les noves bales dins de l'objecte buit
             aux.SetActive(false);
 
             _Pool[i] = aux;
@@ -24,9 +24,9 @@ public class PoolBales : MonoBehaviour
         }
     }
 
-    public GameObject GetBala()
+    public GameObject GetElement()
     {
-        for (int i = 0; i < _NumBales; i++)
+        for (int i = 0; i < _NumElements; i++)
         {
             if (_Disponible[i])
             {
@@ -37,9 +37,9 @@ public class PoolBales : MonoBehaviour
         return null;
     }
 
-    public void ReturnBala(GameObject element)
+    public void ReturnElement(GameObject element)
     {
-        for (int i = 0; i < _NumBales; i++)
+        for (int i = 0; i < _NumElements; i++)
         {
             if (_Pool[i] == element)
             {

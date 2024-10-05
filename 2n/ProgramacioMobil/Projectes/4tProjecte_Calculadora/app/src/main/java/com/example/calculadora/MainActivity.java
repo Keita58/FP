@@ -39,36 +39,24 @@ public class MainActivity extends AppCompatActivity {
         TextView text = (TextView) findViewById(R.id.Text);
         TextView calculMostra = (TextView) findViewById(R.id.CalculMostra);
 
-        Button Num_0 = (Button) findViewById(R.id.Num_0);
-        Button Num_1 = (Button) findViewById(R.id.Num_1);
-        Button Num_2 = (Button) findViewById(R.id.Num_2);
-        Button Num_3 = (Button) findViewById(R.id.Num_3);
-        Button Num_4 = (Button) findViewById(R.id.Num_4);
-        Button Num_5 = (Button) findViewById(R.id.Num_5);
-        Button Num_6 = (Button) findViewById(R.id.Num_6);
-        Button Num_7 = (Button) findViewById(R.id.Num_7);
-        Button Num_8 = (Button) findViewById(R.id.Num_8);
-        Button Num_9 = (Button) findViewById(R.id.Num_9);
-        Button MemClear = (Button) findViewById(R.id.MemoryClear);
-        Button MemResult = (Button) findViewById(R.id.MemoryResult);
-        Button MemAdd = (Button) findViewById(R.id.MemoryAdd);
-        Button MemSub = (Button) findViewById(R.id.MemorySub);
-        Button Calc_C = (Button) findViewById(R.id.Calc_C);
-        Button Calc_Decimal = (Button) findViewById(R.id.Calc_Decimal);
-        Button Calc_Div = (Button) findViewById(R.id.Calc_Div);
-        Button Calc_Igual = (Button) findViewById(R.id.Calc_Igual);
-        Button Calc_Mult = (Button) findViewById(R.id.Calc_Mult);
-        Button Calc_Resta = (Button) findViewById(R.id.Calc_Resta);
-        Button Calc_Suma = (Button) findViewById(R.id.Calc_Suma);
-        Button Calc_Simbol = (Button) findViewById(R.id.Calc_Simbol);
-
-        //OCL pels números
+        /*
+         *
+         * OCL per als botons dels números. Cada número mira:
+         * · Si el text actual del TextView no és un zero.
+         * · Si estàs dividint entre zero.
+         * · Si s'ha fet click al botó d'igual per mostrar el resultat calculat.
+         *
+         * Si en qualsevol d'aquests casos és veritat, en comptes d'afegir el número
+         * al text actual del TextView canvia el contingut pel seu valor.
+         *
+         * En tots els números (excepte el zero), una vegada es canvia el contingut
+         * pel seu valor canvia el valor de la variable booleana calculat a false
+         * per permetre anar afegint els següents números contigus al TextView.
+         *
+         */
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(calculat)
-                    calculMostra.setText("");
-
                 if(view.getId() == R.id.Num_0){
                     if(!text.getText().equals("0") && !divZero && !calculat)
                         text.setText(text.getText()+"0");
@@ -152,18 +140,38 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        Num_0.setOnClickListener(ocl);
-        Num_1.setOnClickListener(ocl);
-        Num_2.setOnClickListener(ocl);
-        Num_3.setOnClickListener(ocl);
-        Num_4.setOnClickListener(ocl);
-        Num_5.setOnClickListener(ocl);
-        Num_6.setOnClickListener(ocl);
-        Num_7.setOnClickListener(ocl);
-        Num_8.setOnClickListener(ocl);
-        Num_9.setOnClickListener(ocl);
+        findViewById(R.id.Num_0).setOnClickListener(ocl);
+        findViewById(R.id.Num_1).setOnClickListener(ocl);
+        findViewById(R.id.Num_2).setOnClickListener(ocl);
+        findViewById(R.id.Num_3).setOnClickListener(ocl);
+        findViewById(R.id.Num_4).setOnClickListener(ocl);
+        findViewById(R.id.Num_5).setOnClickListener(ocl);
+        findViewById(R.id.Num_6).setOnClickListener(ocl);
+        findViewById(R.id.Num_7).setOnClickListener(ocl);
+        findViewById(R.id.Num_8).setOnClickListener(ocl);
+        findViewById(R.id.Num_9).setOnClickListener(ocl);
 
-        //OCL per la resta
+        /*
+         *
+         * OCL per la resta de botons de la calculadora.
+         *
+         * En els botons dels símbols matemàtics es comproven diverses condicions:
+         * · Primer comprovem si el TextView no és buit.
+         * · Si hi ha guardat un símbol matemàtic a la variable simbol.
+         * · Si ja hem inserit un número anteriorment a la calculadora.
+         *
+         * Per cada condició es realitza una acció diferent:
+         * · Si no hi ha cap número actualment al TextView no fem cap tipus de càlcul.
+         * · Si ja existeix un símbol a la nostra variable simbol passem el nombre actual
+         *   del TextView i el símbol guardat a la funció calculConcatenat.
+         * · Si ja hem afegit un número a la calculadora anteriorment afegirà el nou número
+         *   al número anterior.
+         * · Si és el primer número que afegim a la calculadora afegirem aquest a la nostra
+         *   variable num1 i canviarem el valor de la variable booleana num1Ocupat a true per
+         *   a que es compleixi la condició anteriorment esmenada.
+         *
+         */
+
         View.OnClickListener oclSimbols = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -216,15 +224,20 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                             }
                         }
+                        else {
+                            calculMostra.setText("");
+                            text.setText("0");
+                        }
                         simbol = "";
                         num1Ocupat = false;
                         decimal = false;
                         calculat = true;
+                        negatiuNum = false;
                     }
                     else if(view.getId() == R.id.Calc_Div) {
                         if(!text.getText().equals("")) {
                             if(!simbol.equals("")) {
-                                calculConcatenat(simbol, text, calculMostra);
+                                calculConcatenat(simbol, text);
                                 calculMostra.setText(df.format(num1) + "/");
                             }
                             else {
@@ -232,18 +245,20 @@ public class MainActivity extends AppCompatActivity {
                                     num1 /= Float.parseFloat(text.getText().toString());
                                 else {
                                     num1 = Float.parseFloat(text.getText().toString());
+                                    calculMostra.setText(df.format(num1) + "/");
                                     num1Ocupat = true;
                                 }
                             }
                             text.setText("");
                             simbol = "/";
                             decimal = false;
+                            negatiuNum = false;
                         }
                     }
                     else if(view.getId() == R.id.Calc_Mult) {
                         if(!text.getText().equals("")) {
                             if(!simbol.equals("")) {
-                                calculConcatenat(simbol, text, calculMostra);
+                                calculConcatenat(simbol, text);
                                 calculMostra.setText(df.format(num1) + "*");
                             }
                             else {
@@ -251,18 +266,20 @@ public class MainActivity extends AppCompatActivity {
                                     num1 *= Float.parseFloat(text.getText().toString());
                                 else {
                                     num1 = Float.parseFloat(text.getText().toString());
+                                    calculMostra.setText(df.format(num1) + "*");
                                     num1Ocupat = true;
                                 }
                             }
                             text.setText("");
                             simbol = "X";
                             decimal = false;
+                            negatiuNum = false;
                         }
                     }
                     else if(view.getId() == R.id.Calc_Resta) {
                         if(!text.getText().equals("")) {
                             if(!simbol.equals("")) {
-                                calculConcatenat(simbol, text, calculMostra);
+                                calculConcatenat(simbol, text);
                                 calculMostra.setText(df.format(num1) + "-");
                             }
                             else {
@@ -270,12 +287,14 @@ public class MainActivity extends AppCompatActivity {
                                     num1 -= Float.parseFloat(text.getText().toString());
                                 else {
                                     num1 = Float.parseFloat(text.getText().toString());
+                                    calculMostra.setText(df.format(num1) + "-");
                                     num1Ocupat = true;
                                 }
                             }
                             text.setText("");
                             simbol = "-";
                             decimal = false;
+                            negatiuNum = false;
                         }
                     }
                     else if(view.getId() == R.id.Calc_Simbol) {
@@ -295,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
                     else if(view.getId() == R.id.Calc_Suma) {
                         if(!text.getText().equals("")) {
                             if(!simbol.equals("")) {
-                                calculConcatenat(simbol, text, calculMostra);
+                                calculConcatenat(simbol, text);
                                 calculMostra.setText(df.format(num1) + "+");
                             }
                             else {
@@ -304,12 +323,26 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 else {
                                     num1 = Float.parseFloat(text.getText().toString());
+                                    calculMostra.setText(df.format(num1) + "+");
                                     num1Ocupat = true;
                                 }
                             }
                             text.setText("");
                             simbol = "+";
                             decimal = false;
+                            negatiuNum = false;
+                        }
+                    }
+                    else if(view.getId() == R.id.Calc_CE) {
+                        text.setText("0");
+                    }
+                    else if(view.getId() == R.id.Calc_Borra) {
+                        if(!text.getText().equals("") && text.getText().length() > 1) {
+                            CharSequence llista = text.getText();
+                            text.setText(llista.subSequence(0, llista.length() - 1));
+                        }
+                        else if (text.getText().length() == 1) {
+                            text.setText("0");
                         }
                     }
                     else if(view.getId() == R.id.MemoryAdd) {
@@ -334,21 +367,29 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        Calc_C.setOnClickListener(oclSimbols);
-        Calc_Div.setOnClickListener(oclSimbols);
-        Calc_Decimal.setOnClickListener(oclSimbols);
-        Calc_Mult.setOnClickListener(oclSimbols);
-        Calc_Resta.setOnClickListener(oclSimbols);
-        Calc_Suma.setOnClickListener(oclSimbols);
-        Calc_Igual.setOnClickListener(oclSimbols);
-        Calc_Simbol.setOnClickListener(oclSimbols);
-        MemAdd.setOnClickListener(oclSimbols);
-        MemSub.setOnClickListener(oclSimbols);
-        MemResult.setOnClickListener(oclSimbols);
-        MemClear.setOnClickListener(oclSimbols);
+        findViewById(R.id.MemoryClear).setOnClickListener(oclSimbols);
+        findViewById(R.id.MemoryResult).setOnClickListener(oclSimbols);
+        findViewById(R.id.MemoryAdd).setOnClickListener(oclSimbols);
+        findViewById(R.id.MemorySub).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_C).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_Decimal).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_Div).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_Igual).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_Mult).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_Resta).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_Suma).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_Simbol).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_CE).setOnClickListener(oclSimbols);
+        findViewById(R.id.Calc_Borra).setOnClickListener(oclSimbols);
     }
 
-    private void calculConcatenat(String simbol, TextView text, TextView calculMostra) {
+    /*
+     *
+     *
+     *
+     */
+
+    private void calculConcatenat(String simbol, TextView text) {
         switch (simbol) {
             case "+":
                 num1 += Float.parseFloat(text.getText().toString());

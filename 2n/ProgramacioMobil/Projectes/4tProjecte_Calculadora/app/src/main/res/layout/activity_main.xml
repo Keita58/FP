@@ -269,11 +269,30 @@
                 android:text="C" />
 
             <Button
+                android:id="@+id/Calc_CE"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                android:text="CE" />
+
+            <Button
+                android:id="@+id/Calc_Borra"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.75dp"
+                android:minWidth="70dp"
+                app:icon="@android:drawable/ic_input_delete" />
+
+            <Button
                 android:id="@+id/Calc_Igual"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
-                android:layout_height="197dp"
+                android:layout_height="98dp"
                 android:layout_margin="0.75dp"
+                android:clickable="true"
                 android:minWidth="70dp"
                 android:text="=" />
 

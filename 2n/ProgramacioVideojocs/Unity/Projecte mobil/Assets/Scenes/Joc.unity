@@ -1644,6 +1644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1266437133}
   - component: {fileID: 1266437132}
+  - component: {fileID: 1266437134}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -1672,6 +1673,7 @@ MonoBehaviour:
   _Meteorit: []
   _Boss: []
   _EnemicGO: {fileID: 6150984678094144250, guid: 253c7c8a49a1a3841b1c210de88b2b81, type: 3}
+  _Pool: {fileID: 1266437134}
 --- !u!4 &1266437133
 Transform:
   m_ObjectHideFlags: 0
@@ -1687,6 +1689,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1266437134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266437131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6aa1dd75d14f004a82233a2870695e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Element: {fileID: 6150984678094144250, guid: 253c7c8a49a1a3841b1c210de88b2b81, type: 3}
+  _NumElements: 15
 --- !u!1 &1295052776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,7 +2132,7 @@ GameObject:
   - component: {fileID: 1639925475}
   - component: {fileID: 1639925474}
   m_Layer: 0
-  m_Name: Pool
+  m_Name: PoolBales
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2134,8 +2150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6aa1dd75d14f004a82233a2870695e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Bala: {fileID: 6555481038177275033, guid: a58a8387f7f5fed45b787222b20c2fcb, type: 3}
-  _NumBales: 50
+  _Element: {fileID: 6555481038177275033, guid: a58a8387f7f5fed45b787222b20c2fcb, type: 3}
+  _NumElements: 50
 --- !u!4 &1639925475
 Transform:
   m_ObjectHideFlags: 0

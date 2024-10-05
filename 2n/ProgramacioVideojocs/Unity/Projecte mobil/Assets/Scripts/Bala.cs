@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Bala : MonoBehaviour
+public class Bala : MonoBehaviour, IPoolable
 {
     public event Action<GameObject> OnDestroyed;
     private void OnTriggerEnter2D(Collider2D collision)

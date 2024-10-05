@@ -1,19 +1,18 @@
+using System;
 using UnityEngine;
 
-public class Enemic : MonoBehaviour
+public class Enemic : MonoBehaviour, IPoolable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public event Action<GameObject> OnDestroyed;
     public int mal;
     public int vides;
     public int punts;
-    public int videsMax;
     private GameObject soToc;
     [SerializeField] private GameEvent _Event;
     [SerializeField] HealthBar vidaPantalla;
 
     void Start()
     {
-        videsMax = vides;
         soToc = GameObject.Find("SoToc");
     }
 
@@ -21,19 +20,22 @@ public class Enemic : MonoBehaviour
     {
         if(collision.transform.tag == "Player")
         {
-            Destroy(this.gameObject);
+            vidaPantalla.RetornALaPull();
+            OnDestroyed?.Invoke(this.gameObject);
             _Event.Raise();
         }
         if (collision.transform.tag == "Mort")
         {
-            Destroy(this.gameObject);
+            vidaPantalla.RetornALaPull();
+            OnDestroyed?.Invoke(this.gameObject);
         }
         if (collision.transform.tag == "BalaAmiga")
         {
             if (vides == 1)
             {
                 _Event.Raise(punts);
-                Destroy(this.gameObject);
+                vidaPantalla.RetornALaPull();
+                OnDestroyed?.Invoke(this.gameObject);
                 soToc.GetComponent<AudioSource>().Play();
             }
             else
