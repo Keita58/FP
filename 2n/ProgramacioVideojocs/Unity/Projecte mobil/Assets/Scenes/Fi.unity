@@ -882,6 +882,7 @@ MonoBehaviour:
   _PuntuacioFinal: {fileID: 2019429749}
   _TempsFinal: {fileID: 1642296080}
   _PuntuacioSO: {fileID: 11400000, guid: 1d1f930da753bd44a857cefbc7648d51, type: 2}
+  json: {fileID: 4900000, guid: 3c574f38e23a3974db8052068abed064, type: 3}
 --- !u!1 &1642296078
 GameObject:
   m_ObjectHideFlags: 0

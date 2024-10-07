@@ -29,5 +29,6 @@ public class Ex2 {
 			}
 			System.out.print(j+lletra);
 		}
+		ohowo.close();
 	}
 }

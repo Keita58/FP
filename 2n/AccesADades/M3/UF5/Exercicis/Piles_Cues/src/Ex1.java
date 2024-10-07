@@ -39,5 +39,7 @@ public class Ex1 {
 		}
 		if(!trobat) 
 			System.out.println("Etiquetes ben tancades");
+
+		ohowo.close();
 	}
 }

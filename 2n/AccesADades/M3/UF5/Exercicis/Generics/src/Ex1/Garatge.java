@@ -1,10 +1,10 @@
-package Ex2;
+package Ex1;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Garatge<T extends Vehicles> {
-	List<T> vehicles = new ArrayList<>();
+public class Garatge<T> {
+	List<T> vehicles;
 
 	public Garatge(List<T> vehicles) {
 		super();
@@ -13,6 +13,7 @@ public class Garatge<T extends Vehicles> {
 	
 	public Garatge() {
 		super();
+		vehicles = new ArrayList<>();
 	}
 
 	public void afegirVehicle(T vehicle) {

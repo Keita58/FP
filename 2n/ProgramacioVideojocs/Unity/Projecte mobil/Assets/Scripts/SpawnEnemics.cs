@@ -12,9 +12,11 @@ public class SpawnEnemics : MonoBehaviour
     float min;
     float max;
     int count;
+    int ronda, rondaEnemics;
 
     void Start()
-    {   
+    {
+        ronda = 10;
         min = 2.0f;
         max = 4.0f;
         count = 0;
@@ -26,6 +28,7 @@ public class SpawnEnemics : MonoBehaviour
         while (true)
         {
             float num = Random.Range(min, max);
+            print("Espera: " + num);
             yield return new WaitForSeconds(num);
             int enemicNum = Random.Range(0, 5);
             GameObject enemicNau = _Pool.GetElement();
@@ -44,23 +47,20 @@ public class SpawnEnemics : MonoBehaviour
             enemicNau.GetComponentInChildren<HealthBar>().IniciarBarra(_Enemic[enemicNum].vides);
             count++;
 
-            int ronda = 10;
-            int diff = 2;
-
-            if(count%ronda == 0 && max > 0.5f)
+            if (count%ronda == 0 && max > 0.5f)
             {
-                print(count);
-                if(min > 1f)
+                if(min > 0f)
                     min -= 0.5f;
                 max -= 0.5f;
-                ronda += 10*diff;
-                diff++;
+                ronda += 15;
+                rondaEnemics++;
             }
-
-            int aux = (count / ronda);
             
-            switch (aux)
+            switch (rondaEnemics)
             {
+                case 0:
+                    enemicNau.GetComponent<SpriteRenderer>().color = Color.white;
+                    break;
                 case 1:
                     enemicNau.GetComponent<SpriteRenderer>().color = Color.green;
                     break;
@@ -78,6 +78,9 @@ public class SpawnEnemics : MonoBehaviour
                     break;
                 case 6:
                     enemicNau.GetComponent<SpriteRenderer>().color = Color.black;
+                    break;
+                default:
+                    enemicNau.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, 0.5f);
                     break;
             }
         }
