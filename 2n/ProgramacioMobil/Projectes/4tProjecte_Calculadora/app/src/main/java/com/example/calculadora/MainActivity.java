@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     float numMemoria = 0;
     boolean infoMemoria = false;
 
+    //Variable que utilitzem per evitar que a l'imprimir per pantalla els resultats numèrics
+    //se'ns imprimeixin amb exponents
     DecimalFormat df = new DecimalFormat("#.#####");
 
     @Override
@@ -165,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
          * · Si ja existeix un símbol a la nostra variable simbol passem el nombre actual
          *   del TextView i el símbol guardat a la funció calculConcatenat.
          * · Si ja hem afegit un número a la calculadora anteriorment afegirà el nou número
-         *   al número anterior.
+         *   al número anterior (que tenim emmagatzemat a la variable num1).
          * · Si és el primer número que afegim a la calculadora afegirem aquest a la nostra
          *   variable num1 i canviarem el valor de la variable booleana num1Ocupat a true per
          *   a que es compleixi la condició anteriorment esmenada.
@@ -183,6 +185,8 @@ public class MainActivity extends AppCompatActivity {
                     decimal = false;
                     calculMostra.setText("");
                 }
+                //Aquest if està posat per evitar problemes quan has intentat fer una divisió entre 0
+                //(no et deixa fer cap tipus de càlcul, només esborrar la informació)
                 if(!divZero) {
                     if(view.getId() == R.id.Calc_Decimal) {
                         if(!decimal && !text.getText().equals("")) {
@@ -190,6 +194,9 @@ public class MainActivity extends AppCompatActivity {
                             decimal = true;
                         }
                     }
+                    //Al botó d'igual es realitza el càlcul del símbol que tenim guardat entre el nombre
+                    //de la variable num1 i el que hi ha escrit al TextView text i s'escriu per pantalla
+                    //en el mateix
                     else if(view.getId() == R.id.Calc_Igual) {
                         if(!text.getText().equals("")) {
                             switch (simbol) {
@@ -345,6 +352,10 @@ public class MainActivity extends AppCompatActivity {
                             text.setText("0");
                         }
                     }
+                    //Aquests 4 últims botons són els que realitzen els càlculs a memòria
+                    //Bàsicament realitzen tots els càlculs sobre una variable existent numMemoria i
+                    //utilitzen una flag infoMemoria per informar de que hi ha nombres a la variable
+                    //quan intentem imprimir per pantalla la informació de infoMemoria
                     else if(view.getId() == R.id.MemoryAdd) {
                         infoMemoria = true;
                         numMemoria += Float.parseFloat(text.getText().toString());
@@ -385,7 +396,11 @@ public class MainActivity extends AppCompatActivity {
 
     /*
      *
+     * Funció per realitzar els càlculs amb els paràmetres que se li passen (símbol i el segon número,
+     * el primer és al variable num1 global de la classe)
      *
+     * @param simbol  Símbol amb el que hem de realitzar el càlcul matemàtic
+     * @param text    Últim número amb el que es realizta el càlcul
      *
      */
 
