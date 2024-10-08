@@ -12,7 +12,7 @@ public class SpawnEnemics : MonoBehaviour
     float min;
     float max;
     int count;
-    int ronda, rondaEnemics;
+    int ronda, rondaEnemics, numRonda;
 
     void Start()
     {
@@ -20,6 +20,7 @@ public class SpawnEnemics : MonoBehaviour
         min = 2.0f;
         max = 4.0f;
         count = 0;
+        numRonda = 1;
         StartCoroutine(crear());
     }
 
@@ -52,8 +53,9 @@ public class SpawnEnemics : MonoBehaviour
                 if(min > 0f)
                     min -= 0.5f;
                 max -= 0.5f;
-                ronda += 15;
+                ronda += 15*numRonda;
                 rondaEnemics++;
+                numRonda++;
             }
             
             switch (rondaEnemics)

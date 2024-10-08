@@ -8,7 +8,6 @@ public class UIGameOver : MonoBehaviour
     [SerializeField] TextMeshProUGUI _TempsFinal;
     [SerializeField] PuntsSO _PuntuacioSO;
     [SerializeField] TextAsset json;
-    Classificacio fiPartida = new Classificacio();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,9 +17,13 @@ public class UIGameOver : MonoBehaviour
         _TempsFinal.text = "Has durat un total de " + _PuntuacioSO.temps + " segons";
         infoJugador.temps = _PuntuacioSO.temps;
         infoJugador.punts = _PuntuacioSO.puntuacio;
-
+        print(json.ToString());
         Classificacio llista = JsonUtility.FromJson<Classificacio>(json.ToString());
+        if(llista == null ) llista = new Classificacio();
         llista.list.Add(infoJugador);
-        JsonUtility.ToJson(llista, true);
+        print(llista.list);
+        string info = JsonUtility.ToJson(llista, true);
+        //Per guardar la info a l'arxiu s'utilitza el File.WriteAllText (https://learn.microsoft.com/en-us/dotnet/api/system.io.file.writealltext?view=netframework-4.8)
+        File.WriteAllText("./Assets/JSON/classificacio.json", info);
     }
 }

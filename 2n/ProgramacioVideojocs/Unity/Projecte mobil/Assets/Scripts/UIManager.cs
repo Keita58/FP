@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
         _Punts = 0;
         _Vides = 5;
         _Segons = 0;
+        _PuntuacioSO.puntuacio = 0;
+        _PuntuacioSO.temps = 0;
         StartCoroutine(temps());
     }
 

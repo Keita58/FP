@@ -18,4 +18,9 @@ public class CanviEscena : MonoBehaviour
     {
         SceneManager.LoadScene("Cosmetic");
     }
+
+    public void Classificacio()
+    {
+        SceneManager.LoadScene("Classificacio");
+    }
 }

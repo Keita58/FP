@@ -3,7 +3,9 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Classificacio : MonoBehaviour
+
+[Serializable]
+public class Classificacio
 {
     [Serializable]
     public class Info

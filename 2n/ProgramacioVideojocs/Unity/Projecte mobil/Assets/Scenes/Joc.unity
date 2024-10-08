@@ -1670,8 +1670,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 63269db045932614ca1a4451f84a33c0, type: 2}
   - {fileID: 11400000, guid: 8682dde5d4882854c8bb555f813f98a7, type: 2}
   - {fileID: 11400000, guid: 08a2e00cce03742429ab2a5aa8585fda, type: 2}
-  _Meteorit: []
-  _Boss: []
   _EnemicGO: {fileID: 6150984678094144250, guid: 253c7c8a49a1a3841b1c210de88b2b81, type: 3}
   _Pool: {fileID: 1266437134}
 --- !u!4 &1266437133
@@ -1702,7 +1700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Element: {fileID: 6150984678094144250, guid: 253c7c8a49a1a3841b1c210de88b2b81, type: 3}
-  _NumElements: 15
+  _NumElements: 30
 --- !u!1 &1295052776
 GameObject:
   m_ObjectHideFlags: 0
