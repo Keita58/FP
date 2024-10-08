@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1388292847114368002}
   - component: {fileID: 1200385172250791825}
-  - component: {fileID: 8896502094432879948}
   - component: {fileID: 4518149195418135425}
   - component: {fileID: -6855785047376558362}
   - component: {fileID: 8688928713186493713}
@@ -91,22 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8896502094432879948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7731243727312909476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8312f7b264a0614889701fcb9714000, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Bala: {fileID: 6555481038177275033, guid: a58a8387f7f5fed45b787222b20c2fcb, type: 3}
-  _Action: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _PlayerData: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  _Pool: {fileID: 0}
 --- !u!50 &4518149195418135425
 Rigidbody2D:
   serializedVersion: 4

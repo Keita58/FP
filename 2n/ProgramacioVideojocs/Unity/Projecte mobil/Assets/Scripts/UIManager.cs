@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
     {
         if (_Vides > 1)
         {
-            _Vida.text = "Vida: " + (--_Vides).ToString();
+            _Vida.text = "Vides: " + (--_Vides).ToString();
         }
         else
         {

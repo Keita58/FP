@@ -513,7 +513,7 @@ MonoBehaviour:
   _Classificacio: {fileID: 649226724}
   _Punts: {fileID: 906178283}
   _Segons: {fileID: 977383324}
-  _JSON: {fileID: 4900000, guid: 3c574f38e23a3974db8052068abed064, type: 3}
+  _JSON: {fileID: 4900000, guid: cd56cce0e71f4fe4da7b11d5cbf53be7, type: 3}
 --- !u!1 &649226722
 GameObject:
   m_ObjectHideFlags: 0

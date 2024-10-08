@@ -17,11 +17,11 @@ public class Jugador : MonoBehaviour
 
     void Start()
     {
-        //Instància de l'input original
+        //Instancia de l'input original
         _CopiaAction = Instantiate(_Action);
 
-        //Afegim el botó a la funció de disparar
-        _CopiaAction.FindActionMap("Player").FindAction("Botó").started += dispara;
+        //Afegim el boto a la funcio de disparar
+        _CopiaAction.FindActionMap("Player").FindAction("Boto").started += dispara;
 
         //Agafem les tecles del moviment
         _Moviment = _CopiaAction.FindActionMap("Player").FindAction("Moviment");
@@ -78,7 +78,7 @@ public class Jugador : MonoBehaviour
 
     private void OnDestroy()
     {
-        _CopiaAction.FindActionMap("Player").FindAction("Botó").started -= dispara;
+        _CopiaAction.FindActionMap("Player").FindAction("Boto").started -= dispara;
     }
 }
 

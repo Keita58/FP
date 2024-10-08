@@ -18,12 +18,14 @@ public class UIGameOver : MonoBehaviour
         infoJugador.temps = _PuntuacioSO.temps;
         infoJugador.punts = _PuntuacioSO.puntuacio;
         print(json.ToString());
-        Classificacio llista = JsonUtility.FromJson<Classificacio>(json.ToString());
-        if(llista == null ) llista = new Classificacio();
+        Classificacio llista = new Classificacio();
+        if(JsonUtility.FromJson<Classificacio>(json.ToString()) != null)
+            llista = JsonUtility.FromJson<Classificacio>(json.ToString());
+
         llista.list.Add(infoJugador);
         print(llista.list);
         string info = JsonUtility.ToJson(llista, true);
         //Per guardar la info a l'arxiu s'utilitza el File.WriteAllText (https://learn.microsoft.com/en-us/dotnet/api/system.io.file.writealltext?view=netframework-4.8)
-        File.WriteAllText("./Assets/JSON/classificacio.json", info);
+        File.WriteAllText("./Assets/JSON/ClassificacioJoc.json", info);
     }
 }
