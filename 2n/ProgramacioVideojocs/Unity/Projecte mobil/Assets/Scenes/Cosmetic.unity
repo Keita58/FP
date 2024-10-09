@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &100095884
 AudioSource:
   m_ObjectHideFlags: 0
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &148240474
 AudioSource:
   m_ObjectHideFlags: 0
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &583468255
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1282,6 +1282,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _Bala
+      value: 
+      objectReference: {fileID: 6555481038177275033, guid: a58a8387f7f5fed45b787222b20c2fcb, type: 3}
+    - target: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _Pool
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _Action
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - target: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _PlayerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
     - target: {fileID: 1388292847114368002, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1335,17 +1351,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
---- !u!114 &965506075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8896502094432879948, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
-  m_PrefabInstance: {fileID: 965506074}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8312f7b264a0614889701fcb9714000, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1090272158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &1090272163
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1740,7 +1745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &1137992699
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1986,7 +1991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &1154097721
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2232,7 +2237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &1197422811
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2632,7 +2637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &1426339259
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2878,7 +2883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &1452941887
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3331,7 +3336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &1649425028
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3577,7 +3582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &1700552481
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3778,6 +3783,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1921683605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+  m_PrefabInstance: {fileID: 965506074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8312f7b264a0614889701fcb9714000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2016084795
 GameObject:
   m_ObjectHideFlags: 0
@@ -3926,7 +3942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544b044e62332934e9e73fa46368a379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Jugador: {fileID: 965506075}
+  _Jugador: {fileID: 1921683605}
 --- !u!82 &2016084800
 AudioSource:
   m_ObjectHideFlags: 0

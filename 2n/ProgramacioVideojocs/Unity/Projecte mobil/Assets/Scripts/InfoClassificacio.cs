@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,11 +20,10 @@ public class InfoClassificacio : MonoBehaviour
         if (JsonUtility.FromJson<Classificacio>(_JSON.ToString()) != null) { 
             llista = JsonUtility.FromJson<Classificacio>(_JSON.ToString());
 
-            llista.list.OrderBy(x => x.punts);
+            llista.list.Sort((a, b) => b.punts.CompareTo(a.punts));
             int pos = 1;
             foreach (Info jugador in llista.list)
             {
-                print(jugador.ToString());
                 aux += pos;
                 auxPunts += jugador.punts.ToString();
                 auxSeg += jugador.temps.ToString() + "s";
@@ -34,7 +32,6 @@ public class InfoClassificacio : MonoBehaviour
                 auxPunts += "\n";
                 auxSeg += "\n";
             }
-            print("Classificacio: " + _Classificacio.text);
         }
         _Classificacio.text = aux;
         _Punts.text = auxPunts;

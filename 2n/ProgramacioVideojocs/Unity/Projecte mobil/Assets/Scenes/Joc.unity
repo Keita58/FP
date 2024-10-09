@@ -1032,6 +1032,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _Bala
+      value: 
+      objectReference: {fileID: 6555481038177275033, guid: a58a8387f7f5fed45b787222b20c2fcb, type: 3}
+    - target: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _Pool
+      value: 
+      objectReference: {fileID: 1639925474}
+    - target: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _Action
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - target: {fileID: -859973616621021945, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
+      propertyPath: _PlayerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
     - target: {fileID: 1200385172250791825, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1100,9 +1116,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 832701201}
     - targetCorrespondingSourceObject: {fileID: 7731243727312909476, guid: 9090833eb49192347ad2c2d0bf592087, type: 3}
       insertIndex: -1
       addedObject: {fileID: 832701200}
@@ -1237,22 +1250,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &832701201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832701199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8312f7b264a0614889701fcb9714000, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Bala: {fileID: 6555481038177275033, guid: a58a8387f7f5fed45b787222b20c2fcb, type: 3}
-  _Action: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _PlayerData: {fileID: 11400000, guid: 78104a8809fa99049a0eda141d4f5e78, type: 2}
-  _Pool: {fileID: 1639925474}
 --- !u!1 &897017004
 GameObject:
   m_ObjectHideFlags: 0

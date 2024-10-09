@@ -33,6 +33,10 @@ public class SpawnEnemics : MonoBehaviour
             yield return new WaitForSeconds(num);
             int enemicNum = Random.Range(0, 5);
             GameObject enemicNau = _Pool.GetElement();
+
+            if(enemicNau == null)
+                continue;
+
             enemicNau.SetActive(true);
             enemicNau.GetComponent<IPoolable>().OnDestroyed += ReturnEnemicToPool;
 
@@ -82,7 +86,7 @@ public class SpawnEnemics : MonoBehaviour
                     enemicNau.GetComponent<SpriteRenderer>().color = Color.black;
                     break;
                 default:
-                    enemicNau.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, 0.5f);
+                    enemicNau.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0,1f), Random.Range(0, 1f), Random.Range(0, 1f));
                     break;
             }
         }
