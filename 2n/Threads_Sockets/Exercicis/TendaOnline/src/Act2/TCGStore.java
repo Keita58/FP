@@ -18,6 +18,22 @@ public class TCGStore {
         this.id = 1;
     }
 
+    public boolean isSenseCartes() {
+        return senseCartes;
+    }
+
+    public void setSenseCartes(boolean senseCartes) {
+        this.senseCartes = senseCartes;
+    }
+
+    public boolean isMaximStock() {
+        return maximStock;
+    }
+
+    public void setMaximStock(boolean maximStock) {
+        this.maximStock = maximStock;
+    }
+
     public int getId() {
         return id;
     }
@@ -48,7 +64,7 @@ public class TCGStore {
                 wait();
             }
             catch (InterruptedException e) {
-                e.printStackTrace();
+                
             }
         }
         cartes[seguent] = carta + " - Id: " + this.id;
@@ -72,7 +88,7 @@ public class TCGStore {
                 wait();
             }
             catch (InterruptedException e) {
-                e.printStackTrace();
+                
             }
         }
         seguent--;

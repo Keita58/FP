@@ -15,16 +15,16 @@ public class Productor implements Runnable{
 
     @Override
     public void run() {
-        while(true) {
-            try {
+        try {
+            while(true) {
                 Random r = new Random();
                 String carta = cartes[r.nextInt(cartes.length)];
                 tenda.Produir(carta);
                 System.out.println(colorVerd + "El productor ha creat la carta " + carta + reset);
                 Thread.sleep(r.nextInt(6)*1000);
-            } catch (Exception e) {
-                // TODO: handle exception
             }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 }

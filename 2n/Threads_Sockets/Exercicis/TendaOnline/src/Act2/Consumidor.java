@@ -14,15 +14,15 @@ public class Consumidor implements Runnable{
 
     @Override
     public void run() {
-        while (true) {
-            try {
+        try {
+            while (true) {
                 Random r = new Random();
                 String carta = this.tenda.Consumir();
                 System.out.println(colorVermell + "El consumidor ha comprat la carta " + carta + reset);
                 Thread.sleep(r.nextInt(6)*1000);
-            } catch (Exception e) {
-                // TODO: handle exception
             }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 
