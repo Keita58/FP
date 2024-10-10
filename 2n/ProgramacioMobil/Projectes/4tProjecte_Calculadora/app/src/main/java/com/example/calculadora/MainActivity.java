@@ -304,6 +304,11 @@ public class MainActivity extends AppCompatActivity {
                             negatiuNum = false;
                         }
                     }
+                    //El botó de símbol mira si hi ha cap text en el TextView. Si hi ha cap número mira si aquest ja
+                    //l'hem posat en negatiu. Si no ho hem fet només posa el símbol de negatiu al davant del text.
+                    //Si ja ho hem fet agafa el nombre, el multiplica per -1 i el torna a imprimir per pantalla
+                    //(Mira per si de cas que no haguem intentat només posar un 0 en negatiu, si aquest és el cas
+                    //treu la variable decimal de true a false per evitar problemes).
                     else if(view.getId() == R.id.Calc_Simbol) {
                         if(!text.getText().equals("0") && !text.getText().equals("") && !negatiuNum) {
                             negatiuNum = true;
@@ -313,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
                             float aux = Float.parseFloat(text.getText().toString());
                             aux *= -1;
                             text.setText(df.format(aux));
-                            if(aux == 0)
+                            if (aux == 0)
                                 decimal = false;
                             negatiuNum = false;
                         }
@@ -401,7 +406,6 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param simbol  Símbol amb el que hem de realitzar el càlcul matemàtic
      * @param text    Últim número amb el que es realizta el càlcul
-     *
      */
 
     private void calculConcatenat(String simbol, TextView text) {
