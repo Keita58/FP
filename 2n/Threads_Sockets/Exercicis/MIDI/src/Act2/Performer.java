@@ -2,35 +2,29 @@ package Act2;
 
 import java.util.concurrent.Callable;
 
-public class Performer implements Runnable{
+public class Performer implements Callable<Boolean>{
 
     Note[] notes;
-    int bpm;
-    int duracio;
+    int channel;
 
-    public Performer(Note[] notes, int bpm, int duracio) {
+    public Performer(Note[] notes, int channel) {
         this.notes = notes;
-        this.bpm = bpm;
-        this.duracio = duracio;
+        this.channel = channel;
     }
 
     @Override
     public Boolean call() throws Exception {
-        int tick = ((1000*duracio)/bpm)/Note.Duration.negra; //Duració bàsica d'una semifusa
-        for(int i = 0; i < notes.length; i++) {
-            MidiPlayer.play(0, notes[i]);
-            for(int j = 0; j < notes[i].getDuration(); j++) {
-                Thread.sleep(tick);
+        int i = 0;
+        while(true && i < notes.length) {
+            MidiPlayer.play(this.channel, notes[i]);
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            MidiPlayer.stop(0, notes[i]);
-            System.out.println("Nota");
+            MidiPlayer.stop(this.channel, notes[i]);
+            i++;
         }
         return true;
-    }
-
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'run'");
     }
 }
