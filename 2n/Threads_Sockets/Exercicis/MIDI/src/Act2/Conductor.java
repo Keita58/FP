@@ -18,7 +18,9 @@ public class Conductor implements Callable<Boolean>{
             for(int j = 0; j < Note.Duration.negra; j++) {
                 try {
                     Thread.sleep(tick);
-                    notifyAll();
+                    synchronized (this) {
+                        this.notifyAll();
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

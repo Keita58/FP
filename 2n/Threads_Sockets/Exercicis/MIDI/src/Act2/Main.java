@@ -294,16 +294,16 @@ public class Main
 
 		ExecutorService executor = Executors.newFixedThreadPool(4);
 		List<Future<Boolean>> futurs = new ArrayList<>();
-		futurs.add(executor.submit(new Performer(trumpet57, 0)));
-		futurs.add(executor.submit(new Performer(trombone58, 1)));
-		futurs.add(executor.submit(new Performer(chorus54, 2)));
-		futurs.add(executor.submit(new Conductor(trumpet57, 60, 72)));
+		Conductor cond = new Conductor(trumpet57, 80, 40);
+		futurs.add(executor.submit(new Performer(trumpet57, 0, cond)));
+		futurs.add(executor.submit(new Performer(trombone58, 1, cond)));
+		futurs.add(executor.submit(new Performer(chorus54, 2, cond)));
+		futurs.add(executor.submit(cond));
 		executor.shutdown();
 
 		for(Future<Boolean> futur : futurs) {
 			try {
-				if(executor.isShutdown())
-					futur.get();
+				futur.get();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
