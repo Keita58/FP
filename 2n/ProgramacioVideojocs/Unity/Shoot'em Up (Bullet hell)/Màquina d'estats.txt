@@ -1,0 +1,6 @@
+Màquina d'estats:
+IDLE -> RUN -> IDLE
+IDLE -> PUNCH -> IDLE
+IDLE -> HARDPUNCH -> IDLE
+PUCH -> HARDPUNCH -> IDLE
+HARDPUNCH -> PUNCH -> IDLE
