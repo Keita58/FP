@@ -16,6 +16,9 @@ public class Performer implements Callable<Boolean>{
 
     @Override
     public Boolean call() throws Exception {
+        synchronized (this.cond) {
+            cond.wait();
+        }
         int i = 0;
         while(true && i < notes.length) {
             MidiPlayer.play(this.channel, notes[i]);
