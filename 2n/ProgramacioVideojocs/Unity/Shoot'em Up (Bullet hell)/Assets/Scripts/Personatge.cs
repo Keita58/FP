@@ -103,7 +103,14 @@ public class Personatge : MonoBehaviour
                 }
                 _Rigidbody.velocity = _Moviment.ReadValue<Vector2>() * 1f;
 
-                this.transform.eulerAngles = Vector3.up * (_Moviment.ReadValue<Vector2>().x > 0 ? 0 : 180);
+                if(_Moviment.ReadValue<Vector2>().x > 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 0;
+                }
+                else if(_Moviment.ReadValue<Vector2>().x < 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 180;
+                }
                 print(this.transform.eulerAngles);
 
                 break;
@@ -115,6 +122,11 @@ public class Personatge : MonoBehaviour
                         ChangeState(CatStates.PUNCH);
                         _BufferState = CatStates.IDLE;
                     }
+                    else if (_BufferState.Equals(CatStates.HARDPUNCH))
+                    {
+                        ChangeState(CatStates.HARDPUNCH);
+                        _BufferState = CatStates.IDLE;
+                    }
                     else
                         ChangeState(CatStates.IDLE);
                 }
@@ -122,7 +134,12 @@ public class Personatge : MonoBehaviour
             case CatStates.HARDPUNCH:
                 if (_StateTime >= _HardAttackClip.length)
                 {
-                    if (_BufferState.Equals(CatStates.HARDPUNCH))
+                    if (_BufferState.Equals(CatStates.PUNCH))
+                    {
+                        ChangeState(CatStates.PUNCH);
+                        _BufferState = CatStates.IDLE;
+                    }
+                    else if (_BufferState.Equals(CatStates.HARDPUNCH))
                     {
                         ChangeState(CatStates.HARDPUNCH);
                         _BufferState = CatStates.IDLE;
@@ -180,6 +197,8 @@ public class Personatge : MonoBehaviour
             case CatStates.HARDPUNCH:
                 if (_Combo)
                     ChangeState(CatStates.LIGHTCOMBO);
+                else
+                    _BufferState = CatStates.PUNCH;
                 break;
             default:
                 break;
@@ -198,6 +217,8 @@ public class Personatge : MonoBehaviour
             case CatStates.PUNCH:
                 if (_Combo)
                     ChangeState(CatStates.HARDCOMBO);
+                else
+                    _BufferState = CatStates.HARDPUNCH;
                 break;
             case CatStates.HARDPUNCH:
                 _BufferState = CatStates.HARDPUNCH;
