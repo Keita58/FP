@@ -1,19 +1,23 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
-public class Personatge : MonoBehaviour
+public class Personatge : MonoBehaviour, IDamageable
 {
     [SerializeField] InputActionAsset Action;
+    [SerializeField] Hitbox hitbox;
 
     private Animator _Animator;
     private InputActionAsset _CopiaAction;
     private InputAction _Moviment;
     private Rigidbody2D _Rigidbody;
+    private int _Vides;
     [SerializeField] private bool _Girat;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        _Vides = 0;
         _Girat = false;
         _Animator = GetComponent<Animator>();
 
@@ -40,6 +44,8 @@ public class Personatge : MonoBehaviour
     [SerializeField] private AnimationClip _HardAttackClip;
     private bool _Combo;
     private float _StateTime;
+
+    public event Action<float> OnDamaged;
 
     private void Start()
     {
@@ -69,15 +75,19 @@ public class Personatge : MonoBehaviour
                 break;
             case CatStates.PUNCH:
                 _Animator.Play("Attack1");
+                hitbox.Damage = 4;
                 break;
             case CatStates.HARDPUNCH:
                 _Animator.Play("Attack2");
+                hitbox.Damage = 7;
                 break;
             case CatStates.LIGHTCOMBO:
                 _Animator.Play("Attack1");
+                hitbox.Damage = 4 * 0.3f;
                 break;
             case CatStates.HARDCOMBO:
                 _Animator.Play("Attack2");
+                hitbox.Damage = 7 * 0.3f;
                 break;
             default:
                 break;
@@ -242,5 +252,11 @@ public class Personatge : MonoBehaviour
     void Update()
     {
         UpdateState(_CurrentState);
+    }
+
+    public void RebreMal(float damage)
+    {
+        if(_Vides > 0)
+            _Vides--;
     }
 }

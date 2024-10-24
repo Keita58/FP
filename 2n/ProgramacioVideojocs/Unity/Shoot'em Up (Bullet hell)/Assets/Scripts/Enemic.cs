@@ -1,18 +1,25 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
-public class Enemic : MonoBehaviour
+public class Enemic : MonoBehaviour, IDamageable
 {
     [SerializeField] AreaDeteccio RangPerseguir;
     [SerializeField] AreaDeteccio RangAtac;
+    [SerializeField] EnemicSO EnemicSO;
+    [SerializeField] Hitbox hitbox;
 
     private Animator _Animator;
+    private Rigidbody2D _Rigidbody;
+    private float _Vida;
 
     private void Awake()
     {
+        _Vida = EnemicSO.vides;
         _Animator = GetComponent<Animator>();
+        _Rigidbody = this.GetComponent<Rigidbody2D>();
         RangPerseguir.OnEnter += OnPlayerDetected;
         RangPerseguir.OnExit += OnPlayerNotDetected;
     }
@@ -27,6 +34,11 @@ public class Enemic : MonoBehaviour
 
     }
 
+    private void OnPlayerStay(GameObject player)
+    {
+        
+    }
+
     private void OnPlayerAttackRange(GameObject player)
     {
 
@@ -37,8 +49,11 @@ public class Enemic : MonoBehaviour
 
     }
 
-    private enum EnemyStates { IDLE, ATTACK, DIE }
+    private enum EnemyStates { IDLE, PURSUE, ATTACK, DIE }
     [SerializeField] private EnemyStates _CurrentState;
+
+    public event Action<float> OnDamaged;
+
     private void ChangeState(EnemyStates newState)
     {
         ExitState(_CurrentState);
@@ -53,10 +68,13 @@ public class Enemic : MonoBehaviour
         {
             case EnemyStates.IDLE:
                 _Animator.Play("Idle");
-                _Rigidbody.velocity = Vector3.zero;
                 break;
             case EnemyStates.ATTACK:
                 _Animator.Play("Attack");
+                hitbox.Damage = EnemicSO.mal;
+                break;
+            case EnemyStates.PURSUE:
+                _Animator.Play("Idle");
                 break;
             default:
                 break;
@@ -65,39 +83,16 @@ public class Enemic : MonoBehaviour
 
     private void UpdateState(EnemyStates updateState)
     {
-        _StateTime += Time.deltaTime;
-        print(_StateTime);
-
         switch (updateState)
         {
             case EnemyStates.IDLE:
-                if (_Moviment.ReadValue<Vector2>() != Vector2.zero)
-                    ChangeState(EnemyStates.RUN);
-
+                ChangeState(EnemyStates.PURSUE);
                 break;
-            case EnemyStates.RUN:
-                if (_Moviment.ReadValue<Vector2>() == Vector2.zero)
-                {
-                    ChangeState(EnemyStates.IDLE);
-                }
-                _Rigidbody.velocity = _Moviment.ReadValue<Vector2>() * 1f;
-
-                if (_Moviment.ReadValue<Vector2>().x > 0)
-                {
-                    this.transform.eulerAngles = Vector3.up * 0;
-                }
-                else if (_Moviment.ReadValue<Vector2>().x < 0)
-                {
-                    this.transform.eulerAngles = Vector3.up * 180;
-                }
-                print(this.transform.eulerAngles);
-
+            case EnemyStates.PURSUE:
+                ChangeState(EnemyStates.IDLE);
                 break;
             case EnemyStates.ATTACK:
-                if (_StateTime >= _AttackClip.length)
-                {
-                    ChangeState(EnemyStates.IDLE);
-                }
+                ChangeState(EnemyStates.PURSUE);
                 break;
             default:
                 break;
@@ -110,10 +105,9 @@ public class Enemic : MonoBehaviour
         {
             case EnemyStates.IDLE:
                 break;
-            case EnemyStates.RUN:
-                _Rigidbody.velocity = Vector2.zero;
-                break;
             case EnemyStates.ATTACK:
+                break;
+            case EnemyStates.PURSUE: 
                 break;
             default:
                 break;
@@ -122,18 +116,26 @@ public class Enemic : MonoBehaviour
 
     IEnumerator Atacar()
     {
-        _Animator.Play("atac");
+        _Animator.Play("Attack");
         yield return new WaitForSeconds(2);
-        _Animator.Play("idle");
+        _Animator.Play("Idle");
         yield return new WaitForSeconds(0.5f);
-        if (_PlayerRangAtac)
+        /*if (_PlayerRangAtac)
             ChangeState(EnemyStates.ATTACK);
         else
-            ChangeState(EnemyStates.IDLE);
+            ChangeState(EnemyStates.PURSUE);*/
     }
 
     void Update()
     {
         UpdateState(_CurrentState);
+    }
+
+    public void RebreMal(float damage)
+    {
+        if (_Vida > 0)
+            _Vida -= damage;
+        else
+            Destroy(this.gameObject); /*Posar pool!!!!!*/
     }
 }
