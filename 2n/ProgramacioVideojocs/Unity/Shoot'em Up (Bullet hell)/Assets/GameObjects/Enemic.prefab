@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6135951602190555655}
   - component: {fileID: 3624527349745889149}
   - component: {fileID: 2826340316794373577}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RangPerseguir: {fileID: 191887194455216170}
   RangAtac: {fileID: 3538484926886466383}
-  EnemicSO: {fileID: 0}
   hitbox: {fileID: 6135951602190555655}
   _CurrentState: 0
 --- !u!212 &8184585481356092901
@@ -224,7 +223,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.93333334, y: 1.1666666}
+  m_Size: {x: 1.5333333, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -303,7 +302,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -326,7 +325,7 @@ GameObject:
   - component: {fileID: 3946968731343593166}
   - component: {fileID: 3538484926886466383}
   - component: {fileID: 1404645819869337633}
-  - component: {fileID: 3509750081400053864}
+  - component: {fileID: 690452327307611440}
   m_Layer: 9
   m_Name: AreaAtacar
   m_TagString: Untagged
@@ -388,8 +387,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &3509750081400053864
-BoxCollider2D:
+--- !u!58 &690452327307611440
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -422,18 +421,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.6176834, y: -0.2775103}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 3.1305637, y: 3.3454106}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.55, y: -0.3}
+  m_Radius: 1.34
 --- !u!1 &8160098725013886611
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +434,7 @@ GameObject:
   - component: {fileID: 191750425549044974}
   - component: {fileID: 191887194455216170}
   - component: {fileID: 3841212972269774483}
-  - component: {fileID: 8207515108846493655}
+  - component: {fileID: 4463263338247548873}
   m_Layer: 9
   m_Name: AreaDetectar
   m_TagString: Untagged
@@ -507,8 +496,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &8207515108846493655
-BoxCollider2D:
+--- !u!58 &4463263338247548873
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -541,15 +530,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 2.2766488, y: -0.2775103}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 6.4484954, y: 3.3454106}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.55, y: -0.3}
+  m_Radius: 2.5

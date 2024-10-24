@@ -9,11 +9,13 @@ public class SpawnerEnemics : MonoBehaviour
     [SerializeField] Pool _Pool;
     float _Min;
     float _Max;
+    float _Count;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         _Min = 2.0f;
-        _Max = 4.0f;
+        _Max = 6.0f;
+        _Count = 0;
         StartCoroutine(crear());
     }
 
@@ -24,32 +26,36 @@ public class SpawnerEnemics : MonoBehaviour
             float num = Random.Range(_Min, _Max);
             print("Espera: " + num);
             yield return new WaitForSeconds(num);
-            int enemicNum = Random.Range(0, 5);
-            GameObject enemicNau = _Pool.GetElement();
+            int enemicNum = Random.Range(0, 2);
+            GameObject enemicGO = _Pool.GetElement();
 
-            if (enemicNau == null)
+            if (enemicGO == null)
                 continue;
 
-            enemicNau.SetActive(true);
-            enemicNau.GetComponent<IPoolable>().OnDestroyed += ReturnEnemicToPool;
+            enemicGO.SetActive(true);
+            enemicGO.GetComponent<IPoolable>().OnDestroyed += ReturnEnemicToPool;
 
             float posX = Random.Range(-2.6f, 2.6f);
-            enemicNau.transform.position = new Vector2(posX, 5.6f);
-            enemicNau.transform.tag = "Enemic";
-            /*
-            enemicNau.GetComponent<Rigidbody2D>().velocity = _Enemic[enemicNum].velocitat * enemicNau.transform.up;
-            enemicNau.GetComponent<Enemic>().mal = _Enemic[enemicNum].mal;
-            enemicNau.GetComponent<Enemic>().vides = _Enemic[enemicNum].vides;
-            enemicNau.GetComponent<Enemic>().punts = _Enemic[enemicNum].punts;
-            enemicNau.GetComponent<SpriteRenderer>().sprite = _Enemic[enemicNum].sprite;
-            enemicNau.GetComponentInChildren<HealthBar>().IniciarBarra(_Enemic[enemicNum].vides);
-            count++;
+            enemicGO.transform.position = new Vector2(posX, 5.6f);
+            enemicGO.transform.tag = "Enemic";
 
-            if (count % ronda == 0 && max > 0.5f)
+            enemicGO.GetComponent<Enemic>().setVides(_Enemics[enemicNum].vides);
+            enemicGO.GetComponent<Enemic>().setMal(_Enemics[enemicNum].mal);
+            enemicGO.GetComponent<Enemic>().setPunts(_Enemics[enemicNum].punts);
+            enemicGO.GetComponent<Enemic>().setVelocitat(_Enemics[enemicNum].velocitat);
+            enemicGO.GetComponent<Enemic>().setAnimacio(_Enemics[enemicNum].animacio);
+
+            //enemicGO.GetComponent<SpriteRenderer>().sprite = _Enemics[enemicNum].sprite;
+            //enemicGO.GetComponentInChildren<HealthBar>().IniciarBarra(_Enemics[enemicNum].vides);
+            //_Count++;
+
+            // Això és el comptador de les rondes, per a que vagi més ràpid
+            /*
+            if (_Count % ronda == 0 && _Max > 0.5f)
             {
-                if (min > 0f)
-                    min -= 0.5f;
-                max -= 0.5f;
+                if (_Min > 0f)
+                    _Min -= 0.5f;
+                _Max -= 0.5f;
                 ronda += 15 * numRonda;
                 rondaEnemics++;
                 numRonda++;
@@ -58,28 +64,28 @@ public class SpawnerEnemics : MonoBehaviour
             switch (rondaEnemics)
             {
                 case 0:
-                    enemicNau.GetComponent<SpriteRenderer>().color = Color.white;
+                    enemicGO.GetComponent<SpriteRenderer>().color = Color.white;
                     break;
                 case 1:
-                    enemicNau.GetComponent<SpriteRenderer>().color = Color.green;
+                    enemicGO.GetComponent<SpriteRenderer>().color = Color.green;
                     break;
                 case 2:
-                    enemicNau.GetComponent<SpriteRenderer>().color = Color.blue;
+                    enemicGO.GetComponent<SpriteRenderer>().color = Color.blue;
                     break;
                 case 3:
-                    enemicNau.GetComponent<SpriteRenderer>().color = Color.yellow;
+                    enemicGO.GetComponent<SpriteRenderer>().color = Color.yellow;
                     break;
                 case 4:
-                    enemicNau.GetComponent<SpriteRenderer>().color = Color.red;
+                    enemicGO.GetComponent<SpriteRenderer>().color = Color.red;
                     break;
                 case 5:
-                    enemicNau.GetComponent<SpriteRenderer>().color = Color.gray;
+                    enemicGO.GetComponent<SpriteRenderer>().color = Color.gray;
                     break;
                 case 6:
-                    enemicNau.GetComponent<SpriteRenderer>().color = Color.black;
+                    enemicGO.GetComponent<SpriteRenderer>().color = Color.black;
                     break;
                 default:
-                    enemicNau.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+                    enemicGO.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
                     break;
             }*/
         }

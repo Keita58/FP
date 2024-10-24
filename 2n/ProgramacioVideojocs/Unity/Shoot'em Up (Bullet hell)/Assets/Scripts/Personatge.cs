@@ -37,7 +37,7 @@ public class Personatge : MonoBehaviour, IDamageable
         _Rigidbody = this.GetComponent<Rigidbody2D>();
     }
 
-    private enum CatStates { IDLE, RUN, PUNCH, HARDPUNCH, LIGHTCOMBO, HARDCOMBO }
+    private enum CatStates { IDLE, RUN, PUNCH, HARDPUNCH, LIGHTCOMBO, HARDCOMBO, HURT }
     [SerializeField] private CatStates _CurrentState;
     [SerializeField] private CatStates _BufferState;
     [SerializeField] private AnimationClip _AttackClip;
@@ -89,6 +89,9 @@ public class Personatge : MonoBehaviour, IDamageable
                 _Animator.Play("Attack2");
                 hitbox.Damage = 7 * 0.3f;
                 break;
+            case CatStates.HURT:
+                _Animator.Play("Idle");
+                break;
             default:
                 break;
         }
@@ -97,7 +100,7 @@ public class Personatge : MonoBehaviour, IDamageable
     private void UpdateState(CatStates updateState)
     {
         _StateTime += Time.deltaTime;
-        print(_StateTime);
+        //print(_StateTime);
 
         switch (updateState)
         {
@@ -111,7 +114,7 @@ public class Personatge : MonoBehaviour, IDamageable
                 {
                     ChangeState(CatStates.IDLE);
                 }
-                _Rigidbody.velocity = _Moviment.ReadValue<Vector2>() * 1f;
+                _Rigidbody.velocity = _Moviment.ReadValue<Vector2>() * 2f;
 
                 if(_Moviment.ReadValue<Vector2>().x > 0)
                 {
@@ -165,6 +168,9 @@ public class Personatge : MonoBehaviour, IDamageable
             case CatStates.HARDCOMBO:
                 if (_StateTime >= _HardAttackClip.length)
                     ChangeState(CatStates.IDLE);
+                break;
+            case CatStates.HURT:
+                ChangeState(CatStates.IDLE);
                 break;
             default:
                 break;
@@ -257,6 +263,11 @@ public class Personatge : MonoBehaviour, IDamageable
     public void RebreMal(float damage)
     {
         if(_Vides > 0)
-            _Vides--;
+        {
+            _Vides -= (int)damage;
+            ChangeState(CatStates.HURT);
+        }
+        else
+            Destroy(this.gameObject);
     }
 }

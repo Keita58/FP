@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vides: 8
   mal: 3
+  punts: 0
+  velocitat: 1
   animacio: {fileID: 9100000, guid: 745402a0015ef85439720a4e8433c809, type: 2}
+  color: {r: 1, g: 1, b: 1, a: 1}
