@@ -99,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com." + aplicacioABuscar.getText().toString())));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=" + aplicacioABuscar.getText().toString())));
                 } catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + aplicacioABuscar.getText().toString())));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/search?q=" + aplicacioABuscar.getText().toString())));
                 }
             }
         });
