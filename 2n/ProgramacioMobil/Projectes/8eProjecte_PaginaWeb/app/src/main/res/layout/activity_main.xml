@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btnWebbrowser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Web Browser" />
+
+    <Button
+        android:id="@+id/btnMakecalls"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Make Calls" />
+
+    <Button
+        android:id="@+id/btnShowMap"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Show" />
+
+    <Button
+        android:id="@+id/btnChooseContact"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="choose Contact" />
+
+    <Button
+        android:id="@+id/btnMyBrowser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Launch My Browser" />
+
+    <EditText
+        android:id="@+id/textABuscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnPlayStore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Busca a la Play Store" />
+
+</LinearLayout>

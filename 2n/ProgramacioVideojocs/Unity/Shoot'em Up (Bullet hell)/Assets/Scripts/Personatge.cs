@@ -124,7 +124,6 @@ public class Personatge : MonoBehaviour, IDamageable
                 {
                     this.transform.eulerAngles = Vector3.up * 180;
                 }
-                print(this.transform.eulerAngles);
 
                 break;
             case CatStates.PUNCH:

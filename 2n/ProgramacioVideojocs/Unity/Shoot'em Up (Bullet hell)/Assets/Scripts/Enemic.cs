@@ -9,27 +9,32 @@ using UnityEngine.XR;
 public class Enemic : MonoBehaviour, IDamageable, IPoolable
 {
     public event Action<GameObject> OnDestroyed;
-    [SerializeField] AreaDeteccio RangPerseguir;
-    [SerializeField] AreaDeteccio RangAtac;
+    [SerializeField] GameObject RangPerseguir;
+    [SerializeField] GameObject RangAtac;
     [SerializeField] Hitbox hitbox;
 
     private Animator _Animator;
     private Rigidbody2D _Rigidbody;
     private float _Vida;
+    private float _StateTime;
     private int _Mal;
     private int _Punts;
     private int _Velocitat;
     private bool _PlayerRangAtac;
+    private bool _MalColor;
+    private GameObject _Jugador;
 
     private void Awake()
     {
+        _StateTime = 0;
         _PlayerRangAtac = false;
+        _MalColor = false;
         _Animator = GetComponent<Animator>();
         _Rigidbody = this.GetComponent<Rigidbody2D>();
-        RangPerseguir.OnEnter += OnPlayerDetected;
-        RangPerseguir.OnExit += OnPlayerNotDetected;
-        RangAtac.OnEnter += OnPlayerAttackRange;
-        RangAtac.OnExit += OnPlayerNotAttackRange;
+        RangPerseguir.GetComponent<AreaDeteccio>().OnEnter += OnPlayerDetected;
+        RangPerseguir.GetComponent<AreaDeteccio>().OnExit += OnPlayerNotDetected;
+        RangAtac.GetComponent<AreaDeteccio>().OnEnter += OnPlayerAttackRange;
+        RangAtac.GetComponent<AreaDeteccio>().OnExit += OnPlayerNotAttackRange;
     }
 
     public void setVides(float vida)
@@ -57,9 +62,20 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         _Animator.runtimeAnimatorController = animacio; //Afegim el controlador de les animacions amb el runtimeAnimationController
     }
 
+    public void setRadiDeteccio(float radiDeteccio)
+    {
+        RangPerseguir.GetComponent<CircleCollider2D>().radius = radiDeteccio;
+    }
+
+    public void setRadiAtac(float radiAtac)
+    {
+        RangAtac.GetComponent<CircleCollider2D>().radius = radiAtac;
+    }
+
     private void OnPlayerDetected(GameObject player)
     {
-        RangPerseguir.OnStay += OnPlayerStay;
+        RangPerseguir.GetComponent<AreaDeteccio>().OnStay += OnPlayerStay;
+        _Jugador = player;
         ChangeState(EnemyStates.PURSUE);
         Vector2 direccio = player.transform.position - this.transform.position;
         direccio.Normalize();
@@ -68,16 +84,14 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
 
     private void OnPlayerNotDetected(GameObject player)
     {
-        RangPerseguir.OnStay -= OnPlayerStay;
+        RangPerseguir.GetComponent<AreaDeteccio>().OnStay -= OnPlayerStay;
         ChangeState(EnemyStates.IDLE);
         _Rigidbody.velocity = Vector3.zero;
     }
 
     private void OnPlayerStay(GameObject player)
     {
-        Vector2 direccio = player.transform.position - this.transform.position;
-        direccio.Normalize();
-        _Rigidbody.velocity = _Velocitat * direccio;
+        _Jugador = player;
     }
 
     private void OnPlayerExit(GameObject player)
@@ -88,7 +102,6 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     private void OnPlayerAttackRange(GameObject player)
     {
         _PlayerRangAtac = true;
-        RangPerseguir.OnStay -= OnPlayerStay;
         _Rigidbody.velocity = Vector3.zero;
         StartCoroutine(Atacar());
     }
@@ -96,11 +109,11 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     private void OnPlayerNotAttackRange(GameObject player)
     {
         _PlayerRangAtac = false;
-        RangPerseguir.OnStay += OnPlayerStay;
+        _Jugador = player;
         ChangeState(EnemyStates.PURSUE);
     }
 
-    private enum EnemyStates { IDLE, PURSUE, ATTACK, DIE }
+    private enum EnemyStates { IDLE, PURSUE, ATTACK, HURT, DIE }
     [SerializeField] private EnemyStates _CurrentState;
     private void ChangeState(EnemyStates newState)
     {
@@ -110,6 +123,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
 
     private void InitState(EnemyStates initState)
     {
+        _StateTime = 0;
         _CurrentState = initState;
 
         switch (_CurrentState)
@@ -125,6 +139,12 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             case EnemyStates.PURSUE:
                 _Animator.Play("Idle");
                 break;
+            case EnemyStates.HURT:
+                this.GetComponent<SpriteRenderer>().color = Color.red;
+                break;
+            case EnemyStates.DIE:
+                _Animator.Play("Dead");
+                break;
             default:
                 break;
         }
@@ -132,13 +152,37 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
 
     private void UpdateState(EnemyStates updateState)
     {
+        _StateTime += Time.deltaTime;
+
         switch (updateState)
         {
             case EnemyStates.IDLE:
                 break;
             case EnemyStates.PURSUE:
+                Vector2 direccio = _Jugador.transform.position - this.transform.position;
+                direccio.Normalize();
+                _Rigidbody.velocity = _Velocitat * direccio;
+                if (direccio.x > 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 0;
+                }
+                else if (direccio.x < 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 180;
+                }
                 break;
             case EnemyStates.ATTACK:
+                break;
+            case EnemyStates.HURT:
+                if (_StateTime > 0.15f)
+                {
+                    this.GetComponent<SpriteRenderer>().color = Color.white;
+                    ChangeState(EnemyStates.IDLE);
+                }
+                break;
+            case EnemyStates.DIE:
+                if(_StateTime > 0.8f)
+                    ChangeState(EnemyStates.IDLE);
                 break;
             default:
                 break;
@@ -154,6 +198,10 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             case EnemyStates.ATTACK:
                 break;
             case EnemyStates.PURSUE: 
+                break;
+            case EnemyStates.DIE:
+                this.GetComponent<SpriteRenderer>().color = Color.white;
+                OnDestroyed?.Invoke(this.gameObject);
                 break;
             default:
                 break;
@@ -179,8 +227,15 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     public void RebreMal(float damage)
     {
         if (_Vida > 0)
+        {
             _Vida -= damage;
+            ChangeState(EnemyStates.HURT);
+        } 
         else
-            OnDestroyed?.Invoke(this.gameObject);
+        {
+            RangPerseguir.GetComponent<AreaDeteccio>().OnStay -= OnPlayerStay;
+            _Rigidbody.velocity = Vector3.zero;
+            ChangeState(EnemyStates.DIE);
+        }   
     }
 }

@@ -24,7 +24,6 @@ public class SpawnerEnemics : MonoBehaviour
         while (true)
         {
             float num = Random.Range(_Min, _Max);
-            print("Espera: " + num);
             yield return new WaitForSeconds(num);
             int enemicNum = Random.Range(0, 2);
             GameObject enemicGO = _Pool.GetElement();
@@ -44,6 +43,8 @@ public class SpawnerEnemics : MonoBehaviour
             enemicGO.GetComponent<Enemic>().setPunts(_Enemics[enemicNum].punts);
             enemicGO.GetComponent<Enemic>().setVelocitat(_Enemics[enemicNum].velocitat);
             enemicGO.GetComponent<Enemic>().setAnimacio(_Enemics[enemicNum].animacio);
+            enemicGO.GetComponent<Enemic>().setRadiDeteccio(_Enemics[enemicNum].radiDeteccio);
+            enemicGO.GetComponent<Enemic>().setRadiAtac(_Enemics[enemicNum].radiAtac);
 
             //enemicGO.GetComponent<SpriteRenderer>().sprite = _Enemics[enemicNum].sprite;
             //enemicGO.GetComponentInChildren<HealthBar>().IniciarBarra(_Enemics[enemicNum].vides);

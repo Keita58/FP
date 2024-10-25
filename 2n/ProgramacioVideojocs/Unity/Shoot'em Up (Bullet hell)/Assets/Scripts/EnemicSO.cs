@@ -10,4 +10,6 @@ public class EnemicSO : ScriptableObject
     public int velocitat;
     public AnimatorController animacio;
     public Color color;
+    public float radiDeteccio;
+    public float radiAtac;
 }

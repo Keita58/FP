@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7047f4165aaf81f4a863c1c4fef19c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RangPerseguir: {fileID: 191887194455216170}
-  RangAtac: {fileID: 3538484926886466383}
+  RangPerseguir: {fileID: 8160098725013886611}
+  RangAtac: {fileID: 6281025714610957395}
   hitbox: {fileID: 6135951602190555655}
   _CurrentState: 0
 --- !u!212 &8184585481356092901
