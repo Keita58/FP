@@ -17,7 +17,7 @@ public class Michilover implements Runnable {
             cdl.countDown();
             cdl.await();
             GameController.incrementarMichitokens(50);
-            michis.remove("Michilovers");
+            michis.remove("Michilover");
         }
         catch (Exception e) {
 

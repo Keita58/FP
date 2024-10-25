@@ -26,7 +26,7 @@ public class GameController {
     }
 
     private static void printGUI() {
-        System.out.print("\033[H\033[2J");  
+        System.out.print("\033[H\033[2J");  //? Neteja la pantalla per a que només es quedin els prints següents
         System.out.println("Quantitat actual de MichiTokens: " + michiTokens);
         System.out.println("Ara mateix tens aquesta quantitat de michis: ");
         for(Entry<String, Integer> michi : michis.entrySet()) {
@@ -95,14 +95,11 @@ public class GameController {
             michiTokens -= 100;
             try {
                 if(semMichismart.tryAcquire()) {
-                    executor.execute(new Michismart());
+                    executor.execute(new Michismart(semMichismart, michis));
                     if(michis.containsKey("Michismart"))
                         michis.put("Michismart", (michis.get("Michismart") + 1));
                     else
                         michis.put("Michismart", 1);
-                    for(int i = 0; i < 5; i++) {
-                        semMichismart.release();
-                    }
                     printGUI();
                 }
                 
