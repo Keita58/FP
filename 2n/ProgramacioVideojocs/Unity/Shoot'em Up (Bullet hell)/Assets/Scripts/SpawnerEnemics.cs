@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,21 +8,36 @@ public class SpawnerEnemics : MonoBehaviour
     [SerializeField] EnemicSO[] _Enemics;
     [SerializeField] GameObject _EnemicGO;
     [SerializeField] Pool _Pool;
+    [SerializeField] GameObject _JugadorGO;
     float _Min;
     float _Max;
     float _Count;
+    List<int> _Rondes;
+    int _RondaActual;
+    int _EnemicsVius;
+    int _EnemicsRestants;
+    bool _CrearEnemicRonda;
+
+    public delegate void AvisarUI(int ronda);
+    public AvisarUI augmentarRondaDelegat;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        _CrearEnemicRonda = true;
         _Min = 2.0f;
         _Max = 6.0f;
         _Count = 0;
+        _Rondes = new List<int>{ 5, 10, 17, 30, 37, 50, 62, 75, 88, 100};
+        _RondaActual = 0;
+        _EnemicsVius = _Rondes[_RondaActual];
+        _EnemicsRestants = _EnemicsVius;
         StartCoroutine(crear());
     }
 
     IEnumerator crear()
     {
-        while (true)
+        for(int i = 0; i < _EnemicsVius; i++)
         {
             float num = Random.Range(_Min, _Max);
             yield return new WaitForSeconds(num);
@@ -34,8 +50,19 @@ public class SpawnerEnemics : MonoBehaviour
             enemicGO.SetActive(true);
             enemicGO.GetComponent<IPoolable>().OnDestroyed += ReturnEnemicToPool;
 
-            float posX = Random.Range(-2.6f, 2.6f);
-            enemicGO.transform.position = new Vector2(posX, 5.6f);
+            int posx = 0;
+            float pos = Random.Range(0, 2);
+            switch(pos)
+            {
+                case 0:
+                    posx = -9;
+                    break;
+                case 1:
+                    posx = 9;
+                    break;
+            }
+            float posy = Random.Range(-2.5f, 2.5f);
+            enemicGO.transform.position = new Vector2((_JugadorGO.transform.position.x + posx), (_JugadorGO.transform.position.y + posy));
             enemicGO.transform.tag = "Enemic";
 
             enemicGO.GetComponent<Enemic>().setVides(_Enemics[enemicNum].vides);
@@ -46,23 +73,8 @@ public class SpawnerEnemics : MonoBehaviour
             enemicGO.GetComponent<Enemic>().setRadiDeteccio(_Enemics[enemicNum].radiDeteccio);
             enemicGO.GetComponent<Enemic>().setRadiAtac(_Enemics[enemicNum].radiAtac);
 
-            //enemicGO.GetComponent<SpriteRenderer>().sprite = _Enemics[enemicNum].sprite;
-            //enemicGO.GetComponentInChildren<HealthBar>().IniciarBarra(_Enemics[enemicNum].vides);
-            //_Count++;
 
-            // Això és el comptador de les rondes, per a que vagi més ràpid
-            /*
-            if (_Count % ronda == 0 && _Max > 0.5f)
-            {
-                if (_Min > 0f)
-                    _Min -= 0.5f;
-                _Max -= 0.5f;
-                ronda += 15 * numRonda;
-                rondaEnemics++;
-                numRonda++;
-            }
-
-            switch (rondaEnemics)
+            switch (_RondaActual)
             {
                 case 0:
                     enemicGO.GetComponent<SpriteRenderer>().color = Color.white;
@@ -77,7 +89,7 @@ public class SpawnerEnemics : MonoBehaviour
                     enemicGO.GetComponent<SpriteRenderer>().color = Color.yellow;
                     break;
                 case 4:
-                    enemicGO.GetComponent<SpriteRenderer>().color = Color.red;
+                    enemicGO.GetComponent<SpriteRenderer>().color = Color.cyan;
                     break;
                 case 5:
                     enemicGO.GetComponent<SpriteRenderer>().color = Color.gray;
@@ -88,9 +100,26 @@ public class SpawnerEnemics : MonoBehaviour
                 default:
                     enemicGO.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
                     break;
-            }*/
+            }
         }
     }
+
+    public void augmentarRonda()
+    {
+        if (_EnemicsRestants > 1)
+        {
+            _EnemicsRestants--;
+        }
+        else
+        {
+            _RondaActual++;
+            _EnemicsVius = _Rondes[_RondaActual];
+            _EnemicsRestants = _EnemicsVius;
+            augmentarRondaDelegat.Invoke(_RondaActual);
+            StartCoroutine(crear());
+        }
+    }
+
     private void ReturnEnemicToPool(GameObject enemic)
     {
         enemic.GetComponent<IPoolable>().OnDestroyed -= ReturnEnemicToPool;

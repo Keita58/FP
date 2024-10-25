@@ -1,24 +1,25 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 public class Personatge : MonoBehaviour, IDamageable
 {
     [SerializeField] InputActionAsset Action;
-    [SerializeField] Hitbox hitbox;
+    [SerializeField] Hitbox Hitbox;
+    [SerializeField] private int _Vides;
+    [SerializeField] private GameEvent _VidesUI;
 
     private Animator _Animator;
     private InputActionAsset _CopiaAction;
     private InputAction _Moviment;
     private Rigidbody2D _Rigidbody;
-    private int _Vides;
-    [SerializeField] private bool _Girat;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        _Vides = 0;
-        _Girat = false;
+        _Vides = 30;
         _Animator = GetComponent<Animator>();
 
         //Instancia de l'input original
@@ -37,6 +38,11 @@ public class Personatge : MonoBehaviour, IDamageable
         _Rigidbody = this.GetComponent<Rigidbody2D>();
     }
 
+    public int getVides()
+    {
+        return _Vides;
+    }
+
     private enum CatStates { IDLE, RUN, PUNCH, HARDPUNCH, LIGHTCOMBO, HARDCOMBO, HURT }
     [SerializeField] private CatStates _CurrentState;
     [SerializeField] private CatStates _BufferState;
@@ -44,8 +50,6 @@ public class Personatge : MonoBehaviour, IDamageable
     [SerializeField] private AnimationClip _HardAttackClip;
     private bool _Combo;
     private float _StateTime;
-
-    public event Action<float> OnDamaged;
 
     private void Start()
     {
@@ -75,19 +79,19 @@ public class Personatge : MonoBehaviour, IDamageable
                 break;
             case CatStates.PUNCH:
                 _Animator.Play("Attack1");
-                hitbox.Damage = 4;
+                Hitbox.Damage = 4;
                 break;
             case CatStates.HARDPUNCH:
                 _Animator.Play("Attack2");
-                hitbox.Damage = 7;
+                Hitbox.Damage = 7;
                 break;
             case CatStates.LIGHTCOMBO:
                 _Animator.Play("Attack1");
-                hitbox.Damage = 4 * 0.3f;
+                Hitbox.Damage = 4 * 0.3f;
                 break;
             case CatStates.HARDCOMBO:
                 _Animator.Play("Attack2");
-                hitbox.Damage = 7 * 0.3f;
+                Hitbox.Damage = 7 * 0.3f;
                 break;
             case CatStates.HURT:
                 _Animator.Play("Idle");
@@ -261,12 +265,16 @@ public class Personatge : MonoBehaviour, IDamageable
 
     public void RebreMal(float damage)
     {
-        if(_Vides > 0)
+        if ((_Vides - (int)damage) > 0)
         {
             _Vides -= (int)damage;
+            _VidesUI.Raise((int)damage);
             ChangeState(CatStates.HURT);
         }
         else
+        {
             Destroy(this.gameObject);
+            SceneManager.LoadScene("Game Over");
+        }
     }
 }

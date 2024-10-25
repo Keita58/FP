@@ -12,6 +12,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     [SerializeField] GameObject RangPerseguir;
     [SerializeField] GameObject RangAtac;
     [SerializeField] Hitbox hitbox;
+    [SerializeField] private GameEvent _Rondes;
 
     private Animator _Animator;
     private Rigidbody2D _Rigidbody;
@@ -21,14 +22,12 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     private int _Punts;
     private int _Velocitat;
     private bool _PlayerRangAtac;
-    private bool _MalColor;
     private GameObject _Jugador;
 
     private void Awake()
     {
         _StateTime = 0;
         _PlayerRangAtac = false;
-        _MalColor = false;
         _Animator = GetComponent<Animator>();
         _Rigidbody = this.GetComponent<Rigidbody2D>();
         RangPerseguir.GetComponent<AreaDeteccio>().OnEnter += OnPlayerDetected;
@@ -159,7 +158,9 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             case EnemyStates.IDLE:
                 break;
             case EnemyStates.PURSUE:
-                Vector2 direccio = _Jugador.transform.position - this.transform.position;
+                Vector2 direccio = Vector2.zero;
+                if(_Jugador != null)
+                    direccio = _Jugador.transform.position - this.transform.position;
                 direccio.Normalize();
                 _Rigidbody.velocity = _Velocitat * direccio;
                 if (direccio.x > 0)
@@ -199,8 +200,12 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
                 break;
             case EnemyStates.PURSUE: 
                 break;
+            case EnemyStates.HURT:
+                this.GetComponent<SpriteRenderer>().color = Color.white;
+                break;
             case EnemyStates.DIE:
                 this.GetComponent<SpriteRenderer>().color = Color.white;
+                _Rondes.Raise();
                 OnDestroyed?.Invoke(this.gameObject);
                 break;
             default:
@@ -215,6 +220,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             ChangeState(EnemyStates.ATTACK);
             yield return new WaitForSeconds(2);
             ChangeState(EnemyStates.IDLE);
+            _Rigidbody.velocity = Vector3.zero;
             yield return new WaitForSeconds(0.5f);          
         }        
     }
@@ -226,9 +232,9 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
 
     public void RebreMal(float damage)
     {
-        if (_Vida > 0)
+        if ((_Vida - (int)damage) > 0)
         {
-            _Vida -= damage;
+            _Vida -= (int)damage;
             ChangeState(EnemyStates.HURT);
         } 
         else
