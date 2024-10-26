@@ -22,7 +22,9 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     private int _Punts;
     private int _Velocitat;
     private bool _PlayerRangAtac;
+    private bool _TipusEnemic;
     private GameObject _Jugador;
+    private Color _ColorOriginal;
 
     private void Awake()
     {
@@ -71,6 +73,11 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         RangAtac.GetComponent<CircleCollider2D>().radius = radiAtac;
     }
 
+    public void settipusEnemic(bool tipus)
+    {
+        _TipusEnemic = tipus;
+    }
+
     private void OnPlayerDetected(GameObject player)
     {
         RangPerseguir.GetComponent<AreaDeteccio>().OnStay += OnPlayerStay;
@@ -112,7 +119,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         ChangeState(EnemyStates.PURSUE);
     }
 
-    private enum EnemyStates { IDLE, PURSUE, ATTACK, HURT, DIE }
+    private enum EnemyStates { IDLE, PURSUE, ATTACK, HURT, DIE, NULL }
     [SerializeField] private EnemyStates _CurrentState;
     private void ChangeState(EnemyStates newState)
     {
@@ -139,6 +146,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
                 _Animator.Play("Idle");
                 break;
             case EnemyStates.HURT:
+                _ColorOriginal = this.GetComponent<SpriteRenderer>().color;
                 this.GetComponent<SpriteRenderer>().color = Color.red;
                 break;
             case EnemyStates.DIE:
@@ -159,6 +167,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
                 break;
             case EnemyStates.PURSUE:
                 Vector2 direccio = Vector2.zero;
+                
                 if(_Jugador != null)
                     direccio = _Jugador.transform.position - this.transform.position;
                 direccio.Normalize();
@@ -177,13 +186,13 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             case EnemyStates.HURT:
                 if (_StateTime > 0.15f)
                 {
-                    this.GetComponent<SpriteRenderer>().color = Color.white;
+                    this.GetComponent<SpriteRenderer>().color = _ColorOriginal;
                     ChangeState(EnemyStates.IDLE);
                 }
                 break;
             case EnemyStates.DIE:
                 if(_StateTime > 0.8f)
-                    ChangeState(EnemyStates.IDLE);
+                    ChangeState(EnemyStates.NULL);
                 break;
             default:
                 break;
@@ -201,11 +210,10 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             case EnemyStates.PURSUE: 
                 break;
             case EnemyStates.HURT:
-                this.GetComponent<SpriteRenderer>().color = Color.white;
+                this.GetComponent<SpriteRenderer>().color = _ColorOriginal;
                 break;
             case EnemyStates.DIE:
-                this.GetComponent<SpriteRenderer>().color = Color.white;
-                _Rondes.Raise();
+                this.GetComponent<SpriteRenderer>().color = _ColorOriginal;
                 OnDestroyed?.Invoke(this.gameObject);
                 break;
             default:
@@ -242,6 +250,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             RangPerseguir.GetComponent<AreaDeteccio>().OnStay -= OnPlayerStay;
             _Rigidbody.velocity = Vector3.zero;
             ChangeState(EnemyStates.DIE);
+            _Rondes.Raise();
         }   
     }
 }

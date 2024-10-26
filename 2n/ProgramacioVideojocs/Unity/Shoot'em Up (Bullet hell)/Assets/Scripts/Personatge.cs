@@ -19,6 +19,7 @@ public class Personatge : MonoBehaviour, IDamageable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        GetComponent<GameObject>().SetActive(true);
         _Vides = 30;
         _Animator = GetComponent<Animator>();
 
@@ -94,6 +95,7 @@ public class Personatge : MonoBehaviour, IDamageable
                 Hitbox.Damage = 7 * 0.3f;
                 break;
             case CatStates.HURT:
+                this.GetComponent<SpriteRenderer>().color = Color.red;
                 _Animator.Play("Idle");
                 break;
             default:
@@ -173,7 +175,11 @@ public class Personatge : MonoBehaviour, IDamageable
                     ChangeState(CatStates.IDLE);
                 break;
             case CatStates.HURT:
-                ChangeState(CatStates.IDLE);
+                if (_StateTime > 0.15f)
+                {
+                    this.GetComponent<SpriteRenderer>().color = Color.white;
+                    ChangeState(CatStates.IDLE);
+                }
                 break;
             default:
                 break;
@@ -194,6 +200,9 @@ public class Personatge : MonoBehaviour, IDamageable
                 break;
             case CatStates.HARDPUNCH:
                 _Combo = false;
+                break;
+            case CatStates.HURT:
+                this.GetComponent<SpriteRenderer>().color = Color.white;
                 break;
             default:
                 break;
@@ -273,7 +282,7 @@ public class Personatge : MonoBehaviour, IDamageable
         }
         else
         {
-            Destroy(this.gameObject);
+            this.GetComponent<GameObject>().SetActive(false);
             SceneManager.LoadScene("Game Over");
         }
     }

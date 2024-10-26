@@ -9,6 +9,7 @@ public class SpawnerEnemics : MonoBehaviour
     [SerializeField] GameObject _EnemicGO;
     [SerializeField] Pool _Pool;
     [SerializeField] GameObject _JugadorGO;
+
     float _Min;
     float _Max;
     float _Count;
@@ -50,15 +51,15 @@ public class SpawnerEnemics : MonoBehaviour
             enemicGO.SetActive(true);
             enemicGO.GetComponent<IPoolable>().OnDestroyed += ReturnEnemicToPool;
 
-            int posx = 0;
+            float posx = 0;
             float pos = Random.Range(0, 2);
             switch(pos)
             {
                 case 0:
-                    posx = -9;
+                    posx = -6.5f;
                     break;
                 case 1:
-                    posx = 9;
+                    posx = 6.5f;
                     break;
             }
             float posy = Random.Range(-2.5f, 2.5f);
@@ -109,9 +110,11 @@ public class SpawnerEnemics : MonoBehaviour
         if (_EnemicsRestants > 1)
         {
             _EnemicsRestants--;
+            Debug.Log("Ha mort un enemic");
         }
         else
         {
+            Debug.Log("Canviem de ronda");
             _RondaActual++;
             _EnemicsVius = _Rondes[_RondaActual];
             _EnemicsRestants = _EnemicsVius;

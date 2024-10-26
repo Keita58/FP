@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Flappy
   m_EditorClassIdentifier: 
   vides: 10
-  mal: 5
+  mal: 1
   punts: 0
   velocitat: 1
   animacio: {fileID: 9100000, guid: 133fde55cf2e4864fa516a34a985f9aa, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
   radiDeteccio: 6
-  radiAtac: 1.5
+  radiAtac: 1.25

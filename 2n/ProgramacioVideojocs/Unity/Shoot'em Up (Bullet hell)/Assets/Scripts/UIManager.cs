@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
     {
         _Vides.text = "Vides: " + _Jugador.getVides().ToString();
         _Rondes.text = "1a Ronda";
+        RondaFinal.Ronda = 1;
         _Spawner.GetComponent<SpawnerEnemics>().augmentarRondaDelegat += actualitzaRonda;
         _VidesPersonatge = _Jugador.getVides();
     }

@@ -8,6 +8,7 @@ public class UIGameOverManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Debug.Log(RondaFinal);
         Rondes.text = "Has arribat fins l'onada " + RondaFinal.Ronda.ToString();
     }
 }

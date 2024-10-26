@@ -12,4 +12,5 @@ public class EnemicSO : ScriptableObject
     public Color color;
     public float radiDeteccio;
     public float radiAtac;
+    public bool tipus; // True -> Melee | False -> Ranged
 }

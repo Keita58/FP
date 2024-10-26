@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab7a09cb8f57104ca0ebac88313aa4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rondes: {fileID: 0}
+  Rondes: {fileID: 1184243386}
   RondaFinal: {fileID: 11400000, guid: 45542a338055e3243aeccc9e91d3807f, type: 2}
 --- !u!1 &1181518932
 GameObject:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Popy
   m_EditorClassIdentifier: 
   vides: 8
-  mal: 3
+  mal: 1
   punts: 0
   velocitat: 1
   animacio: {fileID: 9100000, guid: 745402a0015ef85439720a4e8433c809, type: 2}
