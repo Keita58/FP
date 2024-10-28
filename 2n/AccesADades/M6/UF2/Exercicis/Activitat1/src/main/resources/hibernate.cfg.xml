@@ -8,7 +8,7 @@
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/factory?serverTimezone=UTC</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/anime?serverTimezone=UTC</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">super3</property>
 		<!-- Si posem create el que farà sera crear la taula cada vegada que ho executem -->
@@ -17,7 +17,7 @@
 		<!-- Això ho deixem a true si volem que es mostri informació per la terminal -->
 		<property name="show_sql">true</property> 
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
-		<mapping class="fabrica.entity.Producte" />
+		<mapping class="Anime.Entity.Anime" />
 	</session-factory>
 </hibernate-configuration>
 	

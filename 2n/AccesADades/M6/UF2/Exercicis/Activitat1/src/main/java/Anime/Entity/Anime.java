@@ -1,5 +1,6 @@
 package Anime.Entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ import jakarta.persistence.Id;
 
 @Entity
 @Table(name="Anime")
-public class Anime {
+public class Anime  implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,10 +29,10 @@ public class Anime {
 	private String sinopsis;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="Genere")
+	@Column(name="Genere", columnDefinition="VARCHAR(30)")
 	private Genere genere;
 	
-	@Column(name="Episodis", columnDefinition="INTEGER(4) DEFAULT 0")
+	@Column(name="Episodis", columnDefinition="integer DEFAULT 0")
 	private int episodis;
 	
 	@Column(name="DisponibleStreaming")
@@ -54,8 +55,7 @@ public class Anime {
 		this.disponibleStreaming = disponibleStreaming;
 	}
 
-	public Anime(int id, String titol, String sinopsis, Genere genere, int episodis, boolean disponibleStreaming,
-			double puntuacio, LocalDateTime dataCreacio) {
+	public Anime(int id, String titol, String sinopsis, Genere genere, int episodis, boolean disponibleStreaming, double puntuacio, LocalDateTime dataCreacio) {
 		super();
 		Id = id;
 		this.titol = titol;
