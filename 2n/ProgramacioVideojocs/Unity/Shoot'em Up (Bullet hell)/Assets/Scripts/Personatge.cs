@@ -19,7 +19,6 @@ public class Personatge : MonoBehaviour, IDamageable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        GetComponent<GameObject>().SetActive(true);
         _Vides = 30;
         _Animator = GetComponent<Animator>();
 
@@ -282,7 +281,6 @@ public class Personatge : MonoBehaviour, IDamageable
         }
         else
         {
-            this.GetComponent<GameObject>().SetActive(false);
             SceneManager.LoadScene("Game Over");
         }
     }

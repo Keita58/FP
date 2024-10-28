@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mon2_change_skull_0: -7566232999800718294
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

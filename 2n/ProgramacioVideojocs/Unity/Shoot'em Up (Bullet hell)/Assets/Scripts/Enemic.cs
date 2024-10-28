@@ -22,14 +22,18 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     private int _Punts;
     private int _Velocitat;
     private bool _PlayerRangAtac;
-    private bool _TipusEnemic;
+    private bool _TipusEnemic; // True -> Melee | False -> Ranged
     private GameObject _Jugador;
     private Color _ColorOriginal;
+    private float _PuntA;
+    private float _PuntB;
+    private bool _Viatge;
 
     private void Awake()
     {
         _StateTime = 0;
         _PlayerRangAtac = false;
+        _Viatge = false;
         _Animator = GetComponent<Animator>();
         _Rigidbody = this.GetComponent<Rigidbody2D>();
         RangPerseguir.GetComponent<AreaDeteccio>().OnEnter += OnPlayerDetected;
@@ -73,9 +77,15 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         RangAtac.GetComponent<CircleCollider2D>().radius = radiAtac;
     }
 
-    public void settipusEnemic(bool tipus)
+    public void setTipusEnemic(bool tipus)
     {
-        _TipusEnemic = tipus;
+        _TipusEnemic = tipus; 
+    }
+
+    public void setPosicio()
+    {
+        _PuntA = this.transform.position.x;
+        _PuntB = -this.transform.position.x;
     }
 
     private void OnPlayerDetected(GameObject player)
@@ -98,11 +108,6 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     private void OnPlayerStay(GameObject player)
     {
         _Jugador = player;
-    }
-
-    private void OnPlayerExit(GameObject player)
-    {
-        _Rigidbody.velocity = Vector3.zero; 
     }
 
     private void OnPlayerAttackRange(GameObject player)
@@ -136,7 +141,33 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         {
             case EnemyStates.IDLE:
                 _Animator.Play("Idle");
-                _Rigidbody.velocity = Vector3.zero;
+                if(_TipusEnemic)
+                    _Rigidbody.velocity = Vector3.zero;
+                else
+                {
+                    if(this.transform.position.x == _PuntA && _Viatge)
+                    {
+                        Debug.Log("Estic al punt A");
+                        Vector2 direccio = (new Vector3(_PuntB, this.transform.position.y, this.transform.position.z)) - this.transform.position;
+                        direccio.Normalize();
+                        _Rigidbody.velocity = _Velocitat * direccio;
+                    }
+                    else if(this.transform.position.x == _PuntB && _Viatge)
+                    {
+                        Debug.Log("Estic al punt B");
+                        Vector2 direccio = (new Vector3(_PuntA, this.transform.position.y, this.transform.position.z)) - this.transform.position;
+                        direccio.Normalize();
+                        _Rigidbody.velocity = _Velocitat * direccio;
+                    }
+                    else if(!_Viatge)
+                    {
+                        Debug.Log("Entro");
+                        _Viatge = true;
+                        Vector2 direccio = (new Vector3(_PuntB, this.transform.position.y, this.transform.position.z)) - this.transform.position;
+                        direccio.Normalize();
+                        _Rigidbody.velocity = _Velocitat * direccio;
+                    }
+                }
                 break;
             case EnemyStates.ATTACK:
                 _Animator.Play("Attack");
@@ -204,6 +235,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         switch (exitState)
         {
             case EnemyStates.IDLE:
+                _Viatge = false;
                 break;
             case EnemyStates.ATTACK:
                 break;
@@ -227,7 +259,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         {
             ChangeState(EnemyStates.ATTACK);
             yield return new WaitForSeconds(2);
-            ChangeState(EnemyStates.IDLE);
+            _Animator.Play("Idle"); //Aquí poso animació més que estat per evitar que es solapin l'estat PURSUE amb l'IDLE i que no pari de perseguir-lo si no pot atacar
             _Rigidbody.velocity = Vector3.zero;
             yield return new WaitForSeconds(0.5f);          
         }        

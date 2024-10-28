@@ -1607,7 +1607,67 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cat_fighter_sprite2_0: 404203229911094984
+      cat_fighter_sprite2_1: -7433033174744773020
+      cat_fighter_sprite2_10: -6955253655114288935
+      cat_fighter_sprite2_11: 1693237838953782015
+      cat_fighter_sprite2_12: -4067552545297051563
+      cat_fighter_sprite2_13: 7420205482876096661
+      cat_fighter_sprite2_14: 5730656098609682743
+      cat_fighter_sprite2_15: 8914047096493853121
+      cat_fighter_sprite2_16: -4704792897080888002
+      cat_fighter_sprite2_17: -4085910122955386771
+      cat_fighter_sprite2_18: 1023424500259162352
+      cat_fighter_sprite2_19: -7718035299780019156
+      cat_fighter_sprite2_2: -8705471210398807926
+      cat_fighter_sprite2_20: -2836629245929924946
+      cat_fighter_sprite2_21: 4968625104849424999
+      cat_fighter_sprite2_22: 8326193602317468291
+      cat_fighter_sprite2_23: 4785885045652061623
+      cat_fighter_sprite2_24: 5181199564077133960
+      cat_fighter_sprite2_25: -1630756995625012504
+      cat_fighter_sprite2_26: 5424493734864636683
+      cat_fighter_sprite2_27: 1334459269488420891
+      cat_fighter_sprite2_28: 3117790441000610229
+      cat_fighter_sprite2_29: -7478476821740763451
+      cat_fighter_sprite2_3: -3219679987570727162
+      cat_fighter_sprite2_30: 4629622903993221911
+      cat_fighter_sprite2_31: 9022969683916661588
+      cat_fighter_sprite2_32: -1476281074599758504
+      cat_fighter_sprite2_33: -8432875790190009266
+      cat_fighter_sprite2_34: -7000087616774870337
+      cat_fighter_sprite2_35: 4829050993173631161
+      cat_fighter_sprite2_36: 4335182247146239755
+      cat_fighter_sprite2_37: -3763991032052148881
+      cat_fighter_sprite2_38: 136709566912808075
+      cat_fighter_sprite2_39: -1952932440999335812
+      cat_fighter_sprite2_4: -7364461460612062082
+      cat_fighter_sprite2_40: 6332260513150802800
+      cat_fighter_sprite2_41: 1337794835288233142
+      cat_fighter_sprite2_42: 4033653955591530020
+      cat_fighter_sprite2_43: 274735164583142826
+      cat_fighter_sprite2_44: 6618587846564097693
+      cat_fighter_sprite2_45: -930387171583722467
+      cat_fighter_sprite2_46: -199930996032388144
+      cat_fighter_sprite2_47: -697949993366361236
+      cat_fighter_sprite2_48: 8557584636787304044
+      cat_fighter_sprite2_49: 6386517433897173451
+      cat_fighter_sprite2_5: -8171444067604145676
+      cat_fighter_sprite2_50: 6568443012752301484
+      cat_fighter_sprite2_51: 1227214137858715398
+      cat_fighter_sprite2_52: -4732406140094087966
+      cat_fighter_sprite2_53: -1395001941207185811
+      cat_fighter_sprite2_54: -1769932404587945780
+      cat_fighter_sprite2_55: 3871664705672438435
+      cat_fighter_sprite2_56: 8723406797830022212
+      cat_fighter_sprite2_57: -2393808867593477998
+      cat_fighter_sprite2_58: -4901103414231795476
+      cat_fighter_sprite2_59: -7475838864508543574
+      cat_fighter_sprite2_6: -6967511066558700568
+      cat_fighter_sprite2_7: 2964439471767832340
+      cat_fighter_sprite2_8: -4735825746459308746
+      cat_fighter_sprite2_9: 8064727412820225597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

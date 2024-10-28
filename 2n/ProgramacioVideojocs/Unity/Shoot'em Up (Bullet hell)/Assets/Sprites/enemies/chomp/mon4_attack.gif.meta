@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mon4_attack_0: 6916810517322975170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
