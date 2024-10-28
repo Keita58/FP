@@ -1,0 +1,1 @@
+1.- Crear l'esquema d'Anime a MySQL
