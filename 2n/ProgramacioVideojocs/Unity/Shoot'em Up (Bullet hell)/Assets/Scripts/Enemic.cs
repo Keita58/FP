@@ -13,6 +13,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     [SerializeField] GameObject RangAtac;
     [SerializeField] Hitbox hitbox;
     [SerializeField] private GameEvent _Rondes;
+    [SerializeField] Pool PoolBales;
 
     private Animator _Animator;
     private Rigidbody2D _Rigidbody;
@@ -25,9 +26,11 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     private bool _TipusEnemic; // True -> Melee | False -> Ranged
     private GameObject _Jugador;
     private Color _ColorOriginal;
-    private float _PuntA;
-    private float _PuntB;
+    private float _PuntAX;
+    private float _PuntBX;
+    private float _PuntAY;
     private bool _Viatge;
+    private Pool _PoolCopia;
 
     private void Awake()
     {
@@ -42,50 +45,29 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         RangAtac.GetComponent<AreaDeteccio>().OnExit += OnPlayerNotAttackRange;
     }
 
-    public void setVides(float vida)
+    public void ValorsEnemic(EnemicSO enemic)
     {
-        _Vida = vida;
-    }
-
-    public void setMal(int mal)
-    {
-        _Mal = mal;
-    }
-
-    public void setPunts(int punts)
-    {
-        _Punts = punts;
-    }
-
-    public void setVelocitat(int velocitat)
-    {
-        _Velocitat = velocitat;
-    }
-
-    public void setAnimacio(AnimatorController animacio)
-    {
-        _Animator.runtimeAnimatorController = animacio; //Afegim el controlador de les animacions amb el runtimeAnimationController
-    }
-
-    public void setRadiDeteccio(float radiDeteccio)
-    {
-        RangPerseguir.GetComponent<CircleCollider2D>().radius = radiDeteccio;
-    }
-
-    public void setRadiAtac(float radiAtac)
-    {
-        RangAtac.GetComponent<CircleCollider2D>().radius = radiAtac;
-    }
-
-    public void setTipusEnemic(bool tipus)
-    {
-        _TipusEnemic = tipus; 
+        this.transform.tag = "Enemic";
+        _Vida = enemic.vides;
+        _Mal = enemic.mal;
+        _Punts = enemic.punts;
+        _Velocitat = enemic.velocitat;
+        _Animator.runtimeAnimatorController = enemic.animacio;
+        RangPerseguir.GetComponent<CircleCollider2D>().radius = enemic.radiDeteccio;
+        RangAtac.GetComponent<CircleCollider2D>().radius = enemic.radiAtac;
+        _TipusEnemic = enemic.tipus;
+        if (!_TipusEnemic)
+        {
+            _PoolCopia = Instantiate(PoolBales);
+        }
     }
 
     public void setPosicio()
     {
-        _PuntA = this.transform.position.x;
-        _PuntB = -this.transform.position.x;
+        _PuntAX = this.transform.position.x;
+        _PuntBX = -this.transform.position.x;
+        _PuntAY = this.transform.position.y;
+        Debug.Log("Punt AX: " + _PuntAX + ", punt AY: " + _PuntAY);
     }
 
     private void OnPlayerDetected(GameObject player)
@@ -112,6 +94,7 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
 
     private void OnPlayerAttackRange(GameObject player)
     {
+        _Jugador = player;
         _PlayerRangAtac = true;
         _Rigidbody.velocity = Vector3.zero;
         StartCoroutine(Atacar());
@@ -141,33 +124,6 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         {
             case EnemyStates.IDLE:
                 _Animator.Play("Idle");
-                if(_TipusEnemic)
-                    _Rigidbody.velocity = Vector3.zero;
-                else
-                {
-                    if(this.transform.position.x == _PuntA && _Viatge)
-                    {
-                        Debug.Log("Estic al punt A");
-                        Vector2 direccio = (new Vector3(_PuntB, this.transform.position.y, this.transform.position.z)) - this.transform.position;
-                        direccio.Normalize();
-                        _Rigidbody.velocity = _Velocitat * direccio;
-                    }
-                    else if(this.transform.position.x == _PuntB && _Viatge)
-                    {
-                        Debug.Log("Estic al punt B");
-                        Vector2 direccio = (new Vector3(_PuntA, this.transform.position.y, this.transform.position.z)) - this.transform.position;
-                        direccio.Normalize();
-                        _Rigidbody.velocity = _Velocitat * direccio;
-                    }
-                    else if(!_Viatge)
-                    {
-                        Debug.Log("Entro");
-                        _Viatge = true;
-                        Vector2 direccio = (new Vector3(_PuntB, this.transform.position.y, this.transform.position.z)) - this.transform.position;
-                        direccio.Normalize();
-                        _Rigidbody.velocity = _Velocitat * direccio;
-                    }
-                }
                 break;
             case EnemyStates.ATTACK:
                 _Animator.Play("Attack");
@@ -195,10 +151,10 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         switch (updateState)
         {
             case EnemyStates.IDLE:
+                Patrulla();
                 break;
             case EnemyStates.PURSUE:
                 Vector2 direccio = Vector2.zero;
-                
                 if(_Jugador != null)
                     direccio = _Jugador.transform.position - this.transform.position;
                 direccio.Normalize();
@@ -258,10 +214,16 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         while (_PlayerRangAtac)
         {
             ChangeState(EnemyStates.ATTACK);
-            yield return new WaitForSeconds(2);
+            if (_TipusEnemic)
+                yield return new WaitForSeconds(2);
+            else
+                yield return new WaitForSeconds(0.6f);
             _Animator.Play("Idle"); //Aquí poso animació més que estat per evitar que es solapin l'estat PURSUE amb l'IDLE i que no pari de perseguir-lo si no pot atacar
             _Rigidbody.velocity = Vector3.zero;
-            yield return new WaitForSeconds(0.5f);          
+            if (_TipusEnemic)
+                yield return new WaitForSeconds(0.5f);
+            else
+                yield return new WaitForSeconds(1.5f);
         }        
     }
 
@@ -284,5 +246,78 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             ChangeState(EnemyStates.DIE);
             _Rondes.Raise();
         }   
+    }
+
+    private void Patrulla() {
+        if (_TipusEnemic)
+            _Rigidbody.velocity = Vector3.zero;
+        else
+        {
+            if ((this.transform.position.x == _PuntAX && this.transform.position.y == _PuntAY) && _Viatge)
+            {
+                Debug.Log("Estic al punt A");
+                Vector2 direccio = (new Vector3(_PuntBX, _PuntAY, this.transform.position.z)) - this.transform.position;
+                direccio.Normalize();
+                _Rigidbody.velocity = _Velocitat * direccio;
+                if (direccio.x > 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 0;
+                }
+                else if (direccio.x < 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 180;
+                }
+            }
+            else if ((this.transform.position.x == _PuntBX && this.transform.position.y == _PuntAY) && _Viatge)
+            {
+                Debug.Log("Estic al punt B");
+                Vector2 direccio = (new Vector3(_PuntAX, _PuntAY, this.transform.position.z)) - this.transform.position;
+                direccio.Normalize();
+                _Rigidbody.velocity = _Velocitat * direccio;
+                if (direccio.x > 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 0;
+                }
+                else if (direccio.x < 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 180;
+                }
+            }
+            else if (!_Viatge)
+            {
+                Debug.Log("Entro");
+                _Viatge = true;
+                Vector2 direccio = (new Vector3(_PuntBX, _PuntAY, this.transform.position.z)) - this.transform.position;
+                direccio.Normalize();
+                _Rigidbody.velocity = _Velocitat * direccio;
+                if (direccio.x > 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 0;
+                }
+                else if (direccio.x < 0)
+                {
+                    this.transform.eulerAngles = Vector3.up * 180;
+                }
+            }
+        }
+    }
+
+    public void Disparar()
+    {
+        GameObject Bala = _PoolCopia.GetElement();
+        Bala.SetActive(true);
+        Bala.GetComponent<IPoolable>().OnDestroyed += ReturnBalaToPool;
+        Vector2 direccio = _Jugador.transform.position - this.transform.position;
+        direccio.Normalize();
+        Bala.transform.position = new Vector3(this.transform.position.x + (direccio.x / 1.4f), this.transform.position.y + (direccio.y / 1.4f), this.transform.rotation.z);
+        Bala.GetComponent<Rigidbody2D>().velocity = 2 * direccio;
+        Bala.GetComponent<Bala>().Damage = 1;
+    }
+
+    private void ReturnBalaToPool(GameObject bala)
+    {
+        bala.GetComponent<IPoolable>().OnDestroyed -= ReturnBalaToPool;
+        bala.SetActive(false);
+        _PoolCopia.ReturnElement(bala);
     }
 }

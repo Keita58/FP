@@ -64,16 +64,7 @@ public class SpawnerEnemics : MonoBehaviour
             }
             float posy = Random.Range(-2.5f, 2.5f);
             enemicGO.transform.position = new Vector3((_JugadorGO.transform.position.x + posx), (_JugadorGO.transform.position.y + posy), 0);
-            enemicGO.transform.tag = "Enemic";
-
-            enemicGO.GetComponent<Enemic>().setVides(_Enemics[enemicNum].vides);
-            enemicGO.GetComponent<Enemic>().setMal(_Enemics[enemicNum].mal);
-            enemicGO.GetComponent<Enemic>().setPunts(_Enemics[enemicNum].punts);
-            enemicGO.GetComponent<Enemic>().setVelocitat(_Enemics[enemicNum].velocitat);
-            enemicGO.GetComponent<Enemic>().setAnimacio(_Enemics[enemicNum].animacio);
-            enemicGO.GetComponent<Enemic>().setRadiDeteccio(_Enemics[enemicNum].radiDeteccio);
-            enemicGO.GetComponent<Enemic>().setRadiAtac(_Enemics[enemicNum].radiAtac);
-            enemicGO.GetComponent<Enemic>().setTipusEnemic(_Enemics[enemicNum].tipus);
+            enemicGO.GetComponent<Enemic>().ValorsEnemic(_Enemics[enemicNum]);
             enemicGO.GetComponent<Enemic>().setPosicio();
 
             switch (_RondaActual)

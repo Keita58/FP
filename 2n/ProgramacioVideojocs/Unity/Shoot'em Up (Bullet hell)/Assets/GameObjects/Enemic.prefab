@@ -174,6 +174,7 @@ MonoBehaviour:
   RangAtac: {fileID: 6281025714610957395}
   hitbox: {fileID: 6135951602190555655}
   _Rondes: {fileID: 11400000, guid: bc87077bc7064e24a9b183c628579399, type: 2}
+  PoolBales: {fileID: 204751817146178586, guid: fe93f08af35436e4cafc1f761e644efd, type: 3}
   _CurrentState: 0
 --- !u!212 &8184585481356092901
 SpriteRenderer:
