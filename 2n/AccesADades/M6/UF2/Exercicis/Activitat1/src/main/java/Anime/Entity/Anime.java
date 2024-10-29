@@ -15,11 +15,11 @@ import jakarta.persistence.Id;
 
 @Entity
 @Table(name="Anime")
-public class Anime  implements Serializable{
+public class Anime implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Id", updatable=false)
+	@Column(name="id", updatable=false)
 	private int Id;
 	
 	@Column(name="Titol", length=50, nullable=false)
@@ -29,7 +29,7 @@ public class Anime  implements Serializable{
 	private String sinopsis;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="Genere", columnDefinition="VARCHAR(30)")
+	@Column(name="Genere")
 	private Genere genere;
 	
 	@Column(name="Episodis", columnDefinition="integer DEFAULT 0")
