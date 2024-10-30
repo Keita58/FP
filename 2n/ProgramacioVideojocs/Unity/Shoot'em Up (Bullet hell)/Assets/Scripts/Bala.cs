@@ -7,7 +7,7 @@ public class Bala : MonoBehaviour, IPoolable, IAttack
     public event Action<GameObject> OnDestroyed;
     private float _Damage = 0;
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(Desapareixer());
     }

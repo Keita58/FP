@@ -26,9 +26,8 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
     private bool _TipusEnemic; // True -> Melee | False -> Ranged
     private GameObject _Jugador;
     private Color _ColorOriginal;
-    private float _PuntAX;
-    private float _PuntBX;
-    private float _PuntAY;
+    private Vector3 _PuntPatrullaA;
+    private Vector3 _PuntPatrullaB;
     private bool _Viatge;
     private Pool _PoolCopia;
 
@@ -64,10 +63,9 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
 
     public void setPosicio()
     {
-        _PuntAX = this.transform.position.x;
-        _PuntBX = -this.transform.position.x;
-        _PuntAY = this.transform.position.y;
-        Debug.Log("Punt AX: " + _PuntAX + ", punt AY: " + _PuntAY);
+        _PuntPatrullaA = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+        _PuntPatrullaB = new Vector3((this.transform.position.x - 4),this.transform.position.y, this.transform.position.z);
+        Debug.Log("Punt patrulla A: " + _PuntPatrullaA + ", punt patrulla B: " + _PuntPatrullaB);
     }
 
     private void OnPlayerDetected(GameObject player)
@@ -195,7 +193,8 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
                 break;
             case EnemyStates.ATTACK:
                 break;
-            case EnemyStates.PURSUE: 
+            case EnemyStates.PURSUE:
+                StartCoroutine(Pausa());
                 break;
             case EnemyStates.HURT:
                 this.GetComponent<SpriteRenderer>().color = _ColorOriginal;
@@ -207,6 +206,11 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             default:
                 break;
         }
+    }
+
+    IEnumerator Pausa()
+    {
+        yield return new WaitForSeconds(1);
     }
 
     IEnumerator Atacar()
@@ -253,51 +257,43 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
             _Rigidbody.velocity = Vector3.zero;
         else
         {
-            if ((this.transform.position.x == _PuntAX && this.transform.position.y == _PuntAY) && _Viatge)
+            //Vector.Distance retorna la diferència entre els dos punts passats per paràmetre, molt útil quan vols saber on està el personatge
+            if(Vector3.Distance(this.transform.position, _PuntPatrullaA) <= 0.5f && _Viatge)
             {
                 Debug.Log("Estic al punt A");
-                Vector2 direccio = (new Vector3(_PuntBX, _PuntAY, this.transform.position.z)) - this.transform.position;
-                direccio.Normalize();
-                _Rigidbody.velocity = _Velocitat * direccio;
-                if (direccio.x > 0)
-                {
+                Vector2 direccioAPuntB = _PuntPatrullaB - this.transform.position;
+                direccioAPuntB.Normalize();
+                _Rigidbody.velocity = direccioAPuntB;
+
+                if (direccioAPuntB.x > 0)
                     this.transform.eulerAngles = Vector3.up * 0;
-                }
-                else if (direccio.x < 0)
-                {
+                else if (direccioAPuntB.x < 0)
                     this.transform.eulerAngles = Vector3.up * 180;
-                }
             }
-            else if ((this.transform.position.x == _PuntBX && this.transform.position.y == _PuntAY) && _Viatge)
+            else if (Vector3.Distance(this.transform.position, _PuntPatrullaB) <= 0.5f && _Viatge)
             {
                 Debug.Log("Estic al punt B");
-                Vector2 direccio = (new Vector3(_PuntAX, _PuntAY, this.transform.position.z)) - this.transform.position;
-                direccio.Normalize();
-                _Rigidbody.velocity = _Velocitat * direccio;
-                if (direccio.x > 0)
-                {
+                Vector2 direccioAPuntA = _PuntPatrullaA - this.transform.position;
+                direccioAPuntA.Normalize();
+                _Rigidbody.velocity = direccioAPuntA;
+
+                if (direccioAPuntA.x > 0)
                     this.transform.eulerAngles = Vector3.up * 0;
-                }
-                else if (direccio.x < 0)
-                {
+                else if (direccioAPuntA.x < 0)
                     this.transform.eulerAngles = Vector3.up * 180;
-                }
             }
             else if (!_Viatge)
             {
                 Debug.Log("Entro");
                 _Viatge = true;
-                Vector2 direccio = (new Vector3(_PuntBX, _PuntAY, this.transform.position.z)) - this.transform.position;
-                direccio.Normalize();
-                _Rigidbody.velocity = _Velocitat * direccio;
-                if (direccio.x > 0)
-                {
+                Vector2 direccioAPuntB = _PuntPatrullaB - this.transform.position;
+                direccioAPuntB.Normalize();
+                _Rigidbody.velocity = direccioAPuntB;
+
+                if (direccioAPuntB.x > 0)
                     this.transform.eulerAngles = Vector3.up * 0;
-                }
-                else if (direccio.x < 0)
-                {
+                else if (direccioAPuntB.x < 0)
                     this.transform.eulerAngles = Vector3.up * 180;
-                }
             }
         }
     }
@@ -312,6 +308,10 @@ public class Enemic : MonoBehaviour, IDamageable, IPoolable
         Bala.transform.position = new Vector3(this.transform.position.x + (direccio.x / 1.4f), this.transform.position.y + (direccio.y / 1.4f), this.transform.rotation.z);
         Bala.GetComponent<Rigidbody2D>().velocity = 2 * direccio;
         Bala.GetComponent<Bala>().Damage = 1;
+        if (direccio.x > 0)
+            this.transform.eulerAngles = Vector3.up * 0;
+        else if (direccio.x < 0)
+            this.transform.eulerAngles = Vector3.up * 180;
     }
 
     private void ReturnBalaToPool(GameObject bala)
