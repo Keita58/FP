@@ -81,6 +81,8 @@ public class GameController {
                     executor.execute(new Michilover(cdlMichilover, michis));
                     printGUI();
                 }
+                if(cdlMichilover.getCount() == 0) 
+                    cdlMichilover = new CountDownLatch(5);
             }
             catch (Exception e) {
 
