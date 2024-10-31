@@ -17,7 +17,7 @@ public class GameController {
     static CountDownLatch cdlMichilover;
 
     public static void main(String[] args) {
-        semMichismart = new Semaphore(2);
+        semMichismart = new Semaphore(2, true); //Amb el true el que fem és treure del semàfor el primer que ha entrat
         cdlMichilover = new CountDownLatch(5);
         scanner = new Scanner(System.in);
         executor = Executors.newCachedThreadPool();
