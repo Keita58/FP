@@ -1,10 +1,12 @@
 package Anime.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +26,10 @@ public class Plataforma {
 
     @Column(name = "URL", length = 200, nullable = false)
     private String url;
+
+    @OneToOne(mappedBy = "plataforma", cascade = CascadeType.ALL) 
+    //? El mappedBy és el nom de la variable de la classe amb la que fa el join, en aquest cas de la classe Anime
+    private Anime anime;
 
     public Plataforma() {
         super();

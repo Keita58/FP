@@ -2,6 +2,8 @@ package Anime.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -34,6 +36,17 @@ public class Anime implements Serializable{
 
     @Column(name = "DataCreacio", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime dataCreacio;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "Comandes", fetch = FetchType.EAGER)
+    private Set<Comandes> comandes;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Plataforma")
+    private Plataforma plataforma;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idAnime")
+    private Set<Personatges> personatges;
 
     public Anime() {
         super();
