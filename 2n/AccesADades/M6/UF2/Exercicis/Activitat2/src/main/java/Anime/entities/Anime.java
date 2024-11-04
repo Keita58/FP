@@ -2,6 +2,7 @@ package Anime.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -34,10 +35,12 @@ public class Anime implements Serializable{
     @Column(name = "Puntuacio", columnDefinition = "decimal(12, 2) default 0.0")
     private double puntuacio;
 
-    @Column(name = "DataCreacio", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dataCreacio;
+    //@Temporal(TemporalType.DATE)
+    @Column(name = "DataCreacio")
+    private LocalDateTime dataCreacio = LocalDateTime.now();
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "Comandes", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "AnimeComprat", joinColumns = {@JoinColumn(name = "idAnime")}, inverseJoinColumns = {@JoinColumn(name = "idComanda")})
     private Set<Comandes> comandes;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -46,17 +49,16 @@ public class Anime implements Serializable{
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idAnime")
-    private Set<Personatges> personatges;
+    private List<Personatges> personatges;
 
     public Anime() {
         super();
     }
 
-    public Anime(String titol, String sinopsis, boolean disponibleStreaming) {
+    public Anime(String titol, String sinopsis) {
         this();
         this.titol = titol;
         this.sinopsis = sinopsis;
-        this.disponibleStreaming = disponibleStreaming;
     }
 
     public Anime(int idAnime, String titol, String sinopsis, Genere genere, int episodis, boolean disponibleStreaming, double puntuacio, LocalDateTime dataCreacio) {
@@ -133,6 +135,30 @@ public class Anime implements Serializable{
 
     public void setDataCreacio(LocalDateTime dataCreacio) {
         this.dataCreacio = dataCreacio;
+    }
+    
+    public Set<Comandes> getComandes() {
+        return comandes;
+    }
+
+    public void setComandes(Set<Comandes> comandes) {
+        this.comandes = comandes;
+    }
+
+    public Plataforma getPlataforma() {
+        return plataforma;
+    }
+
+    public void setPlataforma(Plataforma plataforma) {
+        this.plataforma = plataforma;
+    }
+
+    public List<Personatges> getPersonatges() {
+        return personatges;
+    }
+
+    public void setPersonatges(List<Personatges> personatges) {
+        this.personatges = personatges;
     }
 
     @Override

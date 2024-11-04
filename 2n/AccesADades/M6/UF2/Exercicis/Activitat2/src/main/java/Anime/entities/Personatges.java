@@ -26,8 +26,8 @@ public class Personatges implements Serializable{
     @Column(name = "Popularitat")
     private int popularitat;
 
-    @Column(name = "DataAparicio", columnDefinition = "Datetime default current_timestamp")
-    private LocalDateTime dataAparicio;
+    @Column(name = "DataAparicio")
+    private LocalDateTime dataAparicio = LocalDateTime.now();
 
     public Personatges() {
         super();

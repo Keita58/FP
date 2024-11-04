@@ -7,8 +7,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
@@ -23,8 +21,8 @@ public class Comandes {
     @Column(name = "idComanda", updatable = false)
     private int idComanda;
 
-    @Column(name = "DataComanda", columnDefinition = "datetime default current_timestamp")
-    private LocalDateTime dataComanda;
+    @Column(name = "DataComanda")
+    private LocalDateTime dataComanda = LocalDateTime.now();
 
     @Column(name = "PreuFinal", columnDefinition = "Decimal(12, 2) default 0.0")
     private double preuFinal;
@@ -32,8 +30,8 @@ public class Comandes {
     @Column(name = "Pagat")
     private boolean pagat;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "Anime", joinColumns = {@JoinColumn(name = "idComanda")}, inverseJoinColumns = {@JoinColumn(name = "idAnime")})
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "comandes", fetch = FetchType.EAGER)
+    //? El mappedBy és el nom de la variable de la classe amb la que fa el join, en aquest cas de la classe Comandes
     private Set<Anime> animes;
 
     public Comandes() {
@@ -80,6 +78,14 @@ public class Comandes {
         this.pagat = pagat;
     }
 
+    public Set<Anime> getAnimes() {
+        return animes;
+    }
+
+    public void setAnimes(Set<Anime> animes) {
+        this.animes = animes;
+    } 
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -106,5 +112,5 @@ public class Comandes {
     public String toString() {
         return "Comandes [idComanda=" + idComanda + ", dataComanda=" + dataComanda + ", preuFinal=" + preuFinal
                 + ", pagat=" + pagat + "]";
-    } 
+    }
 }
