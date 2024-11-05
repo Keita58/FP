@@ -14,6 +14,7 @@ public class Michismart implements Runnable {
     @Override
     public void run() {
         try {
+            while(!sem.tryAcquire()){}
             Thread.sleep(10000);
             if(diccionari.get("Michismart") > 1)
                 diccionari.put("Michismart", (diccionari.get("Michismart") - 1));

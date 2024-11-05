@@ -94,17 +94,14 @@ public class GameController {
 
     public static void accio4() {
         if(michiTokens >= 100) {
-            michiTokens -= 100;
             try {
-                if(semMichismart.tryAcquire()) {
-                    executor.execute(new Michismart(semMichismart, michis));
-                    if(michis.containsKey("Michismart"))
-                        michis.put("Michismart", (michis.get("Michismart") + 1));
-                    else
-                        michis.put("Michismart", 1);
-                    printGUI();
-                }
-                
+                michiTokens -= 100;
+                executor.execute(new Michismart(semMichismart, michis));
+                if(michis.containsKey("Michismart"))
+                    michis.put("Michismart", (michis.get("Michismart") + 1));
+                else
+                    michis.put("Michismart", 1);
+                printGUI();
             }
             catch (Exception e) {
 
