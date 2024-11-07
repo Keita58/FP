@@ -82,29 +82,6 @@ public class MainActivity extends Activity {
 						.setAction("Action", null).show();
 			}
 		});
-
-		adaptador.getDetalls().setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), InfoContacte.class);
-				startActivity(intent);
-			}
-		});
-
-		adaptador.getModifica().setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-
-			}
-		});
-
-		adaptador.getElimina().setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-
-			}
-		});
-         
     } // onCreate
 
   
@@ -113,6 +90,7 @@ public class MainActivity extends Activity {
     class AdaptadorTitulares extends ArrayAdapter  {
  
 		Activity context;
+
 		public AdaptadorTitulares(Activity context) {
 			super(context, R.layout.listitem_titular, Contactes);
 			this.context = (Activity) context;			
@@ -122,18 +100,6 @@ public class MainActivity extends Activity {
 		Button Modifica = (Button) findViewById(R.id.modificarContacte);
 		Button Elimina = (Button) findViewById(R.id.eliminarContacte);
 
-		public Button getDetalls() {
-			return Detalls;
-		}
-
-		public Button getModifica() {
-			return Modifica;
-		}
-
-		public Button getElimina() {
-			return Elimina;
-		}
-
 		// GetView s'executa per cada element de l'array de dades i el que fa
 		// es "inflar" el layout del XML que hem creat
 		
@@ -142,8 +108,10 @@ public class MainActivity extends Activity {
 
     		// Inflem el Layout
     		LayoutInflater inflater = context.getLayoutInflater();
+
     		// Sobre el layout crear (inflat) dupliquem el layour creat amb els objectes, view personals.
     		View item = inflater.inflate(R.layout.listitem_titular, null);
+
     		// OJOOOO!!!!! hemos de hacer el findViewById del item que tenemos inflado.
     		TextView lblTitulo = (TextView) item.findViewById(R.id.lblNom);
     		lblTitulo.setText(Contactes.get(position).getNom().toString() + " " + Contactes.get(position).getCognom().toString());
@@ -155,6 +123,34 @@ public class MainActivity extends Activity {
     		lblSubTitulo.setText(dateFormat);
     		// Log.i("Niko","4");
 
+			Detalls.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Bundle bundle = new Bundle();
+					bundle.putString("Nom", Contactes.get(position).getNom());
+					bundle.putString("Adreça", Contactes.get(position).getAdreca());
+					bundle.putInt("Telèfon", Contactes.get(position).getTelefon());
+					bundle.putString("Mail", Contactes.get(position).getMail());
+					bundle.putString("Data", Contactes.get(position).getDataNaixement());
+					Intent intent = new Intent(getApplicationContext(), InfoContacte.class);
+					intent.putExtras(bundle);
+					startActivity(intent);
+				}
+			});
+
+			Modifica.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+
+				}
+			});
+
+			Elimina.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+
+				}
+			});
 
 			if (position%2==0) {
 				item.setBackgroundColor(Color.WHITE);

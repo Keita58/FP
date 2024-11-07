@@ -14,6 +14,11 @@ public class InfoContacte extends Activity {
         setContentView(R.layout.info_contacte);
 
         TextView nom = (TextView) findViewById(R.id.nomContacte);
-        TextView
+        TextView adreca = (TextView) findViewById(R.id.adrecaContacte);
+        TextView telefon = (TextView) findViewById(R.id.telefonContacte);
+        TextView mail = (TextView) findViewById(R.id.mailContacte);
+        TextView data = (TextView) findViewById(R.id.dataContacte);
+
+        Bundle bundle = this.getIntent().getExtras();
     }
 }
