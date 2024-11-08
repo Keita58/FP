@@ -9,7 +9,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Contactes"
+        android:text="@string/contactes"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <FrameLayout
@@ -27,7 +27,7 @@
                 android:id="@+id/lblNomInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nom:"
+                android:text="@string/nom"
                 android:textStyle="bold" />
 
             <TextView
@@ -41,7 +41,7 @@
                 android:id="@+id/lblAdrecaContacte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Adreça:"
+                android:text="@string/adreca"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:id="@+id/lblTelefonContacte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Telèfon:"
+                android:text="@string/telefon"
                 android:textStyle="bold" />
 
             <TextView
@@ -69,7 +69,7 @@
                 android:id="@+id/lblMailContacte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mail:"
+                android:text="@string/mail"
                 android:textStyle="bold" />
 
             <TextView
@@ -83,7 +83,7 @@
                 android:id="@+id/lblDataContacte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Data de naixement:"
+                android:text="@string/data"
                 android:textStyle="bold" />
 
             <TextView
@@ -96,7 +96,7 @@
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/tornarContactes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

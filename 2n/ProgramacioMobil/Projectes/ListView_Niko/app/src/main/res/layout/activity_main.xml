@@ -9,7 +9,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contactes"
+        android:text="@string/contactes"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <FrameLayout

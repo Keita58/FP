@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="@string/txt_temporal"
+        android:text="@string/text_temporal"
         android:textSize="@dimen/padding_large"
         android:textStyle="bold" />
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="@string/txt_temporal"
+            android:text="@string/text_temporal"
             android:textColor="@android:color/darker_gray" />
 
     </LinearLayout>
@@ -40,19 +40,19 @@
             android:id="@+id/detallContacte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Detalls" />
+            android:text="@string/detalls" />
 
         <Button
             android:id="@+id/modificarContacte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Modificar" />
+            android:text="@string/modificar" />
 
         <Button
             android:id="@+id/eliminarContacte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eliminar" />
+            android:text="@string/eliminar" />
     </LinearLayout>
 
 </LinearLayout>

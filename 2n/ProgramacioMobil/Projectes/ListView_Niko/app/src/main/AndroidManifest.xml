@@ -13,7 +13,15 @@
         android:theme="@style/Theme.ListView_Niko"
         tools:targetApi="31" >
         <activity
-            android:name=".MainActivity2"
+            android:name=".InfoContacte"
+            android:exported="false"
+            android:theme="@style/Theme.ListView_Niko" />
+        <activity
+            android:name=".ModificaDades"
+            android:exported="false"
+            android:theme="@style/Theme.ListView_Niko" />
+        <activity
+            android:name=".CreaContacte"
             android:exported="false"
             android:theme="@style/Theme.ListView_Niko" />
         <activity

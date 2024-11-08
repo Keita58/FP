@@ -5,12 +5,12 @@ import java.util.Date;
 public class Titular {
 	private String nom;
 	private String cognom;
-	private int telefon;
+	private String telefon;
 	private String adreca;
 	private String mail;
 	private String dataNaixement;
 
-	public Titular(String nom, String cognom, int telefon, String adreca, String mail, String dataNaixement) {
+	public Titular(String nom, String cognom, String telefon, String adreca, String mail, String dataNaixement) {
 		this.nom = nom;
 		this.cognom = cognom;
 		this.telefon = telefon;
@@ -35,11 +35,11 @@ public class Titular {
 		this.cognom = cognom;
 	}
 
-	public int getTelefon() {
+	public String getTelefon() {
 		return telefon;
 	}
 
-	public void setTelefon(int telefon) {
+	public void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
 
