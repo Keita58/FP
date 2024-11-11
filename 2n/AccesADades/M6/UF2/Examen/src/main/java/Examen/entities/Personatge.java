@@ -1,8 +1,11 @@
 package Examen.entities;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,11 +21,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Personatge")
-public class Personatge {
+public class Personatge implements Serializable{
 
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "idPersonatge", updatable = false)
+    @Column(name = "idPersonatge", updatable = false, insertable = false)
 	int idPersonatge;
 	
 	@Column(name = "Nom", length = 35)
@@ -36,7 +39,7 @@ public class Personatge {
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "PersonatgesQueTenenArma", joinColumns = {@JoinColumn(name = "idPersonatge")}, inverseJoinColumns = {@JoinColumn(name = "idArma")})
-    private List<Armes> armes;
+    private Set<Armes> armes = new HashSet<>();
 
 	public Personatge() {
 		super();
@@ -82,11 +85,11 @@ public class Personatge {
 		this.vida = vida;
 	}
 
-	public List<Armes> getArmes() {
+	public Set<Armes> getArmes() {
 		return armes;
 	}
 
-	public void setArmes(List<Armes> armes) {
+	public void setArmes(Set<Armes> armes) {
 		this.armes = armes;
 	}
 
@@ -106,4 +109,10 @@ public class Personatge {
 		Personatge other = (Personatge) obj;
 		return idPersonatge == other.idPersonatge;
 	}
+
+	@Override
+	public String toString() {
+		return "Personatge [idPersonatge=" + idPersonatge + ", nom=" + nom + ", huma=" + huma + ", vida=" + vida  + "]";
+	}
+	
 }

@@ -11,6 +11,7 @@ import Examen.entities.Personatge;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 
 public class MainExamen {
 
@@ -31,27 +32,26 @@ public class MainExamen {
         Armes cn = new Armes(0, "cn", Mortalitat.ALT, 30, false);
         Armes dn = new Armes(0, "dn", Mortalitat.BAIX, 1, false);
         Armes en = new Armes(0, "en", Mortalitat.ALT, 50, true);
+
+        entityManager.persist(a);
+        entityManager.persist(b);
+        entityManager.persist(c);
+        entityManager.persist(d);
+        entityManager.persist(e);
+        entityManager.persist(an);
+        entityManager.persist(bn);
+        entityManager.persist(cn);
+        entityManager.persist(dn);
+        entityManager.persist(en);
+        entityManager.getTransaction().commit();
+        entityManager.getTransaction().begin();
         
-        List<Armes> aux = new ArrayList<>();
-        aux.add(an);
-        a.setArmes(aux);
-        
-        List<Armes> aux1 = new ArrayList<>();
-        aux1.add(bn);
-        b.setArmes(aux1);
-        
-        List<Armes> aux2 = new ArrayList<>();
-        aux2.add(cn);
-        c.setArmes(aux2);
-        
-        List<Armes> aux3 = new ArrayList<>();
-        aux3.add(dn);
-        d.setArmes(aux3);
-        
-        List<Armes> aux4 = new ArrayList<>();
-        aux4.add(an);
-        aux4.add(en);
-        e.setArmes(aux4);
+        a.getArmes().add(an);
+        b.getArmes().add(bn);
+        c.getArmes().add(cn);
+        d.getArmes().add(dn);
+        e.getArmes().add(en);
+        e.getArmes().add(an);
         
         entityManager.merge(a);
         entityManager.merge(b);
@@ -62,11 +62,25 @@ public class MainExamen {
         
         entityManager.getTransaction().begin();
 
-        List<Personatge> result = (List<Personatge>) entityManager.createQuery("select a from Personatge a", Personatge.class).getResultList();
-        System.out.println(result);
+        TypedQuery<Personatge> result = entityManager.createQuery("select a from Personatge a", Personatge.class);
+        List<Personatge> res = result.getResultList();
+        System.out.println(res);
         
-        List<Armes> result2 = (List<Armes>) entityManager.createQuery("select a from Armes a", Armes.class).getResultList();
-        System.out.println(result2);
+        TypedQuery<Armes> result2 = entityManager.createQuery("select a from Armes a", Armes.class);
+        List<Armes> res2 = result2.getResultList();
+        System.out.println(res2);
+
+        for(Personatge p : res) {
+            System.out.print("Personatge: " + p.toString() + " té l'arma -> ");
+            Set<Armes> ar = p.getArmes();
+            for(Armes arma : ar) {
+                if(ar.size() > 1)
+                    System.out.print(arma.toString() + ", ");
+                else
+                    System.out.print(arma.toString());
+            }
+            System.out.println();
+        }
 
         entityManager.close();
 	}
