@@ -68,9 +68,10 @@ public class MainExamen {
         List<Armes> res2 = result2.getResultList();
         System.out.println(res2);
 
-        for(Personatge p : res) {
-            System.out.print("Personatge: " + p.toString() + " té l'arma -> ");
-            Set<Armes> ar = p.getArmes();
+        for(Object p : res) {
+            Personatge patata = (Personatge) p;
+            System.out.print("Personatge: " + patata.toString() + " té l'arma -> ");
+            Set<Armes> ar = patata.getArmes();
             for(Armes arma : ar) {
                 if(ar.size() > 1)
                     System.out.print(arma.toString() + ", ");
