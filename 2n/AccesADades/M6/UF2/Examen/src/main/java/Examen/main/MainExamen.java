@@ -1,9 +1,7 @@
 package Examen.main;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import Examen.entities.Armes;
 import Examen.entities.Mortalitat;
@@ -84,5 +82,4 @@ public class MainExamen {
 
         entityManager.close();
 	}
-
 }

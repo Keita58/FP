@@ -2,10 +2,8 @@ package Examen.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
