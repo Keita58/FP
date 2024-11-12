@@ -84,6 +84,14 @@ public class Comandes {
         this.pagat = pagat;
     }
 
+    public Set<Anime> getAnimesComprats() {
+        return animesComprats;
+    }
+
+    public void setAnimesComprats(Set<Anime> animesComprats) {
+        this.animesComprats = animesComprats;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

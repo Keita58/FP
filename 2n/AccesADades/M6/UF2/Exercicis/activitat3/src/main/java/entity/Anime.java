@@ -143,6 +143,22 @@ public class Anime {
         this.dataCreacio = dataCreacio;
     }
 
+    public Set<Comandes> getComandesAnime() {
+        return comandesAnime;
+    }
+
+    public void setComandesAnime(Set<Comandes> comandesAnime) {
+        this.comandesAnime = comandesAnime;
+    }
+
+    public Plataforma getPlataforma() {
+        return plataforma;
+    }
+
+    public void setPlataforma(Plataforma plataforma) {
+        this.plataforma = plataforma;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

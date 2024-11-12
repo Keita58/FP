@@ -112,6 +112,14 @@ public class Personatges {
         this.dataAparicio = dataAparicio;
     }
 
+    public Anime getAnime() {
+        return anime;
+    }
+
+    public void setAnime(Anime anime) {
+        this.anime = anime;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
