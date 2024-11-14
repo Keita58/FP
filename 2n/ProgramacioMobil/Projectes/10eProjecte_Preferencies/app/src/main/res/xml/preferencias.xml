@@ -20,5 +20,9 @@
    android:summary="Subtitol"
    android:entries="@array/listArray"
    android:entryValues="@array/listValues" />
+  <SwitchPreference
+      android:defaultValue="false"
+      android:key="canvia_color"
+      android:title="@string/canvia_fons" />
  </PreferenceCategory>
 </PreferenceScreen>

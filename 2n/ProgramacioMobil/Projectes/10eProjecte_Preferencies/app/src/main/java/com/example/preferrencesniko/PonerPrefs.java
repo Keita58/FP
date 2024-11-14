@@ -1,11 +1,19 @@
 package com.example.preferrencesniko;
 
+import static android.app.UiModeManager.MODE_NIGHT_YES;
+
+import android.app.UiModeManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class PonerPrefs extends PreferenceActivity {
+
 	String valor;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,10 +39,20 @@ public class PonerPrefs extends PreferenceActivity {
 		super.onStop();
 		
 		/* Per guardar dades a preferencies */
-		
+
 	    // Primer recuperar preferencies
-	    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
-	  	// Creem editor de preferencies 
+	    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		Preference feedbackPref = findPreference("canvia_color");
+
+		if (feedbackPref != null) {
+			feedbackPref.setOnPreferenceClickListener((preference) -> {
+				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+				Log.d("Preferences", "Feedback was clicked");
+				return true; // Return true if the event is handled.
+			});
+		}
+
+		// Creem editor de preferencies
 		SharedPreferences.Editor editorpreferencies = prefs.edit();
 		// Posem valors com si fos un buddle
 		editorpreferencies.putString("VALOR", valor);

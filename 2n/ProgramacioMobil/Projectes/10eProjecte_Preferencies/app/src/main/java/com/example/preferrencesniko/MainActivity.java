@@ -14,15 +14,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
       
         Button editPrefs = (Button) findViewById(R.id.prefButton);
-        
+
         editPrefs.setOnClickListener(new View.OnClickListener() {
-               public void onClick(View view) {  
-            	 
-                   Intent myIntent = new Intent(view.getContext(), PonerPrefs.class);                
-                   
+               public void onClick(View view) {
+                   Intent myIntent = new Intent(view.getContext(), PonerPrefs.class);
                    startActivityForResult(myIntent, 0);
                }
-
        });
       
        Button showPrefs = (Button) findViewById(R.id.showButton);
