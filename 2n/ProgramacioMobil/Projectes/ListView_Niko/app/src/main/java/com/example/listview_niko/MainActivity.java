@@ -189,16 +189,8 @@ public class MainActivity extends Activity {
 	}
 
 	private void eliminaContacte(int position) {
-		ArrayList<Titular> aux = new ArrayList<>();
 
-		for(Titular contacte : Contactes) {
-			if(!contacte.getTelefon().equals(Contactes.get(position).getTelefon())) {
-				aux.add(contacte);
-			}
-		}
-		Contactes.clear();
-		Contactes = new ArrayList<>(aux);
-
+		Contactes.remove(position);
 		AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstOpcions);
 		lstOpciones.setAdapter(adaptador);
