@@ -1,0 +1,22 @@
+<resources>
+    <string name="contactes">Contactes</string>
+    <string name="nom">Nom</string>
+    <string name="cognom">Cognom</string>
+    <string name="adreca">Adreça</string>
+    <string name="telefon">Telèfon</string>
+    <string name="mail">Mail</string>
+    <string name="data">Data de naixement</string>
+    <string name="text_temporal">Text temporal</string>
+    <string name="detalls">Detalls</string>
+    <string name="modificar">Modificar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="app_name">9eProjecte</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">UF1-1-A15 ListView</string>
+    <string name="txt_temporal">Text de proves</string>
+    <string name="txt_leido">Llegit?</string>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+</resources>
