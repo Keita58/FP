@@ -178,9 +178,9 @@ public class MainActivity extends AppCompatActivity {
 			});
 
 			if (position%2==0) {
-				item.setBackgroundColor(Color.WHITE);
+				item.setBackgroundColor(getResources().getColor(R. color. colorSecundary));
 			}else{
-				item.setBackgroundColor(Color.rgb(0, 255, 255));
+				item.setBackgroundColor(getResources().getColor(R. color. colorTerciary));
 			}
     		return (item);    		
     	}
@@ -204,14 +204,33 @@ public class MainActivity extends AppCompatActivity {
 		else if(requestCode == 2) {
 			if(data != null) {
 				Bundle bundle = data.getExtras();
-				Titular nouContacte = new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), bundle.getString("Telèfon"), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data"));
-				Contactes.add(nouContacte);
+				if(bundle.getString("Nom").isEmpty() && bundle.getString("Cognom").isEmpty() && bundle.getString("Telèfon").isEmpty()) {
+					Toast.makeText(this, "Has de posar la informació bàsica per al nou contacte! \n(Nom, Cognom i Telèfon)", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					Titular nouContacte = new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), bundle.getString("Telèfon"), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data"));
+					Contactes.add(nouContacte);
+				}
 			}
 		}
 
 		AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstOpcions);
 		lstOpciones.setAdapter(adaptador);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		//Preference feedbackPref = findPreference("canvia_color");
+
+		if (prefs.getBoolean("tema_app", true)) {
+			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+		}
+		else {
+			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+		}
 	}
 
 	private void eliminaContacte(int position) {

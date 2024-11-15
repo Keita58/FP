@@ -10,24 +10,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ListView_Niko"
+        android:theme="@style/Theme.9eProjecte"
         tools:targetApi="31" >
         <activity
             android:name=".InfoContacte"
             android:exported="false"
-            android:theme="@style/Theme.ListView_Niko" />
+            android:theme="@style/Theme.9eProjecte" />
         <activity
             android:name=".ModificaDades"
             android:exported="false"
-            android:theme="@style/Theme.ListView_Niko" />
+            android:theme="@style/Theme.9eProjecte" />
         <activity
             android:name=".CreaContacte"
             android:exported="false"
-            android:theme="@style/Theme.ListView_Niko" />
+            android:theme="@style/Theme.9eProjecte" />
         <activity
             android:name=".Config"
             android:exported="false"
-            android:theme="@style/Theme.ListView_Niko" />
+            android:theme="@style/Theme.9eProjecte" />
         <activity
             android:name=".MainActivity"
             android:exported="true" >

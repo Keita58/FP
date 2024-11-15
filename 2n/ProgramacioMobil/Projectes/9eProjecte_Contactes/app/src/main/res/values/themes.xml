@@ -1,9 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ListView_Niko" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.9eProjecte" parent="Theme.AppCompat">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/colorSecundary</item>
+        <item name="colorTertiary">@color/colorTerciary</item>
+        <item name="colorButtonNormal">@color/colorButton</item>
     </style>
-
-    <style name="Theme.ListView_Niko" parent="Base.Theme.ListView_Niko" />
 </resources>

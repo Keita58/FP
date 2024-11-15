@@ -11,11 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/contactes"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorText" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorSecundary">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/nom"
+                android:textColor="@color/colorText"
                 android:textStyle="bold" />
 
             <TextView
@@ -36,13 +39,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/lblAdrecaContacte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/adreca"
+                android:textColor="@color/colorText"
                 android:textStyle="bold" />
 
             <TextView
@@ -50,13 +55,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/lblTelefonContacte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/telefon"
+                android:textColor="@color/colorText"
                 android:textStyle="bold" />
 
             <TextView
@@ -64,13 +71,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/lblMailContacte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/mail"
+                android:textColor="@color/colorText"
                 android:textStyle="bold" />
 
             <TextView
@@ -78,13 +87,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/lblDataContacte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/data"
+                android:textColor="@color/colorText"
                 android:textStyle="bold" />
 
             <TextView
@@ -92,7 +103,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/colorText" />
 
         </LinearLayout>
 
@@ -103,6 +115,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:clickable="true"
+            app:backgroundTint="@color/colorButton"
             app:srcCompat="@android:drawable/ic_menu_revert" />
     </FrameLayout>
 
