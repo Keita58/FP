@@ -25,6 +25,10 @@
             android:exported="false"
             android:theme="@style/Theme.ListView_Niko" />
         <activity
+            android:name=".Config"
+            android:exported="false"
+            android:theme="@style/Theme.ListView_Niko" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>

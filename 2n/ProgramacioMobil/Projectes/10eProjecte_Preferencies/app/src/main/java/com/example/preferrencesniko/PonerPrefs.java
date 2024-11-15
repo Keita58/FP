@@ -42,15 +42,6 @@ public class PonerPrefs extends PreferenceActivity {
 
 	    // Primer recuperar preferencies
 	    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		Preference feedbackPref = findPreference("canvia_color");
-
-		if (feedbackPref != null) {
-			feedbackPref.setOnPreferenceClickListener((preference) -> {
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-				Log.d("Preferences", "Feedback was clicked");
-				return true; // Return true if the event is handled.
-			});
-		}
 
 		// Creem editor de preferencies
 		SharedPreferences.Editor editorpreferencies = prefs.edit();

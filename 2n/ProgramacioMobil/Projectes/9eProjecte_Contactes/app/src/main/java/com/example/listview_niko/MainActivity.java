@@ -2,8 +2,10 @@ package com.example.listview_niko;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +18,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
 	ArrayList<Titular> Contactes = new ArrayList<>();
 
@@ -29,6 +34,14 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+		if (prefs.getBoolean("tema_app", true)) {
+			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+		}
+		else {
+			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+		}
 
 		Contactes.add(new Titular("Marc","Sánchez López", "622260896", "Grugliasco, 61", "a", "26/08/2000"));
 		Contactes.add(new Titular("Laia","Massana Manzanares", "60000000", "Grugliasco, 61", "a", "19/04/2001"));
@@ -77,6 +90,15 @@ public class MainActivity extends Activity {
 			public void onClick(View view) {
 				Intent intent = new Intent(getApplicationContext(), CreaContacte.class);
 				startActivityForResult(intent, 2);
+			}
+		});
+
+		FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.config);
+		fab2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), Config.class);
+				startActivity(intent);
 			}
 		});
     } // onCreate
