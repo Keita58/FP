@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -54,6 +55,9 @@ public class Anime {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idPlataforma")
     private Plataforma plataforma;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "animeOnApareixo")
+    private Set<Personatges> personatgesDeLanime;
 
     public Anime() {
         super();
@@ -157,6 +161,14 @@ public class Anime {
 
     public void setPlataforma(Plataforma plataforma) {
         this.plataforma = plataforma;
+    }
+
+    public Set<Personatges> getPersonatgesDeLanime() {
+        return personatgesDeLanime;
+    }
+
+    public void setPersonatgesDeLanime(Set<Personatges> personatgesDeLanime) {
+        this.personatgesDeLanime = personatgesDeLanime;
     }
 
     @Override

@@ -148,14 +148,23 @@ public class MainActivitat {
         personatgesDAO.update(p4);
         personatgesDAO.update(p5);
 
-        List<Personatges> llistaPer2 = personatgesDAO.findAll();
-        for (Object personatges : llistaPer2) {
-            Personatges p = (Personatges) personatges;
-            System.out.println(p.toString());
-            System.out.println("Anime en els que apareix: ");
-            Anime a = p.getAnime();
-            System.out.println(a.toString());
-            System.out.println();
+        List<Comandes> llistaComandes3 = comandesDAO.findAll();
+        for (Object comandes : llistaComandes3) {
+            Comandes c = (Comandes) comandes;
+            System.out.println(c.toString());
+            System.out.println("Anime comprat en aquesta comanda: ");
+            Set<Anime> anime = c.getAnimesComprats();
+            for (Object anime2 : anime) {
+                Anime aux = (Anime) anime2;
+                System.out.println(aux.toString());
+                System.out.println("Personatges d'aquest anime: ");
+                Set<Personatges> p = aux.getPersonatgesDeLanime();
+                for (Object pe : p) {
+                    Personatges per = (Personatges) pe;
+                    System.out.println(per.toString());
+                }
+            }
+            System.out.println();    
         }
     }
 }
