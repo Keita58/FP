@@ -42,10 +42,12 @@ public class Comandes {
     }
 
     public Comandes(boolean pagat) {
+        this();
         this.pagat = pagat;
     }
 
     public Comandes(int idComanda, LocalDateTime dataComanda, double preuFinal, boolean pagat) {
+        this();
         this.idComanda = idComanda;
         this.dataComanda = dataComanda;
         this.preuFinal = preuFinal;

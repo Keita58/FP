@@ -104,7 +104,7 @@ public class GenericDAO <T, ID extends Serializable> implements IGenericDAO<T, I
 		try {
 			entityManager.getTransaction().begin();
 			Query query = entityManager.createQuery("SELECT e from " + getEntityClass().getName() + " e" );
-			List<T> entities = query.getResultList() ;
+			List<T> entities = query.getResultList();
 			entityManager.getTransaction().commit();
 			return entities;
 		}catch (HibernateException e) {

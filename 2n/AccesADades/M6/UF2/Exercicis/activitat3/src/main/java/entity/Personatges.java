@@ -41,7 +41,7 @@ public class Personatges {
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idAnime")
-    private Anime anime;
+    private Anime animeOnApareixo;
 
     public Personatges() {
         super();
@@ -113,11 +113,11 @@ public class Personatges {
     }
 
     public Anime getAnime() {
-        return anime;
+        return animeOnApareixo;
     }
 
     public void setAnime(Anime anime) {
-        this.anime = anime;
+        this.animeOnApareixo = anime;
     }
 
     @Override

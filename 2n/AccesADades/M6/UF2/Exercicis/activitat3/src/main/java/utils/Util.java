@@ -9,7 +9,7 @@ public class Util {
 
     public static synchronized EntityManagerFactory getCurrentEntityManager() {
 	    if ( factory == null ) {
-	    	factory = Persistence.createEntityManagerFactory("many");
+	    	factory = Persistence.createEntityManagerFactory("Anime");
 	    }
 	    return factory;
 	}

@@ -34,10 +34,11 @@ public class Plataforma {
         super();
     }
 
-    public Plataforma(String nomLlocWeb, String urlLlocWeb) {
+    public Plataforma(String nomLlocWeb, String urlLlocWeb, String ip) {
         this();
         this.nomLlocWeb = nomLlocWeb;
         this.urlLlocWeb = urlLlocWeb;
+        this.ip = ip;
     }
 
     public Plataforma(int idPlataforma, String nomLlocWeb, String ip, String urlLlocWeb) {
