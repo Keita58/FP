@@ -132,7 +132,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      heic1513b_0: 4657688824825614763
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

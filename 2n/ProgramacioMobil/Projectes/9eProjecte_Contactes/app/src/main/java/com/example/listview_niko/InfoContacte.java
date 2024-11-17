@@ -29,7 +29,7 @@ public class InfoContacte extends AppCompatActivity {
 
         nom.setText(bundle.getString("Nom"));
         adreca.setText(bundle.getString("Adreça"));
-        telefon.setText(bundle.getString("Telèfon"));
+        telefon.setText(Integer.toString(bundle.getInt("Telèfon")));
         mail.setText(bundle.getString("Mail"));
         data.setText(bundle.getString("Data"));
 

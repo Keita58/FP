@@ -3,6 +3,7 @@ package com.example.listview_niko;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 
@@ -22,6 +23,7 @@ public class CreaContacte extends AppCompatActivity {
         EditText cognom = (EditText) findViewById(R.id.editCognom);
         EditText adreca = (EditText) findViewById(R.id.editAdreca);
         EditText telefon = (EditText) findViewById(R.id.editTelefon);
+        telefon.setInputType(InputType.TYPE_CLASS_PHONE);
         EditText mail = (EditText) findViewById(R.id.editMail);
         EditText data = (EditText) findViewById(R.id.editData);
         FloatingActionButton afegir = (FloatingActionButton) findViewById(R.id.afegirContacte);
@@ -34,7 +36,7 @@ public class CreaContacte extends AppCompatActivity {
                 bundleTornar.putString("Nom", nom.getText().toString());
                 bundleTornar.putString("Cognom", cognom.getText().toString());
                 bundleTornar.putString("Adreça", adreca.getText().toString());
-                bundleTornar.putString("Telèfon", telefon.getText().toString());
+                bundleTornar.putInt("Telèfon", Integer.parseInt(telefon.getText().toString()));
                 bundleTornar.putString("Mail", mail.getText().toString());
                 bundleTornar.putString("Data", data.getText().toString());
                 intent.putExtras(bundleTornar);

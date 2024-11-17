@@ -43,8 +43,10 @@ public class MainActivity extends AppCompatActivity {
 			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 		}
 
-		Contactes.add(new Titular("Marc","Sánchez López", "622260896", "Grugliasco, 61", "a", "26/08/2000"));
-		Contactes.add(new Titular("Laia","Massana Manzanares", "60000000", "Grugliasco, 61", "a", "19/04/2001"));
+		BaseDeDades contactes = new BaseDeDades(this, "Contactes", null, 1);
+
+		Contactes.add(new Titular("Marc","Sánchez López", 622260896, "Grugliasco, 61", "a", "26/08/2000"));
+		Contactes.add(new Titular("Laia","Massana Manzanares", 60000000, "Grugliasco, 61", "a", "19/04/2001"));
 		/* *********************
         // Conectem al ListView com el Spinner pero sortira molt simple,.
         
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     		lblTitulo.setText(Contactes.get(position).getNom().toString() + " " + Contactes.get(position).getCognom().toString());
 
     		TextView lblSubTitulo = (TextView) item.findViewById(R.id.lblData);
-    		lblSubTitulo.setText(Contactes.get(position).getTelefon());
+    		lblSubTitulo.setText(Integer.toString(Contactes.get(position).getTelefon()));
 
 			Detalls.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -144,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 					Bundle bundle = new Bundle();
 					bundle.putString("Nom", Contactes.get(position).getNom() + " " + Contactes.get(position).getCognom());
 					bundle.putString("Adreça", Contactes.get(position).getAdreca());
-					bundle.putString("Telèfon", Contactes.get(position).getTelefon());
+					bundle.putInt("Telèfon", Contactes.get(position).getTelefon());
 					bundle.putString("Mail", Contactes.get(position).getMail());
 					bundle.putString("Data", Contactes.get(position).getDataNaixement());
 					Intent intent = new Intent(getApplicationContext(), InfoContacte.class);
@@ -161,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 					bundle.putString("Nom", Contactes.get(position).getNom());
 					bundle.putString("Cognom", Contactes.get(position).getCognom());
 					bundle.putString("Adreça", Contactes.get(position).getAdreca());
-					bundle.putString("Telèfon", Contactes.get(position).getTelefon());
+					bundle.putInt("Telèfon", Contactes.get(position).getTelefon());
 					bundle.putString("Mail", Contactes.get(position).getMail());
 					bundle.putString("Data", Contactes.get(position).getDataNaixement());
 					Intent intent = new Intent(getApplicationContext(), ModificaDades.class);
@@ -196,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 				Contactes.get(bundle.getInt("Posicio")).setNom(bundle.getString("Nom"));
 				Contactes.get(bundle.getInt("Posicio")).setCognom(bundle.getString("Cognom"));
 				Contactes.get(bundle.getInt("Posicio")).setAdreca(bundle.getString("Adreça"));
-				Contactes.get(bundle.getInt("Posicio")).setTelefon(bundle.getString("Telèfon"));
+				Contactes.get(bundle.getInt("Posicio")).setTelefon(bundle.getInt("Telèfon"));
 				Contactes.get(bundle.getInt("Posicio")).setMail(bundle.getString("Mail"));
 				Contactes.get(bundle.getInt("Posicio")).setDataNaixement(bundle.getString("Data"));
 			}
@@ -208,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 					Toast.makeText(this, "Has de posar la informació bàsica per al nou contacte! \n(Nom, Cognom i Telèfon)", Toast.LENGTH_SHORT).show();
 				}
 				else {
-					Titular nouContacte = new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), bundle.getString("Telèfon"), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data"));
+					Titular nouContacte = new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), bundle.getInt("Telèfon"), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data"));
 					Contactes.add(nouContacte);
 				}
 			}
