@@ -1,5 +1,6 @@
 package com.example.listview_niko;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,6 +25,10 @@ public class BaseDeDades extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(creacioTaula);
+        db.execSQL("INSERT INTO contactes (nom, cognom, telefon, adreca, mail, dataNaixement) VALUES " +
+                "('Marc', 'Sánchez López', 622260896, 'Grugliasco, 61', 'a', '26/08/2000')");
+        db.execSQL("INSERT INTO contactes (nom, cognom, telefon, adreca, mail, dataNaixement) VALUES " +
+                "('Laia', 'Massana Manzanares', 600000000, 'Grugliasco, 61', 'a', '19/04/2001')");
     }
 
     @Override
@@ -64,23 +69,30 @@ public class BaseDeDades extends SQLiteOpenHelper {
 
 
     public void eliminaContacteBD(int id){
-
         SQLiteDatabase db = this.getWritableDatabase();
-    }
-
-    public int buscaContacteBD(Titular aux) {
-
-        int id = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor c1 = db.rawQuery("SELECT id FROM contactes WHERE nom = "+aux.getNom()+" and cognom = "+aux.getCognom()+" and telefon = "+aux.getTelefon()+"", null);
-        if(c1 != null && c1.moveToFirst()) {
-            id = c1.getInt(0);
-        }
+        db.execSQL("DELETE FROM contactes WHERE id = "+id+"");
         db.close();
-        return id;
     }
 
     public void modificaContacteBD(int id, Titular aux) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues valors = new ContentValues();
+        valors.put("nom", aux.getNom());
+        valors.put("cognom", aux.getCognom());
+        valors.put("telefon", aux.getTelefon());
+        valors.put("adreca", aux.getAdreca());
+        valors.put("mail", aux.getMail());
+        valors.put("dataNaixement", aux.getDataNaixement());
+        db.update("contactes", valors, "id = "+id+"", null);
+        db.close();
+    }
 
+    public boolean creaPredefinits(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT id FROM contactes WHERE id = "+id+"", null);
+        if(c != null && c.moveToFirst())
+            return true;
+        else
+            return false;
     }
 }

@@ -48,10 +48,9 @@ public class MainActivity extends AppCompatActivity {
 		contactes = new BaseDeDades(this, "contactes.db", null, 1);;
 		db = contactes.getWritableDatabase();
 
-		db.execSQL("INSERT INTO contactes (nom, cognom, telefon, adreca, mail, dataNaixement) VALUES " +
-				"('Marc', 'Sánchez López', 622260896, 'Grugliasco, 61', 'a', '26/08/2000')");
-		db.execSQL("INSERT INTO contactes (nom, cognom, telefon, adreca, mail, dataNaixement) VALUES " +
-				"('Laia', 'Massana Manzanares', 600000000, 'Grugliasco, 61', 'a', '19/04/2001')");
+		if(!contactes.creaPredefinits(1)) {
+
+		}
 
 		/* *********************
         // Conectem al ListView com el Spinner pero sortira molt simple,.
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 				@Override
 				public void onClick(View view) {
 					Bundle bundle = new Bundle();
-					bundle.putInt("Posicio", position);
+					bundle.putInt("Posicio", Contactes.get(position).getIdBD());
 					bundle.putString("Nom", Contactes.get(position).getNom());
 					bundle.putString("Cognom", Contactes.get(position).getCognom());
 					bundle.putString("Adreça", Contactes.get(position).getAdreca());
@@ -183,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 			Elimina.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					eliminaContacte(position);
+					eliminaContacte(Contactes.get(position).getIdBD());
 				}
 			});
 
@@ -204,13 +203,8 @@ public class MainActivity extends AppCompatActivity {
 
 		if(requestCode == 1) {
 			if(data != null) {
-				Bundle bundle = data.getExtras();/*
-				Contactes.get(bundle.getInt("Posicio")).setNom(bundle.getString("Nom"));
-				Contactes.get(bundle.getInt("Posicio")).setCognom(bundle.getString("Cognom"));
-				Contactes.get(bundle.getInt("Posicio")).setAdreca(bundle.getString("Adreça"));
-				Contactes.get(bundle.getInt("Posicio")).setTelefon(bundle.getInt("Telèfon"));
-				Contactes.get(bundle.getInt("Posicio")).setMail(bundle.getString("Mail"));
-				Contactes.get(bundle.getInt("Posicio")).setDataNaixement(bundle.getString("Data"));*/
+				Bundle bundle = data.getExtras();
+				contactes.modificaContacteBD(bundle.getInt("Posicio"), new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), bundle.getInt("Telèfon"), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data")));
 			}
 		}
 		else if(requestCode == 2) {
@@ -247,8 +241,7 @@ public class MainActivity extends AppCompatActivity {
 	private void eliminaContacte(int position) {
 
 		contactes = new BaseDeDades(getApplicationContext(), "contactes.db", null, 1);
-		//contactes.buscaContacteBD()
-		//Contactes.remove(position);
+		contactes.eliminaContacteBD(position);
 		AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstOpcions);
 		lstOpciones.setAdapter(adaptador);
