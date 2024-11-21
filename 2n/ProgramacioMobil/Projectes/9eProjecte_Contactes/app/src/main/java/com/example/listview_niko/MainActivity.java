@@ -3,6 +3,7 @@ package com.example.listview_niko;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -28,7 +29,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-	ArrayList<Titular> Contactes = new ArrayList<>();
+	//ArrayList<Titular> Contactes = new ArrayList<>();
+	SQLiteDatabase db;
+	BaseDeDades contactes;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,11 +45,14 @@ public class MainActivity extends AppCompatActivity {
 		else {
 			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 		}
+		contactes = new BaseDeDades(this, "contactes.db", null, 1);;
+		db = contactes.getWritableDatabase();
 
-		BaseDeDades contactes = new BaseDeDades(this, "Contactes", null, 1);
+		db.execSQL("INSERT INTO contactes (nom, cognom, telefon, adreca, mail, dataNaixement) VALUES " +
+				"('Marc', 'Sánchez López', 622260896, 'Grugliasco, 61', 'a', '26/08/2000')");
+		db.execSQL("INSERT INTO contactes (nom, cognom, telefon, adreca, mail, dataNaixement) VALUES " +
+				"('Laia', 'Massana Manzanares', 600000000, 'Grugliasco, 61', 'a', '19/04/2001')");
 
-		Contactes.add(new Titular("Marc","Sánchez López", 622260896, "Grugliasco, 61", "a", "26/08/2000"));
-		Contactes.add(new Titular("Laia","Massana Manzanares", 60000000, "Grugliasco, 61", "a", "19/04/2001"));
 		/* *********************
         // Conectem al ListView com el Spinner pero sortira molt simple,.
         
@@ -77,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
         
         lstOpciones.setAdapter(adaptador);
     
-        lstOpciones.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), Contactes.get(arg2).getNom(), Toast.LENGTH_SHORT).show();
-			}
-		});
+//        lstOpciones.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//				// TODO Auto-generated method stub
+//				Toast.makeText(getApplicationContext(), Contactes.get(arg2).getNom(), Toast.LENGTH_SHORT).show();
+//			}
+//		});
 
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.crearPerfil);
 		fab.setOnClickListener(new View.OnClickListener() {
@@ -109,11 +115,13 @@ public class MainActivity extends AppCompatActivity {
     // ************* PErsonalizamos el Array Adapter 
     
     class AdaptadorTitulares extends ArrayAdapter  {
- 
+
 		Activity context;
+		ArrayList<Titular> Contactes = contactes.selectBD();
 
 		public AdaptadorTitulares(Activity context) {
-			super(context, R.layout.listitem_titular, Contactes);
+			super(context, R.layout.listitem_titular, contactes.selectBD());
+			contactes = new BaseDeDades(getApplicationContext(), "contactes.db", null, 1);;
 			this.context = (Activity) context;
 		}
 
@@ -191,16 +199,18 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		contactes = new BaseDeDades(getApplicationContext(), "contactes.db", null, 1);;
+		//db = contactes.getWritableDatabase();
 
 		if(requestCode == 1) {
 			if(data != null) {
-				Bundle bundle = data.getExtras();
+				Bundle bundle = data.getExtras();/*
 				Contactes.get(bundle.getInt("Posicio")).setNom(bundle.getString("Nom"));
 				Contactes.get(bundle.getInt("Posicio")).setCognom(bundle.getString("Cognom"));
 				Contactes.get(bundle.getInt("Posicio")).setAdreca(bundle.getString("Adreça"));
 				Contactes.get(bundle.getInt("Posicio")).setTelefon(bundle.getInt("Telèfon"));
 				Contactes.get(bundle.getInt("Posicio")).setMail(bundle.getString("Mail"));
-				Contactes.get(bundle.getInt("Posicio")).setDataNaixement(bundle.getString("Data"));
+				Contactes.get(bundle.getInt("Posicio")).setDataNaixement(bundle.getString("Data"));*/
 			}
 		}
 		else if(requestCode == 2) {
@@ -210,8 +220,7 @@ public class MainActivity extends AppCompatActivity {
 					Toast.makeText(this, "Has de posar la informació bàsica per al nou contacte! \n(Nom, Cognom i Telèfon)", Toast.LENGTH_SHORT).show();
 				}
 				else {
-					Titular nouContacte = new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), bundle.getInt("Telèfon"), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data"));
-					Contactes.add(nouContacte);
+					contactes.crearContacteBD(new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), bundle.getInt("Telèfon"), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data")));
 				}
 			}
 		}
@@ -237,7 +246,9 @@ public class MainActivity extends AppCompatActivity {
 
 	private void eliminaContacte(int position) {
 
-		Contactes.remove(position);
+		contactes = new BaseDeDades(getApplicationContext(), "contactes.db", null, 1);
+		//contactes.buscaContacteBD()
+		//Contactes.remove(position);
 		AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstOpcions);
 		lstOpciones.setAdapter(adaptador);

@@ -3,6 +3,7 @@ package com.example.listview_niko;
 import java.util.Date;
 
 public class Titular {
+	private int idBD;
 	private String nom;
 	private String cognom;
 	private int telefon;
@@ -17,6 +18,24 @@ public class Titular {
 		this.adreca = adreca;
 		this.mail = mail;
 		this.dataNaixement = dataNaixement;
+	}
+
+	public Titular(int idBD, String nom, String cognom, int telefon, String adreca, String mail, String dataNaixement) {
+		this.idBD = idBD;
+		this.nom = nom;
+		this.cognom = cognom;
+		this.telefon = telefon;
+		this.adreca = adreca;
+		this.mail = mail;
+		this.dataNaixement = dataNaixement;
+	}
+
+	public int getIdBD() {
+		return idBD;
+	}
+
+	public void setIdBD(int idBD) {
+		this.idBD = idBD;
 	}
 
 	public String getNom() {
