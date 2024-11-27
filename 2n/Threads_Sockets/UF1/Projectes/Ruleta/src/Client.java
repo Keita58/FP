@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.HashMap;
 
 
 /*
@@ -22,6 +23,7 @@ public class Client {
         dinersJugador = 10000;
         hostName  = "localhost";
         port = 25000;
+        HashMap<String, Integer> resultatRuleta = new HashMap<>();
 
         try {
             Socket clientSocket = new Socket(hostName, port);
@@ -33,7 +35,9 @@ public class Client {
                 if(!Menu())
                     break;
                 pEC.send(opcionsAposta);
-                pEC.receive(); // Diccionari de dades del ruleta
+                pEC.receive(resultatRuleta); // Diccionari de dades del ruleta
+                SumarResultat(resultatRuleta);
+                pEC.send(dinersJugador);
             }
 
             pEC.receive("KURWA");
@@ -41,6 +45,11 @@ public class Client {
         } catch (Exception e) {
 
         }
+    }
+
+    private static void SumarResultat(HashMap<String, Integer> resultatRuleta) {
+        if(resultatRuleta.get("Guanys") > 0)
+            dinersJugador += resultatRuleta.get("Guanys");
     }
 
     public static boolean Menu() throws NumberFormatException, IOException {
@@ -142,7 +151,7 @@ public class Client {
                 break;
             }
             else
-                System.out.println("No has escrit cap de les opcions que toca :(");
+                System.out.println("No has posat una aposta amb uns diners inferiors als que tens :(");
         }
 
         pEC.send(opcionsAposta);

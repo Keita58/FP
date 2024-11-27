@@ -48,6 +48,13 @@ public class PontEntreClasses {
         }
     }
 
+    public void send(int diners) {
+        this.printWriter.println(diners);
+        if(this.verbose) {
+            System.out.println("S'està enviant els diners del jugador (" + diners + ") al servidor");
+        }
+    }
+
     public void send(int[] array) {
         try {
             this.escripturaObject.writeObject(array);
@@ -80,8 +87,11 @@ public class PontEntreClasses {
                 System.out.println("S'està rebent el text: " + text);
     }
 
-    public void receive(HashMap<String, Integer> dades) {
-        
+    public void receive(HashMap<String, Integer> dades) throws Excepcio, IOException {
+        if(dades.containsKey("Num") && dades.containsKey("Color") && dades.containsKey("Parell_Imparell") && dades.containsKey("Guanys"))
+            System.out.println("Sestà rebent el diccionari amb el resultat de la ruleta");
+        else
+            throw new Excepcio("El diccionari que s'ha passat " + dades.toString() + " no és correcte.");
     }
 
     public void close() {
