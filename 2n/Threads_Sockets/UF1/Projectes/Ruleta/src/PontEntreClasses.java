@@ -1,4 +1,6 @@
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -14,31 +16,29 @@ public class PontEntreClasses {
     private ObjectOutputStream escripturaObject;
     private BufferedReader bufferReader;
     private PrintWriter printWriter;
+    private DataInputStream dataReader;
+    private DataOutputStream dataWriter;
     private boolean verbose;
     
-    public PontEntreClasses(Socket socket) {
+    public PontEntreClasses(Socket socket) throws IOException {
         this.socket = socket;
-        try {
-            this.bufferReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-            this.printWriter = new PrintWriter(this.socket.getOutputStream(), true);
-            this.lecturaObject = new ObjectInputStream(this.socket.getInputStream());
-            this.escripturaObject = new ObjectOutputStream(this.socket.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.printWriter = new PrintWriter(this.socket.getOutputStream(), true);
+        this.bufferReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        this.dataReader = new DataInputStream(this.socket.getInputStream());
+        this.dataWriter = new DataOutputStream(this.socket.getOutputStream());
+        this.escripturaObject = new ObjectOutputStream(this.socket.getOutputStream());
+        this.lecturaObject = new ObjectInputStream(this.socket.getInputStream());
     }
 
-    public PontEntreClasses(Socket socket, boolean verbose) {
+    public PontEntreClasses(Socket socket, boolean verbose) throws IOException {
         this.socket = socket;
         this.verbose = verbose;
-        try {
-            this.bufferReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-            this.printWriter = new PrintWriter(this.socket.getOutputStream(), true);
-            this.lecturaObject = new ObjectInputStream(this.socket.getInputStream());
-            this.escripturaObject = new ObjectOutputStream(this.socket.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.printWriter = new PrintWriter(this.socket.getOutputStream(), true);
+        this.bufferReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        this.dataReader = new DataInputStream(this.socket.getInputStream());
+        this.dataWriter = new DataOutputStream(this.socket.getOutputStream());
+        this.escripturaObject = new ObjectOutputStream(this.socket.getOutputStream());
+        this.lecturaObject = new ObjectInputStream(this.socket.getInputStream());
     }
 
     public void send(String text) {
@@ -48,63 +48,84 @@ public class PontEntreClasses {
         }
     }
 
-    public void send(int diners) {
-        this.printWriter.println(diners);
+    public void sendInt(int diners) throws IOException {
+        this.dataWriter.writeInt(diners);
         if(this.verbose) {
             System.out.println("S'està enviant els diners del jugador (" + diners + ") al servidor");
         }
     }
 
-    public void send(int[] array) {
-        try {
-            this.escripturaObject.writeObject(array);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void sendArray(int[] array) throws IOException {
+        this.escripturaObject.writeObject(array);
         if(this.verbose) {
             System.out.println("S'està enviant l'array: ");
-            for(int i = 0; i < array.length; i++)
+            System.out.print("[");
+            for(int i = 0; i < array.length - 1; i++)
                 System.out.print(array[i] + ", ");
+            System.out.print(array[array.length - 1]);
+            System.out.print("]");
         }
+        System.out.println();
     }
 
-    public String receive() {
-        try {
-            String text = this.bufferReader.readLine(); // Només es pot fer un readLine()
-            if(this.verbose)
-                System.out.println("S'està rebent el text: " + text);
-            return text;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    } 
-
-    public void receive(String text) throws Excepcio, IOException {
-        if(!text.equals(this.bufferReader.readLine()))
-                throw new Excepcio("El text que has enviat: " + text + ", és diferent al text actual: " + this.bufferReader.readLine());
-            if(this.verbose)
-                System.out.println("S'està rebent el text: " + text);
-    }
-
-    public void receive(HashMap<String, Integer> dades) throws Excepcio, IOException {
-        if(dades.containsKey("Num") && dades.containsKey("Color") && dades.containsKey("Parell_Imparell") && dades.containsKey("Guanys"))
-            System.out.println("Sestà rebent el diccionari amb el resultat de la ruleta");
-        else
-            throw new Excepcio("El diccionari que s'ha passat " + dades.toString() + " no és correcte.");
-    }
-
-    public void close() {
-        try {
-            this.bufferReader.close();
-            this.printWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void sendMap(HashMap<String, Integer> dades) throws IOException {
+        this.escripturaObject.writeObject(dades);
+        if(this.verbose) 
+            System.out.println("S'està enviant l'el diccionari: " + dades.toString());
         
     }
 
-    public String sendReceive(String text) {
+    public String receive() throws IOException {
+        String text = this.bufferReader.readLine(); // Només es pot fer un readLine()
+        if(this.verbose)
+            System.out.println("S'està rebent el text: " + text);
+        return text;
+    } 
+
+    public int receiveInt() throws Excepcio, NumberFormatException, IOException {
+        int aux = this.dataReader.readInt();
+        if(this.verbose)
+            System.out.println("S'està rebent el número " + aux);
+        return aux;
+    }
+
+    public int[] receiveArray() throws ClassNotFoundException, IOException, Excepcio {
+        int[] aux = (int[]) this.lecturaObject.readObject();
+        if(this.verbose)
+            System.out.println("S'està rebent l'array " + aux);
+        return aux;
+    }
+
+    public HashMap<String, Integer> receiveMap() throws ClassNotFoundException, IOException {
+        HashMap<String, Integer> dades = (HashMap<String, Integer>)this.lecturaObject.readObject();
+        if(this.verbose)
+            System.out.println("S'està rebent el diccionari " + dades.toString());
+        return dades;
+    }
+
+    public void receive(String text) throws Excepcio, IOException {
+        String aux = this.bufferReader.readLine();
+        if(!text.equals(aux))
+            throw new Excepcio("El text que has enviat: " + text + ", és diferent al text actual: " + aux);
+        if(this.verbose)
+            System.out.println("S'està rebent el text: " + text);
+    }
+
+    public void receiveMap(HashMap<String, Integer> dades) throws Excepcio, IOException {
+        if(!(dades.containsKey("Numero") && dades.containsKey("Color") && dades.containsKey("Parell_Imparell") && dades.containsKey("Guanys")))
+            throw new Excepcio("El diccionari que s'ha rebut " + dades.toString() +" no té les claus correctes");
+        if(this.verbose)
+            System.out.println("S'està rebent el diccionari " + dades.toString());
+    }
+
+    public void close() throws IOException {
+        this.bufferReader.close();
+        this.printWriter.close();
+        this.lecturaObject.close();
+        this.escripturaObject.close(); 
+    }
+
+    public String sendReceive(String text) throws IOException {
         this.send(text);
         return receive();
     }
