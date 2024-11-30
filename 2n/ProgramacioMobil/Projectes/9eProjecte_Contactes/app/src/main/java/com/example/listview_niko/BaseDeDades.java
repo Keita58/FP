@@ -38,7 +38,6 @@ public class BaseDeDades extends SQLiteOpenHelper {
     }
 
     public ArrayList<Titular> selectBD() {
-
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Titular> aux = new ArrayList<>();
         Cursor c1 = db.rawQuery("Select id, nom, cognom, telefon, adreca, mail, dataNaixement from contactes", null);
@@ -58,6 +57,17 @@ public class BaseDeDades extends SQLiteOpenHelper {
         db.close();
         Log.i("BD", ""+aux);
         return aux;
+    }
+
+    public int selectBDEspecific(Titular t) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int id = 0;
+        Cursor c1 = db.rawQuery("Select id from contactes where nom = ? and cognom = ? and adreca = ? and mail = ?", new String[]{t.getNom(), t.getCognom(), t.getAdreca(), t.getMail()});
+        if(c1 != null && c1.moveToFirst()) {
+            id = c1.getInt(0);
+        }
+        db.close();
+        return id;
     }
 
     public void crearContacteBD(Titular aux) {

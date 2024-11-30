@@ -1,11 +1,18 @@
 package com.example.listview_niko;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NotificationCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,7 +37,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-	//ArrayList<Titular> Contactes = new ArrayList<>();
+	private static final String CHANNEL_ID = "canal_notis";
 	SQLiteDatabase db;
 	BaseDeDades contactes;
 
@@ -38,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		createNotificationChannel();
 
 		if (prefs.getBoolean("tema_app", true)) {
 			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -47,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
 		}
 		contactes = new BaseDeDades(this, "contactes.db", null, 1);;
 		db = contactes.getWritableDatabase();
-
-		if(!contactes.creaPredefinits(1)) {
-
-		}
 
 		/* *********************
         // Conectem al ListView com el Spinner pero sortira molt simple,.
@@ -199,7 +204,6 @@ public class MainActivity extends AppCompatActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		contactes = new BaseDeDades(getApplicationContext(), "contactes.db", null, 1);;
-		//db = contactes.getWritableDatabase();
 
 		if(requestCode == 1) {
 			if(data != null) {
@@ -214,7 +218,9 @@ public class MainActivity extends AppCompatActivity {
 					Toast.makeText(this, "Has de posar la informació bàsica per al nou contacte! \n(Nom, Cognom i Telèfon)", Toast.LENGTH_SHORT).show();
 				}
 				else {
-					contactes.crearContacteBD(new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), bundle.getInt("Telèfon"), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data")));
+					Titular t = new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), Integer.parseInt(bundle.getString("Telèfon")), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data"));
+					contactes.crearContacteBD(t);
+					sendPendingIntentNotification(contactes.selectBDEspecific(t));
 				}
 			}
 		}
@@ -228,7 +234,6 @@ public class MainActivity extends AppCompatActivity {
 	protected void onResume() {
 		super.onResume();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		//Preference feedbackPref = findPreference("canvia_color");
 
 		if (prefs.getBoolean("tema_app", true)) {
 			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -239,11 +244,44 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void eliminaContacte(int position) {
-
 		contactes = new BaseDeDades(getApplicationContext(), "contactes.db", null, 1);
 		contactes.eliminaContacteBD(position);
 		AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstOpcions);
 		lstOpciones.setAdapter(adaptador);
+	}
+
+	private void createNotificationChannel() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			CharSequence name = "Canal";
+			String description = "Canal per a les notificacions";
+			int importance = NotificationManager.IMPORTANCE_DEFAULT;
+			NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+			channel.setDescription(description);
+			NotificationManager notificationManager = getSystemService(NotificationManager.class);
+			notificationManager.createNotificationChannel(channel);
+		}
+	}
+
+	private void sendBasicNotification() {
+		// Crear una notificación
+		/*  Fem servor NptificationCompat.Builder per fer la notificació i fem servir mètodes per donar aspecte i comportament
+		 * a la Notificació  (Icone, Títol, Test,...
+		 * Finalment, fem el Build per contruirla */
+		Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+				.setSmallIcon(android.R.drawable.ic_dialog_info)
+				.setContentTitle("Notificación de prueba")
+				.setContentText("Este es el texto de la notificación.")
+				.setPriority(NotificationCompat.PRIORITY_DEFAULT)
+				.build();
+
+		// Mostrar la notificación
+		/* Per visulizar la notificació al usuari necessitem  un NotificationManager.
+		 * El mètode notify() pren un ID únic per cad anotificació.
+		 *
+		 * Si li enviem un mateix ID, la notficació es "machaca".
+		 * Si fem servir un ID diferent per cada notificació, s'acumulen.  */
+		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.notify(1, notification);  // El primer parámetro es el ID de la notificación
 	}
 }

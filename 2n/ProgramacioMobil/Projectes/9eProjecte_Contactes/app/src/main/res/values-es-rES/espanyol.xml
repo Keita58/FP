@@ -22,4 +22,6 @@
     <dimen name="padding_large">16dp</dimen>
     <string name="titol_preferencies">Preferencias de la aplicación</string>
     <string name="tema_aplicacio">Tema de la aplicación</string>
+    <string name="crear_contacte">Creación de contacto</string>
+    <string name="crear_contacte_desc">Se ha creado un nuevo contacto.</string>
 </resources>

@@ -36,7 +36,7 @@ public class CreaContacte extends AppCompatActivity {
                 bundleTornar.putString("Nom", nom.getText().toString());
                 bundleTornar.putString("Cognom", cognom.getText().toString());
                 bundleTornar.putString("Adreça", adreca.getText().toString());
-                bundleTornar.putInt("Telèfon", Integer.parseInt(telefon.getText().toString()));
+                bundleTornar.putString("Telèfon", telefon.getText().toString());
                 bundleTornar.putString("Mail", mail.getText().toString());
                 bundleTornar.putString("Data", data.getText().toString());
                 intent.putExtras(bundleTornar);
