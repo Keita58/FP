@@ -63,12 +63,17 @@ public class Client {
                         while(sortirNumero) {
                             System.out.println("Tria quin número vols (Escriu un número de 0 a 35)");
                             String num = inConsola.readLine();
-                            if(Integer.parseInt(num) >= 0 && Integer.parseInt(num) <= 35) {
-                                opcionsAposta[1] = Integer.parseInt(num);
-                                sortirNumero = false;
-                            }
-                            else
+                            if(num.equals("")){
                                 System.out.println("No has escrit un dels números corresponents :(");
+                            }
+                            else {
+                                if(Integer.parseInt(num) >= 0 && Integer.parseInt(num) <= 35) {
+                                    opcionsAposta[1] = Integer.parseInt(num);
+                                    sortirNumero = false;
+                                }
+                                else
+                                    System.out.println("No has escrit un dels números corresponents :(");
+                            }
                         }
                         
                         break;
@@ -126,13 +131,19 @@ public class Client {
             while(true) {
                 System.out.println("Quants diners vols apostar? Tens " + dinersJugador);
                 String diners = inConsola.readLine();
-                if(Integer.parseInt(diners) <= dinersJugador && Integer.parseInt(diners) >= 0) {
-                    opcionsAposta[2] = Integer.parseInt(diners);
-                    dinersJugador -= Integer.parseInt(diners);
-                    break;
+                if(diners.equals("")) {
+                    System.out.println("No has posat uns diners vàlids per jugar :(");
                 }
-                else
-                    System.out.println("No has posat una aposta amb uns diners inferiors als que tens :(");
+                else {
+                    if(Integer.parseInt(diners) <= dinersJugador && Integer.parseInt(diners) >= 0) {
+                        opcionsAposta[2] = Integer.parseInt(diners);
+                        dinersJugador -= Integer.parseInt(diners);
+                        break;
+                    }
+                    else
+                        System.out.println("No has posat uns diners vàlids per jugar :(");
+                }
+                
             }
 
             pEC.sendArray(opcionsAposta);
@@ -153,15 +164,22 @@ public class Client {
                 return false;
             }           
             System.out.println("Vols tornar a jugar? Si -> 1 | No -> 2");
-            switch(inConsola.readLine()) {
-                case "1":
-                    pEC.send("SALE");
-                    break;
-                case "2":
-                    pEC.send("LO SUPONIA");
-                    sortirMenu = false;
-                    break;
+            boolean sortir = false;
+            while(sortir) {
+                switch(inConsola.readLine()) {
+                    case "1":
+                        pEC.send("SALE");
+                        break;
+                    case "2":
+                        pEC.send("LO SUPONIA");
+                        sortirMenu = false;
+                        break;
+                    default:
+                        System.out.println("No has escrit cap de les opcions que toca :(");
+                        break;
+                }
             }
+            
         }
         return false;
     }
