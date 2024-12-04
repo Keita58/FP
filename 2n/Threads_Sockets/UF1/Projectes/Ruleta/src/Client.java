@@ -123,9 +123,8 @@ public class Client {
                 }
             }
 
-            System.out.println("Quants diners vols apostar? Tens " + dinersJugador);
-
             while(true) {
+                System.out.println("Quants diners vols apostar? Tens " + dinersJugador);
                 String diners = inConsola.readLine();
                 if(Integer.parseInt(diners) <= dinersJugador && Integer.parseInt(diners) >= 0) {
                     opcionsAposta[2] = Integer.parseInt(diners);
