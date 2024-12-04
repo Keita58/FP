@@ -71,7 +71,7 @@ public class PontEntreClasses {
     public void sendMap(HashMap<String, Integer> dades) throws IOException {
         this.escripturaObject.writeObject(dades);
         if(this.verbose) 
-            System.out.println("S'està enviant l'el diccionari: " + dades.toString());
+            System.out.println("S'està enviant el diccionari: " + dades.toString());
         
     }
 
@@ -91,8 +91,15 @@ public class PontEntreClasses {
 
     public int[] receiveArray() throws ClassNotFoundException, IOException, Excepcio {
         int[] aux = (int[]) this.lecturaObject.readObject();
-        if(this.verbose)
-            System.out.println("S'està rebent l'array " + aux);
+        System.out.println("S'està rebent l'array: ");
+        if(this.verbose){
+            System.out.print("[");
+            for(int i = 0; i < aux.length - 1; i++)
+                System.out.print(aux[i] + ", ");
+            System.out.print(aux[aux.length - 1]);
+            System.out.print("]");
+        }
+        System.out.println();
         return aux;
     }
 

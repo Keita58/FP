@@ -14,8 +14,8 @@ public class Client {
 
     public static void main(String[] args) {
         dinersJugador = 500;
-        hostName = "10.1.83.26";
-        port = 60047;
+        hostName = "localhost";
+        port = 25000;
 
         try {
             Socket clientSocket = new Socket(hostName, port);
@@ -42,8 +42,7 @@ public class Client {
     public static boolean Menu() throws NumberFormatException, IOException, Excepcio, ClassNotFoundException {
 
         BufferedReader inConsola = new BufferedReader(new InputStreamReader(System.in));
-        HashMap<String, Integer> resultatRuleta = new HashMap<>();
-        opcionsAposta = new int[3];
+        //HashMap<String, Integer> resultatRuleta = new HashMap<>();
         boolean sortirMenu = true;
 
         while (sortirMenu) {
@@ -53,6 +52,7 @@ public class Client {
 
             boolean sortirTria = true;
             while (sortirTria) {
+                opcionsAposta = new int[3];
                 System.out.println("Tria quin tipus d'aposta vols fer: 1. Número - 2. Color - 3. Parell/Imparell (Escriu el número)");
                 switch (inConsola.readLine()) {
                     case "1":
@@ -139,7 +139,8 @@ public class Client {
             pEC.sendArray(opcionsAposta);
             pEC.receive("ACK");
 
-            resultatRuleta = pEC.receiveMap(); // Diccionari de dades del ruleta
+            HashMap<String, Integer> resultatRuleta = pEC.receiveMap(); // Diccionari de dades del ruleta
+            System.out.println(resultatRuleta);
             //pEC.receiveMap(resultatRuleta);
             pEC.send("ACK");
 

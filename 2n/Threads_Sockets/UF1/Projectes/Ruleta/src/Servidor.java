@@ -1,14 +1,12 @@
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 public class Servidor {
 
     public static void main(String[] args) {
         int port = 25000;
-        HashMap<String, Integer> resultat = new HashMap<>();
         Random r = new Random();
 
         try {
@@ -18,9 +16,11 @@ public class Servidor {
             pEC.send("MONDONGO");
             pEC.receive("ACK");
             while(true) {
-                pEC.send("Comienza el game");
+                HashMap<String, Integer> resultat = new HashMap<>();
+                pEC.send("COMIENZA EL GAME");
                 pEC.receive("ACK");
                 int[] array = pEC.receiveArray();
+                pEC.send("ACK");
                 //Colors: 0 -> Negre / 1 -> Vermell / 2 -> Verd
                 int[] ruleta = {2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1};
                 int numRuleta = r.nextInt(0, 37);
@@ -30,18 +30,25 @@ public class Servidor {
                 if((array[0] == 0 && array[1] != numRuleta) || (array[0] == 1 && array[1] != ruleta[numRuleta]) || (array[0] == 2 && array[1] != numRuleta%2))
                     resultat.put("Guanys", 0);
                 else {
-                    if(array[0] == 0 && array[1] != numRuleta) //Número
+                    if(array[0] == 0 && array[1] == numRuleta) //Número
                         resultat.put("Guanys", array[2]*36);
-                    else if(array[0] == 1 && array[1] != ruleta[numRuleta]) //Color
+                    else if(array[0] == 1 && array[1] == ruleta[numRuleta]) //Color
                         resultat.put("Guanys", array[2]*2);
-                    else if(array[0] == 2 && array[1] != numRuleta%2) //Parell_Imparell
+                    else if(array[0] == 2 && array[1] == numRuleta%2) //Parell_Imparell
                         resultat.put("Guanys", array[2]*2);
                 }
                 pEC.sendMap(resultat);
                 pEC.receive("ACK");
                 int dinersJugador = pEC.receiveInt();
+                System.out.println("El jugador té " + dinersJugador);
                 pEC.send("ACK");
+                pEC.send("SILKSONG?");
+                String reJugar = pEC.receive();
+                if(reJugar.equals("LO SUPONIA"))
+                    break;
             }
+            pEC.send("PAKETE");
+            pEC.close();
         }
         catch(Exception e) {
 
