@@ -51,7 +51,7 @@ public class Servidor {
             pEC.close();
         }
         catch(Exception e) {
-
+            System.err.println(e);
         }
     }
 }

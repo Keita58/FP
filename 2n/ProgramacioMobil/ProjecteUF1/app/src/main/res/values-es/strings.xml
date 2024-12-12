@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Formula1_Clicker</string>
+    <string name="BotoMenuJoc">🏁 Juego</string>
+    <string name="BotoMenuTrofeus">🏆 Trofeos</string>
+    <string name="BotoMenuConfiguracio">⚙️ Configuración</string>
+    <string name="Titol">F1 Clicker</string>
+</resources>
