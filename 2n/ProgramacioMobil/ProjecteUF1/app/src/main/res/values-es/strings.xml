@@ -5,4 +5,12 @@
     <string name="BotoMenuTrofeus">🏆 Trofeos</string>
     <string name="BotoMenuConfiguracio">⚙️ Configuración</string>
     <string name="Titol">F1 Clicker</string>
+    <string name="Pneumatics">Pneumáticos</string>
+    <string name="AleroDavanter">A. Delantero</string>
+    <string name="SuspensioDavantera">S. Delantera</string>
+    <string name="Cockpit">Cockpit</string>
+    <string name="Portons">Portones</string>
+    <string name="Fons">Fondo</string>
+    <string name="SuspensioTrasera">S. Trasera</string>
+    <string name="AleroTraser">A. Trasera</string>
 </resources>

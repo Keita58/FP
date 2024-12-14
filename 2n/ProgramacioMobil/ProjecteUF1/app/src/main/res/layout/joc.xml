@@ -9,99 +9,173 @@
     tools:context=".Main">
 
     <FrameLayout
-        android:id="@+id/Clicker"
+        android:id="@+id/TextTitol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        app:layout_constraintBottom_toTopOf="@+id/Clicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/Titol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <ImageView
-            android:id="@+id/Cotxe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            tools:src="@tools:sample/avatars" />
+            android:fontFamily="@font/formula1"
+            android:text="@string/Titol"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/Millores"
+        android:id="@+id/Clicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="128dp">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/Millores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextTitol">
 
-        <Button
-            android:id="@+id/button4"
+        <TextView
+            android:id="@+id/NombreVoltes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_gravity="center"
+            android:translationY="-125dp" />
 
-        <Button
-            android:id="@+id/button5"
+        <ImageView
+            android:id="@+id/Bandera"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_height="300dp"
+            app:srcCompat="@drawable/flag" />
 
-        <Button
-            android:id="@+id/button6"
+        <ImageView
+            android:id="@+id/ImatgeCotxe"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_height="300dp"
+            android:scaleType="centerInside"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            app:srcCompat="@drawable/amr23" />
 
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <FrameLayout
-            android:id="@+id/BotonsMillores"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </FrameLayout>
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/Millores"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:orientation="vertical"
+        android:scaleX="0.9"
+        app:layout_constraintBottom_toTopOf="@id/Navegacio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Clicker">
+
+        <HorizontalScrollView
+            android:id="@+id/BotonsMillores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/ADavant"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/AleroDavanter" />
+
+                <Button
+                    android:id="@+id/Pneumatic"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Pneumatics"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/SusDavant"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/SuspensioDavantera"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/Cockpit"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Cockpit"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/Portons"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Portons"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/button9"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/button10"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/button2"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <ImageView
+            android:id="@+id/ImatgeMillora"
+            android:layout_width="211dp"
+            android:layout_height="141dp"
+            android:layout_gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:srcCompat="@drawable/astonmartinnosecone" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/Navegacio"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Millores">
 
         <FrameLayout
-            android:id="@+id/BotoIconaJoc"
+            android:id="@+id/FrameBotoJoc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/Joc"
+                android:id="@+id/BotoJoc"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,12 +186,12 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/BotoIconaTrofeus"
+            android:id="@+id/FrameBotoTrofeus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/Trofeus"
+                android:id="@+id/BotoTrofeus"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,12 +202,12 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/BotoIconaConfig"
+            android:id="@+id/FrameBotoConfig"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/Configuració"
+                android:id="@+id/BotoConfiguracio"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
