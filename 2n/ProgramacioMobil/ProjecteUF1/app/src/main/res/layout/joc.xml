@@ -44,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="@string/TextTemp"
             android:translationY="-125dp" />
 
         <ImageView
@@ -67,6 +68,7 @@
         android:id="@+id/Millores"
         android:layout_width="match_parent"
         android:layout_height="340dp"
+        android:gravity="center|top"
         android:orientation="vertical"
         android:scaleX="0.9"
         app:layout_constraintBottom_toTopOf="@id/Navegacio"
@@ -75,7 +77,7 @@
         app:layout_constraintTop_toBottomOf="@id/Clicker">
 
         <HorizontalScrollView
-            android:id="@+id/BotonsMillores"
+            android:id="@+id/OpcionsMillores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -120,32 +122,32 @@
                     style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Portons"
+                    android:text="@string/Pontons"
                     android:textAlignment="center" />
 
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/Fons"
                     style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button"
+                    android:text="@string/Fons"
                     android:textAlignment="center" />
 
                 <Button
-                    android:id="@+id/button10"
+                    android:id="@+id/SusTrasera"
                     style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button"
+                    android:text="@string/SuspensioTrasera"
                     android:textAlignment="center" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/ATraser"
                     style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Button" />
+                    android:text="@string/AleroTraser" />
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -156,7 +158,113 @@
             android:layout_gravity="center"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            app:srcCompat="@drawable/astonmartinnosecone" />
+            app:srcCompat="@drawable/alero_davanter" />
+
+        <TextView
+            android:id="@+id/NivellMillora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/TextTemp" />
+
+        <LinearLayout
+            android:id="@+id/BotonsMillores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/BotoPlus1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/Plus1"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="+1"
+                    app:cornerRadius="5dp" />
+
+                <TextView
+                    android:id="@+id/CostPlus1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="20"
+                    android:text="@string/TextTemp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/BotoPlus10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/Plus10"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="+10"
+                    app:cornerRadius="5dp" />
+
+                <TextView
+                    android:id="@+id/CostPlus10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="20"
+                    android:text="@string/TextTemp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/BotoPlus100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/Plus100"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="+100"
+                    app:cornerRadius="5dp" />
+
+                <TextView
+                    android:id="@+id/CostPlus100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="20"
+                    android:text="@string/TextTemp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ProdMillora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/TextTemp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -169,53 +277,38 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Millores">
 
-        <FrameLayout
-            android:id="@+id/FrameBotoJoc"
+        <Button
+            android:id="@+id/BotoJoc"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:minWidth="60dip"
+            android:minHeight="30dp"
+            android:text="@string/BotoMenuJoc" />
 
-            <Button
-                android:id="@+id/BotoJoc"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:minWidth="60dip"
-                android:text="@string/BotoMenuJoc" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/FrameBotoTrofeus"
+        <Button
+            android:id="@+id/BotoTrofeus"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:minWidth="60dip"
+            android:minHeight="30dp"
+            android:text="@string/BotoMenuTrofeus" />
 
-            <Button
-                android:id="@+id/BotoTrofeus"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:minWidth="60dip"
-                android:text="@string/BotoMenuTrofeus" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/FrameBotoConfig"
+        <Button
+            android:id="@+id/BotoConfiguracio"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/BotoConfiguracio"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:minWidth="60dip"
-                android:text="@string/BotoMenuConfiguracio" />
-        </FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:minWidth="60dip"
+            android:minHeight="30dp"
+            android:text="@string/BotoMenuConfiguracio" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

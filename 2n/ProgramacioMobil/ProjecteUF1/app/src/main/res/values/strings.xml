@@ -8,8 +8,10 @@
     <string name="AleroDavanter">Aleró Davanter</string>
     <string name="SuspensioDavantera">S. Davantera</string>
     <string name="Cockpit">Cockpit</string>
-    <string name="Portons">Portons</string>
     <string name="Fons">Fons</string>
     <string name="SuspensioTrasera">S. Trasera</string>
     <string name="AleroTraser">Aleró Traser</string>
+    <string name="TextTemp">TextTemporal</string>
+    <string name="Pontons">Pontons</string>
+    <string name="Voltes">voltes</string>
 </resources>

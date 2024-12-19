@@ -12,11 +12,20 @@ public class Jugador : MonoBehaviour
     private InputAction _MoveAction;
     private InputAction _LookAction;
     private Rigidbody _RigidBody;
-
+    
+    [SerializeField] private Animator _Animator;
     [SerializeField] private GameObject _Camera;
 
     [Tooltip("Velocitat de moviment del jugador.")]
     [Range(0.1f, 20f)]
+    [SerializeField] private float _Velocity = 3;
+
+    [Tooltip("Velocitat de mouse en graus per segon.")]
+    [Range(10f, 360f)]
+    [SerializeField] private float _Velocity = 3;
+
+    [Tooltip("Velocitat de mouse en graus per segon.")]
+    [Range(10f, 360f)]
     [SerializeField] private float _Velocity = 3;
 
     [Tooltip("Velocitat de mouse en graus per segon.")]
@@ -40,10 +49,13 @@ public class Jugador : MonoBehaviour
         _LookAction = _inputActions.Player.Look;
 
         _inputActions.Player.Interact.performed += Interact;
+        _inputActions.Player.Attack.performed += Atac;
+        _inputActions.Player.Attack.canceled += AtacFi;
 
         _inputActions.Player.Enable();
 
         _RigidBody = GetComponent<Rigidbody>();
+
     }
 
     private void Update()
@@ -55,6 +67,7 @@ public class Jugador : MonoBehaviour
         _LookRotation.y += (_InvertY ? 1 : -1) * lookInput.y * _LookVelocity * Time.deltaTime;
 
         //_Camera.transform.rotation = Quaternion.Euler(_LookRotation.y, _LookRotation.x, 0);
+        _LookRotation.y = Mathf.Clamp(_LookRotation.y, minAngle, maxAngle);
         transform.rotation = Quaternion.Euler(0, _LookRotation.x, 0);
         _Camera.transform.localRotation = Quaternion.Euler(_LookRotation.y, 0, 0);
 
@@ -65,6 +78,8 @@ public class Jugador : MonoBehaviour
             (transform.right * movementInput.x +
             transform.forward * movementInput.y)
             .normalized * _Velocity;
+
+        UpdateState(_CurrentState);
 
 
         //_RigidBody.linearVelocity = 
@@ -89,4 +104,136 @@ public class Jugador : MonoBehaviour
         }
     }
 
+    //Màquina d'estats
+    private enum RobotStates { IDLE, RUN, PUNCH, RUNPUNCH, HURT }
+    [SerializeField] private RobotStates _CurrentState;
+    //[SerializeField] private RobotStates _BufferState;
+    [SerializeField] private AnimationClip _AttackClip;
+    [SerializeField] private AnimationClip _AttackRunClip;
+    [SerializeField] private AnimationClip _RunClip;
+    private float _StateTime;
+
+    private void Start()
+    {
+        InitState(RobotStates.IDLE);
+    }
+
+    private void ChangeState(RobotStates newState)
+    {
+        ExitState(_CurrentState);
+        InitState(newState);
+    }
+
+    private void InitState(RobotStates initState)
+    {
+        _CurrentState = initState;
+        _StateTime = 0;
+
+        switch (_CurrentState)
+        {
+            case RobotStates.IDLE:
+                _Animator.Play("Idle");
+                _RigidBody.linearVelocity = Vector3.zero;
+                break;
+            case RobotStates.RUN:
+                _Animator.Play("Run");
+                break;
+            case RobotStates.PUNCH:
+                _Animator.Play("Dispar");
+                //Hitbox.Damage = 4;
+                break;
+            case RobotStates.RUNPUNCH:
+                _Animator.Play("MovimentDispar");
+                //Hitbox.Damage = 4;
+                break;
+            case RobotStates.HURT:
+                this.GetComponent<SpriteRenderer>().color = Color.red;
+                _Animator.Play("Idle");
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void UpdateState(RobotStates updateState)
+    {
+        _StateTime += Time.deltaTime;
+        //print(_StateTime);
+
+        switch (updateState)
+        {
+            case RobotStates.IDLE:
+                if (_MoveAction.ReadValue<Vector2>() != Vector2.zero)
+                    ChangeState(RobotStates.RUN);
+
+                break;
+            case RobotStates.RUN:
+                if (_MoveAction.ReadValue<Vector2>() == Vector2.zero)
+                    ChangeState(RobotStates.IDLE);
+                
+                break;
+            case RobotStates.PUNCH:
+
+                break;
+            case RobotStates.RUNPUNCH:
+                if (_StateTime >= _AttackClip.length)
+                {
+                    ChangeState(RobotStates.IDLE);
+                }
+                break;
+            case RobotStates.HURT:
+                if (_StateTime > 0.15f)
+                {
+                    this.GetComponent<SpriteRenderer>().color = Color.white;
+                    ChangeState(RobotStates.IDLE);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ExitState(RobotStates exitState)
+    {
+        switch (exitState)
+        {
+            case RobotStates.IDLE:
+                break;
+            case RobotStates.RUN:
+                _RigidBody.linearVelocity = Vector2.zero;
+                break;
+            case RobotStates.PUNCH:
+                break;
+            case RobotStates.RUNPUNCH:
+                break;
+            case RobotStates.HURT:
+                this.GetComponent<SpriteRenderer>().color = Color.white;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Atac(InputAction.CallbackContext context)
+    {
+        switch (_CurrentState)
+        {
+            case RobotStates.IDLE:
+                ChangeState(RobotStates.PUNCH);
+                break;
+            case RobotStates.RUN:
+                ChangeState(RobotStates.PUNCH);
+                break;
+            case RobotStates.RUNPUNCH:
+                //_BufferState = RobotStates.RUNPUNCH;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void AtacFi(InputAction.CallbackContext context)
+    {
+        ChangeState(RobotStates.IDLE);
+    }
 }

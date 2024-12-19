@@ -9,8 +9,10 @@
     <string name="AleroDavanter">A. Delantero</string>
     <string name="SuspensioDavantera">S. Delantera</string>
     <string name="Cockpit">Cockpit</string>
-    <string name="Portons">Portones</string>
+    <string name="Pontons">Pontones</string>
     <string name="Fons">Fondo</string>
     <string name="SuspensioTrasera">S. Trasera</string>
     <string name="AleroTraser">A. Trasera</string>
+    <string name="TextTemp">TextoTemporal</string>
+    <string name="Voltes">vueltas</string>
 </resources>
