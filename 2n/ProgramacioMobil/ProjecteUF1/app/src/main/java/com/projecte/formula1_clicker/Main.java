@@ -12,30 +12,20 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Main extends AppCompatActivity {
     static int valorClickUsuari;
     static int totalVoltes;
-    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.joc);
 
-        db = FirebaseFirestore.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference("prova");
         myRef.setValue("Hola, soy Niko!!");
         valorClickUsuari = 1;
         totalVoltes = 0;
@@ -76,7 +66,7 @@ public class Main extends AppCompatActivity {
             public void onClick(View view) {
                 totalVoltes += valorClickUsuari;
                 numVoltes.setText(totalVoltes + " " + getString(R.string.Voltes));
-                db.collection("exemple").add(totalVoltes);
+                myRef.child("numero").setValue(totalVoltes);
             }
         });
     }

@@ -1,10 +1,30 @@
 {
   "project_info": {
     "project_number": "528680007625",
+    "firebase_url": "https://keita58-exemple-firebase-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "keita58-exemple-firebase",
     "storage_bucket": "keita58-exemple-firebase.firebasestorage.app"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528680007625:android:60a6a79bc63f94ce6eda18",
+        "android_client_info": {
+          "package_name": "com.example.proves"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYyV7rGoAnfTt2M7xPqic58vwPneVit2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:528680007625:android:440420a20b9e8bc56eda18",
