@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,17 +16,10 @@ public class Jugador : MonoBehaviour
     
     [SerializeField] private Animator _Animator;
     [SerializeField] private GameObject _Camera;
+    [SerializeField] private GameObject _CameraOcell;
 
     [Tooltip("Velocitat de moviment del jugador.")]
     [Range(0.1f, 20f)]
-    [SerializeField] private float _Velocity = 3;
-
-    [Tooltip("Velocitat de mouse en graus per segon.")]
-    [Range(10f, 360f)]
-    [SerializeField] private float _Velocity = 3;
-
-    [Tooltip("Velocitat de mouse en graus per segon.")]
-    [Range(10f, 360f)]
     [SerializeField] private float _Velocity = 3;
 
     [Tooltip("Velocitat de mouse en graus per segon.")]
@@ -48,14 +42,16 @@ public class Jugador : MonoBehaviour
         _MoveAction = _inputActions.Player.Move;
         _LookAction = _inputActions.Player.Look;
 
-        _inputActions.Player.Interact.performed += Interact;
+        //_inputActions.Player.Interact.performed += Interact;
         _inputActions.Player.Attack.performed += Atac;
         _inputActions.Player.Attack.canceled += AtacFi;
+        _inputActions.Player.Attack2.performed += Atac2;
+        _inputActions.Player.Attack2.canceled += AtacFi;
+        _inputActions.Player.Interact.started += CanviaCamera;
 
         _inputActions.Player.Enable();
 
         _RigidBody = GetComponent<Rigidbody>();
-
     }
 
     private void Update()
@@ -66,21 +62,17 @@ public class Jugador : MonoBehaviour
         _LookRotation.x += lookInput.x * _LookVelocity * Time.deltaTime;
         _LookRotation.y += (_InvertY ? 1 : -1) * lookInput.y * _LookVelocity * Time.deltaTime;
 
-        //_Camera.transform.rotation = Quaternion.Euler(_LookRotation.y, _LookRotation.x, 0);
-        _LookRotation.y = Mathf.Clamp(_LookRotation.y, minAngle, maxAngle);
+        _LookRotation.y = Mathf.Clamp(_LookRotation.y, -20, 45);
         transform.rotation = Quaternion.Euler(0, _LookRotation.x, 0);
         _Camera.transform.localRotation = Quaternion.Euler(_LookRotation.y, 0, 0);
-
+        
         //Moviment
         Vector2 movementInput = _MoveAction.ReadValue<Vector2>();
 
-        _RigidBody.linearVelocity =
-            (transform.right * movementInput.x +
-            transform.forward * movementInput.y)
-            .normalized * _Velocity;
+        _RigidBody.linearVelocity = (transform.right * movementInput.x +
+                transform.forward * movementInput.y).normalized * _Velocity;
 
         UpdateState(_CurrentState);
-
 
         //_RigidBody.linearVelocity = 
         //    (_Camera.transform.right * movementInput.x + 
@@ -91,30 +83,18 @@ public class Jugador : MonoBehaviour
         //_RigidBody.linearVelocity = (new Vector3(movementInput.x, 0, movementInput.y)).normalized * 3;
     }
 
-    private void Interact(InputAction.CallbackContext context)
-    {
-        Debug.DrawRay(_Camera.transform.position, _Camera.transform.forward, Color.magenta, 5f);
-        //Mirem a través de la càmera!!!!
-        if (Physics.Raycast(_Camera.transform.position, _Camera.transform.forward, out RaycastHit hitInfo, 20f, _UseLayerMask))
-        {
-            Debug.Log($"He tocat l'objectiu {hitInfo.collider.gameObject.name} a {hitInfo.point}");
-            Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
-
-            OnSetDestination?.Invoke(hitInfo.point);
-        }
-    }
-
     //Màquina d'estats
     private enum RobotStates { IDLE, RUN, PUNCH, RUNPUNCH, HURT }
     [SerializeField] private RobotStates _CurrentState;
-    //[SerializeField] private RobotStates _BufferState;
     [SerializeField] private AnimationClip _AttackClip;
     [SerializeField] private AnimationClip _AttackRunClip;
     [SerializeField] private AnimationClip _RunClip;
+    private bool _AtacContinu;
     private float _StateTime;
 
     private void Start()
     {
+        _AtacContinu = false;
         InitState(RobotStates.IDLE);
     }
 
@@ -132,23 +112,24 @@ public class Jugador : MonoBehaviour
         switch (_CurrentState)
         {
             case RobotStates.IDLE:
-                _Animator.Play("Idle");
+                //_Animator.Play("Idle");
                 _RigidBody.linearVelocity = Vector3.zero;
+                _RigidBody.angularVelocity = Vector3.zero;
                 break;
             case RobotStates.RUN:
-                _Animator.Play("Run");
+                //_Animator.Play("Run");
                 break;
             case RobotStates.PUNCH:
-                _Animator.Play("Dispar");
+                //_Animator.Play("Dispar");
                 //Hitbox.Damage = 4;
                 break;
             case RobotStates.RUNPUNCH:
-                _Animator.Play("MovimentDispar");
+                //_Animator.Play("MovimentDispar");
                 //Hitbox.Damage = 4;
                 break;
             case RobotStates.HURT:
                 this.GetComponent<SpriteRenderer>().color = Color.red;
-                _Animator.Play("Idle");
+                //_Animator.Play("Idle");
                 break;
             default:
                 break;
@@ -170,10 +151,10 @@ public class Jugador : MonoBehaviour
             case RobotStates.RUN:
                 if (_MoveAction.ReadValue<Vector2>() == Vector2.zero)
                     ChangeState(RobotStates.IDLE);
-                
                 break;
             case RobotStates.PUNCH:
-
+                if (_MoveAction.ReadValue<Vector2>() != Vector2.zero)
+                    ChangeState(RobotStates.RUN);
                 break;
             case RobotStates.RUNPUNCH:
                 if (_StateTime >= _AttackClip.length)
@@ -184,7 +165,7 @@ public class Jugador : MonoBehaviour
             case RobotStates.HURT:
                 if (_StateTime > 0.15f)
                 {
-                    this.GetComponent<SpriteRenderer>().color = Color.white;
+                    GetComponent<SpriteRenderer>().color = Color.white;
                     ChangeState(RobotStates.IDLE);
                 }
                 break;
@@ -200,7 +181,8 @@ public class Jugador : MonoBehaviour
             case RobotStates.IDLE:
                 break;
             case RobotStates.RUN:
-                _RigidBody.linearVelocity = Vector2.zero;
+                _RigidBody.linearVelocity = Vector3.zero;
+                _RigidBody.angularVelocity = Vector3.zero;
                 break;
             case RobotStates.PUNCH:
                 break;
@@ -222,7 +204,7 @@ public class Jugador : MonoBehaviour
                 ChangeState(RobotStates.PUNCH);
                 break;
             case RobotStates.RUN:
-                ChangeState(RobotStates.PUNCH);
+                ChangeState(RobotStates.RUNPUNCH);
                 break;
             case RobotStates.RUNPUNCH:
                 //_BufferState = RobotStates.RUNPUNCH;
@@ -230,10 +212,68 @@ public class Jugador : MonoBehaviour
             default:
                 break;
         }
+
+        Debug.DrawRay(_Camera.transform.position, _Camera.transform.forward, Color.magenta, 5f);
+        //Mirem a través de la càmera!!!!
+        if (Physics.Raycast(_Camera.transform.position, _Camera.transform.forward, out RaycastHit hitInfo, 20f, _UseLayerMask))
+        {
+            //Debug.Log($"He tocat l'objectiu {hitInfo.collider.gameObject.name} a {hitInfo.point}");
+            Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
+
+            OnSetDestination?.Invoke(hitInfo.point);
+        }
     }
 
     private void AtacFi(InputAction.CallbackContext context)
     {
         ChangeState(RobotStates.IDLE);
+        _AtacContinu = false;
+    }
+
+    private void Atac2(InputAction.CallbackContext context)
+    {
+        _AtacContinu = true;
+        switch (_CurrentState)
+        {
+            case RobotStates.IDLE:
+                ChangeState(RobotStates.PUNCH);
+                break;
+            case RobotStates.RUN:
+                ChangeState(RobotStates.RUNPUNCH);
+                break;
+            case RobotStates.RUNPUNCH:
+                //_BufferState = RobotStates.RUNPUNCH;
+                break;
+            default:
+                break;
+        }
+
+        StartCoroutine(AtacContinu());
+    }
+
+    private IEnumerator AtacContinu()
+    {
+        Debug.Log("Abans de disparar");
+        while (_AtacContinu)
+        {
+            Debug.Log("Disparant");
+            yield return new WaitForSeconds(0.05f);
+
+            Debug.DrawRay(_Camera.transform.position, _Camera.transform.forward, Color.magenta, 5f);
+            //Mirem a través de la càmera!!!!
+            if (Physics.Raycast(_Camera.transform.position, _Camera.transform.forward, out RaycastHit hitInfo, 20f, _UseLayerMask))
+            {
+                //Debug.Log($"He tocat l'objectiu {hitInfo.collider.gameObject.name} a {hitInfo.point}");
+                Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
+
+                OnSetDestination?.Invoke(hitInfo.point);
+            }
+        }
+    }
+
+    private void CanviaCamera(InputAction.CallbackContext context)
+    {
+        _Camera.SetActive(!_Camera.activeSelf);
+        _CameraOcell.SetActive(!_CameraOcell.activeSelf);
     }
 }
