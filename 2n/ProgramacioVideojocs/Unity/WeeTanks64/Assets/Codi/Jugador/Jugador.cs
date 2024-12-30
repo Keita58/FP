@@ -69,15 +69,12 @@ public class Jugador : MonoBehaviour
         //Moviment
         Vector2 movementInput = _MoveAction.ReadValue<Vector2>();
 
-        _RigidBody.linearVelocity = (transform.right * movementInput.x +
+        Vector3 moviment = (transform.right * movementInput.x +
                 transform.forward * movementInput.y).normalized * _Velocity;
 
+        _RigidBody.linearVelocity = new Vector3(moviment.x, _RigidBody.linearVelocity.y, moviment.z);
+        
         UpdateState(_CurrentState);
-
-        //_RigidBody.linearVelocity = 
-        //    (_Camera.transform.right * movementInput.x + 
-        //    Vector3.ProjectOnPlane(_Camera.transform.forward, Vector3.up).normalized * movementInput.y)
-        //    .normalized * _Velocity;
 
         // Aquest moviment no interessa perquè no té en compte la rotació de l'objecte
         //_RigidBody.linearVelocity = (new Vector3(movementInput.x, 0, movementInput.y)).normalized * 3;
@@ -189,7 +186,7 @@ public class Jugador : MonoBehaviour
             case RobotStates.RUNPUNCH:
                 break;
             case RobotStates.HURT:
-                this.GetComponent<SpriteRenderer>().color = Color.white;
+                GetComponent<SpriteRenderer>().color = Color.white;
                 break;
             default:
                 break;
