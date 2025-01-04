@@ -2054,6 +2054,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1057869442}
+  - component: {fileID: 1057869443}
   m_Layer: 0
   m_Name: Enemic
   m_TagString: Untagged
@@ -2077,6 +2078,28 @@ Transform:
   - {fileID: 1240816354}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1057869443
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057869440}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0982036398a36cf41ae3048e2fcbdd9b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1240816354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2083584608732780142, guid: b725bbfd7141bf2459d5c002a0774ea3, type: 3}
@@ -3233,6 +3256,10 @@ PrefabInstance:
       propertyPath: _Jugador
       value: 
       objectReference: {fileID: 842918083}
+    - target: {fileID: 8808857042344669864, guid: b725bbfd7141bf2459d5c002a0774ea3, type: 3}
+      propertyPath: _Animacio
+      value: 
+      objectReference: {fileID: 1057869443}
     - target: {fileID: 8808857042344669864, guid: b725bbfd7141bf2459d5c002a0774ea3, type: 3}
       propertyPath: _LayerParets.m_Bits
       value: 1024

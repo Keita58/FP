@@ -108,24 +108,17 @@ public class Jugador : MonoBehaviour
         switch (_CurrentState)
         {
             case RobotStates.IDLE:
-                //_Animator.Play("Idle");
                 _RigidBody.linearVelocity = Vector3.zero;
                 _RigidBody.angularVelocity = Vector3.zero;
                 break;
             case RobotStates.RUN:
-                //_Animator.Play("Run");
                 break;
             case RobotStates.PUNCH:
-                //_Animator.Play("Dispar");
-                //Hitbox.Damage = 4;
                 break;
             case RobotStates.RUNPUNCH:
-                //_Animator.Play("MovimentDispar");
-                //Hitbox.Damage = 4;
                 break;
             case RobotStates.HURT:
                 this.GetComponent<SpriteRenderer>().color = Color.red;
-                //_Animator.Play("Idle");
                 break;
             default:
                 break;
@@ -135,7 +128,6 @@ public class Jugador : MonoBehaviour
     private void UpdateState(RobotStates updateState)
     {
         _StateTime += Time.deltaTime;
-        //print(_StateTime);
 
         switch (updateState)
         {
@@ -216,12 +208,7 @@ public class Jugador : MonoBehaviour
             //Debug.Log($"He tocat l'objectiu {hitInfo.collider.gameObject.name} a {hitInfo.point}");
             Rigidbody[] zonaAfectada = hitInfo.collider.GetComponentsInChildren<Rigidbody>();
 
-            foreach (Rigidbody rigidbody in zonaAfectada)
-            {
-                rigidbody.isKinematic = false;
-            }
-
-            hitInfo.rigidbody.AddForce(_Camera.transform.forward * 200);
+            hitInfo.collider.GetComponentInParent<Enemic>().EmDisparen(zonaAfectada, hitInfo.rigidbody, _Camera.transform.forward);
 
             Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
             OnSetDestination?.Invoke(hitInfo.point);
@@ -269,12 +256,7 @@ public class Jugador : MonoBehaviour
             {
                 Rigidbody[] zonaAfectada = hitInfo.collider.GetComponentsInChildren<Rigidbody>();
 
-                foreach (Rigidbody rigidbody in zonaAfectada)
-                {
-                    rigidbody.isKinematic = false;
-                }
-
-                hitInfo.rigidbody.AddForce(_Camera.transform.forward * 200);
+                hitInfo.collider.GetComponentInParent<Enemic>().EmDisparen(zonaAfectada, hitInfo.rigidbody, _Camera.transform.forward);
 
                 Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
                 OnSetDestination?.Invoke(hitInfo.point);

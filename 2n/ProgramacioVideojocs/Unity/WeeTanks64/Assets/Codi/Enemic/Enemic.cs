@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.HighDefinition;
 
 public class Enemic : MonoBehaviour{
-    private enum EnemyStates { PATROL, DETECT, ATTACK }
+    private enum EnemyStates { PATROL, DETECT, ATTACK, IDLE }
     [SerializeField] private EnemyStates _CurrentState;
     [SerializeField] private float _StateTime;
     [SerializeField] private float _hp;
@@ -34,7 +35,7 @@ public class Enemic : MonoBehaviour{
         _AtacarBoolean = false;
         _PuntsMapa = new ArrayList();
         _Random = new System.Random();
-        //_Animacio = GetComponentInParent<Animator>();
+        _Animacio = GetComponentInParent<Animator>();
         _PuntsMapa.Add(new KeyValuePair<float, float>(5, 30.75f)); // Cantonada superior dreta
         _PuntsMapa.Add(new KeyValuePair<float, float>(5, 8)); // Cantonada superior esquerra
         _PuntsMapa.Add(new KeyValuePair<float, float>(27.5f, 30.75f)); // Cantonada inferior dreta
@@ -49,7 +50,7 @@ public class Enemic : MonoBehaviour{
     {
         _Rigidbodies = GetComponentsInChildren<Rigidbody>();
         ToggleRagdoll(false);
-        StartCoroutine(Patrullar());
+        InitState(EnemyStates.PATROL);
     }
 
     private void ChangeState(EnemyStates newState)
@@ -70,18 +71,20 @@ public class Enemic : MonoBehaviour{
         switch (_CurrentState)
         {
             case EnemyStates.PATROL:
-                _Detectat = false;
-                //_Animacio.Play("Run");
+                _Animacio.Play("Run");
                 StartCoroutine(Patrullar());
                 break;
             case EnemyStates.DETECT:
-                //_Animacio.Play("Run");
+                _Animacio.Play("Run");
                 break;
             case EnemyStates.ATTACK:
-                //_Animacio.Play("Dispar");
+                _Animacio.Play("Dispar");
                 _NavMeshAgent.destination = transform.position;
                 _AtacarBoolean = true;
                 StartCoroutine(Atacar());
+                break;
+            case EnemyStates.IDLE:
+                _NavMeshAgent.destination = transform.position;
                 break;
             default:
                 break;
@@ -123,6 +126,8 @@ public class Enemic : MonoBehaviour{
             case EnemyStates.ATTACK:
                 AtacarDireccio();
                 break;
+            case EnemyStates.IDLE:
+                break;
             default:
                 break;
         }
@@ -136,6 +141,8 @@ public class Enemic : MonoBehaviour{
             case EnemyStates.DETECT:
             case EnemyStates.ATTACK:
                 _AtacarBoolean = false;
+                break;
+            case EnemyStates.IDLE:
                 break;
             default:
                 break;
@@ -196,9 +203,9 @@ public class Enemic : MonoBehaviour{
         KeyValuePair<float, float> coordXZ = new KeyValuePair<float, float>(0, 0);
         while (!_Detectat)
         {
-            //Debug.Log("Estic patrullant");
             if (!_Cami) 
-            { 
+            {
+                _Animacio.Play("Run");
                 coordXZ = (KeyValuePair<float, float>)_PuntsMapa[_Random.Next(0, _PuntsMapa.Count - 1)];
                 _NavMeshAgent.destination = new Vector3(coordXZ.Key, transform.position.y, coordXZ.Value);
                 _Cami = true;
@@ -206,6 +213,7 @@ public class Enemic : MonoBehaviour{
 
             if (transform.position == new Vector3(coordXZ.Key, transform.position.y, coordXZ.Value))
             {
+                _Animacio.Play("Idle");
                 _Cami = false;
             }
 
@@ -217,7 +225,7 @@ public class Enemic : MonoBehaviour{
                 _Detectat = true;
                 _Cami = false;
             }
-            
+
             yield return new WaitForSeconds(1);
         }
     }
@@ -233,8 +241,8 @@ public class Enemic : MonoBehaviour{
 
     IEnumerator CanviaPatrullar(int segons)
     {
+        _Animacio.Play("Idle");
         yield return new WaitForSeconds(segons);
-        //_Animacio.Play("Idle");
         ChangeState(EnemyStates.PATROL);
     }
 
@@ -245,21 +253,34 @@ public class Enemic : MonoBehaviour{
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
 
-    public void EmDisparen(Rigidbody[] body)
+    public void EmDisparen(Rigidbody[] body, Rigidbody afegirForca, Vector3 direccio)
     {
         Debug.Log("M'han disparat!");
-        //GetComponentInParent<Animator>().enabled = false;
+        _AtacarBoolean = false;
+        _Animacio.enabled = false;
+        
         foreach (Rigidbody rigidbody in body)
         {
             rigidbody.isKinematic = false;
         }
 
-        CanviaPatrullar(3);
-        //GetComponentInParent<Animator>().enabled = true;
+        afegirForca.AddForce(direccio * 200);
+
+        StartCoroutine(ActivaKinematic(3, body));
+    }
+
+    IEnumerator ActivaKinematic(int segons, Rigidbody[] body)
+    {
+        ChangeState(EnemyStates.IDLE);
+        yield return new WaitForSeconds(segons);
+
+        _Animacio.enabled = true;
 
         foreach (Rigidbody rigidbody in body)
         {
             rigidbody.isKinematic = true;
         }
+
+        ChangeState(EnemyStates.PATROL);
     }
 }
