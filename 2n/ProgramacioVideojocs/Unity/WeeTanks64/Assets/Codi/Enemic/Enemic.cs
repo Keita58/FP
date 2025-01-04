@@ -26,6 +26,7 @@ public class Enemic : MonoBehaviour{
     private Rigidbody[] _Rigidbodies;
     private Collider[] _Atacar;
     private Animator _Animacio;
+    public bool _RagdollActivat { get; private set; }
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class Enemic : MonoBehaviour{
         _Detectat = false;
         _Cami = false;
         _AtacarBoolean = false;
+        _RagdollActivat = false;
         _PuntsMapa = new ArrayList();
         _Random = new System.Random();
         _Animacio = GetComponentInParent<Animator>();
@@ -72,16 +74,13 @@ public class Enemic : MonoBehaviour{
         {
             case EnemyStates.PATROL:
                 _Animacio.Play("Run");
+                _Detectat = false;
                 StartCoroutine(Patrullar());
                 break;
             case EnemyStates.DETECT:
                 _Animacio.Play("Run");
                 break;
             case EnemyStates.ATTACK:
-                _Animacio.Play("Dispar");
-                _NavMeshAgent.destination = transform.position;
-                _AtacarBoolean = true;
-                StartCoroutine(Atacar());
                 break;
             case EnemyStates.IDLE:
                 _NavMeshAgent.destination = transform.position;
@@ -184,11 +183,16 @@ public class Enemic : MonoBehaviour{
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit info, 5f, _LayerParets))
             {
+                _Animacio.Play("Run");
+                _AtacarBoolean = false;
                 Debug.Log(info.ToString());
                 _NavMeshAgent.destination = _Jugador.transform.position;
             }
             else
             {
+                _Animacio.Play("Dispar");
+                _AtacarBoolean = true;
+                StartCoroutine(Atacar());
                 _NavMeshAgent.destination = transform.position;
             }
         }
@@ -256,6 +260,8 @@ public class Enemic : MonoBehaviour{
     public void EmDisparen(Rigidbody[] body, Rigidbody afegirForca, Vector3 direccio)
     {
         Debug.Log("M'han disparat!");
+        ChangeState(EnemyStates.IDLE);
+        _RagdollActivat = true;
         _AtacarBoolean = false;
         _Animacio.enabled = false;
         
@@ -266,12 +272,33 @@ public class Enemic : MonoBehaviour{
 
         afegirForca.AddForce(direccio * 200);
 
-        StartCoroutine(ActivaKinematic(3, body));
+        StartCoroutine(ActivaKinematic(1, body));
     }
 
-    IEnumerator ActivaKinematic(int segons, Rigidbody[] body)
+    public void EmDisparenContinu(Rigidbody[] body, Rigidbody afegirForca, Vector3 direccio)
     {
+        Debug.Log("M'han disparat!");
         ChangeState(EnemyStates.IDLE);
+        _AtacarBoolean = false;
+        _Animacio.enabled = false;
+
+        foreach (Rigidbody rigidbody in body)
+        {
+            rigidbody.isKinematic = false;
+        }
+
+        afegirForca.AddForce(direccio * 200);
+    }
+
+    public void ActKinematic()
+    {
+        _RagdollActivat = true;
+
+        StartCoroutine(ActivaKinematic(1.5f, _Rigidbodies));
+    }
+
+    IEnumerator ActivaKinematic(float segons, Rigidbody[] body)
+    {
         yield return new WaitForSeconds(segons);
 
         _Animacio.enabled = true;
@@ -282,5 +309,7 @@ public class Enemic : MonoBehaviour{
         }
 
         ChangeState(EnemyStates.PATROL);
+        _RagdollActivat = false;
+        _Cami = false;
     }
 }

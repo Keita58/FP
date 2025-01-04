@@ -1562,6 +1562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861851df60d0737459d8ae18d265f63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Enemic: {fileID: 1240816356}
   _Camera: {fileID: 1823688464}
   _CameraOcell: {fileID: 876010562}
   _Velocity: 6
@@ -2105,6 +2106,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2083584608732780142, guid: b725bbfd7141bf2459d5c002a0774ea3, type: 3}
   m_PrefabInstance: {fileID: 2056256512586201531}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1240816356 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8808857042344669864, guid: b725bbfd7141bf2459d5c002a0774ea3, type: 3}
+  m_PrefabInstance: {fileID: 2056256512586201531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef8324d7e818a54796c959b6f2f916d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1357951825
 PrefabInstance:
   m_ObjectHideFlags: 0

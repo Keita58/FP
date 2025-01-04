@@ -13,6 +13,7 @@ public class Jugador : MonoBehaviour
     private InputAction _MoveAction;
     private InputAction _LookAction;
     private Rigidbody _RigidBody;
+    [SerializeField] private Enemic _Enemic;
     
     [SerializeField] private GameObject _Camera;
     [SerializeField] private GameObject _CameraOcell;
@@ -208,17 +209,12 @@ public class Jugador : MonoBehaviour
             //Debug.Log($"He tocat l'objectiu {hitInfo.collider.gameObject.name} a {hitInfo.point}");
             Rigidbody[] zonaAfectada = hitInfo.collider.GetComponentsInChildren<Rigidbody>();
 
-            hitInfo.collider.GetComponentInParent<Enemic>().EmDisparen(zonaAfectada, hitInfo.rigidbody, _Camera.transform.forward);
+            if(!hitInfo.collider.GetComponentInParent<Enemic>()._RagdollActivat)
+                hitInfo.collider.GetComponentInParent<Enemic>().EmDisparen(zonaAfectada, hitInfo.rigidbody, _Camera.transform.forward);
 
             Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
             OnSetDestination?.Invoke(hitInfo.point);
         }
-    }
-
-    private void AtacFi(InputAction.CallbackContext context)
-    {
-        ChangeState(RobotStates.IDLE);
-        _AtacContinu = false;
     }
 
     private void Atac2(InputAction.CallbackContext context)
@@ -256,12 +252,21 @@ public class Jugador : MonoBehaviour
             {
                 Rigidbody[] zonaAfectada = hitInfo.collider.GetComponentsInChildren<Rigidbody>();
 
-                hitInfo.collider.GetComponentInParent<Enemic>().EmDisparen(zonaAfectada, hitInfo.rigidbody, _Camera.transform.forward);
+                if (!hitInfo.collider.GetComponentInParent<Enemic>()._RagdollActivat)
+                    hitInfo.collider.GetComponentInParent<Enemic>().EmDisparenContinu(zonaAfectada, hitInfo.rigidbody, _Camera.transform.forward);
 
                 Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
                 OnSetDestination?.Invoke(hitInfo.point);
             }
         }
+
+        _Enemic.ActKinematic();
+    }
+
+    private void AtacFi(InputAction.CallbackContext context)
+    {
+        ChangeState(RobotStates.IDLE);
+        _AtacContinu = false;
     }
 
     private void CanviaCamera(InputAction.CallbackContext context)
