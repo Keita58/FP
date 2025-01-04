@@ -16,6 +16,7 @@ public class Enemic : MonoBehaviour{
     [SerializeField] private GameObject _Jugador;
     [SerializeField] private bool _Detectat;
     [SerializeField] private bool _Cami;
+    [SerializeField] private bool _AtacarBoolean;
     private ArrayList _PuntsMapa;
     private NavMeshAgent _NavMeshAgent;
     private System.Random _Random;
@@ -28,6 +29,7 @@ public class Enemic : MonoBehaviour{
         _NavMeshAgent = GetComponent<NavMeshAgent>();
         _Detectat = false;
         _Cami = false;
+        _AtacarBoolean = false;
         _PuntsMapa = new ArrayList();
         _Random = new System.Random();
         _PuntsMapa.Add(new KeyValuePair<float, float>(5, 30.75f)); // Cantonada superior dreta
@@ -72,6 +74,8 @@ public class Enemic : MonoBehaviour{
                 break;
             case EnemyStates.ATTACK:
                 _NavMeshAgent.destination = transform.position;
+                _AtacarBoolean = true;
+                StartCoroutine(Atacar());
                 break;
             default:
                 break;
@@ -105,10 +109,9 @@ public class Enemic : MonoBehaviour{
                     else
                         ChangeState(EnemyStates.PATROL);
                 }
-
                 break;
             case EnemyStates.ATTACK:
-                Atacar();
+                AtacarDireccio();
                 break;
             default:
                 break;
@@ -122,6 +125,7 @@ public class Enemic : MonoBehaviour{
             case EnemyStates.PATROL:
             case EnemyStates.DETECT:
             case EnemyStates.ATTACK:
+                _AtacarBoolean = false;
                 break;
             default:
                 break;
@@ -133,22 +137,33 @@ public class Enemic : MonoBehaviour{
         UpdateState(_CurrentState);
     }
 
-    private void Atacar()
+    IEnumerator Atacar()
+    {
+        while(_AtacarBoolean)
+        {
+            Physics.Raycast(transform.position, transform.forward, out RaycastHit hitJugador, 5f, _LayerJugador);
+            Debug.DrawRay(transform.position, transform.forward, Color.red, 5f);
+            Debug.Log(hitJugador);
+            yield return new WaitForSeconds(0.75f);
+        }
+    }
+
+    private void AtacarDireccio()
     {
         transform.LookAt(_Jugador.transform.position);
         _Atacar = Physics.OverlapSphere(transform.position, 5f, _LayerJugador);
-        
+
         if (_Atacar.Length > 0)
         {
-            if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 5f, _LayerParets))
+            if (Physics.Raycast(transform.position, transform.forward, out _, 5f, _LayerParets))
             {
                 ChangeState(EnemyStates.DETECT);
             }
         }
         else
+        {
             ChangeState(EnemyStates.DETECT);
-
-        StartCoroutine(Espera(1));
+        }
     }
 
     IEnumerator Patrullar()
@@ -156,7 +171,7 @@ public class Enemic : MonoBehaviour{
         KeyValuePair<float, float> coordXZ = new KeyValuePair<float, float>(0, 0);
         while (!_Detectat)
         {
-            Debug.Log("Estic patrullant");
+            //Debug.Log("Estic patrullant");
             if (!_Cami) 
             { 
                 coordXZ = (KeyValuePair<float, float>)_PuntsMapa[_Random.Next(0, _PuntsMapa.Count - 1)];
@@ -189,10 +204,5 @@ public class Enemic : MonoBehaviour{
         {
             rb.isKinematic = !v;
         }
-    }
-
-    IEnumerator Espera(int segons)
-    {
-        yield return new WaitForSeconds(segons);
     }
 }
