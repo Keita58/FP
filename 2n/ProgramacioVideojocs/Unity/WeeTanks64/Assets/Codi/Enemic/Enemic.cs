@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -17,12 +18,13 @@ public class Enemic : MonoBehaviour{
     [SerializeField] private bool _Detectat;
     [SerializeField] private bool _Cami;
     [SerializeField] private bool _AtacarBoolean;
+    [SerializeField] private Collider[] _DetectarCollider;
     private ArrayList _PuntsMapa;
     private NavMeshAgent _NavMeshAgent;
     private System.Random _Random;
     private Rigidbody[] _Rigidbodies;
-    [SerializeField] private Collider[] _DetectarCollider;
     private Collider[] _Atacar;
+    private Animator _Animacio;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class Enemic : MonoBehaviour{
         _AtacarBoolean = false;
         _PuntsMapa = new ArrayList();
         _Random = new System.Random();
+        //_Animacio = GetComponentInParent<Animator>();
         _PuntsMapa.Add(new KeyValuePair<float, float>(5, 30.75f)); // Cantonada superior dreta
         _PuntsMapa.Add(new KeyValuePair<float, float>(5, 8)); // Cantonada superior esquerra
         _PuntsMapa.Add(new KeyValuePair<float, float>(27.5f, 30.75f)); // Cantonada inferior dreta
@@ -68,11 +71,14 @@ public class Enemic : MonoBehaviour{
         {
             case EnemyStates.PATROL:
                 _Detectat = false;
+                //_Animacio.Play("Run");
                 StartCoroutine(Patrullar());
                 break;
             case EnemyStates.DETECT:
+                //_Animacio.Play("Run");
                 break;
             case EnemyStates.ATTACK:
+                //_Animacio.Play("Dispar");
                 _NavMeshAgent.destination = transform.position;
                 _AtacarBoolean = true;
                 StartCoroutine(Atacar());
@@ -91,23 +97,27 @@ public class Enemic : MonoBehaviour{
             case EnemyStates.PATROL:
                 break;
             case EnemyStates.DETECT:
-                Vector3 direccio = Vector3.zero;
-
                 _DetectarCollider = Physics.OverlapSphere(transform.position, 10f, _LayerJugador);
                 _Atacar = Physics.OverlapSphere(transform.position, 5f, _LayerJugador);
 
-                if (_Atacar.Length > 0 && !Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 7f, _LayerParets))
+                if (_Atacar.Length > 0)
                 {
                     ChangeState(EnemyStates.ATTACK);
                 }
                 else
                 {
+                    Debug.Log("Detecto!");
                     if(_DetectarCollider.Length > 0)
                     {
+                        Debug.Log("Detecto alguna cosa aprop!");
                         _NavMeshAgent.destination = _Jugador.transform.position;
                     }
                     else
-                        ChangeState(EnemyStates.PATROL);
+                    {
+                        Debug.Log("No detecto res!");
+                        _NavMeshAgent.destination = transform.position;
+                        StartCoroutine(CanviaPatrullar(1));
+                    }
                 }
                 break;
             case EnemyStates.ATTACK:
@@ -141,9 +151,19 @@ public class Enemic : MonoBehaviour{
     {
         while(_AtacarBoolean)
         {
-            Physics.Raycast(transform.position, transform.forward, out RaycastHit hitJugador, 5f, _LayerJugador);
-            Debug.DrawRay(transform.position, transform.forward, Color.red, 5f);
-            Debug.Log(hitJugador);
+            int prob = _Random.Next(1, 6);
+            if(prob > 1) //Probabilitat del 20% de que no dispari correctament
+            {
+                Physics.Raycast(transform.position, transform.forward, out RaycastHit hitJugador, 5f, _LayerJugador);
+                Debug.DrawRay(transform.position, transform.forward, Color.red, 5f);
+                Debug.Log(hitJugador);
+            }
+            else
+            {
+                Physics.Raycast(transform.position, (transform.forward + new Vector3(5, 3, 15)), out RaycastHit hitJugador, 5f, _LayerJugador);
+                Debug.DrawRay(transform.position, transform.forward, Color.green, 5f);
+                Debug.Log("He fallat!");
+            }
             yield return new WaitForSeconds(0.75f);
         }
     }
@@ -155,9 +175,14 @@ public class Enemic : MonoBehaviour{
 
         if (_Atacar.Length > 0)
         {
-            if (Physics.Raycast(transform.position, transform.forward, out _, 5f, _LayerParets))
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit info, 5f, _LayerParets))
             {
-                ChangeState(EnemyStates.DETECT);
+                Debug.Log(info.ToString());
+                _NavMeshAgent.destination = _Jugador.transform.position;
+            }
+            else
+            {
+                _NavMeshAgent.destination = transform.position;
             }
         }
         else
@@ -203,6 +228,38 @@ public class Enemic : MonoBehaviour{
         foreach(Rigidbody rb in _Rigidbodies)
         {
             rb.isKinematic = !v;
+        }
+    }
+
+    IEnumerator CanviaPatrullar(int segons)
+    {
+        yield return new WaitForSeconds(segons);
+        //_Animacio.Play("Idle");
+        ChangeState(EnemyStates.PATROL);
+    }
+
+    //Dibuixa esferes per veure els overlap
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, 10f);
+        Gizmos.DrawWireSphere(transform.position, 5f);
+    }
+
+    public void EmDisparen(Rigidbody[] body)
+    {
+        Debug.Log("M'han disparat!");
+        //GetComponentInParent<Animator>().enabled = false;
+        foreach (Rigidbody rigidbody in body)
+        {
+            rigidbody.isKinematic = false;
+        }
+
+        CanviaPatrullar(3);
+        //GetComponentInParent<Animator>().enabled = true;
+
+        foreach (Rigidbody rigidbody in body)
+        {
+            rigidbody.isKinematic = true;
         }
     }
 }

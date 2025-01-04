@@ -14,7 +14,6 @@ public class Jugador : MonoBehaviour
     private InputAction _LookAction;
     private Rigidbody _RigidBody;
     
-    [SerializeField] private Animator _Animator;
     [SerializeField] private GameObject _Camera;
     [SerializeField] private GameObject _CameraOcell;
 
@@ -215,8 +214,16 @@ public class Jugador : MonoBehaviour
         if (Physics.Raycast(_Camera.transform.position, _Camera.transform.forward, out RaycastHit hitInfo, 20f, _UseLayerMask))
         {
             //Debug.Log($"He tocat l'objectiu {hitInfo.collider.gameObject.name} a {hitInfo.point}");
-            Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
+            Rigidbody[] zonaAfectada = hitInfo.collider.GetComponentsInChildren<Rigidbody>();
 
+            foreach (Rigidbody rigidbody in zonaAfectada)
+            {
+                rigidbody.isKinematic = false;
+            }
+
+            hitInfo.rigidbody.AddForce(_Camera.transform.forward * 200);
+
+            Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
             OnSetDestination?.Invoke(hitInfo.point);
         }
     }
@@ -250,19 +257,26 @@ public class Jugador : MonoBehaviour
 
     private IEnumerator AtacContinu()
     {
-        Debug.Log("Abans de disparar");
+        //Debug.Log("Abans de disparar");
         while (_AtacContinu)
         {
-            Debug.Log("Disparant");
+            //Debug.Log("Disparant");
             yield return new WaitForSeconds(0.05f);
 
             Debug.DrawRay(_Camera.transform.position, _Camera.transform.forward, Color.magenta, 5f);
             //Mirem a través de la càmera!!!!
             if (Physics.Raycast(_Camera.transform.position, _Camera.transform.forward, out RaycastHit hitInfo, 20f, _UseLayerMask))
             {
-                //Debug.Log($"He tocat l'objectiu {hitInfo.collider.gameObject.name} a {hitInfo.point}");
-                Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
+                Rigidbody[] zonaAfectada = hitInfo.collider.GetComponentsInChildren<Rigidbody>();
 
+                foreach (Rigidbody rigidbody in zonaAfectada)
+                {
+                    rigidbody.isKinematic = false;
+                }
+
+                hitInfo.rigidbody.AddForce(_Camera.transform.forward * 200);
+
+                Debug.DrawLine(_Camera.transform.position, hitInfo.point, Color.red, 5f);
                 OnSetDestination?.Invoke(hitInfo.point);
             }
         }
