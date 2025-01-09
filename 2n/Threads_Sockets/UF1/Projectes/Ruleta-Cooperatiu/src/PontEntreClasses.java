@@ -9,6 +9,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashMap;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class PontEntreClasses {
 
     private Socket socket;
@@ -19,6 +22,45 @@ public class PontEntreClasses {
     private DataInputStream dataReader;
     private DataOutputStream dataWriter;
     private boolean verbose;
+
+    // Bytes
+    public static final byte ACK = 0b00000001;
+    public static final byte S_BENVINGUT = 0b00000010;
+    public static final byte S_NICK_EN_US = 0b00000011;
+    public static final byte S_ESTAS_DINS = 0b00000100;
+    public static final byte S_EN_CURS = 0b00000101;
+    public static final byte S_APOSTA = 0b00000110;
+    public static final byte S_CONTINUAR = 0b00000111;
+    public static final byte C_SEGUIR = 0b00001000;
+    public static final byte C_PLEGAR = 0b00001001;
+    public static final byte S_COMENCA_GAME = 0b00001010;
+
+    private String traduccioByte(byte text) {
+        switch (text) {
+            case 0b00000001:
+                return "ACK";
+            case 0b00000010:
+                return "S_BENVINGUT";
+            case 0b00000011:
+                return "S_NICK_EN_US";
+            case 0b00000100:
+                return "S_ESTAS_DINS";
+            case 0b00000101:
+                return "S_EN_CURS";
+            case 0b00000110:
+                return "S_APOSTA";
+            case 0b00000111:
+                return "S_CONTINUAR";
+            case 0b00001000:
+                return "C_SEGUIR";
+            case 0b00001001:
+                return "C_PLEGAR";
+            case 0b00001010:
+                return "S_COMENCA_GAME";
+            default:
+                return null;
+        }
+    }
     
     public PontEntreClasses(Socket socket) throws IOException {
         this.socket = socket;
@@ -72,7 +114,18 @@ public class PontEntreClasses {
         this.escripturaObject.writeObject(dades);
         if(this.verbose) 
             System.out.println("S'està enviant el diccionari: " + dades.toString());
-        
+    }
+
+    public void sendByte(byte dades) throws IOException {
+        this.escripturaObject.writeByte(dades);
+        if(this.verbose) 
+            System.out.println("S'està enviant el byte: " + traduccioByte(dades));
+    }
+
+    public void sendJSON(JSONObject dades) throws IOException, JSONException {
+        this.escripturaObject.writeObject(dades);
+        if(this.verbose) 
+            System.out.println("S'està enviant el JSON: " + dades.toString());
     }
 
     public String receive() throws IOException {
@@ -110,6 +163,28 @@ public class PontEntreClasses {
         return dades;
     }
 
+    public byte receiveByte() throws ClassNotFoundException, IOException {
+        byte dades = this.lecturaObject.readByte();
+        if(this.verbose)
+            System.out.println("S'està rebent el byte " + traduccioByte(dades));
+        return dades;
+    }
+
+    public void receiveByte(byte b) throws Exception, IOException {
+        byte aux = this.lecturaObject.readByte();
+        if(b != aux)
+            throw new Excepcio("El text que has enviat: " + traduccioByte(b) + ", és diferent al text actual: " + traduccioByte(aux));
+        if(this.verbose)
+            System.out.println("S'està rebent el text: " + traduccioByte(b));
+    }
+
+    public JSONObject receiveJSON() throws ClassNotFoundException, IOException {
+        JSONObject dades = (JSONObject)this.lecturaObject.readObject();
+        if(this.verbose)
+            System.out.println("S'està rebent el byte " + dades.toString());
+        return dades;
+    }
+
     public void receive(String text) throws Excepcio, IOException {
         String aux = this.bufferReader.readLine();
         if(!text.equals(aux))
@@ -140,5 +215,14 @@ public class PontEntreClasses {
     public void sendReceive(String send, String receive) throws Excepcio, IOException {
         this.send(send);
         this.receive(receive);
+    }
+
+    public boolean receiveNick() throws Excepcio, IOException, ClassNotFoundException {
+        byte b = this.receiveByte();
+
+        if(b == ACK)
+            return true;
+        else 
+            return false;
     }
 }
