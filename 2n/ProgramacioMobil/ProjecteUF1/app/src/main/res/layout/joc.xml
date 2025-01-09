@@ -170,7 +170,7 @@
         <LinearLayout
             android:id="@+id/BotonsMillores"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="84dp"
             android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
@@ -178,7 +178,7 @@
             <LinearLayout
                 android:id="@+id/BotoPlus1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
@@ -200,13 +200,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLength="20"
-                    android:text="@string/TextTemp" />
+                    android:text="@string/TextTemp"
+                    android:textAlignment="center" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/BotoPlus10"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
@@ -227,13 +228,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLength="20"
-                    android:text="@string/TextTemp" />
+                    android:text="@string/TextTemp"
+                    android:textAlignment="center" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/BotoPlus100"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
@@ -254,7 +256,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLength="20"
-                    android:text="@string/TextTemp" />
+                    android:text="@string/TextTemp"
+                    android:textAlignment="center" />
             </LinearLayout>
         </LinearLayout>
 
