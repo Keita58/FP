@@ -14,4 +14,6 @@
     <string name="TextTemp">TextTemporal</string>
     <string name="Pontons">Pontons</string>
     <string name="Voltes">voltes</string>
+    <string name="Nivell">Nivell</string>
+    <string name="NoPotsComprar">No tens suficients voltes per comprar la millora!</string>
 </resources>

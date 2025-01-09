@@ -253,6 +253,8 @@ public class Enemic : MonoBehaviour{
     //Dibuixa esferes per veure els overlap
     private void OnDrawGizmos()
     {
+        if (!this.isActiveAndEnabled)
+            return;
         Gizmos.DrawWireSphere(transform.position, 10f);
         Gizmos.DrawWireSphere(transform.position, 5f);
     }

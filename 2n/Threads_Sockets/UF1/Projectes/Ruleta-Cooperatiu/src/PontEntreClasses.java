@@ -33,7 +33,6 @@ public class PontEntreClasses {
     public static final byte S_CONTINUAR = 0b00000111;
     public static final byte C_SEGUIR = 0b00001000;
     public static final byte C_PLEGAR = 0b00001001;
-    public static final byte S_COMENCA_GAME = 0b00001010;
 
     private String traduccioByte(byte text) {
         switch (text) {
@@ -55,8 +54,6 @@ public class PontEntreClasses {
                 return "C_SEGUIR";
             case 0b00001001:
                 return "C_PLEGAR";
-            case 0b00001010:
-                return "S_COMENCA_GAME";
             default:
                 return null;
         }
@@ -123,7 +120,9 @@ public class PontEntreClasses {
     }
 
     public void sendJSON(JSONObject dades) throws IOException, JSONException {
-        this.escripturaObject.writeObject(dades);
+        byte[] aux = dades.toString().getBytes("UFT-8");
+        this.dataWriter.writeInt(aux.length); // Enviem primer la llargada de l'array de bytes
+        this.dataWriter.write(aux); //Després enviem els bytes tal qual
         if(this.verbose) 
             System.out.println("S'està enviant el JSON: " + dades.toString());
     }
@@ -179,9 +178,13 @@ public class PontEntreClasses {
     }
 
     public JSONObject receiveJSON() throws ClassNotFoundException, IOException {
-        JSONObject dades = (JSONObject)this.lecturaObject.readObject();
+        int length = dataReader.readInt(); //Agafem la llargada dels bytes enviats
+        byte[] buffer = new byte[length]; //Creem un nou array de bytes
+        dataReader.readFully(buffer); //Llegim tota la info de l'array de bytes
+        String receivedString = new String(buffer, "UTF-8");
+        JSONObject dades = new JSONObject(receivedString);
         if(this.verbose)
-            System.out.println("S'està rebent el byte " + dades.toString());
+            System.out.println("S'està rebent el JSON " + dades.toString());
         return dades;
     }
 
