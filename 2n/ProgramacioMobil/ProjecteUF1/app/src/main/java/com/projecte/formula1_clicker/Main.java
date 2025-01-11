@@ -1,5 +1,6 @@
 package com.projecte.formula1_clicker;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Message;
@@ -19,10 +20,15 @@ import com.projecte.formula1_clicker.runnable.Thread;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -37,36 +43,21 @@ public class Main extends AppCompatActivity {
     static BigDecimal costMillora10;
     static BigDecimal costMillora100;
     static TextView numVoltes;
+    static SQLiteDatabase db;
+    static BaseDeDades cadena;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.joc);
-        milloraActiva = "";
-        MessageDigest codificacio;
-
-        try {
-            codificacio = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-
-        byte[] encodedhash = codificacio.digest(originalString.getBytes(StandardCharsets.UTF_8));
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("prova");
-        //myRef.child("voltes").setValue(totalVoltes.toString());
-        valorClickUsuari = 1; //Canviar això amb el firebase
-        totalVoltes = new BigDecimal("0"); //Canviar això amb el firebase
+        DatabaseReference myRef = database.getReference("Jugadors");
+        milloraActiva = "";
 
         //Menú
         Button trofeus = (Button) findViewById(R.id.BotoTrofeus);
         Button config = (Button) findViewById(R.id.BotoConfiguracio);
-
-        //Num voltes
-        numVoltes = (TextView) findViewById(R.id.NombreVoltes);
-        numVoltes.setText("0 voltes"); //Canviar això amb el firebase
 
         //Diferents opcions de millora
         Button aDavant = (Button) findViewById(R.id.ADavant);
@@ -133,6 +124,51 @@ public class Main extends AppCompatActivity {
         final ExecutorService[] fonsExecutor = {Executors.newSingleThreadExecutor()};
         final ExecutorService[] susTraseraExecutor = {Executors.newSingleThreadExecutor()};
         final ExecutorService[] aTraserExecutor = {Executors.newSingleThreadExecutor()};
+
+        //Num voltes
+        numVoltes = (TextView) findViewById(R.id.NombreVoltes);
+        numVoltes.setText("0 voltes"); //Canviar això amb el firebase
+
+        //Mirem si el jugador actual ja ha jugat abans i agafem les seves dades
+        //Sinó creem un jugador nou amb les dades inicialitzades a 0
+        cadena = new BaseDeDades(this, "cadena.db", null, 1);
+        String cadenaTelefon = ""; // Cadena única per a cada telèfon per identificar-los a Firebase
+
+        if(cadena.buscarUsuari().equals("")) {
+            int leftLimit = 33; // symbol !
+            int rightLimit = 126; // symbol ~
+            int targetStringLength = 25;
+            Random random = new Random();
+            StringBuilder buffer = new StringBuilder(targetStringLength);
+            for (int i = 0; i < targetStringLength; i++) {
+                int randomLimitedInt = 35;
+                while(randomLimitedInt == 35 || randomLimitedInt == 36 || randomLimitedInt == 46 || randomLimitedInt == 91 || randomLimitedInt == 93) {
+                    randomLimitedInt = leftLimit + (int)
+                            (random.nextFloat() * (rightLimit - leftLimit + 1));
+                }
+                buffer.append((char) randomLimitedInt);
+            }
+            cadenaTelefon = buffer.toString();
+            myRef.setValue(cadenaTelefon);
+            cadena.crearUsuari(cadenaTelefon);
+
+            valorClickUsuari = 1;
+            totalVoltes = new BigDecimal("0");
+            Map<String, String> voltesPerSegon = new HashMap<>();
+            Map<String, Integer> nivellMillores = nivellsMilloresHashMap;
+
+            for(Map.Entry<String, BigDecimal> dades : voltesPerSegonMillores.entrySet())  {
+                voltesPerSegon.put(dades.getKey(), dades.getValue().toString());
+            }
+
+            myRef.child(cadenaTelefon).child("valorClick").setValue(valorClickUsuari);
+            myRef.child(cadenaTelefon).child("voltes").setValue(totalVoltes.toString());
+            myRef.child(cadenaTelefon).child("millores").setValue(nivellMillores);
+            myRef.child(cadenaTelefon).child("voltesMillores").setValue(voltesPerSegon);
+        }
+        else {
+
+        }
 
         /**
          * Click de l'usuari al cotxe
@@ -779,5 +815,24 @@ public class Main extends AppCompatActivity {
         public void onTick(long millisUntilFinished) {
             ActualitzaVoltes();
         }
+    }
+}
+
+class Jugador {
+
+    String cadena;
+    BigDecimal numVoltes;
+    int valorClick;
+    Map<String, Integer> nivellMillores = new HashMap<>();
+    Map<String, String> voltesPerSegon = new HashMap<>();
+
+    public Jugador() {}
+
+    public Jugador(String cadena, String numVoltes, int valorClick, Map<String, Integer> nivellMillores, Map<String, String> voltesPerSegon) {
+        this.cadena = cadena;
+        this.numVoltes = new BigDecimal(numVoltes);
+        this.valorClick = valorClick;
+        this.nivellMillores = nivellMillores;
+        this.voltesPerSegon = voltesPerSegon;
     }
 }
