@@ -1,16 +1,14 @@
 package com.projecte.formula1_clicker.runnable;
 
-import android.util.Log;
-
 import com.projecte.formula1_clicker.Main;
 
 import java.math.BigDecimal;
 
-public class ADavant implements Runnable {
+public class Thread implements Runnable {
 
     BigDecimal voltesPerSegon;
 
-    public ADavant(BigDecimal num) {
+    public Thread(BigDecimal num) {
         this.voltesPerSegon = num;
     }
 
@@ -20,10 +18,10 @@ public class ADavant implements Runnable {
         try{
             while(true) {
                 Main.SumarVoltes(voltesPerSegon);
-                Thread.sleep(1000);
+                java.lang.Thread.sleep(1000);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }

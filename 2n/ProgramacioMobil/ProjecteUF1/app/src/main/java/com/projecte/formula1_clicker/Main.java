@@ -1,7 +1,8 @@
 package com.projecte.formula1_clicker;
 
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,22 +15,16 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.projecte.formula1_clicker.runnable.ADavant;
-import com.projecte.formula1_clicker.runnable.ATraser;
-import com.projecte.formula1_clicker.runnable.Cockpit;
-import com.projecte.formula1_clicker.runnable.Fons;
-import com.projecte.formula1_clicker.runnable.Pneumatic;
-import com.projecte.formula1_clicker.runnable.Portons;
-import com.projecte.formula1_clicker.runnable.SusDavant;
-import com.projecte.formula1_clicker.runnable.SusTrasera;
+import com.projecte.formula1_clicker.runnable.Thread;
 
-import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Main extends AppCompatActivity {
     static int valorClickUsuari;
@@ -41,7 +36,7 @@ public class Main extends AppCompatActivity {
     static BigDecimal costMillora1;
     static BigDecimal costMillora10;
     static BigDecimal costMillora100;
-    static WeakReference<TextView> numVoltesText;
+    static TextView numVoltes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +44,19 @@ public class Main extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.joc);
         milloraActiva = "";
+        MessageDigest codificacio;
+
+        try {
+            codificacio = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
+        byte[] encodedhash = codificacio.digest(originalString.getBytes(StandardCharsets.UTF_8));
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("prova");
-        //myRef.setValue("Hola, soy Niko!!");
+        //myRef.child("voltes").setValue(totalVoltes.toString());
         valorClickUsuari = 1; //Canviar això amb el firebase
         totalVoltes = new BigDecimal("0"); //Canviar això amb el firebase
 
@@ -61,8 +65,7 @@ public class Main extends AppCompatActivity {
         Button config = (Button) findViewById(R.id.BotoConfiguracio);
 
         //Num voltes
-        TextView numVoltes = (TextView) findViewById(R.id.NombreVoltes);
-        numVoltesText = new WeakReference<>(numVoltes);
+        numVoltes = (TextView) findViewById(R.id.NombreVoltes);
         numVoltes.setText("0 voltes"); //Canviar això amb el firebase
 
         //Diferents opcions de millora
@@ -123,13 +126,13 @@ public class Main extends AppCompatActivity {
 
         //Executor service per cada millora
         final ExecutorService[] aDavantExecutor = {Executors.newSingleThreadExecutor()};
-        ExecutorService pneumaticExecutor = Executors.newSingleThreadExecutor();
-        ExecutorService susDavantExecutor = Executors.newSingleThreadExecutor();
-        ExecutorService cockpitExecutor = Executors.newSingleThreadExecutor();
-        ExecutorService portonsExecutor = Executors.newSingleThreadExecutor();
-        ExecutorService fonsExecutor = Executors.newSingleThreadExecutor();
-        ExecutorService susTraseraExecutor = Executors.newSingleThreadExecutor();
-        ExecutorService aTraserExecutor = Executors.newSingleThreadExecutor();
+        final ExecutorService[] pneumaticExecutor = {Executors.newSingleThreadExecutor()};
+        final ExecutorService[] susDavantExecutor = {Executors.newSingleThreadExecutor()};
+        final ExecutorService[] cockpitExecutor = {Executors.newSingleThreadExecutor()};
+        final ExecutorService[] portonsExecutor = {Executors.newSingleThreadExecutor()};
+        final ExecutorService[] fonsExecutor = {Executors.newSingleThreadExecutor()};
+        final ExecutorService[] susTraseraExecutor = {Executors.newSingleThreadExecutor()};
+        final ExecutorService[] aTraserExecutor = {Executors.newSingleThreadExecutor()};
 
         /**
          * Click de l'usuari al cotxe
@@ -139,7 +142,6 @@ public class Main extends AppCompatActivity {
             public void onClick(View view) {
                 totalVoltes = totalVoltes.add(BigDecimal.valueOf(valorClickUsuari));
                 numVoltes.setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
-                myRef.child("Voltes").setValue(totalVoltes.toString());
             }
         });
 
@@ -160,6 +162,7 @@ public class Main extends AppCompatActivity {
                 nivellMillora.setText(getString(R.string.Nivell) + " " + nivellsMilloresHashMap.get("aDavant"));
 
                 CanviTextBotons(costPlus1, costPlus10, costPlus100);
+                produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
         });
 
@@ -176,6 +179,7 @@ public class Main extends AppCompatActivity {
                 nivellMillora.setText(getString(R.string.Nivell) + " " + nivellsMilloresHashMap.get("pneumatic"));
 
                 CanviTextBotons(costPlus1, costPlus10, costPlus100);
+                produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
         });
 
@@ -189,6 +193,7 @@ public class Main extends AppCompatActivity {
                 nivellMillora.setText(getString(R.string.Nivell) + " " + nivellsMilloresHashMap.get("susDavant"));
 
                 CanviTextBotons(costPlus1, costPlus10, costPlus100);
+                produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
         });
 
@@ -197,11 +202,12 @@ public class Main extends AppCompatActivity {
             public void onClick(View view) {
                 milloraActiva = "cockpit";
                 imatgeMillora.setImageResource(R.drawable.cockpit);
-                imatgeMillora.setScaleX(1);
-                imatgeMillora.setScaleY(1);
+                imatgeMillora.setScaleX(1.25f);
+                imatgeMillora.setScaleY(1.25f);
                 nivellMillora.setText(getString(R.string.Nivell) + " " + nivellsMilloresHashMap.get("cockpit"));
 
                 CanviTextBotons(costPlus1, costPlus10, costPlus100);
+                produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
         });
 
@@ -215,6 +221,7 @@ public class Main extends AppCompatActivity {
                 nivellMillora.setText(getString(R.string.Nivell) + " " + nivellsMilloresHashMap.get("portons"));
 
                 CanviTextBotons(costPlus1, costPlus10, costPlus100);
+                produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
         });
 
@@ -228,6 +235,7 @@ public class Main extends AppCompatActivity {
                 nivellMillora.setText(getString(R.string.Nivell) + " " + nivellsMilloresHashMap.get("fons"));
 
                 CanviTextBotons(costPlus1, costPlus10, costPlus100);
+                produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
         });
 
@@ -241,6 +249,7 @@ public class Main extends AppCompatActivity {
                 nivellMillora.setText(getString(R.string.Nivell) + " " + nivellsMilloresHashMap.get("susTrasera"));
 
                 CanviTextBotons(costPlus1, costPlus10, costPlus100);
+                produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
         });
 
@@ -254,6 +263,7 @@ public class Main extends AppCompatActivity {
                 nivellMillora.setText(getString(R.string.Nivell) + " " + nivellsMilloresHashMap.get("aTraser"));
 
                 CanviTextBotons(costPlus1, costPlus10, costPlus100);
+                produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
         });
 
@@ -268,42 +278,106 @@ public class Main extends AppCompatActivity {
                                 voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("0.1")));
                                 aDavantExecutor[0].shutdownNow();
                                 aDavantExecutor[0] = Executors.newSingleThreadExecutor();
-                                aDavantExecutor[0].execute(new ADavant(voltesPerSegonMillores.get(milloraActiva)));
+                                aDavantExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
                             }
                             else {
-                                aDavantExecutor[0].execute(new ADavant(new BigDecimal("0.1")));
+                                aDavantExecutor[0].execute(new Thread(new BigDecimal("0.1")));
                                 voltesPerSegonMillores.put(milloraActiva, new BigDecimal("0.1"));
                             }
                             break;
                         case "pneumatic":
                             pneumatic.performClick();
-                            pneumaticExecutor.execute(new Pneumatic());
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("1")));
+                                pneumaticExecutor[0].shutdownNow();
+                                pneumaticExecutor[0] = Executors.newSingleThreadExecutor();
+                                pneumaticExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                pneumaticExecutor[0].execute(new Thread(new BigDecimal("1")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("1"));
+                            }
                             break;
                         case "susDavant":
                             susDavant.performClick();
-                            susDavantExecutor.execute(new SusDavant());
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("10")));
+                                susDavantExecutor[0].shutdownNow();
+                                susDavantExecutor[0] = Executors.newSingleThreadExecutor();
+                                susDavantExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                susDavantExecutor[0].execute(new Thread(new BigDecimal("10")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("10"));
+                            }
                             break;
                         case "cockpit":
                             cockpit.performClick();
-                            cockpitExecutor.execute(new Cockpit());
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("50")));
+                                cockpitExecutor[0].shutdownNow();
+                                cockpitExecutor[0] = Executors.newSingleThreadExecutor();
+                                cockpitExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                cockpitExecutor[0].execute(new Thread(new BigDecimal("50")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("50"));
+                            }
                             break;
                         case "portons":
                             portons.performClick();
-                            portonsExecutor.execute(new Portons());
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("250")));
+                                portonsExecutor[0].shutdownNow();
+                                portonsExecutor[0] = Executors.newSingleThreadExecutor();
+                                portonsExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                portonsExecutor[0].execute(new Thread(new BigDecimal("250")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("250"));
+                            }
                             break;
                         case "fons":
                             fons.performClick();
-                            fonsExecutor.execute(new Fons());
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("1350")));
+                                fonsExecutor[0].shutdownNow();
+                                fonsExecutor[0] = Executors.newSingleThreadExecutor();
+                                fonsExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                fonsExecutor[0].execute(new Thread(new BigDecimal("1350")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("1350"));
+                            }
                             break;
                         case "susTrasera":
                             susTrasera.performClick();
-                            susTraseraExecutor.execute(new SusTrasera());
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("7680")));
+                                susTraseraExecutor[0].shutdownNow();
+                                susTraseraExecutor[0] = Executors.newSingleThreadExecutor();
+                                susTraseraExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                susTraseraExecutor[0].execute(new Thread(new BigDecimal("7680")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("7680"));
+                            }
                             break;
                         case "aTraser":
                             aTraser.performClick();
-                            aTraserExecutor.execute(new ATraser());
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("25000")));
+                                aTraserExecutor[0].shutdownNow();
+                                aTraserExecutor[0] = Executors.newSingleThreadExecutor();
+                                aTraserExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                aTraserExecutor[0].execute(new Thread(new BigDecimal("25000")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("25000"));
+                            }
                             break;
                     }
+                    produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
                 }
             }
         });
@@ -315,29 +389,110 @@ public class Main extends AppCompatActivity {
                     switch (milloraActiva) {
                         case "aDavant":
                             aDavant.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("1")));
+                                aDavantExecutor[0].shutdownNow();
+                                aDavantExecutor[0] = Executors.newSingleThreadExecutor();
+                                aDavantExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                aDavantExecutor[0].execute(new Thread(new BigDecimal("1")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("1"));
+                            }
                             break;
                         case "pneumatic":
                             pneumatic.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("10")));
+                                pneumaticExecutor[0].shutdownNow();
+                                pneumaticExecutor[0] = Executors.newSingleThreadExecutor();
+                                pneumaticExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                pneumaticExecutor[0].execute(new Thread(new BigDecimal("10")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("10"));
+                            }
                             break;
                         case "susDavant":
                             susDavant.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("100")));
+                                susDavantExecutor[0].shutdownNow();
+                                susDavantExecutor[0] = Executors.newSingleThreadExecutor();
+                                susDavantExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                susDavantExecutor[0].execute(new Thread(new BigDecimal("100")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("100"));
+                            }
                             break;
                         case "cockpit":
                             cockpit.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("500")));
+                                cockpitExecutor[0].shutdownNow();
+                                cockpitExecutor[0] = Executors.newSingleThreadExecutor();
+                                cockpitExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                cockpitExecutor[0].execute(new Thread(new BigDecimal("500")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("500"));
+                            }
                             break;
                         case "portons":
                             portons.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("2500")));
+                                portonsExecutor[0].shutdownNow();
+                                portonsExecutor[0] = Executors.newSingleThreadExecutor();
+                                portonsExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                portonsExecutor[0].execute(new Thread(new BigDecimal("2500")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("2500"));
+                            }
                             break;
                         case "fons":
                             fons.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("13500")));
+                                fonsExecutor[0].shutdownNow();
+                                fonsExecutor[0] = Executors.newSingleThreadExecutor();
+                                fonsExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                fonsExecutor[0].execute(new Thread(new BigDecimal("13500")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("13500"));
+                            }
                             break;
                         case "susTrasera":
                             susTrasera.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("76800")));
+                                susTraseraExecutor[0].shutdownNow();
+                                susTraseraExecutor[0] = Executors.newSingleThreadExecutor();
+                                susTraseraExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                susTraseraExecutor[0].execute(new Thread(new BigDecimal("76800")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("76800"));
+                            }
                             break;
                         case "aTraser":
                             aTraser.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("250000")));
+                                aTraserExecutor[0].shutdownNow();
+                                aTraserExecutor[0] = Executors.newSingleThreadExecutor();
+                                aTraserExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                aTraserExecutor[0].execute(new Thread(new BigDecimal("250000")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("250000"));
+                            }
                             break;
                     }
+                    produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
                 }
             }
         });
@@ -349,32 +504,124 @@ public class Main extends AppCompatActivity {
                     switch (milloraActiva) {
                         case "aDavant":
                             aDavant.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("10")));
+                                aDavantExecutor[0].shutdownNow();
+                                aDavantExecutor[0] = Executors.newSingleThreadExecutor();
+                                aDavantExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                aDavantExecutor[0].execute(new Thread(new BigDecimal("10")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("10"));
+                            }
                             break;
                         case "pneumatic":
                             pneumatic.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("100")));
+                                pneumaticExecutor[0].shutdownNow();
+                                pneumaticExecutor[0] = Executors.newSingleThreadExecutor();
+                                pneumaticExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                pneumaticExecutor[0].execute(new Thread(new BigDecimal("100")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("100"));
+                            }
                             break;
                         case "susDavant":
                             susDavant.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("1000")));
+                                susDavantExecutor[0].shutdownNow();
+                                susDavantExecutor[0] = Executors.newSingleThreadExecutor();
+                                susDavantExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                susDavantExecutor[0].execute(new Thread(new BigDecimal("1000")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("1000"));
+                            }
                             break;
                         case "cockpit":
                             cockpit.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("5000")));
+                                cockpitExecutor[0].shutdownNow();
+                                cockpitExecutor[0] = Executors.newSingleThreadExecutor();
+                                cockpitExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                cockpitExecutor[0].execute(new Thread(new BigDecimal("5000")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("5000"));
+                            }
                             break;
                         case "portons":
                             portons.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("25000")));
+                                portonsExecutor[0].shutdownNow();
+                                portonsExecutor[0] = Executors.newSingleThreadExecutor();
+                                portonsExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                portonsExecutor[0].execute(new Thread(new BigDecimal("25000")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("25000"));
+                            }
                             break;
                         case "fons":
                             fons.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("135000")));
+                                fonsExecutor[0].shutdownNow();
+                                fonsExecutor[0] = Executors.newSingleThreadExecutor();
+                                fonsExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                fonsExecutor[0].execute(new Thread(new BigDecimal("135000")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("135000"));
+                            }
                             break;
                         case "susTrasera":
                             susTrasera.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("768000")));
+                                susTraseraExecutor[0].shutdownNow();
+                                susTraseraExecutor[0] = Executors.newSingleThreadExecutor();
+                                susTraseraExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                susTraseraExecutor[0].execute(new Thread(new BigDecimal("768000")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("768000"));
+                            }
                             break;
                         case "aTraser":
                             aTraser.performClick();
+                            if(voltesPerSegonMillores.get(milloraActiva).compareTo(new BigDecimal("0")) == 1) {
+                                voltesPerSegonMillores.put(milloraActiva, voltesPerSegonMillores.get(milloraActiva).add(new BigDecimal("2500000")));
+                                aTraserExecutor[0].shutdownNow();
+                                aTraserExecutor[0] = Executors.newSingleThreadExecutor();
+                                aTraserExecutor[0].execute(new Thread(voltesPerSegonMillores.get(milloraActiva)));
+                            }
+                            else {
+                                aTraserExecutor[0].execute(new Thread(new BigDecimal("2500000")));
+                                voltesPerSegonMillores.put(milloraActiva, new BigDecimal("2500000"));
+                            }
                             break;
                     }
+                    produccioMillora.setText(voltesPerSegonMillores.get(milloraActiva).setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
                 }
             }
         });
+
+        //Comptador per les voltes
+        Comptador comptador = new Comptador(999999999, 500);
+        comptador.start();
+    }
+
+    /**
+     * Funció per actualitzar les voltes acumulades.
+     */
+    private void ActualitzaVoltes() {
+        numVoltes.setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
     }
 
     /**
@@ -384,12 +631,11 @@ public class Main extends AppCompatActivity {
     public static synchronized void SumarVoltes(BigDecimal numVoltes) {
         Log.i("Sumar", "M'han cridat per sumar voltes!");
         totalVoltes = totalVoltes.add(numVoltes);
-        numVoltesText.get().setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + Resources.getSystem().getString(R.string.Voltes));
     }
 
     /**
      * Comprovem si es pot comprar la millora que se'ns passa per paràmetre. Si es pot augmentem el nombre
-     * de nivells de la millora
+     * de nivells de la millora.
      * @param tipusCompra Tipus de compra de nivells (1 - Un nivell, 2 - 10 nivells, 3 - 100 nivells)
      * @return Booleà de la comprovació interna respecte la realització
      * o no de la compra
@@ -398,8 +644,8 @@ public class Main extends AppCompatActivity {
         switch (tipusCompra) {
             case 1:
                 if(totalVoltes.compareTo(costMillora1) >= 0) {
-                    totalVoltes.subtract(costMillora1);
-                    numVoltesText.get().setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
+                    totalVoltes = totalVoltes.subtract(costMillora1);
+                    numVoltes.setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
                     nivellsMilloresHashMap.put(milloraActiva, nivellsMilloresHashMap.get(milloraActiva) + 1);
                     return true;
                 }
@@ -409,8 +655,8 @@ public class Main extends AppCompatActivity {
                 }
             case 2:
                 if(totalVoltes.compareTo(costMillora10) >= 0) {
-                    totalVoltes.subtract(costMillora10);
-                    numVoltesText.get().setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
+                    totalVoltes = totalVoltes.subtract(costMillora10);
+                    numVoltes.setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
                     nivellsMilloresHashMap.put(milloraActiva, nivellsMilloresHashMap.get(milloraActiva) + 10);
                     return true;
                 }
@@ -420,8 +666,8 @@ public class Main extends AppCompatActivity {
                 }
             case 3:
                 if(totalVoltes.compareTo(costMillora100) >= 0) {
-                    totalVoltes.subtract(costMillora100);
-                    numVoltesText.get().setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
+                    totalVoltes = totalVoltes.subtract(costMillora100);
+                    numVoltes.setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
                     nivellsMilloresHashMap.put(milloraActiva, nivellsMilloresHashMap.get(milloraActiva) + 100);
                     return true;
                 }
@@ -512,5 +758,26 @@ public class Main extends AppCompatActivity {
             pot++;
         }
         return aux;
+    }
+
+    /**
+     * Comptador per cridar cada 500ms la funció {@link #ActualitzaVoltes()}.
+     */
+    public class Comptador extends CountDownTimer {
+
+        public Comptador(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onFinish() {
+            Comptador aux = new Comptador(999999999, 500);
+            aux.start();
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            ActualitzaVoltes();
+        }
     }
 }
