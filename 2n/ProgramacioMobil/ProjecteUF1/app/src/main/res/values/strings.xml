@@ -16,4 +16,8 @@
     <string name="Voltes">voltes</string>
     <string name="Nivell">Nivell</string>
     <string name="NoPotsComprar">No tens suficients voltes per comprar la millora!</string>
+    <string name="Config">Configuració</string>
+    <string name="TemaApp">Tema de l\'app</string>
+    <string name="Esborrar">Esborrar dades</string>
+    <string name="EsborrarBoto">🗑️Esborrar</string>
 </resources>

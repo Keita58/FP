@@ -1,8 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Formula1_Clicker" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Formula1_Clicker" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/colorSecundary</item>
+        <item name="colorTertiary">@color/colorTerciary</item>
+        <item name="colorButtonNormal">@color/colorButton</item>
+        <item name="colorControlNormal">@color/colorText</item>
     </style>
 
     <style name="Theme.Formula1_Clicker" parent="Base.Theme.Formula1_Clicker" />

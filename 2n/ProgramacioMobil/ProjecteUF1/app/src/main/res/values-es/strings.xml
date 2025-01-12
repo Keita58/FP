@@ -17,4 +17,8 @@
     <string name="Voltes">vueltas</string>
     <string name="Nivell">Nivel</string>
     <string name="NoPotsComprar">¡No tienes suficientes vueltas para comprar la mejora!</string>
+    <string name="Config">Configuración</string>
+    <string name="TemaApp">Tema de la aplicación</string>
+    <string name="Esborrar">Borrar datos</string>
+    <string name="EsborrarBoto">🗑️Borrar</string>
 </resources>

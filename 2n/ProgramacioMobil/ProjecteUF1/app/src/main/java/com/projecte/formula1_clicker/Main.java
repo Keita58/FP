@@ -2,6 +2,7 @@ package com.projecte.formula1_clicker;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -253,7 +254,8 @@ public class Main extends AppCompatActivity {
         config.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), Configuracio.class);
+                startActivity(intent);
             }
         });
 
