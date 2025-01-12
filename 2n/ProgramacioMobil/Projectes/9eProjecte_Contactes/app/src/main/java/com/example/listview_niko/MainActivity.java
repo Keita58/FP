@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 				else {
 					Titular t = new Titular(bundle.getString("Nom"), bundle.getString("Cognom"), Integer.parseInt(bundle.getString("Telèfon")), bundle.getString("Adreça"), bundle.getString("Mail"), bundle.getString("Data"));
 					contactes.crearContacteBD(t);
-					sendPendingIntentNotification(contactes.selectBDEspecific(t));
+					//sendPendingIntentNotification(contactes.selectBDEspecific(t));
 				}
 			}
 		}

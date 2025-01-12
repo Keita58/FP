@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.google.firebase:firebase-analytics")
     implementation(libs.appcompat)
     implementation(libs.material)

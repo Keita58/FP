@@ -34,7 +34,7 @@ public class BaseDeDades extends SQLiteOpenHelper {
     public String buscarUsuari() {
         SQLiteDatabase db = this.getWritableDatabase();
         String resposta = "";
-        Cursor c1 = db.rawQuery("SELECT * FROM idUsuari", null);
+        Cursor c1 = db.rawQuery("SELECT cadena FROM idUsuari", null);
         if(c1 != null && c1.moveToFirst()) {
             resposta = c1.getString(0);
         }
