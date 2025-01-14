@@ -3,6 +3,7 @@ package com.projecte.formula1_clicker;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -70,6 +71,9 @@ public class Configuracio extends AppCompatActivity {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Música
+                MediaPlayer click = MediaPlayer.create(Configuracio.this, R.raw.fiaum);
+                click.start();
                 Intent intent = new Intent();
                 intent.putExtra("Guardar", true);
                 setResult(RESULT_OK, intent);

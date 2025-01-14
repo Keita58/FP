@@ -2,9 +2,15 @@ package com.projecte.formula1_clicker;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Message;
@@ -22,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,6 +70,7 @@ public class Main extends AppCompatActivity {
     static BigDecimal costMillora100;
     static TextView numVoltes;
     static BaseDeDades cadena;
+    private static final String CHANNEL_ID = "notis";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,11 @@ public class Main extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Jugadors");
         milloraActiva = "";
+
+        //Música
+        MediaPlayer click = MediaPlayer.create(Main.this, R.raw.theme);
+        click.setLooping(true);
+        click.start();
 
         //Menú
         Button trofeus = (Button) findViewById(R.id.BotoTrofeus);
@@ -173,7 +186,12 @@ public class Main extends AppCompatActivity {
                 buffer.append((char) randomLimitedInt);
             }
             cadenaTelefon = buffer.toString();
-            myRef.setValue(cadenaTelefon);
+
+            //Aquí actualitzem en comptes d'afegir per evitar esborrar els altres usuaris de la base de dades
+            Map<String, Object> update = new HashMap<>();
+            update.put("/", cadenaTelefon);
+            myRef.updateChildren(update);
+
             cadena.crearUsuari(cadenaTelefon);
 
             valorClickUsuari = 1;
@@ -187,6 +205,11 @@ public class Main extends AppCompatActivity {
             Jugador aux = new Jugador(totalVoltes.toString(), valorClickUsuari, nivellMillores, voltesPerSegon);
             myRef.child(cadenaTelefon).setValue(aux);
             numVoltes.setText("0 " + R.string.Voltes); //Canviar això amb el firebase
+
+            //Executem la creació del canal de notificacions
+            createNotificationChannel();
+            //I enviem la nostra notificació
+            sendBasicNotification();
         }
         else {
             cadenaTelefon = cadena.buscarUsuari();
@@ -253,6 +276,8 @@ public class Main extends AppCompatActivity {
         clicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MediaPlayer click = MediaPlayer.create(Main.this, R.raw.click);
+                click.start();
                 totalVoltes = totalVoltes.add(BigDecimal.valueOf(valorClickUsuari));
                 numVoltes.setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
@@ -772,6 +797,46 @@ public class Main extends AppCompatActivity {
         //Comptador per les voltes
         Comptador comptador = new Comptador(999999999, 500);
         comptador.start();
+    }
+
+    /**
+     * Funció per crear el canal de notificacions de l'aplicació.
+     */
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "My Channel";
+            String description = "Channel for my notifications";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    /**
+     * Funció per poder enviar notificacions de text bàsiques al dispositiu.
+     */
+    private void sendBasicNotification() {
+        // Crear una notificación
+        /*  Fem servor NptificationCompat.Builder per fer la notificació i fem servir mètodes per donar aspecte i comportament
+         * a la Notificació  (Icone, Títol, Test,...
+         * Finalment, fem el Build per contruirla */
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle(getString(R.string.TitolNoti))
+                .setContentText(getString(R.string.CosNoti))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build();
+
+        // Mostrar la notificación
+        /* Per visulizar la notificació al usuari necessitem  un NotificationManager.
+         * El mètode notify() pren un ID únic per cad anotificació.
+         *
+         * Si li enviem un mateix ID, la notficació es "machaca".
+         * Si fem servir un ID diferent per cada notificació, s'acumulen.  */
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification);  // El primer parámetro es el ID de la notificación
     }
 
     /**
