@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1A1A1D</color>
-    <color name="colorSecundary">#3B1C32</color>
-    <color name="colorTerciary"> #6A1E55 </color>
-    <color name="colorButton">#A64D79</color>
+    <color name="colorPrimary">#363636</color>
+    <color name="colorSecundary">#229954</color>
+    <color name="colorTerciary">#0b4a26</color>
+    <color name="colorButton">#00665E</color>
+    <color name="colorButtonDelete">#FF0000</color>
     <color name="colorText">#ffffff</color>
 </resources>

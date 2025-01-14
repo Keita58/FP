@@ -3,6 +3,7 @@
     <color name="colorPrimary">#ffffff</color>
     <color name="colorSecundary">#229954</color>
     <color name="colorTerciary"> #7dcea0 </color>
-    <color name="colorButton">#CE7DAB</color>
+    <color name="colorButton">#00665E</color>
+    <color name="colorButtonDelete">#FF0000</color>
     <color name="colorText">#000000</color>
 </resources>

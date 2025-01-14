@@ -20,4 +20,6 @@
     <string name="TemaApp">Tema de l\'app</string>
     <string name="Esborrar">Esborrar dades</string>
     <string name="EsborrarBoto">🗑️Esborrar</string>
+    <string name="BotoAvis">Estàs segur/a d\'esborrar TOTES les teves dades?</string>
+    <string name="Cancelar">Cancel·lar</string>
 </resources>

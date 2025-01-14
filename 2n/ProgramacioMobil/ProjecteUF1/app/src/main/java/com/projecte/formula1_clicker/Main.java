@@ -3,10 +3,12 @@ package com.projecte.formula1_clicker;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +19,9 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,8 +65,17 @@ public class Main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Canviem el color de l'app
+        //Això ho posem al principi per evitar que el onCreate es cridi dues vegades!!!!
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean("tema_app", true)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.joc);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Jugadors");
@@ -183,7 +196,6 @@ public class Main extends AppCompatActivity {
                         Log.e("firebase", "Error getting data", task.getException());
                     }
                     else {
-                        //Log.d("pataesbraves", String.valueOf(task.getResult().getValue()));
                         JSONObject userJson = new JSONObject((Map) task.getResult().getValue());
                         Jugador j = new Gson().fromJson(String.valueOf(userJson), Jugador.class);
                         totalVoltes = new BigDecimal(j.numVoltes);
@@ -229,6 +241,7 @@ public class Main extends AppCompatActivity {
                         }
                         valorClickUsuari = j.valorClick;
                     }
+                    aDavant.performClick();
                 }
             });
         }
@@ -255,7 +268,7 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Configuracio.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -732,6 +745,37 @@ public class Main extends AppCompatActivity {
     }
 
     /**
+     * Funció per recuperar el resultat de l'activitat de la configuració (per saber
+     * si el jugador ha eliminat les dades o no).
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     *
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Jugadors");
+        boolean eliminar = false;
+
+        if(data != null)
+            eliminar = data.getBooleanExtra("Eliminat", false);
+
+        if(requestCode == 1 && eliminar) {
+            String cad = cadena.buscarUsuari();
+            cadena.eliminaUsuari();
+            myRef.child(cad).removeValue();
+            finish();
+            startActivity(getIntent());
+        }
+    }
+
+    /**
      * Funció per actualitzar les voltes acumulades.
      */
     private void ActualitzaVoltes() {
@@ -795,10 +839,12 @@ public class Main extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param costPlus1
-     * @param costPlus10
-     * @param costPlus100
+     * Funció per canviar el text inferior dels botons de pujada de nivell
+     * de les millores. El text canvia cada vegada que es fa click a un dels tres botons
+     * augmentant el preu de cost dels següents nivells.
+     * @param costPlus1 TextView del text del botó +1
+     * @param costPlus10 TextView del text del botó +10
+     * @param costPlus100 TextView del text del botó +100
      */
     private void CanviTextBotons(TextView costPlus1, TextView costPlus10, TextView costPlus100) {
         BigDecimal up1 = CalculEdificis(1, milloraActiva);
@@ -896,6 +942,9 @@ public class Main extends AppCompatActivity {
     }
 }
 
+/**
+ * Classe per poder recuperar la info del Firebase correctament
+ */
 @IgnoreExtraProperties
 class Jugador {
 

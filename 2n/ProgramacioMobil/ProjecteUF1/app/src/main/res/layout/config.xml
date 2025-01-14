@@ -38,7 +38,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/formula1"
             android:text="@string/TemaApp"
-            android:textColor="@color/colorText" />
+            android:textColor="@color/colorText"
+            android:thumbTint="@color/colorText"
+            android:trackTint="#000000" />
     </FrameLayout>
 
     <LinearLayout
@@ -57,7 +59,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
+            android:fontFamily="@font/formula1"
+            android:text="@string/Esborrar"
             android:textColor="@color/colorText" />
 
         <Button
@@ -65,7 +68,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:backgroundTint="@color/colorButtonDelete"
+            android:text="@string/EsborrarBoto" />
     </LinearLayout>
 
     <LinearLayout

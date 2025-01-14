@@ -21,4 +21,6 @@
     <string name="TemaApp">Tema de la aplicación</string>
     <string name="Esborrar">Borrar datos</string>
     <string name="EsborrarBoto">🗑️Borrar</string>
+    <string name="BotoAvis">Estás seguro/a de borrar TODOS tus datos?</string>
+    <string name="Cancelar">Cancel·lar</string>
 </resources>

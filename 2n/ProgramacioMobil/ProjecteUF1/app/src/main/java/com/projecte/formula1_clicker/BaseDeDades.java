@@ -42,9 +42,9 @@ public class BaseDeDades extends SQLiteOpenHelper {
         return resposta;
     }
 
-    public void eliminaUsuari(String cadena) {
+    public void eliminaUsuari() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM idUsuari WHERE cadena = "+cadena+"");
+        db.execSQL("DELETE FROM idUsuari");
         db.close();
     }
 }
