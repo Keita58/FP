@@ -1,0 +1,7 @@
+D:\ExamenProva\bin\Debug\ExamenProva.exe.config
+D:\ExamenProva\bin\Debug\ExamenProva.exe
+D:\ExamenProva\bin\Debug\ExamenProva.pdb
+D:\ExamenProva\obj\Debug\ExamenProva.csproj.AssemblyReference.cache
+D:\ExamenProva\obj\Debug\ExamenProva.csproj.CoreCompileInputs.cache
+D:\ExamenProva\obj\Debug\ExamenProva.exe
+D:\ExamenProva\obj\Debug\ExamenProva.pdb
