@@ -22,4 +22,7 @@
     <string name="EsborrarBoto">🗑️Esborrar</string>
     <string name="BotoAvis">Estàs segur/a d\'esborrar TOTES les teves dades?</string>
     <string name="Cancelar">Cancel·lar</string>
+    <string name="GuardarText">Guardar les dades</string>
+    <string name="GuardarBoto">Guardar</string>
+    <string name="GuardatToast">Les dades s\'han guardat correctament!</string>
 </resources>

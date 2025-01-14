@@ -36,6 +36,7 @@ public class Configuracio extends AppCompatActivity {
         });
 
         //Botons configuració
+        Button guardar = (Button) findViewById(R.id.GuardarBoto);
         Button esborrar = (Button) findViewById(R.id.EsborrarBoto);
         Switch tema = (Switch) findViewById(R.id.TemaApp);
 
@@ -63,6 +64,16 @@ public class Configuracio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mostraAvis();
+            }
+        });
+
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("Guardar", true);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

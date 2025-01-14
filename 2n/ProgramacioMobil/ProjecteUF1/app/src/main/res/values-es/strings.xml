@@ -22,5 +22,8 @@
     <string name="Esborrar">Borrar datos</string>
     <string name="EsborrarBoto">🗑️Borrar</string>
     <string name="BotoAvis">Estás seguro/a de borrar TODOS tus datos?</string>
-    <string name="Cancelar">Cancel·lar</string>
+    <string name="Cancelar">Cancelar</string>
+    <string name="GuardarText">Guardar los datos</string>
+    <string name="GuardarBoto">Guardar</string>
+    <string name="GuardatToast">¡Los datos se han guardado correctamente!</string>
 </resources>

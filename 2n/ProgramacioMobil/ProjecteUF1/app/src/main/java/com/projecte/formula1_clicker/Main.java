@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.projecte.formula1_clicker.runnable.Thread;
 import com.google.gson.Gson;
@@ -272,13 +273,7 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        /**
-         * Totes les millores del joc
-         * CompareTo de BigInteger:
-         * - 0 si son iguals els valors
-         * - 1 si el valor que no passem per paràmetre és més gran que el que passem per paràmetre
-         * - -1 si el valor que no passem per paràmetre és més petit que el que passem per paràmetre
-         */
+
         aDavant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -394,6 +389,21 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        /**
+         * Botó de millora +1 de l'aplicació. Mira quina és la millora actual en pantalla i suma el nombre de nivells respectius
+         * alhora que tanca el thread d'execució de la millora per crear-ne un de nou amb el nou valor de les voltes que realitza cada actualització.
+         *
+         * CompareTo de BigInteger:
+         * - 0 si son iguals els valors
+         * - 1 si el valor que no passem per paràmetre és més gran que el que passem per paràmetre
+         * - -1 si el valor que no passem per paràmetre és més petit que el que passem per paràmetre
+         *
+         * Tots els casos realitzen el mateix:
+         * - Fan un click al botó de la opció de millora per actualitzar el valor dels nivell després d'haver comprat 1 nivell
+         * - Fa una comprovació per mirar que no fos la primera millora
+         *      - Si era la primera millora crea el nou Thread amb el valor de la millora inicial
+         *      - Sinó ho era acaba el thread actual i en crea un de nou amb el valor actualitzar de la millora
+         */
         plus1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -509,6 +519,16 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        /**
+         * Botó de millora +10 de l'aplicació. Mira quina és la millora actual en pantalla i suma el nombre de nivells respectius
+         * alhora que tanca el thread d'execució de la millora per crear-ne un de nou amb el nou valor de les voltes que realitza cada actualització.
+         *
+         * Tots els casos realitzen el mateix:
+         * - Fan un click al botó de la opció de millora per actualitzar el valor dels nivell després d'haver comprat 10 nivells
+         * - Fa una comprovació per mirar que no fos la primera millora
+         *          - Si era la primera millora crea el nou Thread amb el valor de la millora inicial
+         *          - Sinó ho era acaba el thread actual i en crea un de nou amb el valor actualitzar de la millora
+         */
         plus10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -624,6 +644,16 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        /**
+         * Botó de millora +100 de l'aplicació. Mira quina és la millora actual en pantalla i suma el nombre de nivells respectius
+         * alhora que tanca el thread d'execució de la millora per crear-ne un de nou amb el nou valor de les voltes que realitza cada actualització.
+         *
+         * Tots els casos realitzen el mateix:
+         * - Fan un click al botó de la opció de millora per actualitzar el valor dels nivell després d'haver comprat 100 nivells
+         * - Fa una comprovació per mirar que no fos la primera millora
+         *          - Si era la primera millora crea el nou Thread amb el valor de la millora inicial
+         *          - Sinó ho era acaba el thread actual i en crea un de nou amb el valor actualitzar de la millora
+         */
         plus100.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -746,7 +776,7 @@ public class Main extends AppCompatActivity {
 
     /**
      * Funció per recuperar el resultat de l'activitat de la configuració (per saber
-     * si el jugador ha eliminat les dades o no).
+     * si el jugador ha eliminat les dades o no i si ha guardat la informació al núvol).
      * @param requestCode The integer request code originally supplied to
      *                    startActivityForResult(), allowing you to identify who this
      *                    result came from.
@@ -762,16 +792,38 @@ public class Main extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Jugadors");
         boolean eliminar = false;
+        boolean guardar = false;
 
-        if(data != null)
+        if(data != null) {
             eliminar = data.getBooleanExtra("Eliminat", false);
+            guardar = data.getBooleanExtra("Guardar", false);
+        }
 
         if(requestCode == 1 && eliminar) {
             String cad = cadena.buscarUsuari();
             cadena.eliminaUsuari();
             myRef.child(cad).removeValue();
+            //Per tancar tots els threads de les millores i evitar problemes a l'iniciar una nova partida
+            System.exit(0);
             finish();
             startActivity(getIntent());
+        }
+        else if(guardar) {
+            valorClickUsuari = 1;
+            Map<String, String> voltesPerSegon = new HashMap<>();
+            Map<String, Integer> nivellMillores = nivellsMilloresHashMap;
+
+            for(Map.Entry<String, BigDecimal> dades : voltesPerSegonMillores.entrySet())  {
+                voltesPerSegon.put(dades.getKey(), dades.getValue().toString());
+            }
+
+            Jugador aux = new Jugador(totalVoltes.toString(), valorClickUsuari, nivellMillores, voltesPerSegon);
+            Map<String, Object> transJugador = aux.toMap();
+            Map<String, Object> update = new HashMap<>();
+            update.put("/" + cadena.buscarUsuari(), transJugador);
+            myRef.updateChildren(update);
+
+            Toast.makeText(this, R.string.GuardatToast, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -960,5 +1012,16 @@ class Jugador {
         this.valorClick = valorClick;
         this.nivellMillores = nivellMillores;
         this.voltesPerSegon = voltesPerSegon;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("numVoltes", numVoltes);
+        result.put("nivellMillores", nivellMillores);
+        result.put("valorClick", valorClick);
+        result.put("voltesPerSegon", voltesPerSegon);
+
+        return result;
     }
 }
