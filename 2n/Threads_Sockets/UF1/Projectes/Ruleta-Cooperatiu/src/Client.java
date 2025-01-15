@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.HashMap;
 
 import org.json.JSONObject;
 
@@ -27,21 +26,21 @@ public class Client {
             //Nick del jugador
             while(true) {
                 JSONObject json = new JSONObject();
+                System.out.println("Escriu el teu nick: ");
                 json.put("Nickname", inConsola.readLine());
                 pEC.sendJSON(json);
-                if(pEC.receiveNick())
+                if(pEC.receiveNick()){
                     break;
+                }
+                System.out.println("El teu nick ja està en ús, prova un altre.");
             }
 
             while(true) {
                 if(!Menu())
                     break;
             }
-
-            pEC.receiveByte(PontEntreClasses.ACK);
-            pEC.close();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -49,13 +48,22 @@ public class Client {
 
         BufferedReader inConsola = new BufferedReader(new InputStreamReader(System.in));
         boolean sortirMenu = true;
+        boolean primera = true;
 
         while (sortirMenu) {
-            pEC.receiveByte(PontEntreClasses.S_ESTAS_DINS);
+            while(true) {
+                if(pEC.receiveByte() == PontEntreClasses.S_ESTAS_DINS)
+                    break;
+                pEC.sendByte(PontEntreClasses.ACK);
+            }
             pEC.sendByte(PontEntreClasses.ACK);
 
-            dinersJugador = pEC.receiveInt(); //dinersJugador del jugador
-
+            if(primera){
+                dinersJugador = pEC.receiveInt(); //dinersJugador del jugador
+                pEC.sendByte(PontEntreClasses.ACK);
+                primera = false;
+            }
+           
             pEC.receiveByte(PontEntreClasses.S_APOSTA);
             boolean sortirTria = true;
             while (sortirTria) {
@@ -160,7 +168,7 @@ public class Client {
             pEC.sendByte(PontEntreClasses.ACK);
 
             JSONObject dadesRuleta = pEC.receiveJSON(); // JSON de dades de la ruleta (resultats)
-            System.out.println("Els altres jugadors tenen actualment els següents diners: " + dadesRuleta.toString(3));
+            System.out.println("Els jugadors tenen actualment els següents diners: " + dadesRuleta.toString(3));
             pEC.sendByte(PontEntreClasses.ACK);
 
             dinersJugador = pEC.receiveInt(); //Diners actuals del jugador
@@ -173,11 +181,12 @@ public class Client {
             }           
 
             System.out.println("Vols tornar a jugar? Si -> 1 | No -> 2");
-            boolean sortir = false;
+            boolean sortir = true;
             while(sortir) {
                 switch(inConsola.readLine()) {
                     case "1":
                         pEC.sendByte(PontEntreClasses.C_SEGUIR);
+                        sortir = false;
                         break;
                     case "2":
                     pEC.sendByte(PontEntreClasses.C_PLEGAR);

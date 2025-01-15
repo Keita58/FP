@@ -65,8 +65,6 @@ public class PontEntreClasses {
         this.bufferReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
         this.dataReader = new DataInputStream(this.socket.getInputStream());
         this.dataWriter = new DataOutputStream(this.socket.getOutputStream());
-        this.escripturaObject = new ObjectOutputStream(this.socket.getOutputStream());
-        this.lecturaObject = new ObjectInputStream(this.socket.getInputStream());
     }
 
     public PontEntreClasses(Socket socket, boolean verbose) throws IOException {
@@ -76,8 +74,7 @@ public class PontEntreClasses {
         this.bufferReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
         this.dataReader = new DataInputStream(this.socket.getInputStream());
         this.dataWriter = new DataOutputStream(this.socket.getOutputStream());
-        this.escripturaObject = new ObjectOutputStream(this.socket.getOutputStream());
-        this.lecturaObject = new ObjectInputStream(this.socket.getInputStream());
+        System.out.println("He acabat");
     }
 
     public void send(String text) {
@@ -114,17 +111,18 @@ public class PontEntreClasses {
     }
 
     public void sendByte(byte dades) throws IOException {
-        this.escripturaObject.writeByte(dades);
+        this.dataWriter.writeByte(dades);
         if(this.verbose) 
             System.out.println("S'està enviant el byte: " + traduccioByte(dades));
     }
 
     public void sendJSON(JSONObject dades) throws IOException, JSONException {
-        byte[] aux = dades.toString().getBytes("UFT-8");
+        byte[] aux = dades.toString().getBytes("UTF-8");
         this.dataWriter.writeInt(aux.length); // Enviem primer la llargada de l'array de bytes
         this.dataWriter.write(aux); //Després enviem els bytes tal qual
         if(this.verbose) 
             System.out.println("S'està enviant el JSON: " + dades.toString());
+        this.dataWriter.flush();
     }
 
     public String receive() throws IOException {
@@ -163,14 +161,14 @@ public class PontEntreClasses {
     }
 
     public byte receiveByte() throws ClassNotFoundException, IOException {
-        byte dades = this.lecturaObject.readByte();
+        byte dades = this.dataReader.readByte();
         if(this.verbose)
             System.out.println("S'està rebent el byte " + traduccioByte(dades));
         return dades;
     }
 
     public void receiveByte(byte b) throws Exception, IOException {
-        byte aux = this.lecturaObject.readByte();
+        byte aux = this.dataReader.readByte();
         if(b != aux)
             throw new Excepcio("El text que has enviat: " + traduccioByte(b) + ", és diferent al text actual: " + traduccioByte(aux));
         if(this.verbose)
@@ -222,7 +220,7 @@ public class PontEntreClasses {
 
     public boolean receiveNick() throws Excepcio, IOException, ClassNotFoundException {
         byte b = this.receiveByte();
-
+        this.sendByte(ACK);
         if(b == ACK)
             return true;
         else 
