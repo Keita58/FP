@@ -1,19 +1,15 @@
 package com.projecte.formula1_clicker;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,10 +28,8 @@ import androidx.core.app.NotificationCompat;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.projecte.formula1_clicker.runnable.Thread;
@@ -46,13 +39,7 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -286,7 +273,8 @@ public class Main extends AppCompatActivity {
         trofeus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), Classificacio.class);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -1063,7 +1051,7 @@ public class Main extends AppCompatActivity {
  * Classe per poder recuperar la info del Firebase correctament
  */
 @IgnoreExtraProperties
-class Jugador {
+class Jugador implements Comparable<Jugador> {
 
     public String numVoltes;
     public int valorClick;
@@ -1088,5 +1076,11 @@ class Jugador {
         result.put("voltesPerSegon", voltesPerSegon);
 
         return result;
+    }
+
+    @Exclude
+    @Override
+    public int compareTo(Jugador j) {
+        return new BigDecimal(numVoltes).compareTo(new BigDecimal(j.numVoltes));
     }
 }

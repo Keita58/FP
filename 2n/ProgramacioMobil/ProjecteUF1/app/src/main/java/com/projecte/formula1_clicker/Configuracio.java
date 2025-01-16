@@ -29,6 +29,15 @@ public class Configuracio extends AppCompatActivity {
         Button trofeus = (Button) findViewById(R.id.BotoTrofeus);
         Button joc = (Button) findViewById(R.id.BotoJoc);
 
+        trofeus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Classificacio.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         joc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

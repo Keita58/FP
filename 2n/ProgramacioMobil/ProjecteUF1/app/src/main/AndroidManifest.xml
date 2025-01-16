@@ -26,6 +26,10 @@
             android:name=".Configuracio"
             android:exported="false"
             android:theme="@style/Theme.Formula1_Clicker" />
+        <activity
+            android:name=".Classificacio"
+            android:exported="false"
+            android:theme="@style/Theme.Formula1_Clicker" />
     </application>
 
 </manifest>

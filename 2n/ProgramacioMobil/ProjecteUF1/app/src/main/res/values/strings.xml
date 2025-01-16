@@ -27,4 +27,9 @@
     <string name="GuardatToast">Les dades s\'han guardat correctament!</string>
     <string name="TitolNoti">Benvingut/da!</string>
     <string name="CosNoti">Et dono la benvinguda al F1Clicker!</string>
+    <string name="TitolClas">Classificació</string>
+    <string name="Posicio">Pos.</string>
+    <string name="Id">Id</string>
+    <string name="VoltesTotalsTaula">Voltes Totals</string>
+    <string name="DadesActualitzades">(Dades guardades de la base de dades)</string>
 </resources>

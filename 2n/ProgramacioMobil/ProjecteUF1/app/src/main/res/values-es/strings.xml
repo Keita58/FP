@@ -28,4 +28,9 @@
     <string name="GuardatToast">¡Los datos se han guardado correctamente!</string>
     <string name="TitolNoti">¡Bienvenido/a!</string>
     <string name="CosNoti">¡Te doy la bienvenida al F1Clicker!</string>
+    <string name="TitolClas">Clasificación</string>
+    <string name="Posicio">Pos.</string>
+    <string name="Id">Id</string>
+    <string name="VoltesTotalsTaula">Vueltas Totales</string>
+    <string name="DadesActualitzades">(Datos guardados de la base de datos)</string>
 </resources>

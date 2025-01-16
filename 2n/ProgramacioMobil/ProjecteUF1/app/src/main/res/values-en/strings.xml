@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Formula1_Clicker</string>
+    <string name="BotoMenuJoc">🏁 Game</string>
+    <string name="BotoMenuTrofeus">🏆 Leaderboard</string>
+    <string name="BotoMenuConfiguracio">⚙️ Settings</string>
+    <string name="Titol">F1 Clicker</string>
+    <string name="Pneumatics">Tires</string>
+    <string name="AleroDavanter">Front Wing</string>
+    <string name="SuspensioDavantera">F. Suspension</string>
+    <string name="Cockpit">Cockpit</string>
+    <string name="Fons">Floor</string>
+    <string name="SuspensioTrasera">R. Suspension</string>
+    <string name="AleroTraser">Rear Wing</string>
+    <string name="TextTemp">TemporalText</string>
+    <string name="Pontons">Engine Intake</string>
+    <string name="Voltes">laps</string>
+    <string name="Nivell">Level</string>
+    <string name="NoPotsComprar">You don\'t have the necessary laps to buy this upgrade!</string>
+    <string name="Config">Settings</string>
+    <string name="TemaApp">App Theme</string>
+    <string name="Esborrar">Delete info</string>
+    <string name="EsborrarBoto">🗑️Delete</string>
+    <string name="BotoAvis">Are you sure to delete ALL of your data?</string>
+    <string name="Cancelar">Cancel</string>
+    <string name="GuardarText">Save data</string>
+    <string name="GuardarBoto">Save</string>
+    <string name="GuardatToast">All the data has been saved correctly!</string>
+    <string name="TitolNoti">Welcome!</string>
+    <string name="CosNoti">Welcome to the F1 Clicker app!</string>
+    <string name="TitolClas">Leaderboard</string>
+    <string name="Posicio">Pos.</string>
+    <string name="Id">Id</string>
+    <string name="VoltesTotalsTaula">Total Laps</string>
+    <string name="DadesActualitzades">(Info from the database)</string>
+</resources>
