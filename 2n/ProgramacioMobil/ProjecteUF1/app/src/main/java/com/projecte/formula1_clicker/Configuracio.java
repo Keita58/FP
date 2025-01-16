@@ -20,9 +20,16 @@ public class Configuracio extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean("tema_app", true)) {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.config);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit(); //Per editar a mà els valors del layot de configuració
 
         //Botons menú
@@ -57,15 +64,16 @@ public class Configuracio extends AppCompatActivity {
         tema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                guardar.performClick();
                 if(tema.isChecked()) {
                     editor.putBoolean("tema_app", true);
                     editor.apply();
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 }
                 else {
                     editor.putBoolean("tema_app", false);
                     editor.apply();
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
             }
         });

@@ -58,6 +58,14 @@ public class Main extends AppCompatActivity {
     static TextView numVoltes;
     static BaseDeDades cadena;
     private static final String CHANNEL_ID = "notis";
+    static final ExecutorService[] aDavantExecutor = {Executors.newSingleThreadExecutor()};
+    static final ExecutorService[] pneumaticExecutor = {Executors.newSingleThreadExecutor()};
+    static final ExecutorService[] susDavantExecutor = {Executors.newSingleThreadExecutor()};
+    static final ExecutorService[] cockpitExecutor = {Executors.newSingleThreadExecutor()};
+    static final ExecutorService[] portonsExecutor = {Executors.newSingleThreadExecutor()};
+    static final ExecutorService[] fonsExecutor = {Executors.newSingleThreadExecutor()};
+    static final ExecutorService[] susTraseraExecutor = {Executors.newSingleThreadExecutor()};
+    static final ExecutorService[] aTraserExecutor = {Executors.newSingleThreadExecutor()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +73,10 @@ public class Main extends AppCompatActivity {
         //Això ho posem al principi per evitar que el onCreate es cridi dues vegades!!!!
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.getBoolean("tema_app", true)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
         else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
         super.onCreate(savedInstanceState);
@@ -141,16 +149,6 @@ public class Main extends AppCompatActivity {
         voltesPerSegonMillores.put("fons", new BigDecimal("0"));
         voltesPerSegonMillores.put("susTrasera", new BigDecimal("0"));
         voltesPerSegonMillores.put("aTraser", new BigDecimal("0"));
-
-        //Executor service per cada millora
-        final ExecutorService[] aDavantExecutor = {Executors.newSingleThreadExecutor()};
-        final ExecutorService[] pneumaticExecutor = {Executors.newSingleThreadExecutor()};
-        final ExecutorService[] susDavantExecutor = {Executors.newSingleThreadExecutor()};
-        final ExecutorService[] cockpitExecutor = {Executors.newSingleThreadExecutor()};
-        final ExecutorService[] portonsExecutor = {Executors.newSingleThreadExecutor()};
-        final ExecutorService[] fonsExecutor = {Executors.newSingleThreadExecutor()};
-        final ExecutorService[] susTraseraExecutor = {Executors.newSingleThreadExecutor()};
-        final ExecutorService[] aTraserExecutor = {Executors.newSingleThreadExecutor()};
 
         //Num voltes
         numVoltes = (TextView) findViewById(R.id.NombreVoltes);
@@ -785,6 +783,18 @@ public class Main extends AppCompatActivity {
         //Comptador per les voltes
         Comptador comptador = new Comptador(999999999, 500);
         comptador.start();
+    }
+
+    @Override
+    protected void onResume() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean("tema_app", true)) {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        super.onResume();
     }
 
     /**
