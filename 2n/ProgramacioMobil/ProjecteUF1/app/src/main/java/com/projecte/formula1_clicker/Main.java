@@ -189,7 +189,7 @@ public class Main extends AppCompatActivity {
                 voltesPerSegon.put(dades.getKey(), dades.getValue().toString());
             }
 
-            Jugador aux = new Jugador(totalVoltes.toString(), valorClickUsuari, nivellMillores, voltesPerSegon);
+            Jugador aux = new Jugador(totalVoltes.toString(), String.valueOf(valorClickUsuari), nivellMillores, voltesPerSegon);
             myRef.child(cadenaTelefon).setValue(aux);
             numVoltes.setText("0 " + R.string.Voltes); //Canviar això amb el firebase
 
@@ -250,7 +250,7 @@ public class Main extends AppCompatActivity {
                                 }
                             }
                         }
-                        valorClickUsuari = j.valorClick;
+                        valorClickUsuari = Integer.parseInt(j.valorClick);
                     }
                     aDavant.performClick();
                 }
@@ -870,7 +870,7 @@ public class Main extends AppCompatActivity {
                 voltesPerSegon.put(dades.getKey(), dades.getValue().toString());
             }
 
-            Jugador aux = new Jugador(totalVoltes.toString(), valorClickUsuari, nivellMillores, voltesPerSegon);
+            Jugador aux = new Jugador(totalVoltes.toString(), String.valueOf(valorClickUsuari), nivellMillores, voltesPerSegon);
             Map<String, Object> transJugador = aux.toMap();
             Map<String, Object> update = new HashMap<>();
             update.put("/" + cadena.buscarUsuari(), transJugador);
@@ -1054,16 +1054,48 @@ public class Main extends AppCompatActivity {
 class Jugador implements Comparable<Jugador> {
 
     public String numVoltes;
-    public int valorClick;
+    public String valorClick;
     public Map<String, Integer> nivellMillores = new HashMap<>();
     public Map<String, String> voltesPerSegon = new HashMap<>();
 
     public Jugador() {}
 
-    public Jugador(String numVoltes, int valorClick, Map<String, Integer> nivellMillores, Map<String, String> voltesPerSegon) {
+    public Jugador(String numVoltes, String valorClick, Map<String, Integer> nivellMillores, Map<String, String> voltesPerSegon) {
         this.numVoltes = numVoltes;
         this.valorClick = valorClick;
         this.nivellMillores = nivellMillores;
+        this.voltesPerSegon = voltesPerSegon;
+    }
+
+    public String getNumVoltes() {
+        return numVoltes;
+    }
+
+    public void setNumVoltes(String numVoltes) {
+        this.numVoltes = numVoltes;
+    }
+
+    public String getValorClick() {
+        return valorClick;
+    }
+
+    public void setValorClick(String valorClick) {
+        this.valorClick = valorClick;
+    }
+
+    public Map<String, Integer> getNivellMillores() {
+        return nivellMillores;
+    }
+
+    public void setNivellMillores(Map<String, Integer> nivellMillores) {
+        this.nivellMillores = nivellMillores;
+    }
+
+    public Map<String, String> getVoltesPerSegon() {
+        return voltesPerSegon;
+    }
+
+    public void setVoltesPerSegon(Map<String, String> voltesPerSegon) {
         this.voltesPerSegon = voltesPerSegon;
     }
 

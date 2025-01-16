@@ -1,5 +1,7 @@
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -9,20 +11,38 @@ import org.json.JSONObject;
 public class Servidor {
 
     static ExecutorService executor;
+    static List<Handler> jugadors = new ArrayList<>();
 
     public static void main(String[] args) {
         int port = 25000;
+        boolean entra = true;
         executor = Executors.newCachedThreadPool();
+        GameManager GM = new GameManager();
+        executor.execute(GM);
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
-            Socket clientSocket = serverSocket.accept();
-            PontEntreClasses pEC = new PontEntreClasses(clientSocket, true);
-
 
             while(true) {
+                if(entra) {
+                    executor.execute(new Temp(10));
+                    entra = false;
+                }
+
+                Socket clientSocket = serverSocket.accept();
+                PontEntreClasses pEC = new PontEntreClasses(clientSocket, true);
+                Handler aux = new Handler(pEC, GM);
+                jugadors.add(aux);
+                executor.execute(aux);
                 
+                for(Handler jugador : jugadors) {
+                    jugador.Comenca();
+                }
+                
+                if(true)
+                    break;
             }
+            
         }
         catch(Exception e) {
             System.err.println(e);

@@ -1,5 +1,7 @@
 package com.projecte.formula1_clicker;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,8 +25,12 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.collection.ArraySortedMap;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.google.gson.Gson;
@@ -48,7 +54,7 @@ public class Classificacio extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
-    LinkedHashMap dataFirebase = new LinkedHashMap<>();
+    HashMap dataFirebase = new HashMap<>();
     List<JugadorClassificacio> jugadors = new ArrayList<>();
 
     @Override
@@ -74,7 +80,7 @@ public class Classificacio extends AppCompatActivity {
         /**
          * Agafem tots els jugadors que hi ha a la base de dades per ordenar-los a una llista.
          */
-        myRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        /*myRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
 
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -101,7 +107,47 @@ public class Classificacio extends AppCompatActivity {
                     carrega.performClick();
                 }
             }
-        });
+        });*/
+
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                for(DataSnapshot d : dataSnapshot.getChildren()) {
+                    String userID = d.getKey();
+                    Jugador uInfo = new Jugador();
+                    for(DataSnapshot a : d.getChildren()) {
+                        switch (a.getKey()) {
+                            case "nivellMillores":
+                                uInfo.setNivellMillores((Map<String, Integer>) a.getValue());
+                                break;
+                            case "numVoltes":
+                                uInfo.setNumVoltes((String) a.getValue());
+                                break;
+                            case "valorClick":
+                                uInfo.setValorClick("1");
+                                break;
+                            case "voltesPerSegon":
+                                uInfo.setVoltesPerSegon((Map<String, String>) a.getValue());
+                                break;
+                        }
+                    }
+
+                    jugadors.add(new JugadorClassificacio(userID, uInfo));
+                }
+                jugadors.sort(new ComparadorVoltes());
+
+                //Aquest click està aquí per poder actualitzar la llista una vegada s'han agafat totes les dades
+                //i s'han realitzat les ordenacions pertinents.
+                carrega.performClick();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        };
+        myRef.addValueEventListener(postListener);
 
         joc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +231,22 @@ class JugadorClassificacio {
         this.clau = clau;
         this.j = jugador;
     }
+
+    public String getClau() {
+        return clau;
+    }
+
+    public void setClau(String clau) {
+        this.clau = clau;
+    }
+
+    public Jugador getJ() {
+        return j;
+    }
+
+    public void setJ(Jugador j) {
+        this.j = j;
+    }
 }
 
 /**
@@ -195,6 +257,8 @@ class ComparadorVoltes implements Comparator<JugadorClassificacio> {
 
     @Override
     public int compare(JugadorClassificacio o1, JugadorClassificacio o2) {
-        return o1.j.numVoltes.compareTo(o2.j.numVoltes);
+        BigDecimal o1D = new BigDecimal(o1.j.numVoltes).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal o2D = new BigDecimal(o2.j.numVoltes).setScale(2, RoundingMode.HALF_UP);
+        return o2D.compareTo(o1D);
     }
 }
