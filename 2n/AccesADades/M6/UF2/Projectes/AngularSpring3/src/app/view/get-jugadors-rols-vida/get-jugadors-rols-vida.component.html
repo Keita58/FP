@@ -1,0 +1,10 @@
+<label class="mt-1" for="rols">Escull un rol:</label>
+<select class="mt-1" id="rols" [formControl]="rolEscollit">
+  <option *ngFor="let rol of rols" [value]="rol">{{ rol }}</option>
+</select>
+
+<p>Rol Escollit: {{ rolEscollit.value }}</p>
+
+<button class="mt-1" type="submit" (click)="resposta()">Response</button>
+<br/>Result:
+<div [innerHTML]="message"></div>
