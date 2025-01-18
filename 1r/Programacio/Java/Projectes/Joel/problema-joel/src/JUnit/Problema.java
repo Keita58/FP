@@ -23,19 +23,7 @@ public class Problema {
 		}
 		
 		int[][] res = posicio(matriu);	
-		System.out.print("{");
-		for(int i = 0; i < res.length; i++) {
-			System.out.print("{");
-			for(int j = 0; j < res.length; j++) {
-				if(j == res.length - 1)
-					System.out.print(res[i][j] + "}");
-				else
-					System.out.print(res[i][j] + ", ");
-			}
-			if(i < res.length - 1)
-				System.out.print(",");
-		}
-		System.out.print("}");
+		System.out.println(Arrays.deepToString(res));
 	}
 	
 	/**
