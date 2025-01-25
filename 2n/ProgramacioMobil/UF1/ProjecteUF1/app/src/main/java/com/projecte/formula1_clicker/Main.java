@@ -266,7 +266,7 @@ public class Main extends AppCompatActivity {
                 totalVoltes = totalVoltes.add(BigDecimal.valueOf(valorClickUsuari));
                 numVoltes.setText(totalVoltes.setScale(2, RoundingMode.HALF_UP) + " " + getString(R.string.Voltes));
             }
-        });
+        }); 
 
         trofeus.setOnClickListener(new View.OnClickListener() {
             @Override
