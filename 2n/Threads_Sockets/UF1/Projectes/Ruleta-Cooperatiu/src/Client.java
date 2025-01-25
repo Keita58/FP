@@ -189,7 +189,8 @@ public class Client {
                         sortir = false;
                         break;
                     case "2":
-                    pEC.sendByte(PontEntreClasses.C_PLEGAR);
+                        pEC.sendByte(PontEntreClasses.C_PLEGAR);
+                        sortir = false;
                         sortirMenu = false;
                         break;
                     default:

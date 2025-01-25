@@ -23,10 +23,12 @@ public class Servidor implements Runnable {
     static Servidor S;
     static int i;
     static Object iniciPartida = new Object(); // Per poder fer-ho amb semàfors
+    static boolean ruletaCanviada;
 
     public static void main(String[] args) {
         int port = 25000;
         partidaComencada = false;
+        ruletaCanviada = false;
         i = 0;
         filaDeU = new Semaphore(1);
         resultat = new JSONObject();
@@ -42,7 +44,10 @@ public class Servidor implements Runnable {
                 Socket clientSocket = serverSocket.accept();
                 PontEntreClasses pEC = new PontEntreClasses(clientSocket, true);
                 Handler aux = new Handler(pEC, S);
-                jugadors.add(aux);
+                if(partidaComencada)
+                    jugadorsEsperant.add(aux);
+                else
+                    jugadors.add(aux);
                 executor.execute(aux);
             }
             
@@ -59,38 +64,48 @@ public class Servidor implements Runnable {
         while(true) {
             try {
                 executor.execute(new Temp(10));
-                synchronized(this) { wait(); } // Espera de 10s pel Lobby
+                Thread.sleep(10000);
                 partidaComencada = true;
                 
                 int numRuleta = r.nextInt(0, 37);
                 resultat.put("Numero", numRuleta);
                 resultat.put("Color", ruleta[numRuleta]);
                 resultat.put("Parell_Imparell", numRuleta%2);
+                ruletaCanviada = true;
+
+                for(Handler h : jugadors) {
+                    h.Desperta();
+                }
                 
                 if(jugadors.size() > 0)
                     synchronized(this) { wait(); } // Esperem per rebre totes les dades dels Handlers
+                
+                ruletaCanviada = false;
 
                 for(Handler h : jugadors) {
                     h.DinersJugadors(apostesTotals);
                 }
 
-                Thread.sleep(10000);
+                System.out.println("Ronda acabada!");
+
                 partidaComencada = false;
+                Thread.sleep(10000);
                 PartidaComenca();
+                i = 0;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    //Llista paralel·la per anar apuntant qui ha arribat o no
+    //Llista parella per anar apuntant qui ha arribat o no
     public synchronized void DinersJugadors(int aposta, String text, int guanys, String textGuanys) {
         apostesTotals.put(text, aposta);
         apostesTotals.put(textGuanys, guanys);
         i++;
         //Només quan estiguin totes les dades
         if(i == jugadors.size())
-            this.notify();
+            synchronized(this) { notify(); }
     }
 
     public synchronized boolean AfegirNick(JSONObject nomJugador) {
@@ -107,32 +122,19 @@ public class Servidor implements Runnable {
 
         for (Handler handler : jugadorsEsperant) {
             jugadors.add(handler);
+            handler.Desperta();
         }
         jugadorsEsperant.clear();
     }
-}
 
-/*
-    Tot el codi per triar la ruleta
-
-    
-
-    Colors: 0 -> Negre / 1 -> Vermell / 2 -> Verd
-    
-    int numRuleta = r.nextInt(0, 37);
-    resultat.put("Numero", numRuleta);
-    resultat.put("Color", ruleta[numRuleta]);
-    resultat.put("Parell_Imparell", numRuleta%2);
-    if((array[0] == 0 && array[1] != numRuleta) || (array[0] == 1 && array[1] != ruleta[numRuleta]) || (array[0] == 2 && array[1] != numRuleta%2))
-        resultat.put("Guanys", 0);
-    else {
-        if(array[0] == 0 && array[1] == numRuleta) //Número
-            resultat.put("Guanys", array[2]*36);
-        else if(array[0] == 1 && array[1] == ruleta[numRuleta]) //Color
-            resultat.put("Guanys", array[2]*2);
-        else if(array[0] == 2 && array[1] == numRuleta%2) //Parell_Imparell
-            resultat.put("Guanys", array[2]*2);
+    public void AlliberaNick(String nick) {
+        nicksJugadors.remove(nick);
     }
- */
 
- 
+    public void EliminarHandler(Handler h) {
+        jugadors.remove(h);
+
+        if(jugadors.size() <= 0)
+            synchronized(this) { notify(); }
+    }
+}

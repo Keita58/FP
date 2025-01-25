@@ -21,6 +21,7 @@ public class Handler implements Runnable{
         try{
             pEC.sendByte(PontEntreClasses.S_BENVINGUT);
             pEC.receiveByte(PontEntreClasses.ACK);
+            inici = S.partidaComencada;
             JSONObject nomJugador = new JSONObject();
             while(true) {
                 nomJugador = pEC.receiveJSON();
@@ -34,24 +35,29 @@ public class Handler implements Runnable{
                 }
             }
 
-            if(S.partidaComencada) {
+
+            if(inici) {
                 pEC.sendByte(PontEntreClasses.S_EN_CURS);
                 pEC.receiveByte(PontEntreClasses.ACK);
-                wait();
+                synchronized(this) { wait(); }
             }
             
+            pEC.sendByte(PontEntreClasses.S_ESTAS_DINS);
+            pEC.receiveByte(PontEntreClasses.ACK);
+            pEC.sendInt(dinersJugador);
+            pEC.receiveByte(PontEntreClasses.ACK);
+            
             while(true) {
-                pEC.sendByte(PontEntreClasses.S_ESTAS_DINS);
-                pEC.receiveByte(PontEntreClasses.ACK);
-                pEC.sendInt(dinersJugador);
-                pEC.receiveByte(PontEntreClasses.ACK);
                 Servidor.filaDeU.acquire();
                 pEC.sendByte(PontEntreClasses.S_APOSTA);
 
                 JSONObject apostaJugador = pEC.receiveJSON();
+                pEC.sendByte(PontEntreClasses.ACK);
                 Servidor.filaDeU.release();
                 dinersJugador -= apostaJugador.getInt("Diners");
                 int dinersApostats = apostaJugador.getInt("Diners");
+                if(!S.ruletaCanviada)
+                    synchronized(this) { wait(); }
                 JSONObject resultatRuleta = Servidor.resultat;
 
                 JSONObject resultat = new JSONObject();
@@ -69,7 +75,7 @@ public class Handler implements Runnable{
                 pEC.sendJSON(resultatRuleta);
                 pEC.receiveByte(PontEntreClasses.ACK);
 
-                S.DinersJugadors(dinersApostats, nomJugador+"_Apostat", apostaJugador.getInt("Diners"), nomJugador+"_Guanys");
+                S.DinersJugadors(dinersApostats, nomJugador.getString("Nickname")+"_Apostat", resultat.getInt("Guanys"), nomJugador.getString("Nickname")+"_Guanys");
                 synchronized(this) { wait(); }
                 pEC.sendJSON(dinersJugadorsJSON);
                 pEC.receiveByte(PontEntreClasses.ACK);
@@ -79,17 +85,28 @@ public class Handler implements Runnable{
 
                 pEC.sendByte(PontEntreClasses.S_CONTINUAR);
 
-                if(pEC.receiveByte() == PontEntreClasses.C_PLEGAR)
+                if(pEC.receiveByte() == PontEntreClasses.C_PLEGAR) {
+                    S.AlliberaNick(nomJugador.getString("Nickname"));
+                    S.EliminarHandler(this);
                     break;
+                }
+
+                pEC.sendByte(PontEntreClasses.S_ESTAS_DINS);
+                pEC.receiveByte(PontEntreClasses.ACK);
             }
         }
         catch(Exception e) {
             e.printStackTrace();
+            Servidor.filaDeU.release();
         }
     }
 
     public void DinersJugadors(JSONObject json) {
         dinersJugadorsJSON = json;
-        this.notify();
+        synchronized(this) { notify(); }
+    }
+
+    public void Desperta() {
+        synchronized(this) { notify(); }
     }
 }

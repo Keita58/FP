@@ -74,7 +74,6 @@ public class PontEntreClasses {
         this.bufferReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
         this.dataReader = new DataInputStream(this.socket.getInputStream());
         this.dataWriter = new DataOutputStream(this.socket.getOutputStream());
-        System.out.println("He acabat");
     }
 
     public void send(String text) {
