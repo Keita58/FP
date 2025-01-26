@@ -98,7 +98,7 @@ public class Servidor implements Runnable {
         }
     }
 
-    //Llista parella per anar apuntant qui ha arribat o no
+    //Llista paral·lela per anar apuntant qui ha arribat o no
     public synchronized void DinersJugadors(int aposta, String text, int guanys, String textGuanys) {
         apostesTotals.put(text, aposta);
         apostesTotals.put(textGuanys, guanys);
