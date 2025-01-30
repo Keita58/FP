@@ -15,8 +15,10 @@ public class Client {
     public static void main(String[] args) {
         BufferedReader inConsola = new BufferedReader(new InputStreamReader(System.in));
         hostName = "localhost";
+        //hostName = "10.1.83.134";
+        //port = 55575;
         port = 25000;
-
+        
         try {
             Socket clientSocket = new Socket(hostName, port);
             pEC = new PontEntreClasses(clientSocket, true);

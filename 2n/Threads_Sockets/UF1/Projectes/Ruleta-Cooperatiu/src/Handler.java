@@ -1,16 +1,19 @@
+import java.io.IOException;
+import java.net.Socket;
+
 import org.json.JSONObject;
 
 public class Handler implements Runnable{
 
-    static PontEntreClasses pEC;
-    static Servidor S;
-    static boolean inici;
-    static int dinersJugador;
-    static JSONObject dinersJugadorsJSON;
+    private PontEntreClasses pEC;
+    private Servidor S;
+    //private boolean inici;
+    private int dinersJugador;
+    private JSONObject dinersJugadorsJSON;
 
-    public Handler(PontEntreClasses p, Servidor s) {
-        pEC = p;
-        inici = false;
+    public Handler(Socket client, Servidor s) throws IOException {
+        pEC = new PontEntreClasses(client, true);
+        //inici = false;
         S = s;
         dinersJugador = 500;
         dinersJugadorsJSON = new JSONObject();
@@ -21,7 +24,6 @@ public class Handler implements Runnable{
         try{
             pEC.sendByte(PontEntreClasses.S_BENVINGUT);
             pEC.receiveByte(PontEntreClasses.ACK);
-            inici = S.partidaComencada;
             JSONObject nomJugador = new JSONObject();
             while(true) {
                 nomJugador = pEC.receiveJSON();
@@ -32,16 +34,19 @@ public class Handler implements Runnable{
                 }
                 else {
                     pEC.sendByte(PontEntreClasses.S_NICK_EN_US);
+                    pEC.receiveByte(PontEntreClasses.ACK);
                 }
             }
 
-
-            if(inici) {
+            if(Servidor.partidaComencada) {
+                S.AfegirHandlerEspera(this);
                 pEC.sendByte(PontEntreClasses.S_EN_CURS);
                 pEC.receiveByte(PontEntreClasses.ACK);
                 synchronized(this) { wait(); }
             }
-            
+            else
+                S.AfegirHandler(this);
+
             pEC.sendByte(PontEntreClasses.S_ESTAS_DINS);
             pEC.receiveByte(PontEntreClasses.ACK);
             pEC.sendInt(dinersJugador);
@@ -56,7 +61,7 @@ public class Handler implements Runnable{
                 Servidor.filaDeU.release();
                 dinersJugador -= apostaJugador.getInt("Diners");
                 int dinersApostats = apostaJugador.getInt("Diners");
-                if(!S.ruletaCanviada)
+                if(!Servidor.ruletaCanviada)
                     synchronized(this) { wait(); }
                 JSONObject resultatRuleta = Servidor.resultat;
 
@@ -88,6 +93,7 @@ public class Handler implements Runnable{
                 if(pEC.receiveByte() == PontEntreClasses.C_PLEGAR) {
                     S.AlliberaNick(nomJugador.getString("Nickname"));
                     S.EliminarHandler(this);
+                    pEC.close();
                     break;
                 }
 
@@ -96,8 +102,9 @@ public class Handler implements Runnable{
             }
         }
         catch(Exception e) {
-            e.printStackTrace();
+            new Excepcio("El client s'ha acabat inesperadament!");
             Servidor.filaDeU.release();
+            Servidor.numJugadors.release();
         }
     }
 

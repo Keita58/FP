@@ -13,7 +13,7 @@ public class Servidor {
             ServerSocket serverSocket = new ServerSocket(port);
             Socket clientSocket = serverSocket.accept();
             PontEntreClasses pEC = new PontEntreClasses(clientSocket, true);
-            pEC.send("MONDONGO");
+            pEC.send("A");
             pEC.receive("ACK");
             while(true) {
                 HashMap<String, Integer> resultat = new HashMap<>();

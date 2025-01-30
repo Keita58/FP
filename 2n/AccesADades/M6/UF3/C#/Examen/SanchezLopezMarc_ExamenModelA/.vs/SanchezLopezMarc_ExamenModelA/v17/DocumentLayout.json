@@ -1,0 +1,97 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\SanchezLopezMarc_ExamenModelA\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D91E857D-7941-4832-8E55-BA9D185E70C9}|SanchezLopezMarc_ExamenModelA.csproj|d:\\sanchezlopezmarc_examenmodela\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D91E857D-7941-4832-8E55-BA9D185E70C9}|SanchezLopezMarc_ExamenModelA.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91E857D-7941-4832-8E55-BA9D185E70C9}|SanchezLopezMarc_ExamenModelA.csproj|d:\\sanchezlopezmarc_examenmodela\\alumne.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D91E857D-7941-4832-8E55-BA9D185E70C9}|SanchezLopezMarc_ExamenModelA.csproj|solutionrelative:alumne.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Examen/True/SqlTable/Examen.Alumnes.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Examen/True/SqlTable/Examen.Mentoria.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91E857D-7941-4832-8E55-BA9D185E70C9}|SanchezLopezMarc_ExamenModelA.csproj|D:\\SanchezLopezMarc_ExamenModelA\\context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D91E857D-7941-4832-8E55-BA9D185E70C9}|SanchezLopezMarc_ExamenModelA.csproj|solutionrelative:context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Examen.Mentoria [Datos]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Examen/True/SqlTable/Examen.Mentoria.sql",
+              "ToolTip": "Examen.Mentoria [Datos]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-01-28T14:32:41.331Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Examen.Alumnes [Datos]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Examen/True/SqlTable/Examen.Alumnes.sql",
+              "ToolTip": "Examen.Alumnes [Datos]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-01-28T14:32:23.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\SanchezLopezMarc_ExamenModelA\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\SanchezLopezMarc_ExamenModelA\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T14:19:57.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Alumne.cs",
+              "DocumentMoniker": "D:\\SanchezLopezMarc_ExamenModelA\\Alumne.cs",
+              "RelativeDocumentMoniker": "Alumne.cs",
+              "ToolTip": "D:\\SanchezLopezMarc_ExamenModelA\\Alumne.cs",
+              "RelativeToolTip": "Alumne.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAmwDcAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T14:23:20.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Context.cs",
+              "DocumentMoniker": "D:\\SanchezLopezMarc_ExamenModelA\\Context.cs",
+              "RelativeDocumentMoniker": "Context.cs",
+              "ToolTip": "D:\\SanchezLopezMarc_ExamenModelA\\Context.cs",
+              "RelativeToolTip": "Context.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T14:20:12.276Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

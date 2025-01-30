@@ -1,0 +1,12 @@
+D:\SanchezLopezMarc_ExamenModelA\bin\Debug\SanchezLopezMarc_ExamenModelA.exe.config
+D:\SanchezLopezMarc_ExamenModelA\bin\Debug\SanchezLopezMarc_ExamenModelA.exe
+D:\SanchezLopezMarc_ExamenModelA\bin\Debug\SanchezLopezMarc_ExamenModelA.pdb
+D:\SanchezLopezMarc_ExamenModelA\bin\Debug\EntityFramework.dll
+D:\SanchezLopezMarc_ExamenModelA\bin\Debug\EntityFramework.SqlServer.dll
+D:\SanchezLopezMarc_ExamenModelA\bin\Debug\EntityFramework.xml
+D:\SanchezLopezMarc_ExamenModelA\bin\Debug\EntityFramework.SqlServer.xml
+D:\SanchezLopezMarc_ExamenModelA\obj\Debug\SanchezLopezMarc_ExamenModelA.csproj.AssemblyReference.cache
+D:\SanchezLopezMarc_ExamenModelA\obj\Debug\SanchezLopezMarc_ExamenModelA.csproj.CoreCompileInputs.cache
+D:\SanchezLopezMarc_ExamenModelA\obj\Debug\SanchezL.D0F1F266.Up2Date
+D:\SanchezLopezMarc_ExamenModelA\obj\Debug\SanchezLopezMarc_ExamenModelA.exe
+D:\SanchezLopezMarc_ExamenModelA\obj\Debug\SanchezLopezMarc_ExamenModelA.pdb

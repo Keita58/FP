@@ -164,11 +164,12 @@ public class Client {
                 return false;
             }           
             System.out.println("Vols tornar a jugar? Si -> 1 | No -> 2");
-            boolean sortir = false;
+            boolean sortir = true;
             while(sortir) {
                 switch(inConsola.readLine()) {
                     case "1":
                         pEC.send("SALE");
+                        sortir = false;
                         break;
                     case "2":
                         pEC.send("LO SUPONIA");

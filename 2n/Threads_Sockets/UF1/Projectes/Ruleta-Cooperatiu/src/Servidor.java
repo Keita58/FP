@@ -24,13 +24,15 @@ public class Servidor implements Runnable {
     static int i;
     static Object iniciPartida = new Object(); // Per poder fer-ho amb semàfors
     static boolean ruletaCanviada;
+    static Semaphore numJugadors;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Excepcio {
         int port = 25000;
         partidaComencada = false;
         ruletaCanviada = false;
         i = 0;
         filaDeU = new Semaphore(1);
+        numJugadors = new Semaphore(100);
         resultat = new JSONObject();
         apostesTotals = new JSONObject();
         executor = Executors.newCachedThreadPool();
@@ -42,58 +44,65 @@ public class Servidor implements Runnable {
 
             while(true) {
                 Socket clientSocket = serverSocket.accept();
-                PontEntreClasses pEC = new PontEntreClasses(clientSocket, true);
-                Handler aux = new Handler(pEC, S);
-                if(partidaComencada)
-                    jugadorsEsperant.add(aux);
-                else
-                    jugadors.add(aux);
+                Handler aux = new Handler(clientSocket, S);
                 executor.execute(aux);
+                numJugadors.acquire();
             }
-            
         }
         catch(Exception e) {
-            System.err.println(e);
+            throw new Excepcio(e.toString());
         }
     }
 
     @Override
     public void run() {
         Random r = new Random();
-        
+        boolean esperar = true;
         while(true) {
             try {
-                executor.execute(new Temp(10));
-                Thread.sleep(10000);
-                partidaComencada = true;
-                
-                int numRuleta = r.nextInt(0, 37);
-                resultat.put("Numero", numRuleta);
-                resultat.put("Color", ruleta[numRuleta]);
-                resultat.put("Parell_Imparell", numRuleta%2);
-                ruletaCanviada = true;
-
-                for(Handler h : jugadors) {
-                    h.Desperta();
+                if(numJugadors.availablePermits() <= 98) {
+                    executor.execute(new Temp(10));
+                    Thread.sleep(10000);
+                    partidaComencada = true;
+                    
+                    int numRuleta = r.nextInt(0, 37);
+                    resultat.put("Numero", numRuleta);
+                    resultat.put("Color", ruleta[numRuleta]);
+                    resultat.put("Parell_Imparell", numRuleta%2);
+                    ruletaCanviada = true;
+    
+                    for(Handler h : jugadors) {
+                        h.Desperta();
+                    }
+                    
+                    if(jugadors.size() > 0)
+                        synchronized(this) { wait(); } // Esperem per rebre totes les dades dels Handlers
+                    
+                    ruletaCanviada = false;
+    
+                    for(Handler h : jugadors) {
+                        h.DinersJugadors(apostesTotals);
+                    }
+                    apostesTotals = new JSONObject();
+    
+                    System.out.println("Ronda acabada!");
+    
+                    partidaComencada = false;
+                    Thread.sleep(5000);
+                    PartidaComenca();
+                    i = 0;
+                    esperar = true;
                 }
-                
-                if(jugadors.size() > 0)
-                    synchronized(this) { wait(); } // Esperem per rebre totes les dades dels Handlers
-                
-                ruletaCanviada = false;
-
-                for(Handler h : jugadors) {
-                    h.DinersJugadors(apostesTotals);
+                else {
+                    if(esperar) {
+                        esperar = false;
+                        System.out.println("Esperant dos jugadors...");
+                    }
                 }
-
-                System.out.println("Ronda acabada!");
-
-                partidaComencada = false;
-                Thread.sleep(10000);
-                PartidaComenca();
-                i = 0;
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    throw new Excepcio("El servidor s'ha tancat inesperadament!");
+                } catch (Excepcio e1) {}
             }
         }
     }
@@ -136,5 +145,17 @@ public class Servidor implements Runnable {
 
         if(jugadors.size() <= 0)
             synchronized(this) { notify(); }
+    }
+
+    public void AfegirHandler(Handler h) {
+        jugadors.add(h);
+    }
+
+    public void AfegirHandlerEspera(Handler h) {
+        jugadorsEsperant.add(h);
+    }
+
+    public void DespertaServer() {
+        synchronized(this) { notify(); }
     }
 }
