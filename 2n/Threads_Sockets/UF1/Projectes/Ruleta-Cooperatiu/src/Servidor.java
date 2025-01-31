@@ -143,7 +143,7 @@ public class Servidor implements Runnable {
     public void EliminarHandler(Handler h) {
         jugadors.remove(h);
 
-        if(jugadors.size() <= 0)
+        if(i == jugadors.size())
             synchronized(this) { notify(); }
     }
 

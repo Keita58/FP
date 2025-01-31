@@ -102,9 +102,14 @@ public class Handler implements Runnable{
             }
         }
         catch(Exception e) {
-            new Excepcio("El client s'ha acabat inesperadament!");
+            try {
+                throw new Excepcio("Un client s'ha acabat inesperadament!");
+            } catch (Excepcio e1) {
+                e1.printStackTrace();
+            }
             Servidor.filaDeU.release();
             Servidor.numJugadors.release();
+            S.EliminarHandler(this);
         }
     }
 
