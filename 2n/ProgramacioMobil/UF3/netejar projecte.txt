@@ -1,0 +1,2 @@
+Eliminar .gitignore
+flutter clean project
