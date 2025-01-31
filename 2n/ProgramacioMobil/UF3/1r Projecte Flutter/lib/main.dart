@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -134,14 +132,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const Spacer(),
             Text(
-              'Combo de x $_subcounter!'
+                'Combo de x $_subcounter!'
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: '+1',
+        tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
