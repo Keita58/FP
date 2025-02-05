@@ -10,6 +10,7 @@ public class Handler implements Runnable{
     //private boolean inici;
     private int dinersJugador;
     private JSONObject dinersJugadorsJSON;
+    private boolean foraCuaJoc;
 
     public Handler(Socket client, Servidor s) throws IOException {
         pEC = new PontEntreClasses(client, true);
@@ -17,14 +18,16 @@ public class Handler implements Runnable{
         S = s;
         dinersJugador = 500;
         dinersJugadorsJSON = new JSONObject();
+        foraCuaJoc = true;
     }
 
     @Override
     public void run() {
+        JSONObject nomJugador = new JSONObject();
+
         try{
             pEC.sendByte(PontEntreClasses.S_BENVINGUT);
             pEC.receiveByte(PontEntreClasses.ACK);
-            JSONObject nomJugador = new JSONObject();
             while(true) {
                 nomJugador = pEC.receiveJSON();
                 if(S.AfegirNick(nomJugador)) {
@@ -54,6 +57,8 @@ public class Handler implements Runnable{
             
             while(true) {
                 Servidor.filaDeU.acquire();
+                System.out.println();
+                System.out.println("És el torn del jugador " + nomJugador + "!");
                 pEC.sendByte(PontEntreClasses.S_APOSTA);
 
                 JSONObject apostaJugador = pEC.receiveJSON();
@@ -89,6 +94,9 @@ public class Handler implements Runnable{
                 pEC.receiveByte(PontEntreClasses.ACK);
 
                 pEC.sendByte(PontEntreClasses.S_CONTINUAR);
+                Servidor.numJugadors.release();
+                foraCuaJoc = false;
+                S.AfegirHandlerEsperaADirSi(this);
 
                 if(pEC.receiveByte() == PontEntreClasses.C_PLEGAR) {
                     S.AlliberaNick(nomJugador.getString("Nickname"));
@@ -97,6 +105,13 @@ public class Handler implements Runnable{
                     break;
                 }
 
+                if(Servidor.partidaComencada)
+                    S.AfegirHandlerEspera(this);
+                else
+                    S.AfegirHandler(this);
+                
+                Servidor.numJugadors.acquire();
+                foraCuaJoc = true;
                 pEC.sendByte(PontEntreClasses.S_ESTAS_DINS);
                 pEC.receiveByte(PontEntreClasses.ACK);
             }
@@ -107,9 +122,11 @@ public class Handler implements Runnable{
             } catch (Excepcio e1) {
                 e1.printStackTrace();
             }
-            Servidor.filaDeU.release();
-            Servidor.numJugadors.release();
+            S.AlliberaNick(nomJugador.getString("Nickname"));
             S.EliminarHandler(this);
+            Servidor.filaDeU.release();
+            if(foraCuaJoc)
+                Servidor.numJugadors.release();
         }
     }
 

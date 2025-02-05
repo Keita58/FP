@@ -14,6 +14,7 @@ public class Servidor implements Runnable {
     static ExecutorService executor;
     static List<Handler> jugadors = new ArrayList<>();
     static List<Handler> jugadorsEsperant = new ArrayList<>();
+    static List<Handler> jugadorsEsperantADirSi = new ArrayList<>();
     static List<String> nicksJugadors = new ArrayList<>();
     static boolean partidaComencada;
     static Semaphore filaDeU;
@@ -88,8 +89,8 @@ public class Servidor implements Runnable {
                     System.out.println("Ronda acabada!");
     
                     partidaComencada = false;
-                    Thread.sleep(5000);
                     PartidaComenca();
+                    Thread.sleep(2000);
                     i = 0;
                     esperar = true;
                 }
@@ -136,11 +137,11 @@ public class Servidor implements Runnable {
         jugadorsEsperant.clear();
     }
 
-    public void AlliberaNick(String nick) {
+    public synchronized void AlliberaNick(String nick) {
         nicksJugadors.remove(nick);
     }
 
-    public void EliminarHandler(Handler h) {
+    public synchronized void EliminarHandler(Handler h) {
         jugadors.remove(h);
 
         if(i == jugadors.size())
@@ -148,11 +149,22 @@ public class Servidor implements Runnable {
     }
 
     public void AfegirHandler(Handler h) {
+        if(jugadorsEsperantADirSi.contains(h))
+            jugadorsEsperantADirSi.remove(h);
+
         jugadors.add(h);
     }
 
     public void AfegirHandlerEspera(Handler h) {
+        if(jugadorsEsperantADirSi.contains(h))
+            jugadorsEsperantADirSi.remove(h);
+
         jugadorsEsperant.add(h);
+    }
+
+    public void AfegirHandlerEsperaADirSi(Handler h) {
+        jugadors.remove(h);
+        jugadorsEsperantADirSi.add(h);
     }
 
     public void DespertaServer() {
