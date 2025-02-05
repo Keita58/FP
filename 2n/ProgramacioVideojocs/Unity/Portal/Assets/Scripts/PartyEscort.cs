@@ -13,15 +13,14 @@ public class PartyEscort : MonoBehaviour
     [SerializeField] private bool _Detectat;
     [SerializeField] private bool _Cami;
     [SerializeField] private Collider[] _DetectarCollider;
-    [SerializeField] private GameObject _PuntPatrullaA;
-    [SerializeField] private GameObject _PuntPatrullaB;
+    [SerializeField] private GameObject[] _Punts;
     private NavMeshAgent _NavMeshAgent;
     private System.Random _Random;
-    private bool _Canvi;
+    [SerializeField] private bool _Canvi;
 
     private void Start()
     {
-        _Canvi = false;
+        _Canvi = true;
         _NavMeshAgent = GetComponent<NavMeshAgent>();
         InitState(EnemyStates.PATROL);
     }
@@ -108,24 +107,13 @@ public class PartyEscort : MonoBehaviour
 
     IEnumerator Patrullar()
     {
+        int i = 0;
         while (!_Detectat)
-        {
-            if (!_Cami)
+        {            
+            if (_NavMeshAgent.remainingDistance <= 0)
             {
-                if (_Canvi)
-                {
-                    _NavMeshAgent.destination = new Vector3(_PuntPatrullaA.transform.position.x, transform.position.y, _PuntPatrullaA.transform.position.z);
-                }
-                else
-                    _NavMeshAgent.destination = new Vector3(_PuntPatrullaB.transform.position.x, transform.position.y, _PuntPatrullaB.transform.position.z);
-                
-                _Cami = true;
-            }
-
-            if (transform.position == new Vector3(_PuntPatrullaA.transform.position.x, transform.position.y, _PuntPatrullaA.transform.position.z) || transform.position == new Vector3(_PuntPatrullaB.transform.position.x, transform.position.y, _PuntPatrullaB.transform.position.z))
-            {
-                _Canvi = !_Canvi;
-                _Cami = false;
+                _NavMeshAgent.SetDestination(_Punts[i%2].transform.position);
+                i++;
             }
 
             _DetectarCollider = Physics.OverlapSphere(transform.position, 8f, _LayerJugador);

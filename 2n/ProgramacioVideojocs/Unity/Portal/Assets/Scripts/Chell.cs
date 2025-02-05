@@ -17,11 +17,12 @@ public class Chell : MonoBehaviour
     [SerializeField] private Camera _Camera;
     private GameObject _PortalBlau;
     private GameObject _PortalTaronja;
+    private bool _Teletransport;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        _Teletransport = true;
     }
 
     // Update is called once per frame
@@ -38,7 +39,8 @@ public class Chell : MonoBehaviour
                 else
                     print("Portal blau buit!");
                 
-                _PortalBlau = Instantiate(m_PortalBlauPrefab, transform.position + (_Camera.transform.forward * info.distance), info.transform.rotation);
+                _PortalBlau = Instantiate(m_PortalBlauPrefab, transform.position + (_Camera.transform.forward * info.distance), Quaternion.identity);
+                _PortalBlau.transform.forward = info.normal;
             }
         }
         else if (Input.GetMouseButtonDown(1)) // Botó dret
@@ -52,7 +54,8 @@ public class Chell : MonoBehaviour
                 else
                     print("Portal taronja buit!");
 
-                _PortalTaronja = Instantiate(m_PortalTaronjaPrefab, transform.position + (_Camera.transform.forward * info.distance), info.transform.rotation);
+                _PortalTaronja = Instantiate(m_PortalTaronjaPrefab, transform.position + (_Camera.transform.forward * info.distance), Quaternion.identity);
+                _PortalTaronja.transform.forward = info.normal;
             }
         }
     }
@@ -63,15 +66,29 @@ public class Chell : MonoBehaviour
         {
             print("He tocat un portal!");
 
-            if (other.transform.name == "PortalBlau")
+            if (other.transform.name == "PortaBlau(Clone)" && _Teletransport)
             {
-                transform.position = _PortalTaronja.transform.position + new Vector3(0, 0, 1 * Mathf.Sign(_PortalTaronja.transform.forward.z));
+                this.GetComponent<CharacterController>().enabled = false;
+                transform.position = _PortalTaronja.transform.position + _PortalTaronja.transform.forward;
+                this.GetComponent<CharacterController>().enabled = true;
+                _Teletransport = false;
+                StartCoroutine(Canvia());
             }
-            else
+            else if(_Teletransport)
             {
-                transform.position = _PortalBlau.transform.position + new Vector3(0, 0, 1 * Mathf.Sign(_PortalTaronja.transform.forward.z));
+                this.GetComponent<CharacterController>().enabled = false;
+                transform.position = _PortalBlau.transform.position + _PortalBlau.transform.forward;
+                this.GetComponent<CharacterController>().enabled = true;
+                _Teletransport = false;
+                StartCoroutine(Canvia());
             }
         }
+    }
+
+    IEnumerator Canvia()
+    {
+        yield return new WaitForSeconds(2);
+        _Teletransport = true;
     }
 
     private void OnCollisionEnter(Collision collision)
