@@ -32,30 +32,44 @@ public class Chell : MonoBehaviour
         {
             if(Physics.Raycast(transform.position, _Camera.transform.forward, out RaycastHit info, float.PositiveInfinity, _LayerParets))
             {
-                if (_PortalBlau != null)
+                if (_PortalBlau == null)
                 {
-                    Destroy(_PortalBlau);
+                    _PortalBlau = Instantiate(m_PortalBlauPrefab, transform.position + (_Camera.transform.forward * info.distance), Quaternion.identity);
                 }
                 else
-                    print("Portal blau buit!");
-                
-                _PortalBlau = Instantiate(m_PortalBlauPrefab, transform.position + (_Camera.transform.forward * info.distance), Quaternion.identity);
+                {
+                    _PortalBlau.transform.position = transform.position + (_Camera.transform.forward * info.distance);
+                }
+
                 _PortalBlau.transform.forward = info.normal;
+
+                if (_PortalTaronja != null)
+                {
+                    _PortalTaronja.transform.GetComponentInChildren<Light>().transform.LookAt(_PortalBlau.transform);
+                    _PortalBlau.transform.GetComponentInChildren<Light>().transform.LookAt(_PortalTaronja.transform);
+                }
             }
         }
         else if (Input.GetMouseButtonDown(1)) // Botó dret
         {
             if (Physics.Raycast(transform.position, _Camera.transform.forward, out RaycastHit info, float.PositiveInfinity, _LayerParets))
             {
-                if (_PortalTaronja != null)
+                if (_PortalTaronja == null)
                 {
-                    Destroy(_PortalTaronja);
+                    _PortalTaronja = Instantiate(m_PortalTaronjaPrefab, transform.position + (_Camera.transform.forward * info.distance), Quaternion.identity);
                 }
                 else
-                    print("Portal taronja buit!");
+                {
+                    _PortalTaronja.transform.position = transform.position + (_Camera.transform.forward * info.distance);
+                }
 
-                _PortalTaronja = Instantiate(m_PortalTaronjaPrefab, transform.position + (_Camera.transform.forward * info.distance), Quaternion.identity);
                 _PortalTaronja.transform.forward = info.normal;
+
+                if (_PortalBlau != null)
+                {
+                    _PortalTaronja.transform.GetComponentInChildren<Light>().transform.LookAt(_PortalBlau.transform);
+                    _PortalBlau.transform.GetComponentInChildren<Light>().transform.LookAt(_PortalTaronja.transform);
+                }
             }
         }
     }
@@ -68,16 +82,20 @@ public class Chell : MonoBehaviour
 
             if (other.transform.name == "PortaBlau(Clone)" && _Teletransport)
             {
+                float velocitat = GetComponent<CharacterController>().velocity.magnitude;
                 this.GetComponent<CharacterController>().enabled = false;
                 transform.position = _PortalTaronja.transform.position + _PortalTaronja.transform.forward;
+                transform.forward = transform.forward * velocitat;
                 this.GetComponent<CharacterController>().enabled = true;
                 _Teletransport = false;
                 StartCoroutine(Canvia());
             }
             else if(_Teletransport)
             {
+                float velocitat = GetComponent<CharacterController>().velocity.magnitude;
                 this.GetComponent<CharacterController>().enabled = false;
                 transform.position = _PortalBlau.transform.position + _PortalBlau.transform.forward;
+                transform.forward = transform.forward * velocitat;
                 this.GetComponent<CharacterController>().enabled = true;
                 _Teletransport = false;
                 StartCoroutine(Canvia());

@@ -49,7 +49,8 @@ public class TorretaMK1 : MonoBehaviour
         {
             Debug.DrawRay(transform.position, info.transform.position, Color.red);
             info.transform.gameObject.TryGetComponent<Chell>(out Chell chell);
-            chell.GameOver();
+            if(chell != null) 
+                chell.GameOver();
         }
     }
 }
