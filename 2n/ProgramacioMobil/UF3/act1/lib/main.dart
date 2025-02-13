@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,28 +12,45 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    String hexColor = "#F896D8"; // Rosa
     return MaterialApp(
       title: 'Fitness App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        //colorScheme: ColorScheme.fromSeed(seedColor: Color(0x00f896d8)),
-        useMaterial3: true,
-        fontFamily: GoogleFonts.montserrat().fontFamily,
-      ),
+          // This is the theme of your application.
+          //
+          // TRY THIS: Try running your application with "flutter run". You'll see
+          // the application has a purple toolbar. Then, without quitting the app,
+          // try changing the seedColor in the colorScheme below to Colors.green
+          // and then invoke "hot reload" (save your changes or press the "hot
+          // reload" button in a Flutter-supported IDE, or press "r" if you used
+          // the command line to start the app).
+          //
+          // Notice that the counter didn't reset back to zero; the application
+          // state is not lost during the reload. To reset the state, use hot
+          // restart instead.
+          //
+          // This works for code too, not just values: Most code changes can be
+          // tested with just a hot reload.
+          //colorScheme: ColorScheme.fromSeed(seedColor: Color(0x00f896d8)),
+          colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: Color(
+                  int.parse(hexColor.substring(1, 7), radix: 16) + 0xFF000000),
+              secondary: Colors.deepPurpleAccent,
+              tertiary: Colors.blue),
+          useMaterial3: true,
+          fontFamily: GoogleFonts.montserrat().fontFamily,
+          textTheme: Theme.of(context).textTheme.copyWith(
+                headlineMedium: GoogleFonts.montserrat(
+                    textStyle: Theme.of(context).textTheme.headlineMedium),
+                bodyMedium: GoogleFonts.montserrat(
+                    textStyle: Theme.of(context).textTheme.bodyMedium),
+                titleSmall: GoogleFonts.montserrat(
+                    textStyle: Theme.of(context).textTheme.titleSmall),
+                titleLarge: GoogleFonts.montserrat(
+                    textStyle: Theme.of(context).textTheme.titleLarge),
+                headlineSmall: GoogleFonts.montserrat(
+                    textStyle: Theme.of(context).textTheme.headlineSmall),
+              )),
       home: const MyHomePage(title: 'Fitness App'),
     );
   }
@@ -57,20 +75,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String hexColor = "#F896D8";
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -81,55 +85,145 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        elevation: 5.0,
+        shadowColor: Colors.black,
         centerTitle: true,
         foregroundColor: Colors.white,
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Color(int.parse(hexColor.substring(1, 7), radix: 16) + 0xFF000000),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title,),
+        title: Text(
+          widget.title,
+        ),
         leading: IconButton(
           icon: Icon(Icons.menu),
           tooltip: 'Menu',
           onPressed: () {},
         ),
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage("https://randomuser.me/api/portraits/women/44.jpg"),
+          GestureDetector(
+            onTap: () => _gotoDetailsPage(context),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: Hero(
+                  tag: 'foto',
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://randomuser.me/api/portraits/women/44.jpg"),
+                  )),
             ),
-          )
+          ),
         ],
       ),
-      body: Center(
+      body: SingleChildScrollView(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Hola Diana,',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+              child: Text(
+                'Come 5 veces al dia y permanece hidratada durante el dia',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Más detalles',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Últimas actividades',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.run_circle_outlined),
+                  title: Text('Running',
+                      style: Theme.of(context).textTheme.titleLarge),
+                  subtitle: Text('Ayer, 18:20'),
+                  trailing: Text(
+                    '7,300km',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.run_circle_outlined),
+                  title: Text('Running',
+                      style: Theme.of(context).textTheme.titleLarge),
+                  subtitle: Text('15 Oct 2022, 13:45'),
+                  trailing: Text(
+                    '6,500km',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.run_circle_outlined),
+                  title: Text('Running',
+                      style: Theme.of(context).textTheme.titleLarge),
+                  subtitle: Text('10 Oct 2022, 19:02'),
+                  trailing: Text(
+                    '7,300km',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+              child: CircularPercentIndicator(
+                radius: 60.0,
+                lineWidth: 10.0,
+                percent: 0.7,
+                circularStrokeCap: CircularStrokeCap.round,
+                progressColor: Theme.of(context).colorScheme.secondary,
+                center: Text(
+                  '70.0%',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                footer: Text(
+                  'Objetivo mensual',
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -148,6 +242,46 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Perfil',
           ),
         ],
+      ),
+    );
+  }
+
+  void _gotoDetailsPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => Scaffold(
+          appBar: AppBar(
+            elevation: 5.0,
+            shadowColor: Colors.black,
+            centerTitle: true,
+            foregroundColor: Colors.white,
+            // TRY THIS: Try changing the color here to a specific color (to
+            // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+            // change color while the other colors stay the same.
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            title: Text('My profile'),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  child: Hero(
+                    tag: 'foto',
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            "https://randomuser.me/api/portraits/women/44.jpg"),
+                        maxRadius: 150,
+                      ),
+                    )
+                  ),
+                )
+              ]
+            )
+          ),
+        ),
       ),
     );
   }
