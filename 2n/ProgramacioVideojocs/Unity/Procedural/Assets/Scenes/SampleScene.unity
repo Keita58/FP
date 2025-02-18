@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 407197585}
   - component: {fileID: 407197587}
   - component: {fileID: 407197586}
-  - component: {fileID: 407197588}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -266,60 +265,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &407197588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407197584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44707e37e84ffd54d9b578f80c37991e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Verbose: 0
-  _Gradient:
-    serializedVersion: 2
-    key0: {r: 0, g: 0.4643875, b: 0.8, a: 1}
-    key1: {r: 0.027450982, g: 0.8000001, b: 0, a: 1}
-    key2: {r: 0.8301887, g: 0.62326264, b: 0.505162, a: 0}
-    key3: {r: 1, g: 1, b: 1, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 16384
-    ctime1: 32768
-    ctime2: 49151
-    ctime3: 65535
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 1
-    m_ColorSpace: -1
-    m_NumColorKeys: 4
-    m_NumAlphaKeys: 2
-  _Tile: {fileID: 11400000, guid: 2262de26e9f690f408730ffd0982d11e, type: 2}
-  _Width: 100
-  _Height: 100
-  _Amplitude: 10
-  _OffsetX: 0
-  _OffsetY: 0
-  _Frequency: 4
-  _Octaves: 0
-  _Lacunarity: 2
-  _Persistence: 0.5
-  _Carve: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +397,77 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &550711875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 550711877}
+  - component: {fileID: 550711876}
+  m_Layer: 0
+  m_Name: Perlin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &550711876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550711875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44707e37e84ffd54d9b578f80c37991e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Verbose: 0
+  _Tilemap: {fileID: 407197587}
+  _TileBosc:
+  - {fileID: 11400000, guid: 68b71e5f002eef54f915f83a3dcb5277, type: 2}
+  _TileTerra:
+  - {fileID: 11400000, guid: 5e46e3c5fe3dd1540ba81cefbcb940f0, type: 2}
+  - {fileID: 11400000, guid: 8a5cf633d96ebad4ca252d93565949a3, type: 2}
+  _TileAigua:
+  - {fileID: 11400000, guid: 0634393e599222e4280b2098d604225a, type: 2}
+  _TileSorra:
+  - {fileID: 11400000, guid: 3a5ebba8656a0ca49825c86e7f4ce8e5, type: 2}
+  _TileNeu:
+  - {fileID: 11400000, guid: 1166935f84b32ba4d97a37330339b4bb, type: 2}
+  - {fileID: 11400000, guid: a4925b324bb908247bb10d65cb45cfd0, type: 2}
+  - {fileID: 11400000, guid: f57315c372be8bf4a90ffb6df8c1d66d, type: 2}
+  _TileRoca:
+  - {fileID: 11400000, guid: f4a0704c600f22a4cbd273ac46cf0c9c, type: 2}
+  _TileLimit: {fileID: 11400000, guid: e81e42b40f0936e4f9d1fb97611ac57e, type: 2}
+  _Width: 100
+  _Height: 100
+  _Amplitude: 10
+  _OffsetX: 0
+  _OffsetY: 0
+  _Frequency: 4
+  _Octaves: 0
+  _Lacunarity: 2
+  _Persistence: 0.5
+--- !u!4 &550711877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550711875}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25355402, y: 0.0024362355, z: 0.020885563}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -593,3 +609,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 2070838195}
+  - {fileID: 550711877}

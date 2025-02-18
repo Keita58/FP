@@ -1,3 +1,4 @@
+import 'package:fitness_app/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -40,17 +41,18 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           fontFamily: GoogleFonts.montserrat().fontFamily,
           textTheme: Theme.of(context).textTheme.copyWith(
-                headlineMedium: GoogleFonts.montserrat(
-                    textStyle: Theme.of(context).textTheme.headlineMedium),
-                bodyMedium: GoogleFonts.montserrat(
-                    textStyle: Theme.of(context).textTheme.bodyMedium),
-                titleSmall: GoogleFonts.montserrat(
-                    textStyle: Theme.of(context).textTheme.titleSmall),
-                titleLarge: GoogleFonts.montserrat(
-                    textStyle: Theme.of(context).textTheme.titleLarge),
-                headlineSmall: GoogleFonts.montserrat(
-                    textStyle: Theme.of(context).textTheme.headlineSmall),
-              )),
+              headlineMedium: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.headlineMedium),
+              bodyMedium: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.bodyMedium),
+              titleSmall: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.titleSmall),
+              titleLarge: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.titleLarge),
+              headlineSmall: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.headlineSmall),
+              titleMedium: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.titleMedium))),
       home: const MyHomePage(title: 'Fitness App'),
     );
   }
@@ -105,7 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: <Widget>[
           GestureDetector(
-            onTap: () => _gotoDetailsPage(context),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+            },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
               child: Hero(
@@ -118,114 +122,169 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Hola Diana,',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+            child: Container(
+              alignment: Alignment.centerLeft,
               child: Text(
-                'Come 5 veces al dia y permanece hidratada durante el dia',
-                style: Theme.of(context).textTheme.bodyMedium,
+                'Hola Diana,',
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
-              child: Container(
-                alignment: Alignment.centerLeft,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+            child: Text(
+              'Come 5 veces al dia y permanece hidratada durante el dia',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+                },
                 child: Text(
                   'Más detalles',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: Theme.of(context).colorScheme.tertiary,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Últimas actividades',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.run_circle_outlined),
+                        title: Text('Running',
+                            style: Theme.of(context).textTheme.titleLarge),
+                        subtitle: Text('Ayer, 18:20'),
+                        trailing: Text(
+                          '7,300km',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
                       ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Últimas actividades',
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-              child: Card(
-                child: ListTile(
-                  leading: Icon(Icons.run_circle_outlined),
-                  title: Text('Running',
-                      style: Theme.of(context).textTheme.titleLarge),
-                  subtitle: Text('Ayer, 18:20'),
-                  trailing: Text(
-                    '7,300km',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    ),
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-              child: Card(
-                child: ListTile(
-                  leading: Icon(Icons.run_circle_outlined),
-                  title: Text('Running',
-                      style: Theme.of(context).textTheme.titleLarge),
-                  subtitle: Text('15 Oct 2022, 13:45'),
-                  trailing: Text(
-                    '6,500km',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.run_circle_outlined),
+                        title: Text('Running',
+                            style: Theme.of(context).textTheme.titleLarge),
+                        subtitle: Text('15 Oct 2022, 13:45'),
+                        trailing: Text(
+                          '6,500km',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-              child: Card(
-                child: ListTile(
-                  leading: Icon(Icons.run_circle_outlined),
-                  title: Text('Running',
-                      style: Theme.of(context).textTheme.titleLarge),
-                  subtitle: Text('10 Oct 2022, 19:02'),
-                  trailing: Text(
-                    '7,300km',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.run_circle_outlined),
+                        title: Text('Running',
+                            style: Theme.of(context).textTheme.titleLarge),
+                        subtitle: Text('10 Oct 2022, 19:02'),
+                        trailing: Text(
+                          '7,300km',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-              child: CircularPercentIndicator(
-                radius: 60.0,
-                lineWidth: 10.0,
-                percent: 0.7,
-                circularStrokeCap: CircularStrokeCap.round,
-                progressColor: Theme.of(context).colorScheme.secondary,
-                center: Text(
-                  '70.0%',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                footer: Text(
-                  'Objetivo mensual',
-                ),
-              ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.run_circle_outlined),
+                        title: Text('Running',
+                            style: Theme.of(context).textTheme.titleLarge),
+                        subtitle: Text('10 Oct 2022, 19:02'),
+                        trailing: Text(
+                          '7,300km',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.run_circle_outlined),
+                        title: Text('Running',
+                            style: Theme.of(context).textTheme.titleLarge),
+                        subtitle: Text('10 Oct 2022, 19:02'),
+                        trailing: Text(
+                          '7,300km',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.run_circle_outlined),
+                        title: Text('Running',
+                            style: Theme.of(context).textTheme.titleLarge),
+                        subtitle: Text('10 Oct 2022, 19:02'),
+                        trailing: Text(
+                          '7,300km',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              )
             )
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+            child: CircularPercentIndicator(
+              radius: 60.0,
+              lineWidth: 10.0,
+              percent: 0.7,
+              circularStrokeCap: CircularStrokeCap.round,
+              progressColor: Theme.of(context).colorScheme.secondary,
+              center: Text(
+                '70.0%',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              footer: Text(
+                'Objetivo mensual',
+              ),
+            ),
+          )
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -242,46 +301,6 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Perfil',
           ),
         ],
-      ),
-    );
-  }
-
-  void _gotoDetailsPage(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) => Scaffold(
-          appBar: AppBar(
-            elevation: 5.0,
-            shadowColor: Colors.black,
-            centerTitle: true,
-            foregroundColor: Colors.white,
-            // TRY THIS: Try changing the color here to a specific color (to
-            // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-            // change color while the other colors stay the same.
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            title: Text('My profile'),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.center,
-                  child: Hero(
-                    tag: 'foto',
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://randomuser.me/api/portraits/women/44.jpg"),
-                        maxRadius: 150,
-                      ),
-                    )
-                  ),
-                )
-              ]
-            )
-          ),
-        ),
       ),
     );
   }

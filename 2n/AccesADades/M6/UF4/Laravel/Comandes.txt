@@ -1,0 +1,7 @@
+php artisan key:generate -> Això és per crear la clau que demana Laravel
+
+Workbech -> Crear la base de dades amb el nom de la scheme a laravel (o la que posem en el .env)
+
+php artisan serve -> Executa el codi per mostrar la pàgina web
+
+SESSION_DRIVER=driver -> SESSION_DRIVER=file per a que funcioni
