@@ -1,0 +1,10 @@
+Parts realitzades:
+    · S'han realitzat tots els punts del projecte
+Dificultats trobades:
+    · Les dificultats que hem trobat en aquest projecte son el gathering pel fet de que no sabíem que si la col·lecció començava amb majúscula s'havia d'afegir una línia a la classe mateixa perquè
+        ho reconegués i els enums.
+    · A l'hora de fer un find sense condició no ens imprimia res, així que després d'haver estat una bona estona mirant, vam descobrir que haviem de convertir el find en una llista.
+Divergències amb l'enunciat:
+    · A la simulació, a l'hora d'atacar, hem decidit que era millor que es pogués atacar si l'atac és major o IGUAL a la defensa, ja que si no es quedava en un bucle infinit.
+    · A l'hora d'iniciar un torn, hem fet que a part que el jugador atacant agafés una carta, que el jugador defensor agafés una altra per a poder fer els càlculs pertinents.
+    · Quan afegim una carta a l'usuari especificat, si aquest està més d'una vegada a la base de dades, afegim la mateixa carta a totes les instàncies d'aquest.
