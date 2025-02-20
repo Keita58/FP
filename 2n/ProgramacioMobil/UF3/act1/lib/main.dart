@@ -1,3 +1,4 @@
+import 'package:fitness_app/Classes/cartes.dart';
 import 'package:fitness_app/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -77,6 +78,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Cartes> cartes = [
+    Cartes(
+      titol: "Running",
+      data: 'Ayer, 18:20',
+      km: 7300,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '15 Oct 2022, 13:45',
+      km: 6500,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '10 Oct 2022, 19:02',
+      km: 7300,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '10 Oct 2022, 19:02',
+      km: 7300,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '10 Oct 2022, 19:02',
+      km: 7300,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '10 Oct 2022, 19:02',
+      km: 7300,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -108,7 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Profile()));
             },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
@@ -147,13 +182,14 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Profile()));
                 },
                 child: Text(
                   'Más detalles',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: Theme.of(context).colorScheme.tertiary,
-                  ),
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
                 ),
               ),
             ),
@@ -169,104 +205,27 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: Card(
-                      child: ListTile(
-                        leading: Icon(Icons.run_circle_outlined),
-                        title: Text('Running',
-                            style: Theme.of(context).textTheme.titleLarge),
-                        subtitle: Text('Ayer, 18:20'),
-                        trailing: Text(
-                          '7,300km',
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
+              child: SingleChildScrollView(
+                  child: Column(
+            children: [
+              for (int i = 0; i < cartes.length; i++)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  child: Card(
+                    child: ListTile(
+                      leading: Icon(Icons.run_circle_outlined),
+                      title: Text(cartes[i].titol,
+                          style: Theme.of(context).textTheme.titleLarge),
+                      subtitle: Text(cartes[i].data),
+                      trailing: Text(
+                        "${cartes[i].km}km",
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: Card(
-                      child: ListTile(
-                        leading: Icon(Icons.run_circle_outlined),
-                        title: Text('Running',
-                            style: Theme.of(context).textTheme.titleLarge),
-                        subtitle: Text('15 Oct 2022, 13:45'),
-                        trailing: Text(
-                          '6,500km',
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: Card(
-                      child: ListTile(
-                        leading: Icon(Icons.run_circle_outlined),
-                        title: Text('Running',
-                            style: Theme.of(context).textTheme.titleLarge),
-                        subtitle: Text('10 Oct 2022, 19:02'),
-                        trailing: Text(
-                          '7,300km',
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: Card(
-                      child: ListTile(
-                        leading: Icon(Icons.run_circle_outlined),
-                        title: Text('Running',
-                            style: Theme.of(context).textTheme.titleLarge),
-                        subtitle: Text('10 Oct 2022, 19:02'),
-                        trailing: Text(
-                          '7,300km',
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: Card(
-                      child: ListTile(
-                        leading: Icon(Icons.run_circle_outlined),
-                        title: Text('Running',
-                            style: Theme.of(context).textTheme.titleLarge),
-                        subtitle: Text('10 Oct 2022, 19:02'),
-                        trailing: Text(
-                          '7,300km',
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: Card(
-                      child: ListTile(
-                        leading: Icon(Icons.run_circle_outlined),
-                        title: Text('Running',
-                            style: Theme.of(context).textTheme.titleLarge),
-                        subtitle: Text('10 Oct 2022, 19:02'),
-                        trailing: Text(
-                          '7,300km',
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              )
-            )
-          ),
+                ),
+            ],
+          ))),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
             child: CircularPercentIndicator(
@@ -285,6 +244,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
