@@ -1,0 +1,9 @@
+Freqüència: Com de detallat es veu el disseny, com més freqüència més petit el disseny i el detall.
+
+Amplitud: Augmenta l'alçada (en 3D)
+
+Octava: Per quant es multiplica la freqüència (com més octaves més freqüencia i més petit el disseny i amb més informació en el mateix espai)
+
+Lacunaritat: Afecta a la freqúència. Augmenta la força de les octaves (com més gran més es noten els canvis)
+
+Persistencia: Com afecten l'amplitud al mapa. Com més petit menys canvia el mapa, com més gran més modificat acaba el mapa.

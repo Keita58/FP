@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -7,6 +8,8 @@ using static Unity.Burst.Intrinsics.X86;
 
 public class MapGenerator : MonoBehaviour
 {
+    private const int MAX_OCTAVES = 8;
+
     [SerializeField]
     private bool _Verbose = false;
 
@@ -14,30 +17,31 @@ public class MapGenerator : MonoBehaviour
     private Tilemap _Tilemap;
 
     [SerializeField]
-    private Tile[] _TileBosc;
+    private Tilemap _TilemapMinerals;
 
     [SerializeField]
-    private Tile[] _TileTerra;
-
-    [SerializeField]
-    private Tile[] _TileAigua;
-
-    [SerializeField]
-    private Tile[] _TileSorra;
-
-    [SerializeField]
-    private Tile[] _TileNeu;
+    private Tile[] _TileGespa;
 
     [SerializeField]
     private Tile[] _TileRoca;
 
     [SerializeField]
-    private Tile _TileLimit;
+    private Tile[] _TileRocaLimit;
 
-    //GUI
-    public event Action OnToggleHelp;
-    public event Action OnToggleQuad;
-    public event Action<Texture2D, int, int> OnTextureChanged;
+    [SerializeField]
+    private Tile[] _TileRocaSubsol;
+
+    [SerializeField]
+    private Tile[] _TileTerra;
+
+    [SerializeField]
+    private Tile[] _TileLiana;
+
+    [SerializeField]
+    private Tile[] _TileMinerals;
+
+    [SerializeField]
+    private Tile _TileLimit;
 
     [Header("Size")]
     //size of the area we will paint
@@ -57,24 +61,40 @@ public class MapGenerator : MonoBehaviour
     private float _OffsetX;
     [SerializeField]
     private float _OffsetY;
-    [SerializeField]
-    private float _Frequency = 4f;
-    [SerializeField]
-    private float _FrequencySoil = 1f;
-    [SerializeField]
-    private float _FrequencyTemp = 1f;
-
-    //octaves
-    private const int MAX_OCTAVES = 8;
-    [SerializeField]
-    [Range(0, MAX_OCTAVES)]
-    private int _Octaves = 0;
     [Range(2, 3)]
     [SerializeField]
     private int _Lacunarity = 2;
+
+    [Header("Mines")]
+    [SerializeField]
+    private float _Frequency = 10f;
+    [SerializeField]
+    [Range(0, MAX_OCTAVES)]
+    private int _Octaves = 2;
     [SerializeField]
     [Range(0.1f, 0.9f)]
-    private float _Persistence = 0.5f;
+    private float _Persistence = 0.4f;
+
+    [Header("Sòl")]
+    [SerializeField]
+    private float _FrequenciaSol = 1f;
+    [SerializeField]
+    [Range(0, MAX_OCTAVES)]
+    private int _OctavesSol = 0;
+    [SerializeField]
+    [Range(0.1f, 0.9f)]
+    private float _PersistenciaSol = 0.4f;
+
+    [Header("Minerals")]
+    [SerializeField]
+    [Min(5f)]
+    private float _FrequencyMinerals = 10f;
+    [SerializeField]
+    [Range(0, MAX_OCTAVES)]
+    private int _OctavesMinerals = 0;
+    [SerializeField]
+    [Range(0.1f, 0.9f)]
+    private float _PersistenciaMinerals = 0.4f;
 
     void Start()
     {
@@ -86,57 +106,136 @@ public class MapGenerator : MonoBehaviour
         //recorrem el mapa
         for (int y = 0; y < _Width; y++)
         {
-            float perlin1D = PerlinNoiseUtilities.CalculatePerlinNoise(y, 1, _FrequencySoil, _Width, 1, _OffsetX, _OffsetY, _Octaves, _Lacunarity, _Persistence, false, _Verbose, true);
+            float perlin1D = PerlinNoiseUtilities.CalculatePerlinNoise(y, 1, _FrequenciaSol, _Width, 1, _OffsetX, _OffsetY, _OctavesSol, 2, _PersistenciaSol, true, false);
 
-            Tile aux = Instantiate(_TileLimit);
-            aux.color = Color.black;
-            _Tilemap.SetTile(new Vector3Int(y, (int)(_Height * perlin1D), 0), aux);
+            _Tilemap.SetTile(new Vector3Int(y, (int)(_Height * perlin1D), 0), _TileLimit);
+            int gespaCaselles = UnityEngine.Random.Range(2, 6);
+            int terraCaselles = UnityEngine.Random.Range(6, 8);
+            int lianaCaselles = UnityEngine.Random.Range(0, 3);
 
             for (int x = (int)(_Height * perlin1D) - 1; x >= 0; x--)
             {
                 //Perlin per les coves
-                float perlinNoise = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _Frequency, _Width, _Height, _OffsetX, _OffsetY, _Octaves, _Lacunarity, _Persistence, false, _Verbose, true);
+                float perlinNoise = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _Frequency, _Width, _Height, _OffsetX, _OffsetY, _Octaves, _Lacunarity, _Persistence, true, _Verbose);
 
-                //Perlin per les temps
-                float tempNoise = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyTemp, _Width, _Height, _OffsetX + 1000, _OffsetY + 1000, _Octaves, _Lacunarity, _Persistence, false, _Verbose, true);
-
-                if (perlinNoise <= 0.25f)
+                if (gespaCaselles > 0)
                 {
-                    _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileAigua[0]);
+                    int s = UnityEngine.Random.Range(0, 10);
+                    if (s < 5)
+                        _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileGespa[0]);
+                    else
+                        _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileGespa[1]);
+                    gespaCaselles--;
                 }
-                else if (perlinNoise > 0.25f && perlinNoise <= 0.4f)
+                else if (perlinNoise > 0.3f && perlinNoise <= 0.7f)
                 {
-                    _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileSorra[0]);
-                }
-                else if (perlinNoise > 0.4f && perlinNoise <= 0.75f)
-                {
-                    if (perlinNoise >= 0.7f && perlinNoise < 0.75f)
+                    lianaCaselles = UnityEngine.Random.Range(0, 3);
+                    if (gespaCaselles <= 0 && terraCaselles > 0)
                     {
-                        _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileBosc[0]);
+                        _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileTerra[0]);
+                        terraCaselles--;
                     }
                     else
                     {
-                        int s = UnityEngine.Random.Range(0, 10);
-                        if(s <= 5)
-                            _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileTerra[0]);
+                        if(x > (_Height * perlin1D)*2/10)
+                        {
+                            float mineral1 = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 1000, _OffsetY + 1000, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
+                            float mineral2 = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 5000, _OffsetY + 5000, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
+                            float mineral3 = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 2500, _OffsetY + 2500, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
+
+                            int rand = UnityEngine.Random.Range(0, 3);
+
+                            switch(rand)
+                            {
+                                case 0:
+                                    if (mineral1 >= 0.8f && mineral1 < 1f)
+                                    {
+                                        _TilemapMinerals.SetTile(new Vector3Int(y, x, 0), _TileMinerals[0]);
+                                    }
+                                    break;
+                                case 1:
+                                    if (mineral2 >= 0.85f && mineral2 < 1f)
+                                    {
+                                        _TilemapMinerals.SetTile(new Vector3Int(y, x, 0), _TileMinerals[1]);
+                                    }
+                                    break;
+                                case 2:
+                                    if (mineral3 >= 0.9f && mineral3 < 1f)
+                                    {
+                                        _TilemapMinerals.SetTile(new Vector3Int(y, x, 0), _TileMinerals[2]);
+                                    }
+                                    break;
+                            }
+
+                            int s = UnityEngine.Random.Range(0, 10);
+                            if (s < 5)
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRoca[0]);
+                            else
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRoca[1]);
+                        }
+                        else if (x > (_Height * perlin1D) * 0.5 / 10)
+                        {
+                            float mid = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 2000, _OffsetY + 2000, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
+
+                            if (mid >= 0.8f && mid < 0.9f)
+                            {
+                                _TilemapMinerals.SetTile(new Vector3Int(y, x, 0), _TileMinerals[3]);
+                            }
+
+                            int s = UnityEngine.Random.Range(0, 10);
+                            if (s < 5)
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRocaLimit[0]);
+                            else
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRocaLimit[1]);
+                        }
                         else
-                            _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileTerra[1]);
+                        {
+                            int s = UnityEngine.Random.Range(0, 10);
+                            if (s < 5)
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRocaSubsol[0]);
+                            else
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRocaSubsol[1]);
+
+                            //Perlin pels minerals
+                            float bot = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 1000, _OffsetY + 1000, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
+
+                            if (bot >= 0.8f && bot < 0.9f)
+                            {
+                                _TilemapMinerals.SetTile(new Vector3Int(y, x, 0), _TileMinerals[4]);
+                            }
+                        }
                     }
-                        
-                }
-                else if (perlinNoise > 0.75f && perlinNoise <= 0.9)
-                {
-                    _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRoca[0]);
                 }
                 else
                 {
-                    int s = UnityEngine.Random.Range(0, 10);
-                    if (s <= 3.3f)
-                        _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileNeu[0]);
-                    else if(s <= 6.6f)
-                        _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileNeu[1]);
-                    else
-                        _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileNeu[2]);
+                    if (lianaCaselles > 0 && x > (_Height * perlin1D)/10)
+                    {
+                        int s = UnityEngine.Random.Range(0, 6);
+                        switch (s)
+                        {
+                            case 0:
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileLiana[0]);
+                                break;
+                            case 1:
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileLiana[1]);
+                                break;
+                            case 2:
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileLiana[2]);
+                                break;
+                            case 3:
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileLiana[3]);
+                                break;
+                            case 4:
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileLiana[4]);
+                                break;
+                            case 5:
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileLiana[5]);
+                                break;
+                        }
+                        lianaCaselles--;
+                    }
+                    if (terraCaselles > 0)
+                        terraCaselles--;
                 }
             }
         }
@@ -148,6 +247,7 @@ public class MapGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _Tilemap.ClearAllTiles();
+            _TilemapMinerals.ClearAllTiles();
             GeneratePerlinMap();
         }
     }
