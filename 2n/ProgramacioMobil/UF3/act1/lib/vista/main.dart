@@ -1,4 +1,5 @@
-import 'package:fitness_app/model/cartes.dart';
+import 'package:fitness_app/Classes/cartes.dart';
+import 'package:fitness_app/afegir.dart';
 import 'package:fitness_app/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -80,31 +81,37 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Cartes> cartes = [
     Cartes(
+      id: 1,
       titol: "Running",
       data: 'Ayer, 18:20',
       km: 7300,
     ),
     Cartes(
+      id: 2,
       titol: "Running",
       data: '15 Oct 2022, 13:45',
       km: 6500,
     ),
     Cartes(
+      id: 3,
       titol: "Running",
       data: '10 Oct 2022, 19:02',
       km: 7300,
     ),
     Cartes(
+      id: 4,
       titol: "Running",
       data: '10 Oct 2022, 19:02',
       km: 7300,
     ),
     Cartes(
+      id: 5,
       titol: "Running",
       data: '10 Oct 2022, 19:02',
       km: 7300,
     ),
     Cartes(
+      id: 6,
       titol: "Running",
       data: '10 Oct 2022, 19:02',
       km: 7300,
@@ -246,7 +253,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Afegir()));
+        },
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: Icon(Icons.add),
       ),
