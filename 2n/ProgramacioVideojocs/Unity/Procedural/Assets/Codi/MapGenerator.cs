@@ -41,6 +41,9 @@ public class MapGenerator : MonoBehaviour
     private Tile[] _TileMinerals;
 
     [SerializeField]
+    private Tile[] _TileArbres;
+
+    [SerializeField]
     private Tile _TileLimit;
 
     [Header("Size")]
@@ -106,13 +109,33 @@ public class MapGenerator : MonoBehaviour
         //recorrem el mapa
         for (int y = 0; y < _Width; y++)
         {
+            //Perlin del límit del tilemap, a partir d'on pintem aquest
             float perlin1D = PerlinNoiseUtilities.CalculatePerlinNoise(y, 1, _FrequenciaSol, _Width, 1, _OffsetX, _OffsetY, _OctavesSol, 2, _PersistenciaSol, true, false);
 
-            _Tilemap.SetTile(new Vector3Int(y, (int)(_Height * perlin1D), 0), _TileLimit);
-            int gespaCaselles = UnityEngine.Random.Range(2, 6);
-            int terraCaselles = UnityEngine.Random.Range(6, 8);
-            int lianaCaselles = UnityEngine.Random.Range(0, 3);
+            int posemArbre = UnityEngine.Random.Range(0, 7);
 
+            if(posemArbre == 2)
+            {
+                int arbre = UnityEngine.Random.Range(0, 8);
+
+                if(arbre < 7)
+                {
+                    //Cada arbre està format per dues tiles
+                    _Tilemap.SetTile(new Vector3Int(y, (int)(_Height * perlin1D) + 2, 0), _TileArbres[arbre*2]);
+                    _Tilemap.SetTile(new Vector3Int(y, (int)(_Height * perlin1D) + 1, 0), _TileArbres[(arbre*2)+1]);
+                }
+                else
+                    //Menys l'últim, que és només una
+                    _Tilemap.SetTile(new Vector3Int(y, (int)(_Height * perlin1D) + 1, 0), _TileArbres[arbre * 2]);
+                
+            }
+
+            _Tilemap.SetTile(new Vector3Int(y, (int)(_Height * perlin1D), 0), _TileLimit);
+            int gespaCaselles = UnityEngine.Random.Range(2, 6); //Quantes caselles extres pintem el tilemap de gespa
+            int terraCaselles = UnityEngine.Random.Range(6, 8); //El mateix amb tiles de terra, a partir de les anteriors
+            int lianaCaselles = UnityEngine.Random.Range(0, 3); //Quantes caselles de lianes pintem a dalt de la cova
+
+            //Pintem el tilemap a partir de la següent posició on hem pintat el límit que ens ha donat el perlin1D
             for (int x = (int)(_Height * perlin1D) - 1; x >= 0; x--)
             {
                 //Perlin per les coves
@@ -139,6 +162,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         if(x > (_Height * perlin1D)*2/10)
                         {
+                            //Un perlin per cada mineral que pot aparèixer en aquesta capa, per evitar que apareguin cercles de minerals amb un buit al centre
                             float mineral1 = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 1000, _OffsetY + 1000, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
                             float mineral2 = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 5000, _OffsetY + 5000, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
                             float mineral3 = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 2500, _OffsetY + 2500, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
@@ -175,6 +199,7 @@ public class MapGenerator : MonoBehaviour
                         }
                         else if (x > (_Height * perlin1D) * 0.5 / 10)
                         {
+                            //Perlin per lúnic mineral d'aquesat capa
                             float mid = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 2000, _OffsetY + 2000, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
 
                             if (mid >= 0.8f && mid < 0.9f)
@@ -190,19 +215,19 @@ public class MapGenerator : MonoBehaviour
                         }
                         else
                         {
-                            int s = UnityEngine.Random.Range(0, 10);
-                            if (s < 5)
-                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRocaSubsol[0]);
-                            else
-                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRocaSubsol[1]);
-
-                            //Perlin pels minerals
+                            //Perlin per lúnic mineral d'aquesat capa
                             float bot = PerlinNoiseUtilities.CalculatePerlinNoise(x, y, _FrequencyMinerals, _Width, _Height, _OffsetX + 1000, _OffsetY + 1000, _OctavesMinerals, 2, _PersistenciaMinerals, true, false);
 
                             if (bot >= 0.8f && bot < 0.9f)
                             {
                                 _TilemapMinerals.SetTile(new Vector3Int(y, x, 0), _TileMinerals[4]);
                             }
+
+                            int s = UnityEngine.Random.Range(0, 10);
+                            if (s < 5)
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRocaSubsol[0]);
+                            else
+                                _Tilemap.SetTile(new Vector3Int(y, x, 0), _TileRocaSubsol[1]);
                         }
                     }
                 }

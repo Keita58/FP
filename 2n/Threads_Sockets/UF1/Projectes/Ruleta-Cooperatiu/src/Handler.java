@@ -49,6 +49,9 @@ public class Handler implements Runnable{
             }
             else
                 S.AfegirHandler(this);
+            
+            //Per evitar que es pugui jugar només creant jugadors
+            Servidor.numJugadors.acquire();
 
             pEC.sendByte(PontEntreClasses.S_ESTAS_DINS);
             pEC.receiveByte(PontEntreClasses.ACK);

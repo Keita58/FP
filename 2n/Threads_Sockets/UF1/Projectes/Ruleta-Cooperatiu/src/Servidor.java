@@ -47,7 +47,6 @@ public class Servidor implements Runnable {
                 Socket clientSocket = serverSocket.accept();
                 Handler aux = new Handler(clientSocket, S);
                 executor.execute(aux);
-                numJugadors.acquire();
             }
         }
         catch(Exception e) {
