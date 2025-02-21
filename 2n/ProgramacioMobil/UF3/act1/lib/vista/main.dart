@@ -1,6 +1,8 @@
-import 'package:fitness_app/Classes/cartes.dart';
-import 'package:fitness_app/afegir.dart';
-import 'package:fitness_app/profile.dart';
+import 'dart:ffi';
+
+import 'package:fitness_app/model/cartes.dart';
+import 'package:fitness_app/vista/afegir.dart';
+import 'package:fitness_app/vista/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -60,6 +62,50 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class LlistaCartes {
+  static List<Cartes> cartes = [
+    Cartes(
+      titol: "Running",
+      data: 'Ayer, 18:20',
+      km: 7300,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '15 Oct 2022, 13:45',
+      km: 6500,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '10 Oct 2022, 19:02',
+      km: 7300,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '10 Oct 2022, 19:02',
+      km: 7300,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '10 Oct 2022, 19:02',
+      km: 7300,
+    ),
+    Cartes(
+      titol: "Running",
+      data: '10 Oct 2022, 19:02',
+      km: 7300,
+    ),
+  ];
+
+  static int kmTotalsFunct() {
+    int kmTotals = 0;
+    for(int i = 0; i < cartes.length; i++) {
+      kmTotals += cartes[i].km;
+    }
+    return kmTotals;
+  }
+
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -79,44 +125,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Cartes> cartes = [
-    Cartes(
-      id: 1,
-      titol: "Running",
-      data: 'Ayer, 18:20',
-      km: 7300,
-    ),
-    Cartes(
-      id: 2,
-      titol: "Running",
-      data: '15 Oct 2022, 13:45',
-      km: 6500,
-    ),
-    Cartes(
-      id: 3,
-      titol: "Running",
-      data: '10 Oct 2022, 19:02',
-      km: 7300,
-    ),
-    Cartes(
-      id: 4,
-      titol: "Running",
-      data: '10 Oct 2022, 19:02',
-      km: 7300,
-    ),
-    Cartes(
-      id: 5,
-      titol: "Running",
-      data: '10 Oct 2022, 19:02',
-      km: 7300,
-    ),
-    Cartes(
-      id: 6,
-      titol: "Running",
-      data: '10 Oct 2022, 19:02',
-      km: 7300,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -212,27 +220,29 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-              child: SingleChildScrollView(
-                  child: Column(
-            children: [
-              for (int i = 0; i < cartes.length; i++)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Card(
-                    child: ListTile(
-                      leading: Icon(Icons.run_circle_outlined),
-                      title: Text(cartes[i].titol,
-                          style: Theme.of(context).textTheme.titleLarge),
-                      subtitle: Text(cartes[i].data),
-                      trailing: Text(
-                        "${cartes[i].km}km",
-                        style: Theme.of(context).textTheme.headlineSmall,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  for (int i = 0; i < LlistaCartes.cartes.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      child: Card(
+                        child: ListTile(
+                          leading: Icon(Icons.run_circle_outlined),
+                          title: Text(LlistaCartes.cartes[i].titol,
+                              style: Theme.of(context).textTheme.titleLarge),
+                          subtitle: Text(LlistaCartes.cartes[i].data),
+                          trailing: Text(
+                            "${LlistaCartes.cartes[i].km}km",
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-            ],
-          ))),
+                ],
+              )
+            )
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
             child: CircularPercentIndicator(
@@ -253,9 +263,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final carta = await Navigator.push(
               context, MaterialPageRoute(builder: (context) => Afegir()));
+          LlistaCartes.cartes.add(carta);
+          setState(() {});
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: Icon(Icons.add),

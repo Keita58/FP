@@ -1,3 +1,4 @@
+import 'package:fitness_app/vista/main.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget{
@@ -85,7 +86,7 @@ class Profile extends StatelessWidget{
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium),
-                              Text('212,4',
+                              Text(LlistaCartes.kmTotalsFunct().toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall)
@@ -109,7 +110,7 @@ class Profile extends StatelessWidget{
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium),
-                              Text('42',
+                              Text(LlistaCartes.cartes.length.toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall)
