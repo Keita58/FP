@@ -1,7 +1,7 @@
 Ordre PERT:
 
-Marc: Enemics -> Puzle llibres -> Navmesh enemics -> Puzle Morse -> Objectes procedurals
+Marc: Enemics -> Puzle llibres -> Navmesh enemics -> Puzle Morse -> Objectes procedurals -> Desat bàsic -> Partícules -> Animacions enemics
 
-Eric: Mapa -> Puzle rellotge -> Sistema so -> Puzle poema -> Puzle pistola
+Eric: Mapa -> Puzle rellotge -> Sistema so -> Puzle poema -> Puzle pistola -> Il·luminació -> Pausa -> Música i so
 
-Héctor: Personatge -> Inventari -> Puzle jeroglífics -> Puzle diari -> Events mapa -> Zones amagatalls
+Héctor: Personatge -> Inventari -> Puzle jeroglífics -> Puzle diari -> Events mapa -> Zones amagatalls -> Desat avançat -> Interfície -> Animacions personatge

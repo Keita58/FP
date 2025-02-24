@@ -1,0 +1,25 @@
+composer require laravel/breeze --dev
+php artisan breeze:install vue --ssr
+composer require inertiajs/inertia-laravel
+npm install bootstrap
+npm install
+npm run dev
+php artisan key:generate
+php artisan serve
+php artisan migrate:fresh --seed
+
+// Fins aquí tot el necessari per crear un projecte
+
+php artisan list # veure les comandes d'artisan
+
+php artisan make:model Rols -ms # Crea el modelo, la tabla i carga datos
+php artisan make:seed UserSeeder
+php artisan migrate:fresh --seed
+
+php artisan make:controller MyDemoController
+
+composer update // Preguntar a Cristian
+
+php artisan make:middleware MydemoMiddleware //Serveix per crear un middleware
+
+class FigurantsJudicis extends Pivot // Preguntar a Arnau (a Ever No!!) -> Canviar el N a N l'extens de Model a Pivot
