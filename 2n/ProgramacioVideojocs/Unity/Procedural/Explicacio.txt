@@ -1,0 +1,10 @@
+En el meu joc procedural tinc 7 funcions de soroll diferents.
+Dues d'aquestes son per delimitar el terreny que crea el Tilemap i les altres 5 són per a l'aparició de minerals en aquest.
+
+La primera funció de soroll (que utilitzo amb la variable "perlin1D") l'utilitzo per delimitar l'alçada del terreny que es crea. Per poder-ho fer he cridat al CalculatePerlinNoise amb y i height a 1, per obtener del perlin una línia de dades amb les que després he creat la delimitació d'alçada del meu tilemap.
+
+La segona funció de soroll (la de la variable perlinNoise) l'utilitzo per crear les coves del terreny.
+
+Després tinc les altres 5 funcions de soroll amb les que creo els minerals pel mapa. Cada una es diferencia únicament per un offset diferent en cadascuna. Aquestes funcions tenen unes freqüències, octaves i persistències pròpies que comparteixen totes elles. Aquestes funcions les utilitzo només per agafar els punts més alts per crear els cúmuls de minerals, cada un separat dels altres.
+
+Per últim, tant l'aparició dels arbres com la llargada tant de tiles de gespa com de terra com de les lianes (les tiles de gespa que apareixen a les coves) están fetes amb randoms, no amb perlins ja que vaig considerar que era més fácil d'implementar-ho d'aquesta manera.
