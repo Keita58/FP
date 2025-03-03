@@ -46,10 +46,6 @@ class _AfegirState extends State<Afegir> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
-                  child: Text(
-                    "Afegeix la nova activitat",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -65,7 +61,9 @@ class _AfegirState extends State<Afegir> {
                     controller: controladorQuantitat,
                     keyboardType: TextInputType.numberWithOptions(),
                     inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.allow(
+                        RegExp(r'(^\d*\.?\d{0,2})'),
+                      )
                     ],
                   ),
                 )
@@ -79,10 +77,26 @@ class _AfegirState extends State<Afegir> {
           List<String> mesos = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
           DateTime data = DateTime.now();
           String dataText = "${data.day} ${mesos[data.month]} ${data.year}, ${data.hour}:${data.minute}";
-          Cartes aux = Cartes(titol: controladorTitol.text, data: dataText, km: int.parse(controladorQuantitat.text));
-          log("prova: $aux");
-          Navigator.pop(
-              context, aux);
+
+          if (controladorTitol.text.isNotEmpty && controladorQuantitat.text.isNotEmpty && double.tryParse(controladorQuantitat.text) != null) {
+            double quantitat = double.parse(controladorQuantitat.text);
+            Cartes aux = Cartes(titol: controladorTitol.text, data: dataText, km: quantitat);
+            Navigator.pop(context, aux);
+          } else {
+            // Mostrar un missatge d'error a l'usuari
+            String missatgeError = "";
+            if(controladorTitol.text.isEmpty){
+              missatgeError = "El camp Activitat realitzada no pot estar buit.";
+            } else if(controladorQuantitat.text.isEmpty){
+              missatgeError = "El camp Quantitat no pot estar buit.";
+            } else {
+              missatgeError = "Si us plau, introdueix una quantitat vàlida.";
+            }
+            //Missatge d'error per si falten dades
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(missatgeError)),
+            );
+          }
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: Icon(Icons.add),

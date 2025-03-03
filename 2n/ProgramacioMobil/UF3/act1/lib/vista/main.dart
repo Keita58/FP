@@ -96,12 +96,16 @@ class LlistaCartes {
     ),
   ];
 
-  static int kmTotalsFunct() {
-    int kmTotals = 0;
+  static double kmTotalsFunct() {
+    double kmTotals = 0.0;
     for(int i = 0; i < cartes.length; i++) {
       kmTotals += cartes[i].km;
     }
     return kmTotals;
+  }
+
+  static void eliminaCarta(Cartes carta) {
+    cartes.remove(carta);
   }
 
 }
@@ -236,6 +240,34 @@ class _MyHomePageState extends State<MyHomePage> {
                             "${LlistaCartes.cartes[i].km}km",
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
+                          onTap: () {
+                            //En comptes de crear un botó creem un dialog per eliminar la carta
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Eliminar activitat"),
+                                  content: Text("Estàs segur que vols eliminar l'activitat ${LlistaCartes.cartes[i].titol}?"),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text("Cancel·lar"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("Eliminar"),
+                                      onPressed: () {
+                                        LlistaCartes.eliminaCarta(LlistaCartes.cartes[i]);
+                                        setState(() {});
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                         ),
                       ),
                     ),

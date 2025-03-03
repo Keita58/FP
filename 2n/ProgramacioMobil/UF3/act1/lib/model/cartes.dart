@@ -2,7 +2,7 @@
 class Cartes {
   String titol;
   String data;
-  int km;
+  double km;
 
   Cartes({
     this.titol = "",
