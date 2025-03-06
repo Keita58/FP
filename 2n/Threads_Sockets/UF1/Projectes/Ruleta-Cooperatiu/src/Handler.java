@@ -57,8 +57,10 @@ public class Handler implements Runnable{
             pEC.receiveByte(PontEntreClasses.ACK);
             pEC.sendInt(dinersJugador);
             pEC.receiveByte(PontEntreClasses.ACK);
-            
+                        
             while(true) {
+            	synchronized(this) { wait(); }
+            	
                 Servidor.filaDeU.acquire();
                 System.out.println();
                 System.out.println("És el torn del jugador " + nomJugador + "!");

@@ -63,6 +63,11 @@ public class Servidor implements Runnable {
                 if(numJugadors.availablePermits() <= 98) {
                     executor.execute(new Temp(10));
                     Thread.sleep(10000);
+                    
+                    for(Handler h : jugadors) {
+                        h.Desperta();
+                    }
+                    
                     partidaComencada = true;
                     
                     int numRuleta = r.nextInt(0, 37);
