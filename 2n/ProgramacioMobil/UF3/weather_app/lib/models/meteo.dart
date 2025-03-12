@@ -33,10 +33,10 @@ class Meteo {
 }
 
 class Dataserie {
-  int timePoint;
-  int cloudCover;
+  int timepoint;
+  int cloudcover;
   int liftedIndex;
-  PrecType precType;
+  String precType;
   int precAmount;
   int temp2M;
   String rh2M;
@@ -44,8 +44,8 @@ class Dataserie {
   String weather;
 
   Dataserie({
-    required this.timePoint,
-    required this.cloudCover,
+    required this.timepoint,
+    required this.cloudcover,
     required this.liftedIndex,
     required this.precType,
     required this.precAmount,
@@ -56,10 +56,10 @@ class Dataserie {
   });
 
   factory Dataserie.fromJson(Map<String, dynamic> json) => Dataserie(
-    timePoint: json["timepoint"],
-    cloudCover: json["cloudcover"],
+    timepoint: json["timepoint"],
+    cloudcover: json["cloudcover"],
     liftedIndex: json["lifted_index"],
-    precType: precTypeValues.map[json["prec_type"]]!,
+    precType: json["prec_type"],
     precAmount: json["prec_amount"],
     temp2M: json["temp2m"],
     rh2M: json["rh2m"],
@@ -68,8 +68,8 @@ class Dataserie {
   );
 
   Map<String, dynamic> toJson() => {
-    "timepoint": timePoint,
-    "cloudcover": cloudCover,
+    "timepoint": timepoint,
+    "cloudcover": cloudcover,
     "lifted_index": liftedIndex,
     "prec_type": precTypeValues.reverse[precType],
     "prec_amount": precAmount,
@@ -81,11 +81,15 @@ class Dataserie {
 }
 
 enum PrecType {
-  NONE
+  NONE,
+  RAIN,
+  SNOW
 }
 
 final precTypeValues = EnumValues({
-  "none": PrecType.NONE
+  "none": PrecType.NONE,
+  "rain": PrecType.RAIN,
+  "snow": PrecType.SNOW
 });
 
 class Wind10M {
@@ -103,10 +107,30 @@ class Wind10M {
   );
 
   Map<String, dynamic> toJson() => {
-    "direction": direction,
+    "direction": directionValues.reverse[direction],
     "speed": speed,
   };
 }
+
+enum Direction {
+  E,
+  N,
+  NE,
+  NW,
+  S,
+  SE,
+  SW
+}
+
+final directionValues = EnumValues({
+  "E": Direction.E,
+  "N": Direction.N,
+  "NE": Direction.NE,
+  "NW": Direction.NW,
+  "S": Direction.S,
+  "SE": Direction.SE,
+  "SW": Direction.SW
+});
 
 class EnumValues<T> {
   Map<String, T> map;
