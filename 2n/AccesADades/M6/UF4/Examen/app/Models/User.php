@@ -45,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function videojocs() {
+        $this->belongsToMany(Videojocs::class, 'resenyes', 'idJugador', 'idVideojoc')->using(Resenyes::class)->withPivot("resenya", "valoracio", "resenya_no_editable", "PDF");
+    }
 }
