@@ -4,6 +4,7 @@ import 'package:harry_potter/providers/preferences.dart';
 import 'package:harry_potter/screens/character_detail.dart';
 import 'package:provider/provider.dart';
 import '../models/character.dart';
+import 'package:harry_potter/screens/character_form.dart';
 
 class CharacterList extends StatefulWidget {
   const CharacterList({super.key});
@@ -51,15 +52,18 @@ class _CharacterListState extends State<CharacterList> {
               );
             }
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () async {
-              final mac = await Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Form()));
-              HogwartsData..add(carta);
-              setState(() {});
-            },
-            child: const Icon(Icons.add),
-          ),
+          floatingActionButton: Consumer<HogwartsData>(
+            builder: (context, data, child) {
+              return FloatingActionButton(
+                onPressed: () async {
+                  final mac = await Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const FormCharacter()));
+                  data.addMac(mac);
+                },
+                child: const Icon(Icons.add),
+              );
+            }
+          )
         );
       });
   }

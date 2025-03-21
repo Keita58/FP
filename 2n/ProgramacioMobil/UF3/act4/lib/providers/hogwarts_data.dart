@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
 import '../models/character.dart';
 
 class HogwartsData extends ChangeNotifier{
@@ -49,4 +48,8 @@ class HogwartsData extends ChangeNotifier{
     return characters.firstWhere( (character ) {return character.id==id; });
   }
 
+  void addMac(Character mac) {
+    characters.add(mac);
+    notifyListeners();
+  }
 }

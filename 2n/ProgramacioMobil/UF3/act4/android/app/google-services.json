@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "190730477461",
+    "firebase_url": "https://hogwarts-59cae-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "hogwarts-59cae",
+    "storage_bucket": "hogwarts-59cae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190730477461:android:911193300f0d353b30e09c",
+        "android_client_info": {
+          "package_name": "com.example.harry_potter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjIlMTCPp1kVhSWKrf-V0kSism3Qe4wR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:harry_potter/models/character.dart';
 
-class Form extends StatefulWidget {
-  const Form({super.key});
+class FormCharacter extends StatefulWidget {
+  const FormCharacter({super.key});
 
   @override
-  State<Form> createState() => _FormState();
+  State<FormCharacter> createState() => _FormCharacterState();
 }
 
-class _FormState extends State<Form> {
+class _FormCharacterState extends State<FormCharacter> {
   final controladorId = TextEditingController();
   final controladorNom = TextEditingController();
   final controladorUrl = TextEditingController();
