@@ -117,51 +117,6 @@ class Partida(Document):
     meta = {'collection': 'Partida'}
 
 
-class Vintage(Document):
-    idCarta = IntField(required=True)
-    plataforma = StringField(required=True, max_length=50)
-    preu = IntField(max_value=100, min_value=0)
-    coleccio = StringField(max_length=100)
-    isDeluxe = BooleanField()
-    meta = {'collection': 'Vintage'}
-
-
-def afegirExamen():
-    criatures = list(Gathering.objects(types="Creature"))
-    print("Noves cartes afegides:")
-    for i in range(5):
-        vintage = Vintage(idCarta=criatures[i].idCarta, plataforma="Plataforma", preu=random.randint(1, 101), coleccio="Magic DAMvi", isDeluxe=criatures[i].isFunny)
-        vintage.save()
-        print("id:", vintage.idCarta, "plataforma:", vintage.plataforma, "preu:", vintage.preu, "col·leccio:", vintage.coleccio, "isDeluxe:",
-              vintage.isDeluxe)
-
-
-def consultar():
-    vintage = list(Vintage.objects())
-    for v in vintage:
-        print("id:", v.idCarta, "plataforma:", v.plataforma, "preu:", v.preu, "col·leccio:", v.coleccio, "isDeluxe:", v.isDeluxe)
-
-
-def actualitzar():
-    vintage = list(Vintage.objects())
-    for v in vintage:
-        if v.isDeluxe is not None:
-            if v.isDeluxe is True:
-                print("Carta a actualitzar:")
-                print("id:", v.idCarta, "plataforma:", v.plataforma, "preu:", v.preu, "col·leccio:", v.coleccio,
-                      "isDeluxe:", v.isDeluxe)
-                v.preu += 3
-                if v.preu > 100:
-                    v.preu = 100
-                    print("La carta té el preu màxim!")
-                else:
-                    print("Carta actualitzada:")
-                    print("id:", v.idCarta, "plataforma:", v.plataforma, "preu:", v.preu, "col·leccio:", v.coleccio,
-                          "isDeluxe:", v.isDeluxe)
-                v.save()
-                print()
-
-
 def migracio():
     jugador1 = Partida(nomJugador="Pepe", vida=20, cartes=[])
     jugador2 = Partida(nomJugador="Nagisa_Shiota", vida=20, cartes=[])

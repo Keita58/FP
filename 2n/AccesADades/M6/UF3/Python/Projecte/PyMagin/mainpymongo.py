@@ -43,7 +43,6 @@ if __name__ == '__main__':
     while True:
         print("Opcions: buscar <<id carta>> <<camp a buscar>> / migracio / add <<nom jugador>> / simulacio / atac "
               "<<nom jugador>> / eliminar <<nom jugador>> / fi")
-        print("EXAMEN: afegir / consultar / actualitzar")
         lineaentrada = input("Tria el valor que vols buscar: ").split()
         print()
         if lineaentrada[0].lower() == "fi":
@@ -67,10 +66,4 @@ if __name__ == '__main__':
         elif lineaentrada[0].lower() == "eliminar":
             nomJugador = lineaentrada[1]
             eliminar(nomJugador)
-        elif lineaentrada[0].lower() == "afegir":
-            mainmongoengine.afegirExamen()
-        elif lineaentrada[0].lower() == "consultar":
-            mainmongoengine.consultar()
-        elif lineaentrada[0].lower() == "actualitzar":
-            mainmongoengine.actualitzar()
         print()
