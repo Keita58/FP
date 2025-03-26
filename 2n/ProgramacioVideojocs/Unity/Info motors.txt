@@ -1,4 +1,0 @@
-Delta time = temps nou - temps frame anterior
-while per poder calcular els frames
-
-ui -> posar un render igual seguit de l'existent per pintar per sobre la ui
