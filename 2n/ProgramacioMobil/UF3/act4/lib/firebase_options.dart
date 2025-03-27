@@ -88,4 +88,5 @@ class DefaultFirebaseOptions {
     databaseURL: 'https://hogwarts-59cae-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'hogwarts-59cae.firebasestorage.app',
   );
+
 }

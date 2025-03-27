@@ -36,14 +36,14 @@ class _CharacterListState extends State<CharacterList> {
                       child: ListTile(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>  CharacterDetail(id: character.id,)
-                              )
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  CharacterDetail(id: character.id,)
+                            )
                           );
                         },
                         leading: Hero(tag: character.name, // Posem el mateix "codi" als dos costats
-                            child: Image.network(character.url)),
+                          child: Image.network(character.url)),
                         title: Text(character.name),
                         subtitle: info.showSubtitles == true ? Text("${character.reviews.toString()} reviews ") : null,
                       ),
@@ -57,8 +57,9 @@ class _CharacterListState extends State<CharacterList> {
               return FloatingActionButton(
                 onPressed: () async {
                   final mac = await Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const FormCharacter()));
+                    context, MaterialPageRoute(builder: (context) => const FormCharacter()));
                   data.addMac(mac);
+                  data.creaInfo();
                 },
                 child: const Icon(Icons.add),
               );
