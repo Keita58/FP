@@ -59,7 +59,6 @@ class _CharacterListState extends State<CharacterList> {
                   final mac = await Navigator.push(
                     context, MaterialPageRoute(builder: (context) => const FormCharacter()));
                   data.addMac(mac);
-                  data.creaInfo();
                 },
                 child: const Icon(Icons.add),
               );
