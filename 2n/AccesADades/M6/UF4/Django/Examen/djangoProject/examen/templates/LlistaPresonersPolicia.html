@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Llista presonerspolicia</title>
+</head>
+<body>
+     <table>
+        <tr>
+            <th>id Presoner</th>
+            <th>Nom</th>
+            <th>Edat</th>
+            <th>Motiu detenció</th>
+            <th>Data empresonament</th>
+            <th>Accions</th>
+        </tr>
+        {% for presoner in presonerpolicia %}
+            {% for presonerUnic in presoner %}
+                <tr>
+                    <td>{{ presoner.idPresoners }}</td>
+                    <td>{{ presoner.nom }}</td>
+                    <td>{{ presoner.edat }}</td>
+                    <td>{{ presoner.motiuDetencio }}</td>
+                    <td>{{ presoner.timestamp }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+</body>
+</html>

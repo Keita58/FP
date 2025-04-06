@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Llista presoners</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>id Presoner</th>
+            <th>Nom</th>
+            <th>Edat</th>
+            <th>Motiu detenció</th>
+            <th>Data empresonament</th>
+            <th>Accions</th>
+        </tr>
+        {% for presoner in presoners %}
+            <tr>
+                <td>{{ presoner.idPresoners }}</td>
+                <td>{{ presoner.nom }}</td>
+                <td>{{ presoner.edat }}</td>
+                <td>{{ presoner.motiuDetencio }}</td>
+                <td>{{ presoner.timestamp }}</td>
+            </tr>
+            <td>
+                <button onclick="location.href='{% url 'editarPresoners' presoner.idPresoners %}'">Editar presoner</button>
+                <button onclick="location.href='{% url 'eliminarPresoners' presoner.idPresoners %}'">Eliminar presoner</button>
+            </td>
+        {% endfor %}
+    </table>
+<button onclick="location.href='{% url 'afegirPresoners' %}'">Crear presoner</button>
+</body>
+</html>

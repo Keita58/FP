@@ -17,6 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from examen.views import LlistarPresonerPolicia, LlistarPresoners, AfegirPresoners, EliminarPresoners, EditarPresoners
+from users.views import LoginView, LogoutView
+
 urlpatterns = [
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('admin/', admin.site.urls),
+    path('', LlistarPresonerPolicia.as_view(), name='llistarPresonerPolicia'),
+    path('presonersadd/', AfegirPresoners.as_view(), name='afegirPresoners'),
+    path('presonerslist/', LlistarPresoners.as_view(), name='llistarPresoners'),
+    path('presonersdelete/', EliminarPresoners.as_view(), name='eliminarPresoners'),
+    path('presonersedit/', EditarPresoners.as_view(), name='editarPresoners'),
 ]
