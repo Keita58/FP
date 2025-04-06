@@ -1,0 +1,41 @@
+Coses a escriure:
+
+- Persisència: 
+
+Freqüència: Com de detallat es veu el disseny, com més freqüència més petit el disseny i el detall.
+
+Amplitud: Augmenta l'alçada (en 3D)
+
+Octava: Per quant es multiplica la freqüència (com més octaves més freqüencia i més petit el disseny i amb més informació en el mateix espai). Determina el nivell de detall 
+
+Lacunaritat: Afecta a la freqüència. Augmenta la força de les octaves (com més gran més es noten els canvis, com més petit només es noten els detalls)
+
+Persistencia: Com afecten l'amplitud al mapa. Com més petit menys canvia el mapa, com més gran més modificat acaba el mapa.
+
+- Motor: 
+
+Bucle d'un joc => Start -> Càrrega d'objectes -> Bucle(Acabat? (No) -> Actualitzar -> Petit retard) (Sí) -> Alliberar recursos -> Tancar Motor
+
+FPS: Per evitar sobrecarregar la CPU podem forçar a que el joc vagi a un frame rate determinat, obligant a que la resta del temps que no està realitzant les actualitzacions descansi o el dediqui a altres tasques.
+
+Delta time: Per evitar haver de forçar a que el joc vagi a uns determinats fps es pot utilitzar el delta time, que és la diferència de temps entre cada actualització (l'anterior versus l'actual).
+
+Paradigmes de construcció d'un motor:
+	- Game objects purs on aquests realitzen les actualitzacions i codi
+	- Game objects amb components: Afavorim la composició d'objectes vers l'herència d'aquests (paradigme anterior). Els gameobjects anteriors implementen tots els components sense que ells hagin de crear o realitzar res per ells sols (són un recull de components).
+	- ECS: Canvia el paradigme de construcció d'orientació a objectes a orientació a dades. Aquest paradigme ens permet recollir molta més data a la vegada que els dos anteriors a memòria i posar-la en els mateixos chunks de memòria per una lectura més eficient. Game Objects -> Entitats / Components -> Les dades en sí / Sistemes -> Encarregats d'executar la lògica a les entitats corresponents
+
+- Multi:
+
+Network variable: Variables compartides entre tots els clients que executen el mateix codi
+Network list: El mateix però amb llistes
+
+Rpc(SendTo...: La funció que ho conté com a capçalera executa aquesta i ho envia a la respectiva (Server o ClientsAndHost)
+
+OnNetworkSpawn en substitució al Awake
+
+- Godot: 
+
+Els nodes són també escenes. La info es pot transmetre amb signals (d'un node a l'script per poder captar les senyals que ens enviï)
+
+Resources -> ScriptableObjects
