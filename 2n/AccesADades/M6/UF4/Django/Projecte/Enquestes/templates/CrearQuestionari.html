@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear qüestionari</title>
+</head>
+<body>
+    <form method="post" action="{% url 'crearQuestionari' %}">
+        {% csrf_token %}
+        <h1>Crear qüestionari</h1>
+        <div>
+            <label for="idEmpresa" class="form-label">Id Empresa: </label>
+            <input type="number" id="idEmpresa" name="idEmpresa" class="form-control" required>
+        </div>
+        <div>
+            <label for="descripcio" class="form-label">Descripció del qüestionari: </label>
+            <input type="text" id="descripcio" name="descripcio" class="form-control" required>
+        </div>
+        <div class="text-center">
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+</body>
+</html>

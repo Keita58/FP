@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Llista alumnes</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Id Alumne</th>
+            <th>Nom complet</th>
+            <th>Pot realitzar més qüestionaris?</th>
+            <th>Accions</th>
+        </tr>
+        {% for alumne in alumnes %}
+            <tr>
+                <td>{{ alumne.idAlumnes }}</td>
+                <td>{{ alumne.nomComplet }}</td>
+                <td>{{ alumne.questionari }}</td>
+                <td>
+                    <button onclick="location.href='{% url 'editarAlumne' alumne.idAlumnes %}'">Editar alumne</button>
+                    <button onclick="location.href='{% url 'esborrarAlumne' alumne.idAlumnes %}'">Eliminar alumne</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <button onclick="location.href='{% url 'crearAlumne' %}'">Crear alumne</button>
+</body>
+</html>

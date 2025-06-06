@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Llista qüestionaris</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>id Questionari</th>
+            <th>id Empresa</th>
+            <th>Descripcio</th>
+            <th>Accions</th>
+        </tr>
+        {% for questionari in questionaris %}
+            <tr>
+                <td>{{ questionari.idQuestionaris }}</td>
+                <td>{{ questionari.idEmpresa }}</td>
+                <td>{{ questionari.descripcio }}</td>
+                <td>
+                    <button onclick="location.href='{% url 'editarQuestionari' questionari.idQuestionaris %}'">Editar qüestionari</button>
+                    <button onclick="location.href='{% url 'esborrarQuestionari' questionari.idQuestionaris %}'">Eliminar qüestionari</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <button onclick="location.href='{% url 'crearQuestionari' %}'">Crear qüestionari</button>
+</body>
+</html>
