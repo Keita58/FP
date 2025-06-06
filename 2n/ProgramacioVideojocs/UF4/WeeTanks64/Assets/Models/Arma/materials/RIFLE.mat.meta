@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 674177a54455f264a89b60af80b76a98
+timeCreated: 1524583773
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 118741
+  packageName: Sci-Fi Rifle
+  packageVersion: 1.0
+  assetPath: Assets/sci fi rifle/materials/RIFLE.mat
+  uploadId: 255520
